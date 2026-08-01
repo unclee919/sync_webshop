@@ -218,13 +218,18 @@ def get_search_suggestions(search):
 		})
 		
 	# Add item suggestions
+	price_list = _get_price_list()
+	prices = _get_prices([i.item_code for i in items], price_list)
 	for i in items:
+		price_info = prices.get(i.item_code)
 		results.append({
 			"type": "item",
 			"id": i.item_code,
 			"name": i.item_name,
 			"image": full_url(i.image) if i.image else None,
-			"category": i.item_group
+			"category": i.item_group,
+			"price": price_info.get("rate") if price_info else None,
+			"currency": price_info.get("currency") if price_info else None
 		})
 		
 	return results

@@ -61,7 +61,83 @@
   "show_back_to_top",
   "delivery_section",
   "min_delivery_days",
-  "max_delivery_days"
+  "max_delivery_days",
+  "ui_labels_section",
+  "header_contact_number",
+  "need_help_text_en",
+  "need_help_text_ar",
+  "support_center_text_en",
+  "support_center_text_ar",
+  "browse_categories_text_en",
+  "browse_categories_text_ar",
+  "search_placeholder_en",
+  "search_placeholder_ar",
+  "wishlist_text_en",
+  "wishlist_text_ar",
+  "cart_text_en",
+  "cart_text_ar",
+  "account_text_en",
+  "account_text_ar",
+  "shop_now_text_en",
+  "shop_now_text_ar",
+  "best_categories_text_en",
+  "best_categories_text_ar",
+  "view_all_text_en",
+  "view_all_text_ar",
+  "new_badge_text_en",
+  "new_badge_text_ar",
+  "add_to_cart_text_en",
+  "add_to_cart_text_ar",
+  "ui_icons_section",
+  "wishlist_icon",
+  "cart_icon",
+  "account_icon",
+  "support_icon",
+  "ui_labels_section",
+  "header_contact_number",
+  "need_help_text_en",
+  "need_help_text_ar",
+  "support_center_text_en",
+  "support_center_text_ar",
+  "browse_categories_text_en",
+  "browse_categories_text_ar",
+  "search_placeholder_en",
+  "search_placeholder_ar",
+  "wishlist_text_en",
+  "wishlist_text_ar",
+  "cart_text_en",
+  "cart_text_ar",
+  "account_text_en",
+  "account_text_ar",
+  "shop_now_text_en",
+  "shop_now_text_ar",
+  "best_categories_text_en",
+  "best_categories_text_ar",
+  "view_all_text_en",
+  "view_all_text_ar",
+  "new_badge_text_en",
+  "new_badge_text_ar",
+  "add_to_cart_text_en",
+  "add_to_cart_text_ar",
+  "item_code_label_en",
+  "item_code_label_ar",
+  "category_label_en",
+  "category_label_ar",
+  "unit_label_en",
+  "unit_label_ar",
+  "added_text_en",
+  "added_text_ar",
+  "checkout_title_en",
+  "checkout_title_ar",
+  "order_success_title_en",
+  "order_success_title_ar",
+  "continue_shopping_text_en",
+  "continue_shopping_text_ar",
+  "ui_icons_section",
+  "wishlist_icon",
+  "cart_icon",
+  "account_icon",
+  "support_icon"
  ],
  "fields": [
   {
@@ -465,6 +541,386 @@
    "fieldname": "mailchimp_server_prefix",
    "fieldtype": "Data",
    "label": "Mailchimp Server Prefix (e.g. us1)"
+  },
+  {
+   "fieldname": "ui_labels_section",
+   "fieldtype": "Section Break",
+   "label": "UI Labels"
+  },
+  {
+   "fieldname": "header_contact_number",
+   "fieldtype": "Data",
+   "label": "Header Contact Number"
+  },
+  {
+   "fieldname": "need_help_text_en",
+   "fieldtype": "Data",
+   "label": "Need Help Text (EN)"
+  },
+  {
+   "fieldname": "need_help_text_ar",
+   "fieldtype": "Data",
+   "label": "Need Help Text (AR)"
+  },
+  {
+   "fieldname": "support_center_text_en",
+   "fieldtype": "Data",
+   "label": "Support Center Text (EN)"
+  },
+  {
+   "fieldname": "support_center_text_ar",
+   "fieldtype": "Data",
+   "label": "Support Center Text (AR)"
+  },
+  {
+   "fieldname": "browse_categories_text_en",
+   "fieldtype": "Data",
+   "label": "Browse Categories Text (EN)"
+  },
+  {
+   "fieldname": "browse_categories_text_ar",
+   "fieldtype": "Data",
+   "label": "Browse Categories Text (AR)"
+  },
+  {
+   "fieldname": "search_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Search Placeholder (EN)"
+  },
+  {
+   "fieldname": "search_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Search Placeholder (AR)"
+  },
+  {
+   "fieldname": "wishlist_text_en",
+   "fieldtype": "Data",
+   "label": "Wishlist Text (EN)"
+  },
+  {
+   "fieldname": "wishlist_text_ar",
+   "fieldtype": "Data",
+   "label": "Wishlist Text (AR)"
+  },
+  {
+   "fieldname": "cart_text_en",
+   "fieldtype": "Data",
+   "label": "Cart Text (EN)"
+  },
+  {
+   "fieldname": "cart_text_ar",
+   "fieldtype": "Data",
+   "label": "Cart Text (AR)"
+  },
+  {
+   "fieldname": "account_text_en",
+   "fieldtype": "Data",
+   "label": "Account Text (EN)"
+  },
+  {
+   "fieldname": "account_text_ar",
+   "fieldtype": "Data",
+   "label": "Account Text (AR)"
+  },
+  {
+   "fieldname": "shop_now_text_en",
+   "fieldtype": "Data",
+   "label": "Shop Now Text (EN)"
+  },
+  {
+   "fieldname": "shop_now_text_ar",
+   "fieldtype": "Data",
+   "label": "Shop Now Text (AR)"
+  },
+  {
+   "fieldname": "best_categories_text_en",
+   "fieldtype": "Data",
+   "label": "Best Categories Text (EN)"
+  },
+  {
+   "fieldname": "best_categories_text_ar",
+   "fieldtype": "Data",
+   "label": "Best Categories Text (AR)"
+  },
+  {
+   "fieldname": "view_all_text_en",
+   "fieldtype": "Data",
+   "label": "View All Text (EN)"
+  },
+  {
+   "fieldname": "view_all_text_ar",
+   "fieldtype": "Data",
+   "label": "View All Text (AR)"
+  },
+  {
+   "fieldname": "new_badge_text_en",
+   "fieldtype": "Data",
+   "label": "New Badge Text (EN)"
+  },
+  {
+   "fieldname": "new_badge_text_ar",
+   "fieldtype": "Data",
+   "label": "New Badge Text (AR)"
+  },
+  {
+   "fieldname": "add_to_cart_text_en",
+   "fieldtype": "Data",
+   "label": "Add to Cart Text (EN)"
+  },
+  {
+   "fieldname": "add_to_cart_text_ar",
+   "fieldtype": "Data",
+   "label": "Add to Cart Text (AR)"
+  },
+  {
+   "fieldname": "ui_icons_section",
+   "fieldtype": "Section Break",
+   "label": "UI Icons"
+  },
+  {
+   "fieldname": "wishlist_icon",
+   "fieldtype": "Attach Image",
+   "label": "Wishlist Icon"
+  },
+  {
+   "fieldname": "cart_icon",
+   "fieldtype": "Attach Image",
+   "label": "Cart Icon"
+  },
+  {
+   "fieldname": "account_icon",
+   "fieldtype": "Attach Image",
+   "label": "Account Icon"
+  },
+  {
+   "fieldname": "support_icon",
+   "fieldtype": "Attach Image",
+   "label": "Support Icon"
+  },
+  {
+   "fieldname": "ui_labels_section",
+   "fieldtype": "Section Break",
+   "label": "UI Labels"
+  },
+  {
+   "fieldname": "header_contact_number",
+   "fieldtype": "Data",
+   "label": "Header Contact Number"
+  },
+  {
+   "fieldname": "need_help_text_en",
+   "fieldtype": "Data",
+   "label": "Need Help Text (EN)"
+  },
+  {
+   "fieldname": "need_help_text_ar",
+   "fieldtype": "Data",
+   "label": "Need Help Text (AR)"
+  },
+  {
+   "fieldname": "support_center_text_en",
+   "fieldtype": "Data",
+   "label": "Support Center Text (EN)"
+  },
+  {
+   "fieldname": "support_center_text_ar",
+   "fieldtype": "Data",
+   "label": "Support Center Text (AR)"
+  },
+  {
+   "fieldname": "browse_categories_text_en",
+   "fieldtype": "Data",
+   "label": "Browse Categories Text (EN)"
+  },
+  {
+   "fieldname": "browse_categories_text_ar",
+   "fieldtype": "Data",
+   "label": "Browse Categories Text (AR)"
+  },
+  {
+   "fieldname": "search_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Search Placeholder (EN)"
+  },
+  {
+   "fieldname": "search_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Search Placeholder (AR)"
+  },
+  {
+   "fieldname": "wishlist_text_en",
+   "fieldtype": "Data",
+   "label": "Wishlist Text (EN)"
+  },
+  {
+   "fieldname": "wishlist_text_ar",
+   "fieldtype": "Data",
+   "label": "Wishlist Text (AR)"
+  },
+  {
+   "fieldname": "cart_text_en",
+   "fieldtype": "Data",
+   "label": "Cart Text (EN)"
+  },
+  {
+   "fieldname": "cart_text_ar",
+   "fieldtype": "Data",
+   "label": "Cart Text (AR)"
+  },
+  {
+   "fieldname": "account_text_en",
+   "fieldtype": "Data",
+   "label": "Account Text (EN)"
+  },
+  {
+   "fieldname": "account_text_ar",
+   "fieldtype": "Data",
+   "label": "Account Text (AR)"
+  },
+  {
+   "fieldname": "shop_now_text_en",
+   "fieldtype": "Data",
+   "label": "Shop Now Text (EN)"
+  },
+  {
+   "fieldname": "shop_now_text_ar",
+   "fieldtype": "Data",
+   "label": "Shop Now Text (AR)"
+  },
+  {
+   "fieldname": "best_categories_text_en",
+   "fieldtype": "Data",
+   "label": "Best Categories Text (EN)"
+  },
+  {
+   "fieldname": "best_categories_text_ar",
+   "fieldtype": "Data",
+   "label": "Best Categories Text (AR)"
+  },
+  {
+   "fieldname": "view_all_text_en",
+   "fieldtype": "Data",
+   "label": "View All Text (EN)"
+  },
+  {
+   "fieldname": "view_all_text_ar",
+   "fieldtype": "Data",
+   "label": "View All Text (AR)"
+  },
+  {
+   "fieldname": "new_badge_text_en",
+   "fieldtype": "Data",
+   "label": "New Badge Text (EN)"
+  },
+  {
+   "fieldname": "new_badge_text_ar",
+   "fieldtype": "Data",
+   "label": "New Badge Text (AR)"
+  },
+  {
+   "fieldname": "add_to_cart_text_en",
+   "fieldtype": "Data",
+   "label": "Add to Cart Text (EN)"
+  },
+  {
+   "fieldname": "add_to_cart_text_ar",
+   "fieldtype": "Data",
+   "label": "Add to Cart Text (AR)"
+  },
+  {
+   "fieldname": "item_code_label_en",
+   "fieldtype": "Data",
+   "label": "Item Code Label (EN)"
+  },
+  {
+   "fieldname": "item_code_label_ar",
+   "fieldtype": "Data",
+   "label": "Item Code Label (AR)"
+  },
+  {
+   "fieldname": "category_label_en",
+   "fieldtype": "Data",
+   "label": "Category Label (EN)"
+  },
+  {
+   "fieldname": "category_label_ar",
+   "fieldtype": "Data",
+   "label": "Category Label (AR)"
+  },
+  {
+   "fieldname": "unit_label_en",
+   "fieldtype": "Data",
+   "label": "Unit Label (EN)"
+  },
+  {
+   "fieldname": "unit_label_ar",
+   "fieldtype": "Data",
+   "label": "Unit Label (AR)"
+  },
+  {
+   "fieldname": "added_text_en",
+   "fieldtype": "Data",
+   "label": "Added Text (EN)"
+  },
+  {
+   "fieldname": "added_text_ar",
+   "fieldtype": "Data",
+   "label": "Added Text (AR)"
+  },
+  {
+   "fieldname": "checkout_title_en",
+   "fieldtype": "Data",
+   "label": "Checkout Title (EN)"
+  },
+  {
+   "fieldname": "checkout_title_ar",
+   "fieldtype": "Data",
+   "label": "Checkout Title (AR)"
+  },
+  {
+   "fieldname": "order_success_title_en",
+   "fieldtype": "Data",
+   "label": "Order Success Title (EN)"
+  },
+  {
+   "fieldname": "order_success_title_ar",
+   "fieldtype": "Data",
+   "label": "Order Success Title (AR)"
+  },
+  {
+   "fieldname": "continue_shopping_text_en",
+   "fieldtype": "Data",
+   "label": "Continue Shopping Text (EN)"
+  },
+  {
+   "fieldname": "continue_shopping_text_ar",
+   "fieldtype": "Data",
+   "label": "Continue Shopping Text (AR)"
+  },
+  {
+   "fieldname": "ui_icons_section",
+   "fieldtype": "Section Break",
+   "label": "UI Icons"
+  },
+  {
+   "fieldname": "wishlist_icon",
+   "fieldtype": "Attach Image",
+   "label": "Wishlist Icon"
+  },
+  {
+   "fieldname": "cart_icon",
+   "fieldtype": "Attach Image",
+   "label": "Cart Icon"
+  },
+  {
+   "fieldname": "account_icon",
+   "fieldtype": "Attach Image",
+   "label": "Account Icon"
+  },
+  {
+   "fieldname": "support_icon",
+   "fieldtype": "Attach Image",
+   "label": "Support Icon"
   }
  ],
  "permissions": [
