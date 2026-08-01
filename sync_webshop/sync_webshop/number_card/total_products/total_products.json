@@ -1,0 +1,22 @@
+{
+ "creation": "2026-08-01 12:26:08.889521",
+ "currency": "SAR",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Item",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "Total Products",
+ "modified": "2026-08-01 12:26:08.889521",
+ "modified_by": "Administrator",
+ "module": "Sync Webshop",
+ "name": "Total Products",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_full_number": 0,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Document Type"
+}
