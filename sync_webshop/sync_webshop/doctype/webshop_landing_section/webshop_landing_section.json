@@ -19,26 +19,26 @@
   {
    "fieldname": "section_title_en",
    "fieldtype": "Data",
-   "label": "Section Title (English)",
+   "label": "عنوان القسم - إنجليزي (Title EN)",
    "reqd": 1,
    "unique": 1
   },
   {
    "fieldname": "section_title_ar",
    "fieldtype": "Data",
-   "label": "Section Title (Arabic)",
+   "label": "عنوان القسم - عربي (Title AR)",
    "reqd": 1
   },
   {
    "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "Enabled",
+   "label": "مفعل (Enabled)",
    "default": 1
   },
   {
    "fieldname": "sort_order",
    "fieldtype": "Int",
-   "label": "Sort Order",
+   "label": "ترتيب الظهور (Sort Order)",
    "default": 0
   },
   {
@@ -54,7 +54,7 @@
   {
    "fieldname": "items",
    "fieldtype": "Table",
-   "label": "Items",
+   "label": "المنتجات (Items)",
    "options": "Webshop Landing Section Item"
   }
  ],

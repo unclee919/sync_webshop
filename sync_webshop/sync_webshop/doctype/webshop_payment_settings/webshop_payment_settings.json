@@ -23,30 +23,30 @@
   {
    "fieldname": "stripe_section",
    "fieldtype": "Section Break",
-   "label": "Stripe Settings"
+   "label": "إعدادات سترايب (Stripe Settings)"
   },
   {
    "fieldname": "stripe_enabled",
    "fieldtype": "Check",
-   "label": "Enable Stripe",
+   "label": "تفعيل سترايب (Enable Stripe)",
    "default": 0
   },
   {
    "fieldname": "stripe_mode",
    "fieldtype": "Select",
-   "label": "Mode",
+   "label": "الوضع (Mode)",
    "options": "Test\nLive",
    "default": "Test"
   },
   {
    "fieldname": "stripe_publishable_key",
    "fieldtype": "Data",
-   "label": "Stripe Publishable Key"
+   "label": "المفتاح العام (Stripe Publishable Key)"
   },
   {
    "fieldname": "stripe_secret_key",
    "fieldtype": "Password",
-   "label": "Stripe Secret Key"
+   "label": "المفتاح السري (Stripe Secret Key)"
   },
   {
    "fieldname": "stripe_webhook_secret",
@@ -56,12 +56,12 @@
   {
    "fieldname": "cod_section",
    "fieldtype": "Section Break",
-   "label": "Cash on Delivery"
+   "label": "الدفع عند الاستلام (Cash on Delivery)"
   },
   {
    "fieldname": "cod_enabled",
    "fieldtype": "Check",
-   "label": "Enable Cash on Delivery",
+   "label": "تفعيل الدفع عند الاستلام (Enable COD)",
    "default": 1
   },
   {

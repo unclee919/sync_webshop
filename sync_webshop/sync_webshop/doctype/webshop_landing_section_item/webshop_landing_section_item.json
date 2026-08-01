@@ -9,7 +9,7 @@
   {
    "fieldname": "item_code",
    "fieldtype": "Link",
-   "label": "Item",
+   "label": "المنتج (Item)",
    "options": "Item",
    "reqd": 1
   }

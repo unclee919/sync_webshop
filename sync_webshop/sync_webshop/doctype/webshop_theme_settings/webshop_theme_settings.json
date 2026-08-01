@@ -55,17 +55,17 @@
   {
    "fieldname": "branding_section",
    "fieldtype": "Section Break",
-   "label": "Branding"
+   "label": "الهوية البصرية (Branding)"
   },
   {
    "fieldname": "logo",
    "fieldtype": "Attach Image",
-   "label": "Logo"
+   "label": "الشعار (Logo)"
   },
   {
    "fieldname": "favicon",
    "fieldtype": "Attach Image",
-   "label": "Favicon"
+   "label": "أيقونة المتصفح (Favicon)"
   },
   {
    "fieldname": "column_break_1",
@@ -74,19 +74,19 @@
   {
    "fieldname": "layout_style",
    "fieldtype": "Select",
-   "label": "Layout Style",
+   "label": "نمط التخطيط (Layout Style)",
    "options": "Classic\nMinimal\nBold\nOasis",
    "default": "Classic"
   },
   {
    "fieldname": "colors_section",
    "fieldtype": "Section Break",
-   "label": "General Colors"
+   "label": "الألوان العامة (General Colors)"
   },
   {
    "fieldname": "primary_color",
    "fieldtype": "Color",
-   "label": "Primary Color",
+   "label": "اللون الأساسي (Primary Color)",
    "default": "#21504C"
   },
   {
@@ -114,7 +114,7 @@
   {
    "fieldname": "top_bar_colors_section",
    "fieldtype": "Section Break",
-   "label": "Top Bar Colors"
+   "label": "ألوان الشريط العلوي (Top Bar)"
   },
   {
    "fieldname": "top_bar_bg_color",
@@ -209,18 +209,18 @@
   {
    "fieldname": "header_dimensions_section",
    "fieldtype": "Section Break",
-   "label": "Header Dimensions"
+   "label": "أبعاد الهيدر (Header Dimensions)"
   },
   {
    "fieldname": "header_max_width",
    "fieldtype": "Int",
-   "label": "Header Max Width (px)",
+   "label": "أقصى عرض للهيدر (Header Max Width - px)",
    "default": 1200
   },
   {
    "fieldname": "header_height",
    "fieldtype": "Int",
-   "label": "Header Height (px)",
+   "label": "ارتفاع الهيدر (Header Height - px)",
    "default": 80
   },
   {
@@ -238,7 +238,7 @@
   {
    "fieldname": "logo_height",
    "fieldtype": "Int",
-   "label": "Logo Height (px)",
+   "label": "ارتفاع الشعار (Logo Height - px)",
    "default": 45
   },
   {
