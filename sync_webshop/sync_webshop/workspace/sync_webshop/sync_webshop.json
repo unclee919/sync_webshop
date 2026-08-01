@@ -1,10 +1,6 @@
 {
- "charts": [
-  {
-   "chart_name": "Webshop Sales Trend"
-  }
- ],
- "content": "[{\"data\": {\"level\": 2, \"text\": \"Sync Webshop Management\"}, \"type\": \"header\"}, {\"data\": {\"chart_name\": \"Webshop Sales Trend\"}, \"type\": \"chart\"}, {\"data\": {}, \"type\": \"spacer\"}, {\"data\": {\"level\": 4, \"text\": \"Key Performance Indicators\"}, \"type\": \"header\"}, {\"data\": {\"number_card_name\": \"Webshop Total Products\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Total Orders\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Total Customers\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Abandoned Carts\"}, \"type\": \"number_card\"}, {\"data\": {}, \"type\": \"spacer\"}, {\"data\": {\"level\": 4, \"text\": \"Quick Access\"}, \"type\": \"header\"}, {\"data\": {\"card_name\": \"Store Configuration\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Content & SEO\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Sales & Customers\"}, \"type\": \"card\"}]",
+ "charts": [],
+ "content": "[{\"data\": {\"level\": 2, \"text\": \"Sync Webshop Management\"}, \"type\": \"header\"}, {\"data\": {\"chart_name\": \"Webshop Sales Trend\"}, \"type\": \"chart\"}, {\"data\": {}, \"type\": \"spacer\"}, {\"data\": {\"level\": 4, \"text\": \"Key Performance Indicators\"}, \"type\": \"header\"}, {\"data\": {\"number_card_name\": \"Webshop Total Products\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Total Orders\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Total Customers\"}, \"type\": \"number_card\"}, {\"data\": {\"number_card_name\": \"Webshop Abandoned Carts\"}, \"type\": \"number_card\"}, {\"data\": {}, \"type\": \"spacer\"}, {\"data\": {\"level\": 4, \"text\": \"Quick Access\"}, \"type\": \"header\"}, {\"data\": {\"card_name\": \"Catalog & Inventory\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Sales & Orders\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Store Configuration\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Content & SEO\"}, \"type\": \"card\"}, {\"data\": {\"card_name\": \"Webshop Extras\"}, \"type\": \"card\"}]",
  "creation": "2026-08-01 12:12:52.936399",
  "custom_blocks": [],
  "docstatus": 0,
@@ -16,6 +12,96 @@
  "is_hidden": 0,
  "label": "Sync Webshop",
  "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Items",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Groups",
+   "link_count": 0,
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Price Lists",
+   "link_count": 0,
+   "link_to": "Price List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Prices",
+   "link_count": 0,
+   "link_to": "Item Price",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Orders",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoices",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customers",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Addresses",
+   "link_count": 0,
+   "link_to": "Address",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Contacts",
+   "link_count": 0,
+   "link_to": "Contact",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -167,24 +253,11 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-01 12:27:17.484648",
+ "modified": "2026-08-02 01:15:23.338545",
  "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Sync Webshop",
- "number_cards": [
-  {
-   "number_card_name": "Webshop Total Products"
-  },
-  {
-   "number_card_name": "Webshop Total Orders"
-  },
-  {
-   "number_card_name": "Webshop Total Customers"
-  },
-  {
-   "number_card_name": "Webshop Abandoned Carts"
-  }
- ],
+ "number_cards": [],
  "owner": "Administrator",
  "public": 1,
  "quick_lists": [],
@@ -193,20 +266,20 @@
  "shortcuts": [
   {
    "doc_view": "",
+   "label": "Items",
+   "link_to": "Item",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Sales Orders",
+   "link_to": "Sales Order",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
    "label": "Content Settings",
    "link_to": "Webshop Content Settings",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "label": "Theme Settings",
-   "link_to": "Webshop Theme Settings",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "label": "Product Settings",
-   "link_to": "Webshop Product Settings",
    "type": "DocType"
   },
   {
