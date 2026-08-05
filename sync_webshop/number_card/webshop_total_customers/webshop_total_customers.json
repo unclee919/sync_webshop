@@ -12,7 +12,7 @@
  "label": "Total Customers",
  "modified": "2026-08-01 12:24:23.120266",
  "modified_by": "Administrator",
- "module": "Sync Webshop",
+ "module": "Webshop",
  "name": "Webshop Total Customers",
  "owner": "Administrator",
  "report_function": "Sum",

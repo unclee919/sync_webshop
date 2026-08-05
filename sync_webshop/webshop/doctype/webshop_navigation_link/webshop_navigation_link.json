@@ -1,0 +1,68 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Navigation Link",
+ "module": "Webshop",
+ "custom": 0,
+ "istable": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "label_en",
+  "label_ar",
+  "link_url",
+  "item_group",
+  "is_external",
+  "show_in_navbar",
+  "show_in_browse_menu",
+  "sort_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "label_en",
+   "fieldtype": "Data",
+   "label": "Label (English)",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "label": "Label (Arabic)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "link_url",
+   "fieldtype": "Data",
+   "label": "Link URL",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "is_external",
+   "fieldtype": "Check",
+   "label": "Is External"
+  },
+  {
+   "fieldname": "show_in_navbar",
+   "fieldtype": "Check",
+   "label": "Show in Navbar",
+   "default": "1"
+  },
+  {
+   "fieldname": "show_in_browse_menu",
+   "fieldtype": "Check",
+   "label": "Show in Browse Menu",
+   "default": "1"
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order",
+   "default": "0"
+  }
+ ]
+}

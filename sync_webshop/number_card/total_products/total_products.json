@@ -11,7 +11,7 @@
  "label": "Total Products",
  "modified": "2026-08-01 12:26:08.889521",
  "modified_by": "Administrator",
- "module": "Sync Webshop",
+ "module": "Webshop",
  "name": "Total Products",
  "owner": "Administrator",
  "report_function": "Sum",
