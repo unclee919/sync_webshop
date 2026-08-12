@@ -132,7 +132,16 @@
   "mega_menu_featured_image",
   "mega_menu_featured_title_en",
   "mega_menu_featured_title_ar",
-  "mega_menu_featured_url"
+  "mega_menu_featured_url",
+  "enable_coupons",
+  "require_city_governorate",
+  "require_second_phone",
+  "enable_location_picker",
+  "coupon_placeholder_en",
+  "coupon_placeholder_ar",
+  "enable_analytics_tracking",
+  "ga4_measurement_id",
+  "facebook_pixel_id"
  ],
  "fields": [
   {
@@ -805,11 +814,63 @@
    "fieldname": "mega_menu_featured_url",
    "fieldtype": "Data",
    "label": "Mega Menu Featured URL"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_coupons",
+   "fieldtype": "Check",
+   "label": "Enable Coupon Codes"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_city_governorate",
+   "fieldtype": "Check",
+   "label": "Require City and Governorate"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_second_phone",
+   "fieldtype": "Check",
+   "label": "Require Second Phone Number"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_location_picker",
+   "fieldtype": "Check",
+   "label": "Enable Location Picker (Optional)"
+  },
+  {
+   "default": "Enter coupon code",
+   "fieldname": "coupon_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Coupon Placeholder (EN)"
+  },
+  {
+   "default": "\u0623\u062f\u062e\u0644 \u0643\u0648\u062f \u0627\u0644\u062e\u0635\u0645",
+   "fieldname": "coupon_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Placeholder (AR)"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_analytics_tracking",
+   "fieldtype": "Check",
+   "label": "Enable Storefront Analytics Tracking"
+  },
+  {
+   "fieldname": "ga4_measurement_id",
+   "fieldtype": "Data",
+   "label": "Google Analytics 4 Measurement ID"
+  },
+  {
+   "fieldname": "facebook_pixel_id",
+   "fieldtype": "Data",
+   "label": "Facebook Pixel ID"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2026-08-12 13:55:02.367513",
+ "modified": "2026-08-12 19:14:33.489404",
  "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Webshop Content Settings",

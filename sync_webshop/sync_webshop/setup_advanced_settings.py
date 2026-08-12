@@ -109,6 +109,9 @@ def run_all():
         {"fieldname": "mega_menu_featured_title_en", "label": "Mega Menu Featured Title (English)", "fieldtype": "Data"},
         {"fieldname": "mega_menu_featured_title_ar", "label": "Mega Menu Featured Title (Arabic)", "fieldtype": "Data"},
         {"fieldname": "mega_menu_featured_url", "label": "Mega Menu Featured URL", "fieldtype": "Data"},
+        {"fieldname": "enable_analytics_tracking", "label": "Enable Storefront Analytics Tracking", "fieldtype": "Check", "default": "0"},
+        {"fieldname": "ga4_measurement_id", "label": "Google Analytics 4 Measurement ID", "fieldtype": "Data"},
+        {"fieldname": "facebook_pixel_id", "label": "Facebook Pixel ID", "fieldtype": "Data"},
     ])
 
     # 1. Paymob Settings
@@ -156,6 +159,7 @@ def run_all():
         {"fieldname": "max_message_length", "label": "Maximum Message Length", "fieldtype": "Int", "default": "2000"},
         {"fieldname": "max_tokens", "label": "Maximum Response Tokens", "fieldtype": "Int", "default": "500"},
         {"fieldname": "temperature", "label": "Response Temperature", "fieldtype": "Float", "default": "0.2"},
+        {"fieldname": "prevent_sensitive_data", "label": "Block Sensitive Data in Chat", "fieldtype": "Check", "default": "1"},
     ]
     create_single_doctype("Webshop AI Chat Settings", "AI Chat Widget Configuration", ai_fields)
 

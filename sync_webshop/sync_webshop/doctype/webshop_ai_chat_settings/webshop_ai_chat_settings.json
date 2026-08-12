@@ -19,7 +19,8 @@
   "rate_limit_per_minute",
   "max_message_length",
   "max_tokens",
-  "temperature"
+  "temperature",
+  "prevent_sensitive_data"
  ],
  "fields": [
   {
@@ -99,13 +100,20 @@
    "fieldname": "temperature",
    "fieldtype": "Float",
    "label": "Response Temperature"
+  },
+  {
+   "default": "1",
+   "description": "AI will refuse to discuss or collect passwords, credit card numbers, or other sensitive credentials.",
+   "fieldname": "prevent_sensitive_data",
+   "fieldtype": "Check",
+   "label": "Prevent Sensitive Data Exposure"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-08-12 18:19:35.036324",
+ "modified": "2026-08-12 18:53:29.951056",
  "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Webshop AI Chat Settings",

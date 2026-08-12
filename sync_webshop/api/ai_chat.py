@@ -5,6 +5,7 @@ Frappe Password fields and all model calls are made server-side.
 """
 
 import json
+import re
 import time
 
 import frappe
@@ -76,10 +77,10 @@ def _product_context(message):
 
 
 def _customer_context(email=None):
-    if frappe.session.user == "Guest" and not email:
+    # Guest chat never receives order history, even if a browser submits an email.
+    if frappe.session.user == "Guest":
         return []
-    if frappe.session.user != "Guest":
-        email = frappe.session.user
+    email = frappe.session.user
     if not email:
         return []
     customer = frappe.db.get_value("Contact", {"email_id": email}, "name")
@@ -98,6 +99,19 @@ def _customer_context(email=None):
     )
 
 
+_SENSITIVE_PATTERNS = (
+    r"\b(?:password|passwd|passcode|secret|api[_ -]?key|token|otp|one[- ]time|cvv|cvc|pin)\b",
+    r"\b(?:credit|debit|card)\s*(?:number|no\.?|details)\b",
+    r"\b(?:iban|bank\s*account|national\s*id|passport)\b",
+    r"(?:\b\d[ -]?){13,19}\b",
+)
+
+
+def _contains_sensitive_data(text):
+    value = str(text or "")
+    return any(re.search(pattern, value, flags=re.IGNORECASE) for pattern in _SENSITIVE_PATTERNS)
+
+
 def _history(history):
     if isinstance(history, str):
         try:
@@ -111,7 +125,7 @@ def _history(history):
         if not isinstance(row, dict) or row.get("role") not in {"user", "assistant"}:
             continue
         content = str(row.get("content") or "").strip()
-        if content:
+        if content and not _contains_sensitive_data(content):
             clean.append({"role": row["role"], "content": content[:2000]})
     return clean
 
@@ -126,6 +140,7 @@ def get_ai_chat_settings():
         "greeting_message": getattr(settings, "greeting_message", None) or "How can I help you today?",
         "primary_color": getattr(settings, "primary_color", None) or "#10b981",
         "max_message_length": int(getattr(settings, "max_message_length", None) or 2000),
+        "prevent_sensitive_data": _truthy(getattr(settings, "prevent_sensitive_data", None), True),
     }
 
 
@@ -145,6 +160,8 @@ def send_message(message, history=None, email=None):
         frappe.throw("A message is required.")
     if len(message) > max_length:
         frappe.throw(f"Message is limited to {max_length} characters.")
+    if _truthy(getattr(settings, "prevent_sensitive_data", None), True) and _contains_sensitive_data(message):
+        return {"message": "For your safety, please do not share passwords, payment-card details, OTPs, API keys, or government identification. I can still help with products, delivery, returns, and general store policies.", "blocked_sensitive_data": True}
 
     api_key = _password(settings, "api_key")
     if not api_key:

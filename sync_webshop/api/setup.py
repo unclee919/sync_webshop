@@ -34,12 +34,51 @@ def run_setup():
 				"fieldtype": "Data", 
 				"insert_after": "webshop_payment_method"
 			},
-			{
+						{
 				"fieldname": "stripe_payment_intent", 
 				"label": "معرف دفع سترايب (Stripe Intent)", 
 				"fieldtype": "Data", 
 				"insert_after": "webshop_payment_status"
-			},
+				},
+			{
+				"fieldname": "webshop_coupon_code",
+				"label": "Coupon Code",
+				"fieldtype": "Data",
+				"insert_after": "stripe_payment_intent"
+				},
+			{
+				"fieldname": "webshop_coupon_discount",
+				"label": "Coupon Discount",
+				"fieldtype": "Currency",
+				"insert_after": "webshop_coupon_code"
+				},
+			{
+				"fieldname": "webshop_governorate",
+				"label": "Governorate",
+				"fieldtype": "Link",
+				"options": "Territory",
+				"insert_after": "webshop_coupon_discount"
+				},
+			{
+				"fieldname": "webshop_city",
+				"label": "City",
+				"fieldtype": "Link",
+				"options": "Territory",
+				"insert_after": "webshop_governorate"
+				},
+			{
+				"fieldname": "webshop_location",
+				"label": "Optional Location",
+				"fieldtype": "Small Text",
+				"insert_after": "webshop_city"
+				},
+			{
+				"fieldname": "webshop_second_phone",
+				"label": "Second Phone Number",
+				"fieldtype": "Data",
+				"insert_after": "webshop_location"
+				},
+
 		],
 		"Delivery Note": [
 			{
