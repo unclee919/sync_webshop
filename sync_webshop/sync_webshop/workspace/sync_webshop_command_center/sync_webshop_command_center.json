@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\": \"h1\", \"type\": \"header\", \"data\": {\"text\": \"\\ud83d\\ude80 Sync Webshop Elite Command Center\", \"level\": 2, \"col\": 12}}, {\"id\": \"p1\", \"type\": \"text\", \"data\": {\"text\": \"Welcome to your professional e-commerce operations hub. All systems are operational, stock is synchronized, and multi-image galleries are live.\", \"col\": 12}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"h2\", \"type\": \"header\", \"data\": {\"text\": \"\\u26a1 Quick Navigation & Management\", \"level\": 4, \"col\": 12}}, {\"id\": \"sc1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Products\", \"col\": 3}}, {\"id\": \"sc2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Orders\", \"col\": 3}}, {\"id\": \"sc3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 3}}, {\"id\": \"sc4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Theme Editor\", \"col\": 3}}, {\"id\": \"sp2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"c1\", \"type\": \"card\", \"data\": {\"card_name\": \"\\ud83d\\udce6 Store Operations\", \"col\": 6}}, {\"id\": \"c2\", \"type\": \"card\", \"data\": {\"card_name\": \"\\u2728 Storefront, AI & Growth\", \"col\": 6}}]",
- "creation": "2026-08-13 00:05:05.835890",
+ "content": "[{\"id\": \"welcome_banner\", \"type\": \"card\", \"data\": {\"card_name\": \"\\ud83d\\ude80 Sync Webshop Elite Command Center\", \"col\": 12}}, {\"id\": \"desc_text\", \"type\": \"text\", \"data\": {\"text\": \"### Welcome to your E-Commerce Operations Hub\\n\\nAll settings, translations, AI chat, Paymob integration, and product catalogs are fully configured and synchronized with ERPNext.\\n\\n- **Products Catalog**: Fully populated with sample images and inventory.\\n- **Authentication**: Phone/email customer sync active.\\n- **RBAC**: User and Manager roles enforced.\\n\\nUse the sidebar links to manage Orders, Items, Customers, and Settings.\", \"col\": 12}}]",
+ "creation": "2026-08-13 00:12:21.148344",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -131,7 +131,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-13 00:09:03.167951",
+ "modified": "2026-08-13 00:12:21.148344",
  "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Sync Webshop Command Center",
@@ -141,35 +141,6 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 1.0,
- "shortcuts": [
-  {
-   "doc_view": "",
-   "icon": "box",
-   "label": "Products",
-   "link_to": "Item",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "icon": "shopping-cart",
-   "label": "Orders",
-   "link_to": "Sales Order",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "icon": "user-check",
-   "label": "Customers",
-   "link_to": "Customer",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "icon": "sliders",
-   "label": "Theme Editor",
-   "link_to": "Webshop Theme Settings",
-   "type": "DocType"
-  }
- ],
+ "shortcuts": [],
  "title": "Sync Webshop Command Center"
 }
