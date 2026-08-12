@@ -1,5 +1,5 @@
 import frappe
-from sync_webshop.api.utils import set_cors_headers, full_url
+from sync_webshop.api.utils import get_json_cache, set_cors_headers, full_url, set_json_cache
 from sync_webshop.api.catalog import _get_price_list
 from sync_webshop.api.theme import get_theme
 
@@ -9,10 +9,12 @@ def get_content():
 	Returns this server's text content and settings.
 	"""
 	set_cors_headers()
+	cached = get_json_cache("content", {})
+	if cached is not None:
+		return cached
 	try:
 		settings = frappe.get_single("Webshop Content Settings")
 	except Exception:
-		# Fallback if Doctype doesn't exist
 		settings = frappe._dict({
 			"site_name": "Sync Webshop",
 			"banners": [],
@@ -35,7 +37,7 @@ def get_content():
 			"subtitle": row.subtitle,
 			"link_url": row.link_url,
 		}
-		for row in active_sorted(settings.banners)
+		for row in active_sorted(settings.get("banners"))
 	]
 
 	featured_categories = [
@@ -45,7 +47,7 @@ def get_content():
 			"label_ar": row.display_label_ar,
 			"image": full_url(row.image),
 		}
-		for row in active_sorted(settings.featured_categories)
+		for row in active_sorted(settings.get("featured_categories"))
 	]
 
 	testimonials = [
@@ -55,7 +57,7 @@ def get_content():
 			"author": row.author,
 			"author_title": row.author_title,
 		}
-		for row in active_sorted(settings.testimonials)
+		for row in active_sorted(settings.get("testimonials"))
 	]
 
 	trust_badges = [
@@ -66,12 +68,11 @@ def get_content():
 			"description_en": row.description_en,
 			"description_ar": row.description_ar,
 		}
-		for row in active_sorted(settings.trust_badges)
+		for row in active_sorted(settings.get("trust_badges"))
 	]
 
 	nav_links = []
-	if settings.nav_links:
-		# Sort by sort_order
+	if settings.get("nav_links"):
 		sorted_links = sorted(settings.nav_links, key=lambda x: x.sort_order or 0)
 		for row in sorted_links:
 			link_url = row.link_url
@@ -95,10 +96,9 @@ def get_content():
 			"link_url": row.link_url,
 			"icon": row.icon
 		}
-		for row in settings.social_links
+		for row in settings.get("social_links", [])
 	]
 
-	# Fetch Landing Sections
 	landing_sections = []
 	try:
 		sections = frappe.get_all(
@@ -107,92 +107,94 @@ def get_content():
 			fields=["name", "section_title_en", "section_title_ar", "section_subtitle_en", "section_subtitle_ar", "sort_order"],
 			order_by="sort_order asc"
 		)
-
 		price_list = _get_price_list()
-		for s in sections:
-			items = frappe.get_all(
-				"Webshop Landing Section Item",
-				filters={"parent": s.name},
-				fields=["item_code"]
-			)
-			section_items = []
-			for item_row in items:
-				item_code = item_row.item_code
-				if not frappe.db.exists("Item", item_code): continue
+		currency = frappe.db.get_value("Price List", price_list, "currency") or "SAR"
+
+		for sec in sections:
+			sec_doc = frappe.get_doc("Webshop Landing Section", sec.name)
+			items_list = []
+			for itm_row in sec_doc.items:
+				item_code = itm_row.item_code
+				if not frappe.db.exists("Item", item_code):
+					continue
 				item_doc = frappe.get_doc("Item", item_code)
-				# Get price
-				price = frappe.db.get_value("Item Price", {"item_code": item_code, "price_list": price_list}, "price_list_rate")
-				section_items.append({
+				rate = frappe.db.get_value(
+					"Item Price",
+					{"price_list": price_list, "item_code": item_code, "selling": 1},
+					"price_list_rate"
+				) or 0
+				items_list.append({
 					"item_code": item_code,
 					"item_name": item_doc.item_name,
-					"item_group": item_doc.item_group,
-					"image": full_url(item_doc.image) if item_doc.image else None,
-					"price": price or 0,
-					"currency": frappe.db.get_value("Price List", price_list, "currency"),
-					"rating": item_doc.webshop_rating
+					"description": item_doc.description,
+					"image": full_url(item_doc.image),
+					"price": rate,
+					"currency": currency,
+					"rating": getattr(item_doc, "webshop_rating", 5.0) or 5.0
 				})
 			landing_sections.append({
-				"title_en": s.section_title_en,
-				"title_ar": s.section_title_ar,
-				"subtitle_en": s.section_subtitle_en,
-				"subtitle_ar": s.section_subtitle_ar,
-				"items": section_items
+				"title_en": sec.section_title_en,
+				"title_ar": sec.section_title_ar,
+				"subtitle_en": sec.section_subtitle_en,
+				"subtitle_ar": sec.section_subtitle_ar,
+				"sort_order": sec.sort_order,
+				"items": items_list
 			})
 	except Exception:
 		pass
 
-	# New Features Data
-	footer_columns = []
-	footer_settings_data = {"enabled": 0, "footer_logo": None, "copyright_en": "", "copyright_ar": "", "columns": []}
+	footer_settings_data = {}
 	try:
 		footer_settings = frappe.get_single("Webshop Footer Settings")
-		if footer_settings.enabled:
-			columns = frappe.get_all(
-				"Webshop Footer Column",
-				filters={"enabled": 1},
-				fields=["name", "title_en", "title_ar", "sort_order"],
-				order_by="sort_order asc"
-			)
-			for col in columns:
-				col_doc = frappe.get_doc("Webshop Footer Column", col.name)
-				footer_columns.append({
-					"title_en": col.title_en,
-					"title_ar": col.title_ar,
-					"links": [
-						{
-							"label_en": l.label_en,
-							"label_ar": l.label_ar,
-							"link_url": l.link_url,
-							"is_external": l.is_external
-						} for l in col_doc.links
-					]
-				})
-			footer_settings_data = {
-				"enabled": footer_settings.enabled,
-				"footer_logo": full_url(footer_settings.footer_logo) if footer_settings.footer_logo else None,
-				"copyright_en": footer_settings.copyright_en,
-				"copyright_ar": footer_settings.copyright_ar,
-				"columns": footer_columns
-			}
-	except Exception:
-		pass
-
-	announcement_data = {"enabled": 0}
-	try:
-		announcement = frappe.get_single("Webshop Announcement Bar")
-		announcement_data = {
-			"enabled": announcement.enabled,
-			"message_en": announcement.message_en,
-			"message_ar": announcement.message_ar,
-			"background_color": announcement.background_color,
-			"text_color": announcement.text_color,
-			"link_url": announcement.link_url,
-			"show_close_button": announcement.show_close_button
+		columns = frappe.get_all(
+			"Webshop Footer Column",
+			filters={"enabled": 1},
+			fields=["name", "title_en", "title_ar", "sort_order"],
+			order_by="sort_order asc"
+		)
+		cols_data = []
+		for col in columns:
+			col_doc = frappe.get_doc("Webshop Footer Column", col.name)
+			links_data = [
+				{
+					"label_en": l.label_en,
+					"label_ar": l.label_ar,
+					"link_url": l.link_url,
+					"is_external": l.is_external
+				} for l in col_doc.links
+			]
+			cols_data.append({
+				"title_en": col.title_en,
+				"title_ar": col.title_ar,
+				"sort_order": col.sort_order,
+				"links": links_data
+			})
+		footer_settings_data = {
+			"enabled": footer_settings.enabled,
+			"footer_logo": full_url(footer_settings.footer_logo) if footer_settings.footer_logo else None,
+			"copyright_en": footer_settings.copyright_en,
+			"copyright_ar": footer_settings.copyright_ar,
+			"columns": cols_data
 		}
 	except Exception:
 		pass
 
-	product_settings_data = {"enable_zoom": 0, "show_related_products": 0, "show_sidebar": 0}
+	announcement_data = {}
+	try:
+		announcement = frappe.get_single("Webshop Announcement Bar")
+		if announcement.enabled:
+			announcement_data = {
+				"message_en": announcement.message_en,
+				"message_ar": announcement.message_ar,
+				"background_color": announcement.background_color,
+				"text_color": announcement.text_color,
+				"link_url": announcement.link_url,
+				"show_close_button": announcement.show_close_button
+			}
+	except Exception:
+		pass
+
+	product_settings_data = {}
 	try:
 		product_settings = frappe.get_single("Webshop Product Settings")
 		product_settings_data = {
@@ -200,7 +202,14 @@ def get_content():
 			"show_related_products": product_settings.show_related_products,
 			"related_products_title_en": product_settings.related_products_title_en,
 			"related_products_title_ar": product_settings.related_products_title_ar,
-			"show_sidebar": product_settings.show_sidebar
+			"show_sidebar": product_settings.show_sidebar,
+			"reviews_enabled": getattr(product_settings, "reviews_enabled", 1),
+			"reviews_title_en": getattr(product_settings, "reviews_title_en", "Customer reviews"),
+			"reviews_title_ar": getattr(product_settings, "reviews_title_ar", "آراء العملاء"),
+			"enable_recently_viewed": getattr(product_settings, "enable_recently_viewed", 1),
+			"recently_viewed_limit": getattr(product_settings, "recently_viewed_limit", 8) or 8,
+			"recently_viewed_title_en": getattr(product_settings, "recently_viewed_title_en", "Recently viewed"),
+			"recently_viewed_title_ar": getattr(product_settings, "recently_viewed_title_ar", "شوهدت مؤخراً"),
 		}
 	except Exception:
 		pass
@@ -258,7 +267,6 @@ def get_content():
 	except Exception:
 		pass
 
-	# FAQs
 	faqs = []
 	try:
 		faqs = frappe.get_all(
@@ -270,8 +278,28 @@ def get_content():
 	except Exception:
 		pass
 
-	return {
+	response = {
 		"site_name": settings.site_name,
+		"contact_us_text_en": settings.get("contact_us_text_en"),
+		"contact_us_text_ar": settings.get("contact_us_text_ar"),
+		"track_order_text_en": settings.get("track_order_text_en"),
+		"track_order_text_ar": settings.get("track_order_text_ar"),
+		"open_menu_text_en": settings.get("open_menu_text_en"),
+		"open_menu_text_ar": settings.get("open_menu_text_ar"),
+		"home_text_en": settings.get("home_text_en"),
+		"home_text_ar": settings.get("home_text_ar"),
+		"all_products_text_en": settings.get("all_products_text_en"),
+		"all_products_text_ar": settings.get("all_products_text_ar"),
+		"why_us_text_en": settings.get("why_us_text_en"),
+		"why_us_text_ar": settings.get("why_us_text_ar"),
+		"search_button_text_en": settings.get("search_button_text_en"),
+		"search_button_text_ar": settings.get("search_button_text_ar"),
+		"category_label_short_en": settings.get("category_label_short_en"),
+		"category_label_short_ar": settings.get("category_label_short_ar"),
+		"product_label_short_en": settings.get("product_label_short_en"),
+		"product_label_short_ar": settings.get("product_label_short_ar"),
+		"enable_quick_view": settings.get("enable_quick_view", 1),
+		"enable_faceted_search": settings.get("enable_faceted_search", 1),
 		"show_category_sidebar": settings.show_category_sidebar,
 		"show_price_filter": settings.show_price_filter,
 		"show_brand_filter": settings.show_brand_filter,
@@ -291,17 +319,14 @@ def get_content():
 		"show_top_bar": settings.show_top_bar,
 		"top_bar_message_en": settings.top_bar_message_en,
 		"top_bar_message_ar": settings.top_bar_message_ar,
-		# SEO & Social Sharing
 		"seo_meta_description_en": settings.seo_meta_description_en,
 		"seo_meta_description_ar": settings.seo_meta_description_ar,
 		"seo_og_image": full_url(settings.seo_og_image) if settings.seo_og_image else None,
 		"seo_keywords": settings.seo_keywords,
-		# Floating Action Buttons
 		"show_whatsapp_button": settings.show_whatsapp_button,
 		"whatsapp_number": settings.whatsapp_number,
 		"whatsapp_message": settings.whatsapp_message,
 		"show_back_to_top": settings.show_back_to_top,
-		# Lists
 		"nav_links": nav_links,
 		"social_links": social_links,
 		"banners": banners,
@@ -310,72 +335,24 @@ def get_content():
 		"trust_badges": trust_badges,
 		"landing_sections": landing_sections,
 		"theme": get_theme(),
-		# New Data
 		"footer_settings": footer_settings_data,
 		"announcement": announcement_data,
 		"product_settings": product_settings_data,
+		"recommendations_title_en": settings.get("recommendations_title_en") or "Picked for you",
+		"recommendations_title_ar": settings.get("recommendations_title_ar") or "مختارات لك",
+		"recommendations_enabled": settings.get("recommendations_enabled", 1),
 		"popups": popups_data,
 		"seo": seo_data,
-		# User Auth & Wishlist Settings
-		"enable_user_registration": settings.enable_user_registration,
-		"enable_wishlist": settings.enable_wishlist,
-		# Analytics & Performance
-		"google_analytics_id": settings.google_analytics_id,
-		"cdn_url_prefix": settings.cdn_url_prefix,
-		"enable_webp_optimization": settings.enable_webp_optimization,
-		# Customer Support
-		"enable_live_chat": settings.enable_live_chat,
-		"live_chat_type": settings.live_chat_type,
-		"live_chat_custom_script": settings.live_chat_custom_script,
 		"faqs": faqs,
-		# Marketing & Sales
-		"enable_coupons": settings.enable_coupons,
-		"enable_mailchimp": settings.enable_mailchimp,
-		# UI Labels
-		"header_contact_number": settings.header_contact_number,
-		"need_help_text_en": settings.need_help_text_en,
-		"need_help_text_ar": settings.need_help_text_ar,
-		"support_center_text_en": settings.support_center_text_en,
-		"support_center_text_ar": settings.support_center_text_ar,
-		"browse_categories_text_en": settings.browse_categories_text_en,
-		"browse_categories_text_ar": settings.browse_categories_text_ar,
-		"all_categories_text_en": settings.all_categories_text_en,
-		"all_categories_text_ar": settings.all_categories_text_ar,
-		"search_placeholder_en": settings.search_placeholder_en,
-		"search_placeholder_ar": settings.search_placeholder_ar,
-		"wishlist_text_en": settings.wishlist_text_en,
-		"wishlist_text_ar": settings.wishlist_text_ar,
-		"cart_text_en": settings.cart_text_en,
-		"cart_text_ar": settings.cart_text_ar,
-		"account_text_en": settings.account_text_en,
-		"account_text_ar": settings.account_text_ar,
-		"shop_now_text_en": settings.shop_now_text_en,
-		"shop_now_text_ar": settings.shop_now_text_ar,
-		"best_categories_text_en": settings.best_categories_text_en,
-		"best_categories_text_ar": settings.best_categories_text_ar,
-		"view_all_text_en": settings.view_all_text_en,
-		"view_all_text_ar": settings.view_all_text_ar,
-		"new_badge_text_en": settings.new_badge_text_en,
-		"new_badge_text_ar": settings.new_badge_text_ar,
-		"add_to_cart_text_en": settings.add_to_cart_text_en,
-		"add_to_cart_text_ar": settings.add_to_cart_text_ar,
-		"item_code_label_en": settings.item_code_label_en,
-		"item_code_label_ar": settings.item_code_label_ar,
-		"category_label_en": settings.category_label_en,
-		"category_label_ar": settings.category_label_ar,
-		"unit_label_en": settings.unit_label_en,
-		"unit_label_ar": settings.unit_label_ar,
-		"added_text_en": settings.added_text_en,
-		"added_text_ar": settings.added_text_ar,
-		"checkout_title_en": settings.checkout_title_en,
-		"checkout_title_ar": settings.checkout_title_ar,
-		"order_success_title_en": settings.order_success_title_en,
-		"order_success_title_ar": settings.order_success_title_ar,
-		"continue_shopping_text_en": settings.continue_shopping_text_en,
-		"continue_shopping_text_ar": settings.continue_shopping_text_ar,
-		# UI Icons
-		"wishlist_icon": full_url(settings.wishlist_icon) if settings.wishlist_icon else None,
-		"cart_icon": full_url(settings.cart_icon) if settings.cart_icon else None,
-		"account_icon": full_url(settings.account_icon) if settings.account_icon else None,
-		"support_icon": full_url(settings.support_icon) if settings.support_icon else None
+		"enable_user_registration": settings.get("enable_user_registration", 1),
+		"enable_wishlist": settings.get("enable_wishlist", 1),
+		"mega_menu_enabled": settings.get("mega_menu_enabled", 1),
+		"mega_menu_max_categories": settings.get("mega_menu_max_categories", 12),
+		"mega_menu_title_en": settings.get("mega_menu_title_en") or "Browse categories",
+		"mega_menu_title_ar": settings.get("mega_menu_title_ar") or "تصفح الأقسام",
+		"mega_menu_featured_image": full_url(settings.get("mega_menu_featured_image")) if settings.get("mega_menu_featured_image") else None,
+		"mega_menu_featured_title_en": settings.get("mega_menu_featured_title_en"),
+		"mega_menu_featured_title_ar": settings.get("mega_menu_featured_title_ar"),
+		"mega_menu_featured_url": settings.get("mega_menu_featured_url"),
 	}
+	return set_json_cache("content", {}, response, expires_in_sec=120)

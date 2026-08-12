@@ -51,3 +51,61 @@ def full_url(file_url):
 	if ":8000" in url:
 		url = url.replace(":8000", "")
 	return url
+
+
+def clear_webshop_cache(doc=None, method=None):
+    """Invalidate cached storefront responses after configurable records change."""
+    try:
+        cache = frappe.cache()
+        version = int(cache.get_value('sync_webshop:cache_version') or 1)
+        cache.set_value('sync_webshop:cache_version', version + 1)
+        for key in (
+            'sync_webshop:content',
+            'sync_webshop:theme',
+            'sync_webshop:catalog',
+            'sync_webshop:categories',
+        ):
+            cache.delete_value(key)
+    except Exception:
+        # Cache invalidation must never prevent Desk saves.
+        pass
+
+
+def _cache_key(namespace, payload):
+    import hashlib
+    import json
+    try:
+        version = frappe.cache().get_value('sync_webshop:cache_version') or 1
+    except Exception:
+        version = 1
+    encoded = json.dumps(payload, sort_keys=True, default=str, separators=(',', ':')).encode('utf-8')
+    digest = hashlib.sha256(encoded).hexdigest()[:24]
+    return f"sync_webshop:v{version}:{namespace}:{digest}"
+
+
+def get_json_cache(namespace, payload):
+    """Return a cached JSON value or None without allowing cache failures to break APIs."""
+    import json
+    try:
+        value = frappe.cache().get_value(_cache_key(namespace, payload))
+        if not value:
+            return None
+        if isinstance(value, bytes):
+            value = value.decode('utf-8')
+        return json.loads(value)
+    except Exception:
+        return None
+
+
+def set_json_cache(namespace, payload, value, expires_in_sec=60):
+    """Store a JSON response in Redis; cache failure is intentionally non-fatal."""
+    import json
+    try:
+        frappe.cache().set_value(
+            _cache_key(namespace, payload),
+            json.dumps(value, default=str, separators=(',', ':')),
+            expires_in_sec=expires_in_sec,
+        )
+    except Exception:
+        pass
+    return value

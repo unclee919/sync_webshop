@@ -1,45 +1,126 @@
 {
- "name": "Webshop Product Settings",
- "module": "Webshop",
+ "actions": [],
+ "creation": "2026-08-03 19:03:15.223150",
  "doctype": "DocType",
- "issingle": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable_zoom",
+  "show_related_products",
+  "related_products_title_en",
+  "related_products_title_ar",
+  "show_sidebar",
+  "reviews_enabled",
+  "reviews_require_approval",
+  "reviews_allow_guest",
+  "reviews_title_en",
+  "reviews_title_ar",
+  "enable_recently_viewed",
+  "recently_viewed_limit",
+  "recently_viewed_title_en",
+  "recently_viewed_title_ar"
+ ],
  "fields": [
   {
+   "default": "1",
    "fieldname": "enable_zoom",
    "fieldtype": "Check",
-   "label": "Enable Product Image Zoom",
-   "default": 1
+   "label": "Enable Product Image Zoom"
   },
   {
+   "default": "1",
    "fieldname": "show_related_products",
    "fieldtype": "Check",
-   "label": "Show Related Products",
-   "default": 1
+   "label": "Show Related Products"
   },
   {
+   "default": "Related Products",
    "fieldname": "related_products_title_en",
    "fieldtype": "Data",
-   "label": "Related Products Title (English)",
-   "default": "Related Products"
+   "label": "Related Products Title (English)"
   },
   {
+   "default": "\u0645\u0646\u062a\u062c\u0627\u062a \u0630\u0627\u062a \u0635\u0644\u0629",
    "fieldname": "related_products_title_ar",
    "fieldtype": "Data",
-   "label": "Related Products Title (Arabic)",
-   "default": "\u0645\u0646\u062a\u062c\u0627\u062a \u0630\u0627\u062a \u0635\u0644\u0629"
+   "label": "Related Products Title (Arabic)"
   },
   {
+   "default": "0",
    "fieldname": "show_sidebar",
    "fieldtype": "Check",
-   "label": "Show Sidebar on Product Page",
-   "default": 0
+   "label": "Show Sidebar on Product Page"
+  },
+  {
+   "default": "1",
+   "fieldname": "reviews_enabled",
+   "fieldtype": "Check",
+   "label": "Product Reviews Enabled"
+  },
+  {
+   "default": "1",
+   "fieldname": "reviews_require_approval",
+   "fieldtype": "Check",
+   "label": "Require Review Approval"
+  },
+  {
+   "default": "0",
+   "fieldname": "reviews_allow_guest",
+   "fieldtype": "Check",
+   "label": "Allow Guest Reviews"
+  },
+  {
+   "default": "Customer reviews",
+   "fieldname": "reviews_title_en",
+   "fieldtype": "Data",
+   "label": "Reviews Title (English)"
+  },
+  {
+   "default": "\u0622\u0631\u0627\u0621 \u0627\u0644\u0639\u0645\u0644\u0627\u0621",
+   "fieldname": "reviews_title_ar",
+   "fieldtype": "Data",
+   "label": "Reviews Title (Arabic)"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_recently_viewed",
+   "fieldtype": "Check",
+   "label": "Enable Recently Viewed"
+  },
+  {
+   "default": "8",
+   "fieldname": "recently_viewed_limit",
+   "fieldtype": "Int",
+   "label": "Recently Viewed Limit"
+  },
+  {
+   "default": "Recently viewed",
+   "fieldname": "recently_viewed_title_en",
+   "fieldtype": "Data",
+   "label": "Recently Viewed Title (English)"
+  },
+  {
+   "default": "\u0634\u0648\u0647\u062f\u062a \u0645\u0624\u062e\u0631\u0627\u064b",
+   "fieldname": "recently_viewed_title_ar",
+   "fieldtype": "Data",
+   "label": "Recently Viewed Title (Arabic)"
   }
  ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-12 14:04:54.635750",
+ "modified_by": "Administrator",
+ "module": "Webshop",
+ "name": "Webshop Product Settings",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
    "read": 1,
+   "role": "System Manager",
    "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }

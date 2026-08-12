@@ -1,240 +1,421 @@
+import json
+
 import frappe
-from sync_webshop.api.utils import set_cors_headers, full_url, require_catalog_access
+
+from sync_webshop.api.utils import (
+    full_url,
+    get_json_cache,
+    require_catalog_access,
+    set_cors_headers,
+    set_json_cache,
+)
+
 
 def _get_price_list():
-	settings = frappe.get_single("Webshop API Settings")
-	return settings.default_price_list or "Standard Selling"
+    settings = frappe.get_single("Webshop API Settings")
+    return settings.default_price_list or "Standard Selling"
+
 
 def _get_prices(item_codes, price_list):
-	if not item_codes:
-		return {}
-	rows = frappe.get_all(
-		"Item Price",
-		filters={"item_code": ["in", item_codes], "price_list": price_list, "selling": 1},
-		fields=["item_code", "price_list_rate", "currency"],
-	)
-	# last one wins if there are duplicates - fine for a single default price list
-	return {row.item_code: {"rate": row.price_list_rate, "currency": row.currency} for row in rows}
+    if not item_codes:
+        return {}
+    rows = frappe.get_all(
+        "Item Price",
+        filters={"item_code": ["in", item_codes], "price_list": price_list, "selling": 1},
+        fields=["item_code", "price_list_rate", "currency"],
+    )
+    return {row.item_code: {"rate": row.price_list_rate, "currency": row.currency} for row in rows}
+
 
 def _get_price_range(price_list, item_group=None):
-	"""Returns the min and max price for items in the given price list and optional item group."""
-	filters = {"price_list": price_list, "selling": 1}
-	if item_group:
-		# Get item codes in this group
-		item_codes = frappe.get_all("Item", filters={"item_group": item_group, "disabled": 0}, pluck="item_code")
-		if not item_codes:
-			return {"min_price": 0, "max_price": 0}
-		filters["item_code"] = ["in", item_codes]
-	
-	result = frappe.db.sql("""
-		SELECT MIN(price_list_rate) as min_price, MAX(price_list_rate) as max_price
-		FROM `tabItem Price`
-		WHERE price_list = %(price_list)s AND selling = 1
-		{item_filter}
-	""".format(
-		item_filter="AND item_code IN %(item_codes)s" if item_group else ""
-	), {
-		"price_list": price_list,
-		"item_codes": item_codes if item_group else []
-	}, as_dict=True)
-	
-	if result and result[0]:
-		return {
-			"min_price": float(result[0].get("min_price") or 0),
-			"max_price": float(result[0].get("max_price") or 0)
-		}
-	return {"min_price": 0, "max_price": 0}
+    filters = {"price_list": price_list, "selling": 1}
+    if item_group:
+        codes = frappe.get_all("Item", filters={"item_group": item_group, "disabled": 0}, pluck="item_code")
+        if not codes:
+            return {"min_price": 0, "max_price": 0}
+        filters["item_code"] = ["in", codes]
+    rows = frappe.get_all("Item Price", filters=filters, fields=["price_list_rate"])
+    rates = [float(row.price_list_rate or 0) for row in rows]
+    return {
+        "min_price": min(rates) if rates else 0,
+        "max_price": max(rates) if rates else 0,
+    }
+
+
+def _get_stock(item_codes):
+    """Aggregate ERPNext Bin availability without exposing warehouse-level data publicly."""
+    if not item_codes:
+        return {}
+    try:
+        rows = frappe.db.sql(
+            """
+            SELECT item_code,
+                   SUM(actual_qty) AS actual_qty,
+                   SUM(projected_qty) AS projected_qty,
+                   SUM(reserved_qty) AS reserved_qty
+            FROM `tabBin`
+            WHERE item_code IN %(item_codes)s
+            GROUP BY item_code
+            """,
+            {"item_codes": tuple(item_codes)},
+            as_dict=True,
+        )
+    except Exception:
+        return {}
+    return {
+        row.item_code: {
+            "actual_qty": float(row.actual_qty or 0),
+            "projected_qty": float(row.projected_qty or 0),
+            "reserved_qty": float(row.reserved_qty or 0),
+            "available_qty": max(float(row.actual_qty or 0) - float(row.reserved_qty or 0), 0),
+            "in_stock": float(row.actual_qty or 0) - float(row.reserved_qty or 0) > 0,
+        }
+        for row in rows
+    }
+
+
+def _get_variant_attributes(item_codes):
+    if not item_codes:
+        return {}
+    try:
+        rows = frappe.get_all(
+            "Item Variant Attribute",
+            filters={"parent": ["in", item_codes]},
+            fields=["parent", "attribute", "attribute_value"],
+        )
+    except Exception:
+        return {}
+    result = {}
+    for row in rows:
+        result.setdefault(row.parent, []).append({
+            "attribute": row.attribute,
+            "value": row.attribute_value,
+        })
+    return result
+
+
+def _get_available_attributes(item_codes):
+    by_item = _get_variant_attributes(item_codes)
+    facets = {}
+    for rows in by_item.values():
+        for row in rows:
+            facets.setdefault(row["attribute"], set()).add(row["value"])
+    return {key: sorted(values) for key, values in facets.items()}
+
+
+def _empty_catalog(page, page_size, price_list, item_group=None):
+    return {
+        "items": [],
+        "page": page,
+        "page_size": page_size,
+        "total_count": 0,
+        "price_list": price_list,
+        "price_range": _get_price_range(price_list, item_group),
+        "available_attributes": {},
+    }
+
 
 @frappe.whitelist(allow_guest=True)
-def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=None, max_price=None):
-	"""
-	Returns a page of items + their price in the configured default Price
-	List. Backs the product listing page and the landing page's featured
-	category sections. Supports price range filtering.
-	"""
-	set_cors_headers()
-	require_catalog_access()
-	page = int(page)
-	page_size = min(int(page_size), 100)
-	min_price = float(min_price) if min_price else None
-	max_price = float(max_price) if max_price else None
-	
-	filters = {"disabled": 0}
-	if item_group:
-		filters["item_group"] = item_group
-	or_filters = None
-	if search:
-		or_filters = [
-			["item_name", "like", f"%{search}%"],
-			["item_code", "like", f"%{search}%"],
-		]
-	
-	price_list = _get_price_list()
-	
-	# If price filtering is active, we need to get eligible item codes first
-	price_filtered_codes = None
-	if min_price is not None or max_price is not None:
-		price_filters = {"price_list": price_list, "selling": 1}
-		if min_price is not None:
-			price_filters["price_list_rate"] = [">=", min_price]
-		if max_price is not None:
-			if "price_list_rate" in price_filters:
-				# Both min and max - use between
-				del price_filters["price_list_rate"]
-				price_filters["price_list_rate"] = ["between", [min_price, max_price]]
-			else:
-				price_filters["price_list_rate"] = ["<=", max_price]
-		
-		price_filtered_codes = frappe.get_all(
-			"Item Price",
-			filters=price_filters,
-			pluck="item_code"
-		)
-		if not price_filtered_codes:
-			return {
-				"items": [],
-				"page": page,
-				"page_size": page_size,
-				"total_count": 0,
-				"price_list": price_list,
-				"price_range": _get_price_range(price_list, item_group),
-			}
-		filters["item_code"] = ["in", price_filtered_codes]
-	
-	items = frappe.get_all(
-		"Item",
-		filters=filters,
-		or_filters=or_filters,
-		fields=["item_code", "item_name", "description", "image", "item_group", "webshop_rating"],
-		limit_start=(page - 1) * page_size,
-		limit_page_length=page_size,
-		order_by="item_name asc",
-	)
-	if or_filters:
-		total_count = frappe.get_all("Item", filters=filters, or_filters=or_filters, fields=["count(*) as total"])[0].total
-	else:
-		total_count = frappe.db.count("Item", filters=filters)
-	prices = _get_prices([i.item_code for i in items], price_list)
-	results = []
-	for item in items:
-		price = prices.get(item.item_code)
-		results.append(
-			{
-				"item_code": item.item_code,
-				"item_name": item.item_name,
-				"description": item.description,
-				"image": full_url(item.image),
-				"item_group": item.item_group,
-				"price": price.get("rate") if price else None,
-				"currency": price.get("currency") if price else None,
-		"rating": item.webshop_rating,
-			}
-		)
-	return {
-		"items": results,
-		"page": page,
-		"page_size": page_size,
-		"total_count": total_count,
-		"price_list": price_list,
-		"price_range": _get_price_range(price_list, item_group),
-	}
+def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=None, max_price=None, attributes=None):
+    set_cors_headers()
+    require_catalog_access()
+    page = max(int(page), 1)
+    page_size = min(max(int(page_size), 1), 100)
+    min_price = float(min_price) if min_price not in (None, "") else None
+    max_price = float(max_price) if max_price not in (None, "") else None
+    if attributes and isinstance(attributes, str):
+        try:
+            attributes = json.loads(attributes)
+        except Exception:
+            attributes = None
+
+    cache_payload = {
+        "item_group": item_group,
+        "search": search,
+        "page": page,
+        "page_size": page_size,
+        "min_price": min_price,
+        "max_price": max_price,
+        "attributes": attributes or {},
+    }
+    cached = get_json_cache("catalog", cache_payload)
+    if cached is not None:
+        return cached
+
+    filters = {"disabled": 0}
+    if item_group:
+        filters["item_group"] = item_group
+    or_filters = None
+    if search:
+        or_filters = [
+            ["item_name", "like", f"%{search}%"],
+            ["item_code", "like", f"%{search}%"],
+        ]
+
+    price_list = _get_price_list()
+    if min_price is not None or max_price is not None:
+        price_filters = {"price_list": price_list, "selling": 1}
+        if min_price is not None and max_price is not None:
+            price_filters["price_list_rate"] = ["between", [min_price, max_price]]
+        elif min_price is not None:
+            price_filters["price_list_rate"] = [">=", min_price]
+        else:
+            price_filters["price_list_rate"] = ["<=", max_price]
+        codes = frappe.get_all("Item Price", filters=price_filters, pluck="item_code")
+        if not codes:
+            return _empty_catalog(page, page_size, price_list, item_group)
+        filters["item_code"] = ["in", codes]
+
+    if attributes:
+        matching_codes = None
+        for attribute, values in attributes.items():
+            values = values if isinstance(values, list) else [values]
+            if not values:
+                continue
+            current = set(frappe.get_all(
+                "Item Variant Attribute",
+                filters={"attribute": attribute, "attribute_value": ["in", values]},
+                pluck="parent",
+            ))
+            matching_codes = current if matching_codes is None else matching_codes.intersection(current)
+        if matching_codes is not None:
+            if not matching_codes:
+                return _empty_catalog(page, page_size, price_list, item_group)
+            if "item_code" in filters:
+                matching_codes = matching_codes.intersection(set(filters["item_code"][1]))
+            filters["item_code"] = ["in", list(matching_codes)]
+
+    items = frappe.get_all(
+        "Item",
+        filters=filters,
+        or_filters=or_filters,
+        fields=["item_code", "item_name", "description", "image", "item_group", "webshop_rating"],
+        limit_start=(page - 1) * page_size,
+        limit_page_length=page_size,
+        order_by="item_name asc",
+    )
+    if or_filters:
+        total_count = frappe.db.count("Item", filters=filters, or_filters=or_filters)
+    else:
+        total_count = frappe.db.count("Item", filters=filters)
+    codes = [row.item_code for row in items]
+    prices = _get_prices(codes, price_list)
+    stocks = _get_stock(codes)
+    variants = _get_variant_attributes(codes)
+    results = []
+    for item in items:
+        price = prices.get(item.item_code) or {}
+        results.append({
+            "item_code": item.item_code,
+            "item_name": item.item_name,
+            "description": item.description,
+            "image": full_url(item.image),
+            "item_group": item.item_group,
+            "price": price.get("rate"),
+            "currency": price.get("currency"),
+            "rating": item.webshop_rating,
+            "stock": stocks.get(item.item_code, {"available_qty": 0, "in_stock": False}),
+            "attributes": variants.get(item.item_code, []),
+        })
+
+    response = {
+        "items": results,
+        "page": page,
+        "page_size": page_size,
+        "total_count": total_count,
+        "price_list": price_list,
+        "price_range": _get_price_range(price_list, item_group),
+        "available_attributes": _get_available_attributes(codes),
+    }
+    return set_json_cache("catalog", cache_payload, response, expires_in_sec=45)
+
 
 @frappe.whitelist(allow_guest=True)
 def get_item(item_code):
-	"""Returns full detail for a single item, for the product detail page."""
-	set_cors_headers()
-	require_catalog_access()
-	if not frappe.db.exists("Item", {"item_code": item_code, "disabled": 0}):
-		frappe.throw("Item not found", frappe.DoesNotExistError)
-	item = frappe.get_doc("Item", item_code)
-	price_list = _get_price_list()
-	prices = _get_prices([item_code], price_list)
-	price = prices.get(item_code)
-	return {
-		"item_code": item.item_code,
-		"item_name": item.item_name,
-		"description": item.description,
-		"item_group": item.item_group,
-		"image": full_url(item.image),
-		"stock_uom": item.stock_uom,
-		"price": price.get("rate") if price else None,
-		"currency": price.get("currency") if price else None,
-		"rating": item.webshop_rating,
-		"price_list": price_list,
-	}
+    set_cors_headers()
+    require_catalog_access()
+    cache_payload = {"item_code": item_code}
+    cached = get_json_cache("item", cache_payload)
+    if cached is not None:
+        return cached
+    if not frappe.db.exists("Item", {"item_code": item_code, "disabled": 0}):
+        frappe.throw("Item not found", frappe.DoesNotExistError)
+    item = frappe.get_doc("Item", item_code)
+    price_list = _get_price_list()
+    price = (_get_prices([item_code], price_list).get(item_code) or {})
+    stock = _get_stock([item_code]).get(item_code, {"available_qty": 0, "in_stock": False})
+    attributes = _get_variant_attributes([item_code]).get(item_code, [])
+    recommendations = frappe.get_all(
+        "Item",
+        filters={"item_group": item.item_group, "disabled": 0, "item_code": ["!=", item_code]},
+        fields=["item_code", "item_name", "image", "item_group", "webshop_rating"],
+        limit_page_length=6,
+        order_by="modified desc",
+    )
+    rec_prices = _get_prices([row.item_code for row in recommendations], price_list)
+    response = {
+        "item_code": item.item_code,
+        "item_name": item.item_name,
+        "description": item.description,
+        "item_group": item.item_group,
+        "image": full_url(item.image),
+        "stock_uom": item.stock_uom,
+        "price": price.get("rate"),
+        "currency": price.get("currency"),
+        "rating": item.webshop_rating,
+        "price_list": price_list,
+        "stock": stock,
+        "attributes": attributes,
+        "recommendations": [
+            {
+                "item_code": row.item_code,
+                "item_name": row.item_name,
+                "image": full_url(row.image),
+                "item_group": row.item_group,
+                "rating": row.webshop_rating,
+                "price": (rec_prices.get(row.item_code) or {}).get("rate"),
+                "currency": (rec_prices.get(row.item_code) or {}).get("currency"),
+            }
+            for row in recommendations
+        ],
+    }
+    return set_json_cache("item", cache_payload, response, expires_in_sec=90)
+
+
+@frappe.whitelist(allow_guest=True)
+def get_stock(item_code=None):
+    set_cors_headers()
+    require_catalog_access()
+    if item_code:
+        cache_payload = {"item_code": item_code}
+        cached = get_json_cache("stock", cache_payload)
+        if cached is not None:
+            return cached
+        response = _get_stock([item_code]).get(item_code, {"available_qty": 0, "in_stock": False})
+        return set_json_cache("stock", cache_payload, response, expires_in_sec=20)
+    return _get_stock([])
+
 
 @frappe.whitelist(allow_guest=True)
 def get_categories():
-	set_cors_headers()
-	require_catalog_access()
-	groups = frappe.get_all(
-		"Item Group",
-		filters={"show_in_website": 1},
-		fields=["name", "item_group_name", "image"]
-	)
-	return [
-		{
-			"name": g.name,
-			"label": g.item_group_name,
-			"image": full_url(g.image)
-		}
-		for g in groups
-	]
+    set_cors_headers()
+    require_catalog_access()
+    cached = get_json_cache("categories", {})
+    if cached is not None:
+        return cached
+    groups = frappe.get_all(
+        "Item Group",
+        filters={"show_in_website": 1},
+        fields=["name", "item_group_name", "image", "parent_item_group"],
+        order_by="name asc",
+    )
+    nodes = {
+        group.name: {
+            "name": group.name,
+            "label": group.item_group_name,
+            "image": full_url(group.image),
+            "parent": group.parent_item_group,
+            "children": [],
+        }
+        for group in groups
+    }
+    roots = []
+    for node in nodes.values():
+        parent = nodes.get(node["parent"])
+        if parent and parent["name"] != node["name"]:
+            parent["children"].append(node)
+        else:
+            roots.append(node)
+    response = roots
+    return set_json_cache("categories", {}, response, expires_in_sec=300)
+
 
 @frappe.whitelist(allow_guest=True)
 def get_search_suggestions(search):
-	set_cors_headers()
-	require_catalog_access()
-	if not search or len(search) < 2:
-		return []
-	
-	# 1. Search Categories
-	categories = frappe.get_all(
-		"Item Group",
-		filters={
-			"show_in_website": 1,
-			"item_group_name": ["like", f"%{search}%"]
-		},
-		fields=["name", "item_group_name", "image"],
-		limit_page_length=3
-	)
-	
-	# 2. Search Items (with better matching)
-	# Try exact match first, then partial
-	items = frappe.get_all(
-		"Item",
-		filters={
-			"disabled": 0,
-			"item_name": ["like", f"%{search}%"]
-		},
-		fields=["item_code", "item_name", "image", "item_group"],
-		limit_page_length=5
-	)
-	
-	results = []
-	
-	# Add category suggestions
-	for cat in categories:
-		results.append({
-			"type": "category",
-			"id": cat.name,
-			"name": cat.item_group_name,
-			"image": full_url(cat.image) if cat.image else None
-		})
-		
-	# Add item suggestions
-	price_list = _get_price_list()
-	prices = _get_prices([i.item_code for i in items], price_list)
-	for i in items:
-		price_info = prices.get(i.item_code)
-		results.append({
-			"type": "item",
-			"id": i.item_code,
-			"name": i.item_name,
-			"image": full_url(i.image) if i.image else None,
-			"category": i.item_group,
-			"price": price_info.get("rate") if price_info else None,
-			"currency": price_info.get("currency") if price_info else None
-		})
-		
-	return results
+    set_cors_headers()
+    require_catalog_access()
+    if not search or len(search) < 2:
+        return []
+    cache_payload = {"search": search.strip().lower()}
+    cached = get_json_cache("suggestions", cache_payload)
+    if cached is not None:
+        return cached
+    categories = frappe.get_all(
+        "Item Group",
+        filters={"show_in_website": 1, "item_group_name": ["like", f"%{search}%"]},
+        fields=["name", "item_group_name", "image"],
+        limit_page_length=3,
+    )
+    items = frappe.get_all(
+        "Item",
+        filters={"disabled": 0, "item_name": ["like", f"%{search}%"]},
+        fields=["item_code", "item_name", "image", "item_group"],
+        limit_page_length=5,
+    )
+    results = [
+        {"type": "category", "id": row.name, "name": row.item_group_name, "image": full_url(row.image)}
+        for row in categories
+    ]
+    price_list = _get_price_list()
+    prices = _get_prices([row.item_code for row in items], price_list)
+    results.extend([
+        {
+            "type": "item",
+            "id": row.item_code,
+            "name": row.item_name,
+            "image": full_url(row.image),
+            "category": row.item_group,
+            "price": (prices.get(row.item_code) or {}).get("rate"),
+            "currency": (prices.get(row.item_code) or {}).get("currency"),
+        }
+        for row in items
+    ])
+    return set_json_cache("suggestions", cache_payload, results, expires_in_sec=30)
+
+
+@frappe.whitelist(allow_guest=True)
+def get_recommendations(item_code=None, item_group=None, limit=8):
+    """Return lightweight, cacheable recommendations for landing pages and product cards."""
+    set_cors_headers()
+    require_catalog_access()
+    try:
+        limit = min(max(int(limit or 8), 1), 24)
+    except (TypeError, ValueError):
+        limit = 8
+    source_group = item_group
+    if item_code and not source_group:
+        source_group = frappe.db.get_value("Item", item_code, "item_group")
+    cache_payload = {"item_code": item_code, "item_group": source_group, "limit": limit}
+    cached = get_json_cache("recommendations", cache_payload)
+    if cached is not None:
+        return cached
+    filters = {"disabled": 0}
+    if source_group:
+        filters["item_group"] = source_group
+    if item_code:
+        filters["item_code"] = ["!=", item_code]
+    items = frappe.get_all(
+        "Item",
+        filters=filters,
+        fields=["item_code", "item_name", "image", "item_group", "webshop_rating", "modified"],
+        order_by="webshop_rating desc, modified desc",
+        limit_page_length=limit,
+    )
+    codes = [row.item_code for row in items]
+    prices = _get_prices(codes, _get_price_list())
+    stocks = _get_stock(codes)
+    response = [
+        {
+            "item_code": row.item_code,
+            "item_name": row.item_name,
+            "image": full_url(row.image),
+            "item_group": row.item_group,
+            "rating": row.webshop_rating or 0,
+            "price": (prices.get(row.item_code) or {}).get("rate"),
+            "currency": (prices.get(row.item_code) or {}).get("currency"),
+            "stock": stocks.get(row.item_code, {"available_qty": 0, "in_stock": False}),
+            "in_stock": stocks.get(row.item_code, {}).get("in_stock", False),
+        }
+        for row in items
+    ]
+    return set_json_cache("recommendations", cache_payload, response, expires_in_sec=90)
