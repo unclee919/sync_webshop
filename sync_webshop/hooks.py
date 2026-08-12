@@ -22,4 +22,5 @@ doc_events = {
     "Webshop Dashboard Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Product Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Review": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop SEO Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
