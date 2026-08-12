@@ -128,7 +128,6 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
 				"price": price.get("rate") if price else None,
 				"currency": price.get("currency") if price else None,
 		"rating": item.webshop_rating,
-				"rating": item.webshop_rating,
 			}
 		)
 	return {
@@ -161,7 +160,6 @@ def get_item(item_code):
 		"price": price.get("rate") if price else None,
 		"currency": price.get("currency") if price else None,
 		"rating": item.webshop_rating,
-				"rating": item.webshop_rating,
 		"price_list": price_list,
 	}
 

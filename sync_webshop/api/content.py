@@ -128,7 +128,8 @@ def get_content():
 					"item_group": item_doc.item_group,
 					"image": full_url(item_doc.image) if item_doc.image else None,
 					"price": price or 0,
-					"currency": frappe.db.get_value("Price List", price_list, "currency")
+					"currency": frappe.db.get_value("Price List", price_list, "currency"),
+					"rating": item_doc.webshop_rating
 				})
 			landing_sections.append({
 				"title_en": s.section_title_en,
