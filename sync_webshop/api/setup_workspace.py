@@ -4,99 +4,109 @@ import json
 def setup_workspace():
     workspace_name = "Sync Webshop"
     
-    # 1. Check if workspace exists
+    # 1. Ensure Module Def exists
+    if not frappe.db.exists("Module Def", "Sync Webshop"):
+        frappe.get_doc({
+            "doctype": "Module Def",
+            "module_name": "Sync Webshop",
+            "app_name": "sync_webshop",
+            "custom": 0
+        }).insert()
+
+    # 2. Define exactly what goes into the workspace
+    # The IDs should be consistent to avoid duplication if possible, but for a fresh start we define new ones
+    content_blocks = [
+        {"id": "h1", "type": "header", "data": {"text": "Sync Webshop Command Center", "level": 2, "col": 12}},
+        {"id": "s1", "type": "spacer", "data": {"col": 12}},
+        {"id": "h2", "type": "header", "data": {"text": "Essential Shortcuts", "level": 4, "col": 12}},
+        # These shortcut_names MUST match the 'label' in the shortcuts table
+        {"id": "sc1", "type": "shortcut", "data": {"shortcut_name": "Products", "col": 3}},
+        {"id": "sc2", "type": "shortcut", "data": {"shortcut_name": "Orders", "col": 3}},
+        {"id": "sc3", "type": "shortcut", "data": {"shortcut_name": "Customers", "col": 3}},
+        {"id": "sc4", "type": "shortcut", "data": {"shortcut_name": "Theme Editor", "col": 3}},
+        {"id": "s2", "type": "spacer", "data": {"col": 12}},
+        {"id": "h3", "type": "header", "data": {"text": "Store Operations", "level": 4, "col": 12}},
+        # These card_names MUST match the 'label' in the links table where type is 'Card Break'
+        {"id": "c1", "type": "card", "data": {"card_name": "Sales & Inventory", "col": 4}},
+        {"id": "c2", "type": "card", "data": {"card_name": "Storefront Design", "col": 4}},
+        {"id": "c3", "type": "card", "data": {"card_name": "Marketing & Support", "col": 4}},
+    ]
+
+    # 3. Prepare child table data
+    shortcuts = [
+        {"label": "Products", "type": "DocType", "link_to": "Item", "icon": "list"},
+        {"label": "Orders", "type": "DocType", "link_to": "Sales Order", "icon": "file-text"},
+        {"label": "Customers", "type": "DocType", "link_to": "Customer", "icon": "users"},
+        {"label": "Theme Editor", "type": "DocType", "link_to": "Webshop Theme Settings", "icon": "layout"},
+    ]
+
+    links = [
+        # Sales & Inventory Card
+        {"label": "Sales & Inventory", "type": "Card Break"},
+        {"label": "Sales Orders", "link_type": "DocType", "link_to": "Sales Order"},
+        {"label": "Items", "link_type": "DocType", "link_to": "Item"},
+        {"label": "Item Groups", "link_type": "DocType", "link_to": "Item Group"},
+        {"label": "Stock Balance", "link_type": "Report", "link_to": "Stock Balance", "is_query_report": 1},
+        
+        # Storefront Design Card
+        {"label": "Storefront Design", "type": "Card Break"},
+        {"label": "Theme Settings", "link_type": "DocType", "link_to": "Webshop Theme Settings"},
+        {"label": "Content Settings", "link_type": "DocType", "link_to": "Webshop Content Settings"},
+        {"label": "Landing Sections", "link_type": "DocType", "link_to": "Webshop Landing Section"},
+        {"label": "SEO Settings", "link_type": "DocType", "link_to": "Webshop SEO Settings"},
+        
+        # Marketing & Support Card
+        {"label": "Marketing & Support", "type": "Card Break"},
+        {"label": "AI Chat Settings", "link_type": "DocType", "link_to": "Webshop AI Chat Settings"},
+        {"label": "Product Reviews", "link_type": "DocType", "link_to": "Webshop Review"},
+        {"label": "Coupon Codes", "link_type": "DocType", "link_to": "Coupon Code"},
+        {"label": "Abandoned Carts", "link_type": "DocType", "link_to": "Webshop Abandoned Cart"},
+    ]
+
+    # 4. Get or Create Workspace
     ws_doc = None
-    existing = frappe.get_all("Workspace", filters={"label": workspace_name}, limit=1)
-    if existing:
-        ws_doc = frappe.get_doc("Workspace", existing[0].name)
+    if frappe.db.exists("Workspace", "Sync Webshop"):
+        ws_doc = frappe.get_doc("Workspace", "Sync Webshop")
+        ws_doc.links = []
+        ws_doc.shortcuts = []
     else:
         ws_doc = frappe.new_doc("Workspace")
-        ws_doc.label = workspace_name
+        ws_doc.name = "Sync Webshop"
+        ws_doc.label = "Sync Webshop"
         ws_doc.title = "Sync Webshop"
-        ws_doc.icon = "shopping-cart"
+        ws_doc.icon = "shop"
         ws_doc.module = "Sync Webshop"
         ws_doc.is_standard = 0
         ws_doc.public = 1
 
-    # Define content blocks for Frappe v15 Workspace
-    # Shortcuts at the top, then cards/sections
-    content_blocks = [
-        # Shortcuts Header
-        {"id": "shortcut_header", "type": "header", "data": {"text": "Quick Actions", "level": 3, "col": 12}},
-        # Shortcuts
-        {"id": "sc_item", "type": "shortcut", "data": {"shortcut_name": "Manage Catalog", "col": 3}},
-        {"id": "sc_order", "type": "shortcut", "data": {"shortcut_name": "View Orders", "col": 3}},
-        {"id": "sc_ai", "type": "shortcut", "data": {"shortcut_name": "AI Settings", "col": 3}},
-        {"id": "sc_theme", "type": "shortcut", "data": {"shortcut_name": "Theme Editor", "col": 3}},
-        
-        # Spacer
-        {"id": "spacer_1", "type": "spacer", "data": {"col": 12}},
-        
-        # Storefront Settings Card
-        {"id": "card_storefront", "type": "card", "data": {"card_name": "Storefront Settings", "col": 4}},
-        # AI & Support Card
-        {"id": "card_ai", "type": "card", "data": {"card_name": "AI & Customer Support", "col": 4}},
-        # Catalog & Sales Card
-        {"id": "card_catalog", "type": "card", "data": {"card_name": "Catalog & Sales", "col": 4}},
-        
-        # Spacer
-        {"id": "spacer_2", "type": "spacer", "data": {"col": 12}},
-        
-        # Marketing & Growth Card
-        {"id": "card_marketing", "type": "card", "data": {"card_name": "Marketing & Growth", "col": 4}},
-        # Logistics & Finance Card
-        {"id": "card_logistics", "type": "card", "data": {"card_name": "Logistics & Finance", "col": 4}},
-    ]
-
     ws_doc.content = json.dumps(content_blocks)
     
-    # Clear and repopulate links & shortcuts child tables
-    ws_doc.links = []
-    ws_doc.shortcuts = []
-
-    links = [
-        # Storefront Settings
-        {"label": "Content Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop Content Settings", "only_for": ""},
-        {"label": "Theme Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop Theme Settings", "only_for": ""},
-        {"label": "SEO Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop SEO Settings", "only_for": ""},
-        {"label": "Dashboard Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop Dashboard Settings", "only_for": ""},
-        
-        # AI & Support
-        {"label": "AI Chat Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop AI Chat Settings", "only_for": ""},
-        {"label": "Product Reviews", "type": "Link", "link_type": "DocType", "link_to": "Webshop Review", "only_for": ""},
-        
-        # Catalog & Sales
-        {"label": "Products", "type": "Link", "link_type": "DocType", "link_to": "Item", "only_for": ""},
-        {"label": "Product Groups", "type": "Link", "link_type": "DocType", "link_to": "Item Group", "only_for": ""},
-        {"label": "Sales Orders", "type": "Link", "link_type": "DocType", "link_to": "Sales Order", "only_for": ""},
-        
-        # Marketing & Growth
-        {"label": "Coupon Codes", "type": "Link", "link_type": "DocType", "link_to": "Coupon Code", "only_for": ""},
-        {"label": "Abandoned Carts", "type": "Link", "link_type": "DocType", "link_to": "Webshop Abandoned Cart", "only_for": ""},
-        {"label": "Product Display Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop Product Settings", "only_for": ""},
-        
-        # Logistics & Finance
-        {"label": "Territories", "type": "Link", "link_type": "DocType", "link_to": "Territory", "only_for": ""},
-        {"label": "Paymob Settings", "type": "Link", "link_type": "DocType", "link_to": "Webshop Paymob Settings", "only_for": ""},
-        {"label": "Paymob Transactions", "type": "Link", "link_type": "DocType", "link_to": "Webshop Paymob Transaction", "only_for": ""},
-    ]
-
-    shortcuts = [
-        {"label": "Manage Catalog", "type": "DocType", "link_to": "Item", "icon": "list", "doc_view": ""},
-        {"label": "View Orders", "type": "DocType", "link_to": "Sales Order", "icon": "file-text", "doc_view": ""},
-        {"label": "AI Settings", "type": "DocType", "link_to": "Webshop AI Chat Settings", "icon": "cpu", "doc_view": ""},
-        {"label": "Theme Editor", "type": "DocType", "link_to": "Webshop Theme Settings", "icon": "layout", "doc_view": ""},
-    ]
-
-    for link in links:
-        ws_doc.append("links", link)
-    
-    for sc in shortcuts:
-        ws_doc.append("shortcuts", sc)
+    for s in shortcuts:
+        ws_doc.append("shortcuts", s)
+    for l in links:
+        ws_doc.append("links", l)
 
     ws_doc.save(ignore_permissions=True)
+    
+    # 5. Force module update for DocTypes to ensure they show up
+    custom_doctypes = [
+        "Webshop Content Settings", "Webshop Theme Settings", "Webshop SEO Settings",
+        "Webshop Dashboard Settings", "Webshop AI Chat Settings", "Webshop Review",
+        "Webshop Product Settings", "Webshop Paymob Settings", "Webshop Paymob Transaction",
+        "Webshop Abandoned Cart", "Webshop Announcement Bar", "Webshop FAQ",
+        "Webshop Popup", "Webshop Landing Section", "Webshop Landing Section Item",
+        "Webshop Navigation Link", "Webshop Banner", "Webshop Featured Category",
+        "Webshop Footer Column", "Webshop Footer Link", "Webshop Footer Settings",
+        "Webshop Social Link", "Webshop Testimonial", "Webshop Trust Badge",
+        "Webshop Wishlist", "Webshop Help Guide", "Webshop SEO Redirect", "Webshop Shipping Rule"
+    ]
+    for dt in custom_doctypes:
+        if frappe.db.exists("DocType", dt):
+            frappe.db.set_value("DocType", dt, "module", "Sync Webshop")
+
     frappe.db.commit()
-    print(f"Professional Workspace '{workspace_name}' updated successfully with v15 content format.")
+    frappe.clear_cache()
+    print("Professional Workspace 'Sync Webshop' has been completely rebuilt and DocType modules aligned.")
 
 if __name__ == "__main__":
     setup_workspace()
