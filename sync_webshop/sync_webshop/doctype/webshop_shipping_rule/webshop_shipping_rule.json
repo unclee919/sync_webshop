@@ -1,13 +1,8 @@
 {
- "doctype": "DocType",
- "name": "Webshop Shipping Rule",
- "module": "Webshop",
- "custom": 0,
- "istable": 0,
- "issingle": 0,
- "track_changes": 1,
- "engine": "InnoDB",
  "autoname": "field:rule_name",
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
  "field_order": [
   "rule_name",
   "enabled",
@@ -19,40 +14,45 @@
   {
    "fieldname": "rule_name",
    "fieldtype": "Data",
-   "label": "اسم القاعدة (Rule Name)",
-   "unique": 1,
-   "reqd": 1
+   "label": "\u0627\u0633\u0645 \u0627\u0644\u0642\u0627\u0639\u062f\u0629 (Rule Name)",
+   "reqd": 1,
+   "unique": 1
   },
   {
+   "default": 1,
    "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "مفعل (Enabled)",
-   "default": 1
+   "label": "\u0645\u0641\u0639\u0644 (Enabled)"
   },
   {
    "fieldname": "column_break_1",
    "fieldtype": "Column Break"
   },
   {
+   "default": 0,
    "fieldname": "shipping_cost",
    "fieldtype": "Currency",
-   "label": "تكلفة الشحن (Shipping Cost)",
-   "default": 0
+   "label": "\u062a\u0643\u0644\u0641\u0629 \u0627\u0644\u0634\u062d\u0646 (Shipping Cost)"
   },
   {
+   "default": 0,
    "fieldname": "free_shipping_threshold",
    "fieldtype": "Currency",
-   "label": "حد الشحن المجاني (Free Shipping Threshold)",
-   "default": 0
+   "label": "\u062d\u062f \u0627\u0644\u0634\u062d\u0646 \u0627\u0644\u0645\u062c\u0627\u0646\u064a (Free Shipping Threshold)"
   }
  ],
+ "issingle": 0,
+ "istable": 0,
+ "module": "Sync Webshop",
+ "name": "Webshop Shipping Rule",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
    "create": 1,
-   "delete": 1
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
   }
- ]
+ ],
+ "track_changes": 1
 }

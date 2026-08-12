@@ -1,11 +1,6 @@
 {
- "doctype": "DocType",
- "name": "Webshop Theme Settings",
- "module": "Webshop",
  "custom": 0,
- "istable": 0,
- "issingle": 1,
- "track_changes": 1,
+ "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "branding_section",
@@ -55,94 +50,94 @@
   {
    "fieldname": "branding_section",
    "fieldtype": "Section Break",
-   "label": "الهوية البصرية (Branding)"
+   "label": "\u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0628\u0635\u0631\u064a\u0629 (Branding)"
   },
   {
    "fieldname": "logo",
    "fieldtype": "Attach Image",
-   "label": "الشعار (Logo)"
+   "label": "\u0627\u0644\u0634\u0639\u0627\u0631 (Logo)"
   },
   {
    "fieldname": "favicon",
    "fieldtype": "Attach Image",
-   "label": "أيقونة المتصفح (Favicon)"
+   "label": "\u0623\u064a\u0642\u0648\u0646\u0629 \u0627\u0644\u0645\u062a\u0635\u0641\u062d (Favicon)"
   },
   {
    "fieldname": "column_break_1",
    "fieldtype": "Column Break"
   },
   {
+   "default": "Classic",
    "fieldname": "layout_style",
    "fieldtype": "Select",
-   "label": "نمط التخطيط (Layout Style)",
-   "options": "Classic\nMinimal\nBold\nOasis",
-   "default": "Classic"
+   "label": "\u0646\u0645\u0637 \u0627\u0644\u062a\u062e\u0637\u064a\u0637 (Layout Style)",
+   "options": "Classic\nMinimal\nBold\nOasis"
   },
   {
    "fieldname": "colors_section",
    "fieldtype": "Section Break",
-   "label": "الألوان العامة (General Colors)"
+   "label": "\u0627\u0644\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0639\u0627\u0645\u0629 (General Colors)"
   },
   {
+   "default": "#21504C",
    "fieldname": "primary_color",
    "fieldtype": "Color",
-   "label": "اللون الأساسي (Primary Color)",
-   "default": "#21504C"
+   "label": "\u0627\u0644\u0644\u0648\u0646 \u0627\u0644\u0623\u0633\u0627\u0633\u064a (Primary Color)"
   },
   {
+   "default": "#84B082",
    "fieldname": "secondary_color",
    "fieldtype": "Color",
-   "label": "Secondary Color",
-   "default": "#84B082"
+   "label": "Secondary Color"
   },
   {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
   },
   {
+   "default": "#FF9900",
    "fieldname": "accent_color",
    "fieldtype": "Color",
-   "label": "Accent Color",
-   "default": "#FF9900"
+   "label": "Accent Color"
   },
   {
+   "default": "#FFFFFF",
    "fieldname": "background_color",
    "fieldtype": "Color",
-   "label": "Background Color",
-   "default": "#FFFFFF"
+   "label": "Background Color"
   },
   {
    "fieldname": "top_bar_colors_section",
    "fieldtype": "Section Break",
-   "label": "ألوان الشريط العلوي (Top Bar)"
+   "label": "\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0634\u0631\u064a\u0637 \u0627\u0644\u0639\u0644\u0648\u064a (Top Bar)"
   },
   {
+   "default": "#f8f9fa",
    "fieldname": "top_bar_bg_color",
    "fieldtype": "Color",
-   "label": "Top Bar Background",
-   "default": "#f8f9fa"
+   "label": "Top Bar Background"
   },
   {
+   "default": "#333333",
    "fieldname": "top_bar_text_color",
    "fieldtype": "Color",
-   "label": "Top Bar Text",
-   "default": "#333333"
+   "label": "Top Bar Text"
   },
   {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
   {
+   "default": "#ffffff",
    "fieldname": "header_bg_color",
    "fieldtype": "Color",
-   "label": "Header Background",
-   "default": "#ffffff"
+   "label": "Header Background"
   },
   {
+   "default": "#333333",
    "fieldname": "header_text_color",
    "fieldtype": "Color",
-   "label": "Header Text",
-   "default": "#333333"
+   "label": "Header Text"
   },
   {
    "fieldname": "nav_colors_section",
@@ -150,16 +145,16 @@
    "label": "Navigation Colors"
   },
   {
+   "default": "#ffffff",
    "fieldname": "nav_bg_color",
    "fieldtype": "Color",
-   "label": "Nav Background",
-   "default": "#ffffff"
+   "label": "Nav Background"
   },
   {
+   "default": "#333333",
    "fieldname": "nav_text_color",
    "fieldtype": "Color",
-   "label": "Nav Text",
-   "default": "#333333"
+   "label": "Nav Text"
   },
   {
    "fieldname": "footer_colors_section",
@@ -167,16 +162,16 @@
    "label": "Footer Colors"
   },
   {
+   "default": "#21504C",
    "fieldname": "footer_bg_color",
    "fieldtype": "Color",
-   "label": "Footer Background",
-   "default": "#21504C"
+   "label": "Footer Background"
   },
   {
+   "default": "#ffffff",
    "fieldname": "footer_text_color",
    "fieldtype": "Color",
-   "label": "Footer Text",
-   "default": "#ffffff"
+   "label": "Footer Text"
   },
   {
    "fieldname": "typography_section",
@@ -184,22 +179,22 @@
    "label": "Typography"
   },
   {
+   "default": "Poppins",
    "fieldname": "font_heading",
    "fieldtype": "Select",
    "label": "Heading Font",
-   "options": "Poppins\nPlayfair Display\nCairo\nInter",
-   "default": "Poppins"
+   "options": "Poppins\nPlayfair Display\nCairo\nInter"
   },
   {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
   {
+   "default": "Inter",
    "fieldname": "font_body",
    "fieldtype": "Select",
    "label": "Body Font",
-   "options": "Inter\nCairo\nRoboto\nOpen Sans",
-   "default": "Inter"
+   "options": "Inter\nCairo\nRoboto\nOpen Sans"
   },
   {
    "fieldname": "hero_section",
@@ -209,37 +204,37 @@
   {
    "fieldname": "header_dimensions_section",
    "fieldtype": "Section Break",
-   "label": "أبعاد الهيدر (Header Dimensions)"
+   "label": "\u0623\u0628\u0639\u0627\u062f \u0627\u0644\u0647\u064a\u062f\u0631 (Header Dimensions)"
   },
   {
+   "default": 1200,
    "fieldname": "header_max_width",
    "fieldtype": "Int",
-   "label": "أقصى عرض للهيدر (Header Max Width - px)",
-   "default": 1200
+   "label": "\u0623\u0642\u0635\u0649 \u0639\u0631\u0636 \u0644\u0644\u0647\u064a\u062f\u0631 (Header Max Width - px)"
   },
   {
+   "default": 80,
    "fieldname": "header_height",
    "fieldtype": "Int",
-   "label": "ارتفاع الهيدر (Header Height - px)",
-   "default": 80
+   "label": "\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0647\u064a\u062f\u0631 (Header Height - px)"
   },
   {
+   "default": 15,
    "fieldname": "header_padding_vertical",
    "fieldtype": "Int",
-   "label": "Header Padding Vertical (px)",
-   "default": 15
+   "label": "Header Padding Vertical (px)"
   },
   {
+   "default": 15,
    "fieldname": "header_padding_horizontal",
    "fieldtype": "Int",
-   "label": "Header Padding Horizontal (px)",
-   "default": 15
+   "label": "Header Padding Horizontal (px)"
   },
   {
+   "default": 45,
    "fieldname": "logo_height",
    "fieldtype": "Int",
-   "label": "ارتفاع الشعار (Logo Height - px)",
-   "default": 45
+   "label": "\u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0634\u0639\u0627\u0631 (Logo Height - px)"
   },
   {
    "fieldname": "logo_width",
@@ -251,22 +246,22 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": 600,
    "fieldname": "search_bar_max_width",
    "fieldtype": "Int",
-   "label": "Search Bar Max Width (px)",
-   "default": 600
+   "label": "Search Bar Max Width (px)"
   },
   {
+   "default": 45,
    "fieldname": "search_bar_height",
    "fieldtype": "Int",
-   "label": "Search Bar Height (px)",
-   "default": 45
+   "label": "Search Bar Height (px)"
   },
   {
+   "default": 50,
    "fieldname": "nav_bar_height",
    "fieldtype": "Int",
-   "label": "Nav Bar Height (px)",
-   "default": 50
+   "label": "Nav Bar Height (px)"
   },
   {
    "fieldname": "hero_background_image",
@@ -274,24 +269,29 @@
    "label": "Hero Background Image"
   },
   {
+   "default": 400,
    "fieldname": "hero_height",
    "fieldtype": "Int",
-   "label": "Hero Height (px)",
-   "default": 400
+   "label": "Hero Height (px)"
   },
   {
+   "default": 1200,
    "fieldname": "hero_width",
    "fieldtype": "Int",
-   "label": "Hero Max Width (px)",
-   "default": 1200
+   "label": "Hero Max Width (px)"
   }
  ],
+ "issingle": 1,
+ "istable": 0,
+ "module": "Sync Webshop",
+ "name": "Webshop Theme Settings",
  "permissions": [
   {
-   "role": "System Manager",
+   "create": 1,
    "read": 1,
-   "write": 1,
-   "create": 1
+   "role": "System Manager",
+   "write": 1
   }
- ]
+ ],
+ "track_changes": 1
 }

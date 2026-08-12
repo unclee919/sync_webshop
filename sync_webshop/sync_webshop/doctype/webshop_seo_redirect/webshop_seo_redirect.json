@@ -1,29 +1,29 @@
 {
- "name": "Webshop SEO Redirect",
- "module": "Webshop",
  "doctype": "DocType",
- "istable": 1,
  "fields": [
   {
    "fieldname": "source_url",
    "fieldtype": "Data",
-   "label": "Source URL",
    "in_list_view": 1,
+   "label": "Source URL",
    "reqd": 1
   },
   {
    "fieldname": "target_url",
    "fieldtype": "Data",
-   "label": "Target URL",
    "in_list_view": 1,
+   "label": "Target URL",
    "reqd": 1
   },
   {
+   "default": "301",
    "fieldname": "redirect_type",
    "fieldtype": "Select",
    "label": "Redirect Type",
-   "options": "301\n302",
-   "default": "301"
+   "options": "301\n302"
   }
- ]
+ ],
+ "istable": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop SEO Redirect"
 }

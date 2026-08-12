@@ -1,8 +1,5 @@
 {
- "name": "Webshop SEO Settings",
- "module": "Webshop",
  "doctype": "DocType",
- "issingle": 1,
  "fields": [
   {
    "fieldname": "meta_section",
@@ -76,10 +73,10 @@
    "options": "Markdown"
   },
   {
+   "default": 1,
    "fieldname": "sitemap_enabled",
    "fieldtype": "Check",
-   "label": "Sitemap Enabled",
-   "default": 1
+   "label": "Sitemap Enabled"
   },
   {
    "fieldname": "structured_data",
@@ -99,10 +96,13 @@
    "options": "Webshop SEO Redirect"
   }
  ],
+ "issingle": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop SEO Settings",
  "permissions": [
   {
-   "role": "System Manager",
    "read": 1,
+   "role": "System Manager",
    "write": 1
   }
  ]

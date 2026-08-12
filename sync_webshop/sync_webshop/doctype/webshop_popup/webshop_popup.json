@@ -1,13 +1,11 @@
 {
- "name": "Webshop Popup",
- "module": "Webshop",
  "doctype": "DocType",
  "fields": [
   {
+   "default": 0,
    "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "Enabled",
-   "default": 0
+   "label": "Enabled"
   },
   {
    "fieldname": "title_en",
@@ -36,11 +34,11 @@
    "label": "Image"
   },
   {
+   "default": "Offer",
    "fieldname": "popup_type",
    "fieldtype": "Select",
    "label": "Popup Type",
-   "options": "Offer\nNewsletter",
-   "default": "Offer"
+   "options": "Offer\nNewsletter"
   },
   {
    "fieldname": "link_url",
@@ -58,25 +56,27 @@
    "label": "Button Text (Arabic)"
   },
   {
+   "default": 5,
    "fieldname": "delay_seconds",
    "fieldtype": "Int",
-   "label": "Delay (Seconds)",
-   "default": 5
+   "label": "Delay (Seconds)"
   },
   {
+   "default": 1,
    "fieldname": "show_once_per_session",
    "fieldtype": "Check",
-   "label": "Show Once Per Session",
-   "default": 1
+   "label": "Show Once Per Session"
   }
  ],
+ "module": "Sync Webshop",
+ "name": "Webshop Popup",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
    "create": 1,
-   "delete": 1
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
   }
  ]
 }

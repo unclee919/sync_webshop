@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2026-08-12 18:19:35.673200",
+ "description": "Customer Reviews",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "customer",
+  "order_name",
+  "rating",
+  "review_title",
+  "review_text",
+  "display_name",
+  "status",
+  "verified_purchase"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "order_name",
+   "fieldtype": "Link",
+   "label": "Verified Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Rating",
+   "reqd": 1
+  },
+  {
+   "fieldname": "review_title",
+   "fieldtype": "Data",
+   "label": "Review Title"
+  },
+  {
+   "fieldname": "review_text",
+   "fieldtype": "Long Text",
+   "label": "Review Text"
+  },
+  {
+   "fieldname": "display_name",
+   "fieldtype": "Data",
+   "label": "Display Name"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Moderation Status",
+   "options": "Pending\nApproved\nRejected"
+  },
+  {
+   "default": "0",
+   "fieldname": "verified_purchase",
+   "fieldtype": "Check",
+   "label": "Verified Purchase"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-12 18:19:35.673200",
+ "modified_by": "Administrator",
+ "module": "Sync Webshop",
+ "name": "Webshop Review",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
