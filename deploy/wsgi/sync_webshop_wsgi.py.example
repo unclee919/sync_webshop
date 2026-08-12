@@ -1,0 +1,103 @@
+import json
+import os
+import sys
+
+BENCH_PATH = os.environ.get("FRAPPE_BENCH_PATH", "/home/frappe/frappe-bench")
+SITE_NAME = os.environ.get("FRAPPE_SITE_NAME", "erpnext.localhost")
+SITES_PATH = os.path.join(BENCH_PATH, "sites")
+ASSETS_JSON_PATH = os.path.join(SITES_PATH, "assets", "assets.json")
+
+for app in ("frappe", "erpnext", "sync_webshop", "education"):
+    app_path = os.path.join(BENCH_PATH, "apps", app)
+    if app_path not in sys.path:
+        sys.path.insert(0, app_path)
+
+os.environ["SITES_PATH"] = SITES_PATH
+
+with open(ASSETS_JSON_PATH, "r", encoding="utf-8") as handle:
+    _ASSETS_JSON = json.load(handle)
+
+import frappe
+import frappe.app
+import frappe.boot
+import frappe.sessions
+from frappe.utils import jinja_globals
+
+
+def safe_get_assets_json():
+    return dict(_ASSETS_JSON)
+
+
+def safe_bundled_asset(path, rtl=None):
+    try:
+        if ".bundle." in path and not path.startswith("/assets"):
+            if path.endswith(".css") and rtl:
+                path = "rtl_" + path
+            path = _ASSETS_JSON.get(path) or path
+        return path
+    except Exception:
+        return path
+
+
+# Replace every helper reference that may be used by Frappe v15.
+import frappe.utils
+frappe.utils.get_assets_json = safe_get_assets_json
+frappe.sessions.get_assets_json = safe_get_assets_json
+jinja_globals.get_assets_json = safe_get_assets_json
+jinja_globals.bundled_asset = safe_bundled_asset
+
+_original_bootinfo = frappe.boot.get_bootinfo
+
+
+def patched_get_bootinfo(*args, **kwargs):
+    bootinfo = _original_bootinfo(*args, **kwargs)
+    bootinfo["assets_json"] = safe_get_assets_json()
+    return bootinfo
+
+
+frappe.boot.get_bootinfo = patched_get_bootinfo
+
+_original_session_get = frappe.sessions.get
+
+
+def patched_session_get(*args, **kwargs):
+    bootinfo = _original_session_get(*args, **kwargs)
+    if bootinfo is not None:
+        bootinfo["assets_json"] = safe_get_assets_json()
+    return bootinfo
+
+
+frappe.sessions.get = patched_session_get
+
+
+def _redirect_bare_bundle(environ, start_response):
+    """Redirect legacy bare bundle URLs to the current hashed public asset."""
+    path = environ.get("PATH_INFO", "")
+    if path.startswith("/assets/") or ".bundle." not in path:
+        return None
+
+    asset_path = _ASSETS_JSON.get(path.lstrip("/"))
+    if not asset_path or not asset_path.startswith("/assets/"):
+        return None
+
+    query_string = environ.get("QUERY_STRING", "")
+    if query_string:
+        asset_path = f"{asset_path}?{query_string}"
+
+    start_response(
+        "302 Found",
+        [
+            ("Location", asset_path),
+            ("Cache-Control", "no-store"),
+        ],
+    )
+    return [b""]
+
+
+def application(environ, start_response):
+    redirect_response = _redirect_bare_bundle(environ, start_response)
+    if redirect_response is not None:
+        return redirect_response
+
+    environ.setdefault("HTTP_X_FRAPPE_SITE_NAME", SITE_NAME)
+    return frappe.app.application(environ, start_response)
