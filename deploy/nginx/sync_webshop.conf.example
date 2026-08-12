@@ -1,0 +1,133 @@
+server {
+    listen 80;
+    server_name _;
+    # Replace with the built React storefront directory for this server.
+    root /var/www/YOUR_SYNC_WEBSHOP_FRONTEND;
+    index index.html;
+
+    location /socket.io {
+        proxy_pass http://127.0.0.1:YOUR_SOCKETIO_PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        proxy_buffering off;
+    }
+
+    location ^~ /files/ {
+        alias /home/frappe/frappe-bench/sites/YOUR_FRAPPE_SITE_NAME/public/files/;
+        add_header Access-Control-Allow-Origin * always;
+        expires 1h;
+        add_header Cache-Control "public" always;
+    }
+
+    location ~ ^/api/method/sync_webshop\.api\.(content|theme\.get_|catalog\.get_|paymob\.get_|ai_chat\.get_|portal\.get_dashboard_settings|reviews\.get_) {
+        proxy_pass http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT;
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_cache sync_webshop_api;
+        proxy_cache_methods GET;
+        proxy_cache_valid 200 30s;
+        proxy_cache_key "$scheme$request_method$host$request_uri";
+        add_header X-API-Cache $upstream_cache_status always;
+        add_header Access-Control-Allow-Origin * always;
+        expires off;
+    }
+
+    location ~ ^/(app|login|api|method|desk|files|private|backups) {
+        proxy_pass http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT;
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_redirect http://YOUR_FRAPPE_SITE_NAME:8001/ http://$host/;
+        proxy_redirect http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT/ http://$host/;
+        add_header Cache-Control "no-store, no-cache, must-revalidate";
+        expires off;
+    }
+
+    location /assets {
+        alias /var/www/YOUR_SYNC_WEBSHOP_FRONTEND/assets;
+        add_header Access-Control-Allow-Origin *;
+        expires 1y;
+        add_header Cache-Control "public";
+        try_files $uri @frappe_backend;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-store, no-cache, must-revalidate";
+    }
+
+    location @frappe_backend {
+        proxy_pass http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT;
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+    }
+}
+
+server {
+    listen 8000;
+    server_name _;
+
+    location /socket.io {
+        proxy_pass http://127.0.0.1:YOUR_SOCKETIO_PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        proxy_buffering off;
+    }
+
+    location ^~ /files/ {
+        alias /home/frappe/frappe-bench/sites/YOUR_FRAPPE_SITE_NAME/public/files/;
+        add_header Access-Control-Allow-Origin * always;
+        expires 1h;
+        add_header Cache-Control "public" always;
+    }
+
+    location /assets {
+        alias /home/frappe/frappe-bench/sites/assets;
+        add_header Access-Control-Allow-Origin *;
+        expires 1y;
+        add_header Cache-Control "public";
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Frappe-Site-Name YOUR_FRAPPE_SITE_NAME;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_redirect http://YOUR_FRAPPE_SITE_NAME:8001/ http://$host:YOUR_ERP_DESK_PORT/;
+        proxy_redirect http://127.0.0.1:YOUR_FRAPPE_BACKEND_PORT/ http://$host:YOUR_ERP_DESK_PORT/;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        proxy_buffering off;
+        add_header Cache-Control "no-store, no-cache, must-revalidate";
+        sub_filter_once off;
+        sub_filter '.js"' '.js?v=20260812-erp-fix2"';
+        sub_filter '.css"' '.css?v=20260812-erp-fix2"';
+    }
+}
