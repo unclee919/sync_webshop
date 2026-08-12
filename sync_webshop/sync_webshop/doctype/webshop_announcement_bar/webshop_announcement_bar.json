@@ -1,0 +1,55 @@
+{
+ "doctype": "DocType",
+ "fields": [
+  {
+   "default": 0,
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "message_en",
+   "fieldtype": "Data",
+   "label": "Message (English)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "message_ar",
+   "fieldtype": "Data",
+   "label": "Message (Arabic)"
+  },
+  {
+   "default": "#000000",
+   "fieldname": "background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "fieldname": "link_url",
+   "fieldtype": "Data",
+   "label": "Link URL"
+  },
+  {
+   "default": 1,
+   "fieldname": "show_close_button",
+   "fieldtype": "Check",
+   "label": "Show Close Button"
+  }
+ ],
+ "issingle": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop Announcement Bar",
+ "permissions": [
+  {
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ]
+}

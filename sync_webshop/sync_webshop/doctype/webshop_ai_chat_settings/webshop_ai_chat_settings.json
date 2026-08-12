@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-12 18:19:35.036324",
+ "description": "AI Chat Widget Configuration",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "provider",
+  "api_key",
+  "api_base_url",
+  "model",
+  "system_prompt",
+  "greeting_message",
+  "primary_color",
+  "allow_guest",
+  "rate_limit_per_minute",
+  "max_message_length",
+  "max_tokens",
+  "temperature"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "default": "OpenAI",
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "label": "Provider",
+   "options": "OpenAI\nManus\nCustom"
+  },
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "API Key"
+  },
+  {
+   "default": "https://api.openai.com/v1",
+   "fieldname": "api_base_url",
+   "fieldtype": "Data",
+   "label": "API Base URL"
+  },
+  {
+   "default": "gpt-5-mini",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model Name"
+  },
+  {
+   "default": "You are a helpful and professional customer support AI assistant for our webshop. Help users find products, check order status, and answer questions about store policies.",
+   "fieldname": "system_prompt",
+   "fieldtype": "Small Text",
+   "label": "System Prompt"
+  },
+  {
+   "default": "Hello! How can I help you with your shopping today?",
+   "fieldname": "greeting_message",
+   "fieldtype": "Data",
+   "label": "Greeting Message"
+  },
+  {
+   "default": "#10b981",
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Widget Primary Color"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_guest",
+   "fieldtype": "Check",
+   "label": "Allow Guest Chat"
+  },
+  {
+   "default": "20",
+   "fieldname": "rate_limit_per_minute",
+   "fieldtype": "Int",
+   "label": "Messages per Minute"
+  },
+  {
+   "default": "2000",
+   "fieldname": "max_message_length",
+   "fieldtype": "Int",
+   "label": "Maximum Message Length"
+  },
+  {
+   "default": "500",
+   "fieldname": "max_tokens",
+   "fieldtype": "Int",
+   "label": "Maximum Response Tokens"
+  },
+  {
+   "default": "0.2",
+   "fieldname": "temperature",
+   "fieldtype": "Float",
+   "label": "Response Temperature"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-12 18:19:35.036324",
+ "modified_by": "Administrator",
+ "module": "Sync Webshop",
+ "name": "Webshop AI Chat Settings",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,68 @@
+{
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "label_en",
+  "label_ar",
+  "link_url",
+  "item_group",
+  "is_external",
+  "show_in_navbar",
+  "show_in_browse_menu",
+  "sort_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "label_en",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label (English)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label (Arabic)"
+  },
+  {
+   "fieldname": "link_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Link URL"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "is_external",
+   "fieldtype": "Check",
+   "label": "Is External"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_in_navbar",
+   "fieldtype": "Check",
+   "label": "Show in Navbar"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_in_browse_menu",
+   "fieldtype": "Check",
+   "label": "Show in Browse Menu"
+  },
+  {
+   "default": "0",
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order"
+  }
+ ],
+ "istable": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop Navigation Link"
+}

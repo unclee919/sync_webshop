@@ -1,0 +1,59 @@
+{
+ "custom": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_group",
+  "display_label_en",
+  "display_label_ar",
+  "image",
+  "sort_order",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "display_label_en",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Display Label (English)"
+  },
+  {
+   "fieldname": "display_label_ar",
+   "fieldtype": "Data",
+   "label": "Display Label (Arabic)"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  },
+  {
+   "default": "0",
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  }
+ ],
+ "issingle": 0,
+ "istable": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop Featured Category",
+ "permissions": [],
+ "track_changes": 0
+}

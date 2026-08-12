@@ -1,0 +1,33 @@
+{
+ "doctype": "DocType",
+ "fields": [
+  {
+   "fieldname": "label_en",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label (English)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Label (Arabic)"
+  },
+  {
+   "fieldname": "link_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Link URL",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_external",
+   "fieldtype": "Check",
+   "label": "Is External"
+  }
+ ],
+ "istable": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop Footer Link"
+}

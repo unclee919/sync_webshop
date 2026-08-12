@@ -1,0 +1,53 @@
+{
+ "doctype": "DocType",
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "cart_data",
+   "fieldtype": "Code",
+   "label": "Cart Data (JSON)",
+   "options": "JSON"
+  },
+  {
+   "default": "Abandoned",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Abandoned\nRecovered\nConverted"
+  },
+  {
+   "default": 0,
+   "fieldname": "recovery_email_sent",
+   "fieldtype": "Check",
+   "label": "Recovery Email Sent"
+  },
+  {
+   "fieldname": "last_updated",
+   "fieldtype": "Datetime",
+   "label": "Last Updated"
+  }
+ ],
+ "module": "Sync Webshop",
+ "name": "Webshop Abandoned Cart",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ]
+}

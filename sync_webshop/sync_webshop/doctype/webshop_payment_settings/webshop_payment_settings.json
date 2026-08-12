@@ -1,0 +1,88 @@
+{
+ "custom": 0,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "stripe_section",
+  "stripe_enabled",
+  "stripe_mode",
+  "stripe_publishable_key",
+  "stripe_secret_key",
+  "stripe_webhook_secret",
+  "cod_section",
+  "cod_enabled",
+  "cod_label_en",
+  "cod_label_ar"
+ ],
+ "fields": [
+  {
+   "fieldname": "stripe_section",
+   "fieldtype": "Section Break",
+   "label": "\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0633\u062a\u0631\u0627\u064a\u0628 (Stripe Settings)"
+  },
+  {
+   "default": 0,
+   "fieldname": "stripe_enabled",
+   "fieldtype": "Check",
+   "label": "\u062a\u0641\u0639\u064a\u0644 \u0633\u062a\u0631\u0627\u064a\u0628 (Enable Stripe)"
+  },
+  {
+   "default": "Test",
+   "fieldname": "stripe_mode",
+   "fieldtype": "Select",
+   "label": "\u0627\u0644\u0648\u0636\u0639 (Mode)",
+   "options": "Test\nLive"
+  },
+  {
+   "fieldname": "stripe_publishable_key",
+   "fieldtype": "Data",
+   "label": "\u0627\u0644\u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0639\u0627\u0645 (Stripe Publishable Key)"
+  },
+  {
+   "fieldname": "stripe_secret_key",
+   "fieldtype": "Password",
+   "label": "\u0627\u0644\u0645\u0641\u062a\u0627\u062d \u0627\u0644\u0633\u0631\u064a (Stripe Secret Key)"
+  },
+  {
+   "fieldname": "stripe_webhook_secret",
+   "fieldtype": "Password",
+   "label": "Stripe Webhook Secret"
+  },
+  {
+   "fieldname": "cod_section",
+   "fieldtype": "Section Break",
+   "label": "\u0627\u0644\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0627\u0633\u062a\u0644\u0627\u0645 (Cash on Delivery)"
+  },
+  {
+   "default": 1,
+   "fieldname": "cod_enabled",
+   "fieldtype": "Check",
+   "label": "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0627\u0633\u062a\u0644\u0627\u0645 (Enable COD)"
+  },
+  {
+   "default": "Cash on Delivery",
+   "fieldname": "cod_label_en",
+   "fieldtype": "Data",
+   "label": "COD Label (English)"
+  },
+  {
+   "default": "\u0627\u0644\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0627\u0633\u062a\u0644\u0627\u0645",
+   "fieldname": "cod_label_ar",
+   "fieldtype": "Data",
+   "label": "COD Label (Arabic)"
+  }
+ ],
+ "issingle": 1,
+ "istable": 0,
+ "module": "Sync Webshop",
+ "name": "Webshop Payment Settings",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "track_changes": 1
+}

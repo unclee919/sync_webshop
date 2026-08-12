@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-12 18:19:35.378438",
+ "description": "Customer Portal Dashboard Configuration",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable_analytics",
+  "enable_loyalty",
+  "enable_profile_edit",
+  "enable_rma",
+  "enable_tracking_timeline",
+  "enable_addresses",
+  "tracking_labels_en",
+  "tracking_labels_ar"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enable_analytics",
+   "fieldtype": "Check",
+   "label": "Enable Order Analytics"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_loyalty",
+   "fieldtype": "Check",
+   "label": "Enable Loyalty Points"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_profile_edit",
+   "fieldtype": "Check",
+   "label": "Enable Profile Editing"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_rma",
+   "fieldtype": "Check",
+   "label": "Enable RMA / Returns"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_tracking_timeline",
+   "fieldtype": "Check",
+   "label": "Enable Visual Order Timeline"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_addresses",
+   "fieldtype": "Check",
+   "label": "Enable Saved Addresses"
+  },
+  {
+   "default": "{\"placed\":\"Order placed\",\"confirmed\":\"Confirmed\",\"processing\":\"Preparing\",\"shipped\":\"Shipped\",\"delivered\":\"Delivered\"}",
+   "fieldname": "tracking_labels_en",
+   "fieldtype": "Long Text",
+   "label": "Tracking Labels (English JSON)"
+  },
+  {
+   "default": "{\"placed\":\"\u062a\u0645 \u062a\u0642\u062f\u064a\u0645 \u0627\u0644\u0637\u0644\u0628\",\"confirmed\":\"\u062a\u0645 \u0627\u0644\u062a\u0623\u0643\u064a\u062f\",\"processing\":\"\u0642\u064a\u062f \u0627\u0644\u062a\u062c\u0647\u064a\u0632\",\"shipped\":\"\u062a\u0645 \u0627\u0644\u0634\u062d\u0646\",\"delivered\":\"\u062a\u0645 \u0627\u0644\u062a\u0633\u0644\u064a\u0645\"}",
+   "fieldname": "tracking_labels_ar",
+   "fieldtype": "Long Text",
+   "label": "Tracking Labels (Arabic JSON)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-12 18:19:35.378438",
+ "modified_by": "Administrator",
+ "module": "Sync Webshop",
+ "name": "Webshop Dashboard Settings",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
