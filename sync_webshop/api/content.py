@@ -413,6 +413,8 @@ def get_content():
 
 	response = {
 		"site_name": settings.site_name,
+		"site_name_en": settings.get("site_name_en") or settings.site_name,
+		"site_name_ar": settings.get("site_name_ar") or settings.site_name,
 		"business_profile": {
 			"vertical": settings.get("business_vertical") or "General Retail",
 			"vertical_label_en": settings.get("business_vertical_label_en") or "Thoughtfully selected",

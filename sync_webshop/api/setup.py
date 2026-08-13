@@ -386,6 +386,8 @@ def seed_coffee_shop_demo():
         group.item_group_name = group_name
         group.parent_item_group = parent_group
         group.is_group = 0
+        if group.meta.has_field("show_in_website"):
+            group.show_in_website = 1
         if group.meta.has_field("item_group_name_ar"):
             group.item_group_name_ar = group_ar
         if group.meta.has_field("webshop_label_en"):
