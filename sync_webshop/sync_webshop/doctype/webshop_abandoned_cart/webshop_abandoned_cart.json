@@ -37,6 +37,23 @@
    "fieldname": "last_updated",
    "fieldtype": "Datetime",
    "label": "Last Updated"
+  },
+  {
+   "default": "Pending Follow-up",
+   "fieldname": "recovery_stage",
+   "fieldtype": "Select",
+   "label": "Recovery Stage",
+   "options": "Pending Follow-up\nReady\nSent\nConverted"
+  },
+  {
+   "fieldname": "recovery_ready_at",
+   "fieldtype": "Datetime",
+   "label": "Recovery Ready At"
+  },
+  {
+   "fieldname": "recovery_coupon_code",
+   "fieldtype": "Data",
+   "label": "Recovery Coupon Code"
   }
  ],
  "module": "Sync Webshop",

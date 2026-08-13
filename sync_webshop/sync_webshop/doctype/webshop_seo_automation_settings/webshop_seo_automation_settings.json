@@ -1,0 +1,47 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop SEO Automation Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "enabled",
+            "label": "AI SEO Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "auto_generate_product_meta",
+            "label": "Auto Generate Product Meta",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "include_json_ld",
+            "label": "Include JSON-LD",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "description_max_length",
+            "label": "Description Maximum Length",
+            "fieldtype": "Int",
+            "default": 155
+        },
+        {
+            "fieldname": "brand_voice_en",
+            "label": "Brand Voice (EN)",
+            "fieldtype": "Small Text",
+            "default": "Clear, refined, warm, and practical."
+        },
+        {
+            "fieldname": "brand_voice_ar",
+            "label": "Brand Voice (AR)",
+            "fieldtype": "Small Text",
+            "default": "\u0648\u0627\u0636\u062d \u0648\u0623\u0646\u064a\u0642 \u0648\u062f\u0627\u0641\u0626 \u0648\u0639\u0645\u0644\u064a."
+        }
+    ]
+}

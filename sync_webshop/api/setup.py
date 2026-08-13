@@ -1,6 +1,7 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from sync_webshop.api.utils import clear_webshop_cache
+from sync_webshop.api.master_tier import seed_master_tier
 
 @frappe.whitelist()
 def run_setup():
@@ -417,9 +418,10 @@ def run_setup():
 
 		}).insert(ignore_permissions=True)
 
+	seed_master_tier()
 	frappe.db.commit()
 	clear_webshop_cache()
-	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, Dynamic Pages, roles, and Help Guide created."
+	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, Dynamic Pages, Master Tier settings, roles, and Help Guide created."
 
 
 @frappe.whitelist()

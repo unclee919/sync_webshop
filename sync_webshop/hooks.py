@@ -54,6 +54,14 @@ doc_events = {
     "Webshop Policy Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Article": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop QA Item": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Master Tier Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop SEO Automation Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Style Quiz Question": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Membership Tier": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Hotspot": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Loyalty Wallet Entry": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Referral": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Sales Order": {"on_submit": "sync_webshop.api.master_tier.on_sales_order_submit", "on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
 
 
@@ -63,5 +71,6 @@ scheduler_events = {
         "sync_webshop.api.master_class.process_due_subscriptions",
         "sync_webshop.api.enterprise.process_abandoned_cart_recovery",
         "sync_webshop.api.enterprise.run_enterprise_maintenance",
+        "sync_webshop.api.master_tier.run_abandoned_cart_recovery",
     ],
 }

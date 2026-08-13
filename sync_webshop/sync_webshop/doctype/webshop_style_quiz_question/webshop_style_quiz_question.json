@@ -1,59 +1,48 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2026-08-13 00:00:00",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "question_key",
-  "question_en",
-  "question_ar",
-  "options_json",
-  "enabled",
-  "sort_order"
- ],
- "fields": [
-  {
-   "fieldname": "question_key",
-   "fieldtype": "Data",
-   "label": "Question Key",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "question_en",
-   "fieldtype": "Small Text",
-   "label": "Question (English)",
-   "reqd": 1
-  },
-  {
-   "fieldname": "question_ar",
-   "fieldtype": "Small Text",
-   "label": "Question (Arabic)"
-  },
-  {
-   "fieldname": "options_json",
-   "fieldtype": "Long Text",
-   "label": "Options JSON",
-   "description": "Array of {label_en,label_ar,tag} objects."
-  },
-  {
-   "fieldname": "enabled",
-   "fieldtype": "Check",
-   "label": "Enabled",
-   "default": "1"
-  },
-  {
-   "fieldname": "sort_order",
-   "fieldtype": "Int",
-   "label": "Sort Order",
-   "default": "10"
-  }
- ],
- "module": "Sync Webshop",
- "name": "Webshop Style Quiz Question",
- "owner": "Administrator",
- "permissions": [],
- "track_changes": 1
+    "doctype": "DocType",
+    "name": "Webshop Style Quiz Question",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "question_key",
+            "label": "Question Key",
+            "fieldtype": "Data",
+            "unique": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "question_en",
+            "label": "Question (EN)",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "question_ar",
+            "label": "Question (AR)",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "options_json",
+            "label": "Options JSON",
+            "fieldtype": "Long Text",
+            "description": "JSON array of objects with label_en, label_ar, and tag."
+        },
+        {
+            "fieldname": "sort_order",
+            "label": "Sort Order",
+            "fieldtype": "Int",
+            "default": 10
+        },
+        {
+            "fieldname": "enabled",
+            "label": "Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
 }

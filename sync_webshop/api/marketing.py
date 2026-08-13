@@ -44,7 +44,13 @@ def sync_cart(cart_data):
         return
         
     settings = frappe.get_single("Webshop Content Settings")
-    if not settings.enable_abandoned_cart_recovery:
+    master_recovery_enabled = None
+    if frappe.db.exists("DocType", "Webshop Master Tier Settings"):
+        try:
+            master_recovery_enabled = bool(getattr(frappe.get_single("Webshop Master Tier Settings"), "abandoned_cart_enabled", 0))
+        except Exception:
+            master_recovery_enabled = None
+    if master_recovery_enabled is False or (master_recovery_enabled is None and not settings.enable_abandoned_cart_recovery):
         return
         
     user = frappe.get_doc("User", frappe.session.user)
@@ -55,6 +61,9 @@ def sync_cart(cart_data):
         doc = frappe.get_doc("Webshop Abandoned Cart", abandoned_cart)
         doc.cart_data = json.dumps(cart_data)
         doc.last_updated = frappe.utils.now()
+        if doc.meta.has_field("recovery_stage"):
+            doc.recovery_stage = "Pending Follow-up"
+            doc.recovery_ready_at = None
         doc.save(ignore_permissions=True)
     else:
         doc = frappe.get_doc({
@@ -63,7 +72,8 @@ def sync_cart(cart_data):
             "email": user.email,
             "cart_data": json.dumps(cart_data),
             "status": "Abandoned",
-            "last_updated": frappe.utils.now()
+            "last_updated": frappe.utils.now(),
+            "recovery_stage": "Pending Follow-up"
         })
         doc.insert(ignore_permissions=True)
         

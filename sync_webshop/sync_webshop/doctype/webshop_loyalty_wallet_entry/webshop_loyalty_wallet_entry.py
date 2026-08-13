@@ -3,5 +3,5 @@
 
 from frappe.model.document import Document
 
-class WebshopStyleQuizQuestion(Document):
+class WebshopLoyaltyWalletEntry(Document):
     pass

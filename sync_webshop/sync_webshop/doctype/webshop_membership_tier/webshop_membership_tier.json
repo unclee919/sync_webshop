@@ -1,81 +1,76 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2026-08-13 00:00:00",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "tier_name",
-  "tier_code",
-  "enabled",
-  "minimum_spend",
-  "discount_percent",
-  "badge_color",
-  "perks_en",
-  "perks_ar",
-  "sort_order"
- ],
- "fields": [
-  {
-   "fieldname": "tier_name",
-   "fieldtype": "Data",
-   "label": "Tier Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "tier_code",
-   "fieldtype": "Data",
-   "label": "Tier Code",
-   "unique": 1
-  },
-  {
-   "fieldname": "enabled",
-   "fieldtype": "Check",
-   "label": "Enabled",
-   "default": "1"
-  },
-  {
-   "fieldname": "minimum_spend",
-   "fieldtype": "Currency",
-   "label": "Minimum Lifetime Spend"
-  },
-  {
-   "fieldname": "discount_percent",
-   "fieldtype": "Percent",
-   "label": "Member Discount Percent"
-  },
-  {
-   "fieldname": "badge_color",
-   "fieldtype": "Color",
-   "label": "Badge Color",
-   "default": "#C8A96B"
-  },
-  {
-   "fieldname": "perks_en",
-   "fieldtype": "Small Text",
-   "label": "Perks (English)"
-  },
-  {
-   "fieldname": "perks_ar",
-   "fieldtype": "Small Text",
-   "label": "Perks (Arabic)"
-  },
-  {
-   "fieldname": "sort_order",
-   "fieldtype": "Int",
-   "label": "Sort Order",
-   "default": "10"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "module": "Sync Webshop",
- "name": "Webshop Membership Tier",
- "owner": "Administrator",
- "permissions": [],
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+    "doctype": "DocType",
+    "name": "Webshop Membership Tier",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "tier_name",
+            "label": "Tier Name",
+            "fieldtype": "Data",
+            "unique": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "tier_code",
+            "label": "Tier Code",
+            "fieldtype": "Data",
+            "unique": 1
+        },
+        {
+            "fieldname": "min_spend",
+            "label": "Minimum Spend (SAR)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "minimum_spend",
+            "label": "Minimum Spend (Portal) (SAR)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "discount_percent",
+            "label": "Member Discount %",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "points_multiplier",
+            "label": "Points Multiplier",
+            "fieldtype": "Float",
+            "default": 1.0
+        },
+        {
+            "fieldname": "badge_color",
+            "label": "Badge Color",
+            "fieldtype": "Color",
+            "default": "#C5A059"
+        },
+        {
+            "fieldname": "perks_en",
+            "label": "Perks (EN)",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "perks_ar",
+            "label": "Perks (AR)",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "sort_order",
+            "label": "Sort Order",
+            "fieldtype": "Int",
+            "default": 10
+        },
+        {
+            "fieldname": "enabled",
+            "label": "Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
 }

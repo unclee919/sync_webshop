@@ -1,0 +1,53 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Loyalty Wallet Entry",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "customer",
+            "label": "Customer",
+            "fieldtype": "Link",
+            "options": "Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "entry_type",
+            "label": "Entry Type",
+            "fieldtype": "Select",
+            "options": "Earn\nRedeem\nAdjustment",
+            "default": "Earn",
+            "reqd": 1
+        },
+        {
+            "fieldname": "points",
+            "label": "Points",
+            "fieldtype": "Float",
+            "reqd": 1
+        },
+        {
+            "fieldname": "wallet_amount",
+            "label": "Wallet Amount (SAR)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "reference_doctype",
+            "label": "Reference DocType",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "reference_name",
+            "label": "Reference Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "note",
+            "label": "Note",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

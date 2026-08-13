@@ -21,7 +21,13 @@ def _json_options(value):
 def get_style_quiz():
     set_cors_headers()
     settings = _content_settings()
-    if not getattr(settings, "style_quiz_enabled", 0):
+    master_enabled = None
+    if frappe.db.exists("DocType", "Webshop Master Tier Settings"):
+        try:
+            master_enabled = bool(getattr(frappe.get_single("Webshop Master Tier Settings"), "style_quiz_enabled", 0))
+        except Exception:
+            master_enabled = None
+    if master_enabled is False or (master_enabled is None and not getattr(settings, "style_quiz_enabled", 0)):
         return {"enabled": False, "questions": []}
     rows = frappe.get_all("Webshop Style Quiz Question", filters={"enabled": 1}, fields=["question_key", "question_en", "question_ar", "options_json", "sort_order"], order_by="sort_order asc")
     return {"enabled": True, "title_en": getattr(settings, "style_quiz_title_en", None) or "Find your point of view", "title_ar": getattr(settings, "style_quiz_title_ar", None) or "اكتشف ذوقك", "intro_en": getattr(settings, "style_quiz_intro_en", None) or "Answer a few questions and we will tune the edit to you.", "intro_ar": getattr(settings, "style_quiz_intro_ar", None) or "أجب عن بعض الأسئلة لنضبط الاختيارات بما يناسبك.", "questions": [{"key": row.question_key, "question_en": row.question_en, "question_ar": row.question_ar, "options": _json_options(row.options_json)} for row in rows]}
