@@ -5,6 +5,11 @@
  "engine": "InnoDB",
  "field_order": [
   "enable_zoom",
+  "enable_immersive_viewer",
+  "enable_video_hover",
+  "complete_the_look_enabled",
+  "complete_the_look_title_en",
+  "complete_the_look_title_ar",
   "show_related_products",
   "related_products_title_en",
   "related_products_title_ar",
@@ -39,7 +44,7 @@
    "label": "Related Products Title (English)"
   },
   {
-   "default": "\u0645\u0646\u062a\u062c\u0627\u062a \u0630\u0627\u062a \u0635\u0644\u0629",
+   "default": "منتجات ذات صلة",
    "fieldname": "related_products_title_ar",
    "fieldtype": "Data",
    "label": "Related Products Title (Arabic)"
@@ -75,7 +80,7 @@
    "label": "Reviews Title (English)"
   },
   {
-   "default": "\u0622\u0631\u0627\u0621 \u0627\u0644\u0639\u0645\u0644\u0627\u0621",
+   "default": "آراء العملاء",
    "fieldname": "reviews_title_ar",
    "fieldtype": "Data",
    "label": "Reviews Title (Arabic)"
@@ -99,10 +104,40 @@
    "label": "Recently Viewed Title (English)"
   },
   {
-   "default": "\u0634\u0648\u0647\u062f\u062a \u0645\u0624\u062e\u0631\u0627\u064b",
+   "default": "شوهدت مؤخراً",
    "fieldname": "recently_viewed_title_ar",
    "fieldtype": "Data",
    "label": "Recently Viewed Title (Arabic)"
+  },
+  {
+   "fieldname": "enable_immersive_viewer",
+   "fieldtype": "Check",
+   "label": "Enable Immersive Product Viewer",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_video_hover",
+   "fieldtype": "Check",
+   "label": "Enable Product Video Hover",
+   "default": 1
+  },
+  {
+   "fieldname": "complete_the_look_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Complete the Look",
+   "default": 1
+  },
+  {
+   "fieldname": "complete_the_look_title_en",
+   "fieldtype": "Data",
+   "label": "Complete the Look Title (English)",
+   "default": "Complete the look"
+  },
+  {
+   "fieldname": "complete_the_look_title_ar",
+   "fieldtype": "Data",
+   "label": "Complete the Look Title (Arabic)",
+   "default": "أكمل الإطلالة"
   }
  ],
  "issingle": 1,

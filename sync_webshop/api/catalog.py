@@ -264,6 +264,8 @@ def get_item(item_code):
         "currency": price.get("currency"),
         "rating": item.webshop_rating,
         "price_list": price_list,
+        "images": [full_url(value) for value in [item.image, item.get("image_2"), item.get("image_3"), item.get("image_4")] if value],
+        "video_url": full_url(item.get("video_url")) if item.get("video_url") else None,
         "stock": stock,
         "attributes": attributes,
         "recommendations": [

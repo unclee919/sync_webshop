@@ -22,6 +22,15 @@
   "top_bar_message_en",
   "top_bar_message_ar",
   "navigation_section",
+  "elite_ui_section",
+  "stories_enabled",
+  "stories_title_en",
+  "stories_title_ar",
+  "stories",
+  "mobile_quick_actions_enabled",
+  "complete_the_look_enabled",
+  "complete_the_look_title_en",
+  "complete_the_look_title_ar",
   "nav_links",
   "about_section",
   "about_text_en",
@@ -790,7 +799,7 @@
    "label": "Mega Menu Title (English)"
   },
   {
-   "default": "\u062a\u0635\u0641\u062d \u0627\u0644\u0623\u0642\u0633\u0627\u0645",
+   "default": "تصفح الأقسام",
    "fieldname": "mega_menu_title_ar",
    "fieldtype": "Data",
    "label": "Mega Menu Title (Arabic)"
@@ -846,7 +855,7 @@
    "label": "Coupon Placeholder (EN)"
   },
   {
-   "default": "\u0623\u062f\u062e\u0644 \u0643\u0648\u062f \u0627\u0644\u062e\u0635\u0645",
+   "default": "أدخل كود الخصم",
    "fieldname": "coupon_placeholder_ar",
    "fieldtype": "Data",
    "label": "Coupon Placeholder (AR)"
@@ -866,6 +875,59 @@
    "fieldname": "facebook_pixel_id",
    "fieldtype": "Data",
    "label": "Facebook Pixel ID"
+  },
+  {
+   "fieldname": "elite_ui_section",
+   "fieldtype": "Section Break",
+   "label": "Elite UI Experience"
+  },
+  {
+   "fieldname": "stories_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Homepage Stories",
+   "default": 1
+  },
+  {
+   "fieldname": "stories_title_en",
+   "fieldtype": "Data",
+   "label": "Stories Title (English)",
+   "default": "The edit, in moments"
+  },
+  {
+   "fieldname": "stories_title_ar",
+   "fieldtype": "Data",
+   "label": "Stories Title (Arabic)",
+   "default": "مختارات في لحظات"
+  },
+  {
+   "fieldname": "stories",
+   "fieldtype": "Table",
+   "label": "Homepage Stories",
+   "options": "Webshop Story"
+  },
+  {
+   "fieldname": "mobile_quick_actions_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Mobile Quick Actions",
+   "default": 1
+  },
+  {
+   "fieldname": "complete_the_look_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Complete the Look",
+   "default": 1
+  },
+  {
+   "fieldname": "complete_the_look_title_en",
+   "fieldtype": "Data",
+   "label": "Complete the Look Title (English)",
+   "default": "Complete the look"
+  },
+  {
+   "fieldname": "complete_the_look_title_ar",
+   "fieldtype": "Data",
+   "label": "Complete the Look Title (Arabic)",
+   "default": "أكمل الإطلالة"
   }
  ],
  "issingle": 1,

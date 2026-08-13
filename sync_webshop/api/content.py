@@ -199,6 +199,11 @@ def get_content():
 		product_settings = frappe.get_single("Webshop Product Settings")
 		product_settings_data = {
 			"enable_zoom": product_settings.enable_zoom,
+			"enable_immersive_viewer": getattr(product_settings, "enable_immersive_viewer", 1),
+			"enable_video_hover": getattr(product_settings, "enable_video_hover", 1),
+			"complete_the_look_enabled": getattr(product_settings, "complete_the_look_enabled", 1),
+			"complete_the_look_title_en": getattr(product_settings, "complete_the_look_title_en", "Complete the look"),
+			"complete_the_look_title_ar": getattr(product_settings, "complete_the_look_title_ar", "أكمل الإطلالة"),
 			"show_related_products": product_settings.show_related_products,
 			"related_products_title_en": product_settings.related_products_title_en,
 			"related_products_title_ar": product_settings.related_products_title_ar,
@@ -211,6 +216,31 @@ def get_content():
 			"recently_viewed_title_en": getattr(product_settings, "recently_viewed_title_en", "Recently viewed"),
 			"recently_viewed_title_ar": getattr(product_settings, "recently_viewed_title_ar", "شوهدت مؤخراً"),
 		}
+	except Exception:
+		pass
+
+	stories_data = []
+	try:
+		stories = frappe.get_all(
+			"Webshop Story",
+			filters={"is_active": 1},
+			fields=["image", "title_en", "title_ar", "subtitle_en", "subtitle_ar", "link_url", "accent_color", "sort_order"],
+			order_by="sort_order asc",
+		)
+		stories_data = [
+			{
+				"image": full_url(story.image) if story.image else None,
+				"title_en": story.title_en,
+				"title_ar": story.title_ar,
+				"subtitle_en": story.subtitle_en,
+				"subtitle_ar": story.subtitle_ar,
+				"link_url": story.link_url,
+				"accent_color": story.accent_color,
+				"sort_order": story.sort_order,
+				"is_active": 1,
+			}
+			for story in stories
+		]
 	except Exception:
 		pass
 
