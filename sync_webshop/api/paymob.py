@@ -120,7 +120,11 @@ def get_paymob_settings():
     if not frappe.db.exists("DocType", "Webshop Paymob Settings"):
         return {"enabled": False, "public_key": "", "payment_methods": []}
     settings = frappe.get_single("Webshop Paymob Settings")
-    configured_ids = _payment_methods(settings) if settings.enabled else []
+    try:
+        configured_ids = _payment_methods(settings) if settings.enabled else []
+    except Exception:
+        # Public configuration discovery must fail closed without turning an incomplete Desk setup into a 417.
+        configured_ids = []
     methods = []
     for key, fieldname, label_en, label_ar in (
         ("card", "card_integration_id", getattr(settings, "card_label_en", None) or "Cards", getattr(settings, "card_label_ar", None) or "البطاقات"),
