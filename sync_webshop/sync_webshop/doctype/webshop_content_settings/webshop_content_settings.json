@@ -31,6 +31,15 @@
   "complete_the_look_enabled",
   "complete_the_look_title_en",
   "complete_the_look_title_ar",
+  "ultra_experience_section",
+  "adaptive_palette_enabled",
+  "circadian_theme_enabled",
+  "circadian_morning_start",
+  "circadian_evening_start",
+  "shared_transitions_enabled",
+  "magnetic_cursor_enabled",
+  "predictive_prefetch_enabled",
+  "palette_transition_ms",
   "nav_links",
   "about_section",
   "about_text_en",
@@ -928,6 +937,59 @@
    "fieldtype": "Data",
    "label": "Complete the Look Title (Arabic)",
    "default": "أكمل الإطلالة"
+  },
+  {
+   "fieldname": "ultra_experience_section",
+   "fieldtype": "Section Break",
+   "label": "Ultra-Elite Experience"
+  },
+  {
+   "fieldname": "adaptive_palette_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Adaptive Product Palette",
+   "default": 1
+  },
+  {
+   "fieldname": "circadian_theme_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Time-of-Day Theme",
+   "default": 1
+  },
+  {
+   "fieldname": "circadian_morning_start",
+   "fieldtype": "Int",
+   "label": "Morning Theme Start Hour",
+   "default": 7
+  },
+  {
+   "fieldname": "circadian_evening_start",
+   "fieldtype": "Int",
+   "label": "Golden Hour Theme Start Hour",
+   "default": 18
+  },
+  {
+   "fieldname": "shared_transitions_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Shared Product Transitions",
+   "default": 1
+  },
+  {
+   "fieldname": "magnetic_cursor_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Magnetic Desktop Cursor",
+   "default": 1
+  },
+  {
+   "fieldname": "predictive_prefetch_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Predictive Product Prefetch",
+   "default": 1
+  },
+  {
+   "fieldname": "palette_transition_ms",
+   "fieldtype": "Int",
+   "label": "Palette Transition Duration (ms)",
+   "default": 520
   }
  ],
  "issingle": 1,

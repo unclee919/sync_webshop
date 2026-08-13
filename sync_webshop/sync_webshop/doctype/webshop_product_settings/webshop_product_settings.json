@@ -22,7 +22,18 @@
   "enable_recently_viewed",
   "recently_viewed_limit",
   "recently_viewed_title_en",
-  "recently_viewed_title_ar"
+  "recently_viewed_title_ar",
+  "ultra_media_section",
+  "ar_enabled",
+  "ar_ios_model_url",
+  "ar_android_model_url",
+  "three_d_model_url",
+  "exploded_view_enabled",
+  "exploded_view_title_en",
+  "exploded_view_title_ar",
+  "fit_guide_enabled",
+  "fit_guide_title_en",
+  "fit_guide_title_ar"
  ],
  "fields": [
   {
@@ -138,6 +149,68 @@
    "fieldtype": "Data",
    "label": "Complete the Look Title (Arabic)",
    "default": "أكمل الإطلالة"
+  },
+  {
+   "fieldname": "ultra_media_section",
+   "fieldtype": "Section Break",
+   "label": "Ultra-Elite Product Media"
+  },
+  {
+   "fieldname": "ar_enabled",
+   "fieldtype": "Check",
+   "label": "Enable AR Product Preview",
+   "default": 1
+  },
+  {
+   "fieldname": "ar_ios_model_url",
+   "fieldtype": "Data",
+   "label": "Default iOS AR/USDZ Model URL"
+  },
+  {
+   "fieldname": "ar_android_model_url",
+   "fieldtype": "Data",
+   "label": "Default Android AR/GLB Model URL"
+  },
+  {
+   "fieldname": "three_d_model_url",
+   "fieldtype": "Data",
+   "label": "Default 3D Model URL"
+  },
+  {
+   "fieldname": "exploded_view_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Exploded Product View",
+   "default": 1
+  },
+  {
+   "fieldname": "exploded_view_title_en",
+   "fieldtype": "Data",
+   "label": "Exploded View Title (English)",
+   "default": "Inspect the details"
+  },
+  {
+   "fieldname": "exploded_view_title_ar",
+   "fieldtype": "Data",
+   "label": "Exploded View Title (Arabic)",
+   "default": "استكشف التفاصيل"
+  },
+  {
+   "fieldname": "fit_guide_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Fit and Measurement Guide",
+   "default": 1
+  },
+  {
+   "fieldname": "fit_guide_title_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Title (English)",
+   "default": "Find your best fit"
+  },
+  {
+   "fieldname": "fit_guide_title_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Title (Arabic)",
+   "default": "اعثر على المقاس المناسب"
   }
  ],
  "issingle": 1,

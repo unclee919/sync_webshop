@@ -214,7 +214,18 @@ def get_content():
 			"enable_recently_viewed": getattr(product_settings, "enable_recently_viewed", 1),
 			"recently_viewed_limit": getattr(product_settings, "recently_viewed_limit", 8) or 8,
 			"recently_viewed_title_en": getattr(product_settings, "recently_viewed_title_en", "Recently viewed"),
-			"recently_viewed_title_ar": getattr(product_settings, "recently_viewed_title_ar", "شوهدت مؤخراً"),
+							"recently_viewed_title_ar": getattr(product_settings, "recently_viewed_title_ar", "شوهدت مؤخراً"),
+				"ar_enabled": getattr(product_settings, "ar_enabled", 1),
+				"ar_ios_model_url": getattr(product_settings, "ar_ios_model_url", ""),
+				"ar_android_model_url": getattr(product_settings, "ar_android_model_url", ""),
+				"three_d_model_url": getattr(product_settings, "three_d_model_url", ""),
+				"exploded_view_enabled": getattr(product_settings, "exploded_view_enabled", 1),
+				"exploded_view_title_en": getattr(product_settings, "exploded_view_title_en", "Inspect the details"),
+				"exploded_view_title_ar": getattr(product_settings, "exploded_view_title_ar", "استكشف التفاصيل"),
+				"fit_guide_enabled": getattr(product_settings, "fit_guide_enabled", 1),
+				"fit_guide_title_en": getattr(product_settings, "fit_guide_title_en", "Find your best fit"),
+				"fit_guide_title_ar": getattr(product_settings, "fit_guide_title_ar", "اعثر على المقاس المناسب"),
+
 		}
 	except Exception:
 		pass
@@ -395,6 +406,17 @@ def get_content():
 		"mobile_quick_actions_enabled": settings.get("mobile_quick_actions_enabled", 1),
 		"complete_the_look_enabled": settings.get("complete_the_look_enabled", 1),
 		"complete_the_look_title_en": settings.get("complete_the_look_title_en") or "Complete the look",
-		"complete_the_look_title_ar": settings.get("complete_the_look_title_ar") or "أكمل الإطلالة",
+					"complete_the_look_title_ar": settings.get("complete_the_look_title_ar") or "أكمل الإطلالة",
+			"ultra_settings": {
+				"adaptive_palette_enabled": settings.get("adaptive_palette_enabled", 1),
+				"circadian_theme_enabled": settings.get("circadian_theme_enabled", 1),
+				"circadian_morning_start": settings.get("circadian_morning_start", 7),
+				"circadian_evening_start": settings.get("circadian_evening_start", 18),
+				"shared_transitions_enabled": settings.get("shared_transitions_enabled", 1),
+				"magnetic_cursor_enabled": settings.get("magnetic_cursor_enabled", 1),
+				"predictive_prefetch_enabled": settings.get("predictive_prefetch_enabled", 1),
+				"palette_transition_ms": settings.get("palette_transition_ms", 520),
+			},
+
 	}
-	return set_json_cache("content_elite_v2", {}, response, expires_in_sec=120)
+	return set_json_cache("content_elite_v3", {}, response, expires_in_sec=120)

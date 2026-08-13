@@ -266,6 +266,12 @@ def get_item(item_code):
         "price_list": price_list,
         "images": [full_url(value) for value in [item.image, item.get("image_2"), item.get("image_3"), item.get("image_4")] if value],
         "video_url": full_url(item.get("video_url")) if item.get("video_url") else None,
+        "ar_ios_model_url": full_url(item.get("ar_ios_model_url")) if item.get("ar_ios_model_url") else None,
+        "ar_android_model_url": full_url(item.get("ar_android_model_url")) if item.get("ar_android_model_url") else None,
+        "three_d_model_url": full_url(item.get("three_d_model_url")) if item.get("three_d_model_url") else None,
+        "palette_key": item.get("palette_key") or None,
+        "palette_color": item.get("palette_color") or None,
+        "exploded_layers": item.get("exploded_layers") or [],
         "stock": stock,
         "attributes": attributes,
         "recommendations": [
