@@ -1,3 +1,5 @@
+import os
+
 import frappe
 
 def set_cors_headers():
@@ -35,22 +37,40 @@ def require_catalog_access():
 			frappe.PermissionError,
 		)
 
+def _webp_variant(file_url):
+    """Return a generated WebP derivative when it exists, otherwise preserve the Desk URL."""
+    if not isinstance(file_url, str) or not file_url.startswith("/files/"):
+        return file_url
+    path, separator, query = file_url.partition("?")
+    stem, extension = os.path.splitext(path)
+    if extension.lower() not in {".png", ".jpg", ".jpeg"}:
+        return file_url
+    variant = f"{stem}.webp"
+    try:
+        if os.path.exists(frappe.get_site_path("public", variant.lstrip("/"))):
+            return f"{variant}{separator}{query}" if separator else variant
+    except Exception:
+        pass
+    return file_url
+
+
 def full_url(file_url):
-	"""Turn a stored Attach/Attach Image value into an absolute URL."""
-	if not file_url:
-		return None
-	if file_url.startswith("http://") or file_url.startswith("https://"):
-		return file_url
-	
-	# Return relative URL so Nginx can proxy it correctly
-	if file_url.startswith("/files/"):
-		return file_url
-		
-	url = frappe.utils.get_url(file_url)
-	# Strip port 8000 if present as it's likely internal
-	if ":8000" in url:
-		url = url.replace(":8000", "")
-	return url
+    """Turn a stored Attach/Attach Image value into an absolute URL."""
+    if not file_url:
+        return None
+    if file_url.startswith("http://") or file_url.startswith("https://"):
+        return file_url
+
+    # Return a relative URL so Nginx can proxy it correctly.
+    if file_url.startswith("/files/"):
+        return _webp_variant(file_url)
+
+    url = frappe.utils.get_url(file_url)
+
+    # Strip port 8000 if present as it is likely internal.
+    if ":8000" in url:
+        url = url.replace(":8000", "")
+    return url
 
 
 def clear_webshop_cache(doc=None, method=None):
