@@ -159,7 +159,10 @@
   "coupon_placeholder_ar",
   "enable_analytics_tracking",
   "ga4_measurement_id",
-  "facebook_pixel_id"
+  "facebook_pixel_id",
+  "tiktok_pixel_id",
+  "analytics_events_enabled",
+  "elite_ui_section"
  ],
  "fields": [
   {
@@ -884,6 +887,17 @@
    "fieldname": "facebook_pixel_id",
    "fieldtype": "Data",
    "label": "Facebook Pixel ID"
+  },
+  {
+   "fieldname": "tiktok_pixel_id",
+   "fieldtype": "Data",
+   "label": "TikTok Pixel ID"
+  },
+  {
+   "default": "1",
+   "fieldname": "analytics_events_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Ultra-Elite Engagement Events"
   },
   {
    "fieldname": "elite_ui_section",

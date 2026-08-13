@@ -255,6 +255,61 @@ def get_content():
 	except Exception:
 		pass
 
+	editorial_collections = []
+	try:
+		collections = frappe.get_all(
+			"Webshop Editorial Collection",
+			filters={"is_published": 1},
+			fields=["name", "slug", "title_en", "title_ar", "intro_en", "intro_ar", "cover_image", "cover_image_alt_en", "cover_image_alt_ar", "accent_color", "cta_text_en", "cta_text_ar", "cta_url", "sort_order"],
+			order_by="sort_order asc, modified desc",
+		)
+		for collection in collections:
+			sections = frappe.get_all(
+				"Webshop Editorial Section",
+				filters={"parent": collection.name, "parenttype": "Webshop Editorial Collection"},
+				fields=["layout", "eyebrow_en", "eyebrow_ar", "title_en", "title_ar", "body_en", "body_ar", "image", "image_2", "item_code", "link_url", "cta_text_en", "cta_text_ar", "sort_order"],
+				order_by="sort_order asc",
+			)
+			serialized_sections = []
+			for section in sections:
+				featured_item = None
+				if section.item_code:
+					featured_item = frappe.db.get_value("Item", section.item_code, ["item_code", "item_name", "image", "item_group"], as_dict=True)
+				serialized_sections.append({
+					"layout": section.layout,
+					"eyebrow_en": section.eyebrow_en,
+					"eyebrow_ar": section.eyebrow_ar,
+					"title_en": section.title_en,
+					"title_ar": section.title_ar,
+					"body_en": section.body_en,
+					"body_ar": section.body_ar,
+					"image": full_url(section.image) if section.image else None,
+					"image_2": full_url(section.image_2) if section.image_2 else None,
+					"item_code": section.item_code,
+					"link_url": section.link_url,
+					"cta_text_en": section.cta_text_en,
+					"cta_text_ar": section.cta_text_ar,
+					"sort_order": section.sort_order,
+					"featured_item": {**featured_item, "image": full_url(featured_item.image) if featured_item and featured_item.image else None} if featured_item else None,
+				})
+			editorial_collections.append({
+				"slug": collection.slug,
+				"title_en": collection.title_en,
+				"title_ar": collection.title_ar,
+				"intro_en": collection.intro_en,
+				"intro_ar": collection.intro_ar,
+				"cover_image": full_url(collection.cover_image) if collection.cover_image else None,
+				"cover_image_alt_en": collection.cover_image_alt_en,
+				"cover_image_alt_ar": collection.cover_image_alt_ar,
+				"accent_color": collection.accent_color,
+				"cta_text_en": collection.cta_text_en,
+				"cta_text_ar": collection.cta_text_ar,
+				"cta_url": collection.cta_url,
+				"sections": serialized_sections,
+			})
+	except Exception:
+		pass
+
 	popups_data = []
 	try:
 		popups = frappe.get_all(
@@ -367,6 +422,8 @@ def get_content():
             "enable_analytics_tracking": bool(settings.get("enable_analytics_tracking", 0)),
             "ga4_measurement_id": settings.get("ga4_measurement_id") if settings.get("enable_analytics_tracking", 0) else None,
             "facebook_pixel_id": settings.get("facebook_pixel_id") if settings.get("enable_analytics_tracking", 0) else None,
+            "tiktok_pixel_id": settings.get("tiktok_pixel_id") if settings.get("enable_analytics_tracking", 0) else None,
+            "analytics_events_enabled": bool(settings.get("analytics_events_enabled", 1)) and bool(settings.get("enable_analytics_tracking", 0)),
             "show_whatsapp_button": settings.show_whatsapp_button,
 
 		"whatsapp_number": settings.whatsapp_number,
@@ -399,7 +456,9 @@ def get_content():
 		"mega_menu_featured_title_en": settings.get("mega_menu_featured_title_en"),
 		"mega_menu_featured_title_ar": settings.get("mega_menu_featured_title_ar"),
 		"mega_menu_featured_url": settings.get("mega_menu_featured_url"),
-		"stories": stories_data,
+					"stories": stories_data,
+			"editorial_collections": editorial_collections,
+
 		"stories_enabled": settings.get("stories_enabled", 1),
 		"stories_title_en": settings.get("stories_title_en") or "The edit, in moments",
 		"stories_title_ar": settings.get("stories_title_ar") or "مختارات في لحظات",
@@ -419,4 +478,4 @@ def get_content():
 			},
 
 	}
-	return set_json_cache("content_elite_v3", {}, response, expires_in_sec=120)
+	return set_json_cache("content_elite_v4", {}, response, expires_in_sec=120)
