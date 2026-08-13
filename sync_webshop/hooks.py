@@ -49,6 +49,11 @@ doc_events = {
     "Webshop Fintech Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Omnichannel Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Gift Card": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Dynamic Pages Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop About Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Policy Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Article": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop QA Item": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
 
 

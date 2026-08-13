@@ -309,12 +309,117 @@ def run_setup():
 			if changed:
 				doc.save(ignore_permissions=True)
 
+	dynamic_pages_defaults = {
+	"enabled": 1,
+	"about_enabled": 1,
+	"about_show_in_nav": 1,
+	"about_label_en": "About us",
+	"about_label_ar": "من نحن",
+	"policy_enabled": 1,
+	"policy_show_in_nav": 1,
+	"policy_label_en": "Our policy",
+	"policy_label_ar": "سياساتنا",
+	"articles_enabled": 1,
+	"articles_show_in_nav": 1,
+	"articles_label_en": "Articles",
+	"articles_label_ar": "المقالات",
+	"qa_enabled": 1,
+	"qa_show_in_nav": 1,
+	"qa_label_en": "Q&A",
+	"qa_label_ar": "الأسئلة والأجوبة",
+	"seo_description_en": "Discover our story, policies, and helpful answers from the Sync Webshop team.",
+	"seo_description_ar": "اكتشف قصتنا وسياساتنا وإجاباتنا المفيدة من فريق متجر سينك.",
+}
+	if frappe.db.exists("DocType", "Webshop Dynamic Pages Settings"):
+		doc = frappe.get_single("Webshop Dynamic Pages Settings")
+		changed = False
+		for fieldname, value in dynamic_pages_defaults.items():
+			if doc.get(fieldname) is None or doc.get(fieldname) == "":
+				doc.set(fieldname, value)
+				changed = True
+
+		if changed:
+			doc.save(ignore_permissions=True)
+
+	about_defaults = {
+		"title_en": "About Our Brand",
+		"title_ar": "عن علامتنا التجارية",
+		"subtitle_en": "A considered way to discover what belongs in your everyday.",
+		"subtitle_ar": "طريقة مدروسة لاكتشاف ما يناسب تفاصيل يومك.",
+		"content_en": "<p>We curate thoughtfully selected essentials for modern living, with a focus on quality, clarity, and a warmer way to shop.</p>",
+		"content_ar": "<p>نختار بعناية فائقة أساسيات الحياة العصرية، مع التركيز على الجودة والوضوح وتجربة تسوق أكثر دفئاً.</p>",
+	}
+	if frappe.db.exists("DocType", "Webshop About Settings"):
+		doc = frappe.get_single("Webshop About Settings")
+		changed = False
+		for fieldname, value in about_defaults.items():
+			if not doc.get(fieldname):
+				doc.set(fieldname, value)
+				changed = True
+		if changed:
+			doc.save(ignore_permissions=True)
+
+	policy_defaults = {
+		"title_en": "Our Policy",
+		"title_ar": "سياساتنا",
+		"subtitle_en": "Clear commitments for every order and every customer.",
+		"subtitle_ar": "التزامات واضحة لكل طلب ولكل عميل.",
+		"shipping_title_en": "Shipping",
+		"shipping_title_ar": "الشحن",
+		"shipping_policy_en": "<p>Reliable regional shipping with clear tracking. Delivery estimates and fees are shown before you place an order.</p>",
+		"shipping_policy_ar": "<p>شحن موثوق في جميع أنحاء المنطقة مع تتبع دقيق. تظهر تقديرات وعمولة التوصيل قبل إتمام الطلب.</p>",
+		"return_title_en": "Returns & Exchanges",
+		"return_title_ar": "الإرجاع والاستبدال",
+		"return_policy_en": "<p>Contact our team within 14 days for unused items in their original condition. We will guide you through the next step.</p>",
+		"return_policy_ar": "<p>تواصل مع فريقنا خلال 14 يوماً للأصناف غير المستخدمة وبحالتها الأصلية، وسنرشدك إلى الخطوة التالية.</p>",
+		"privacy_title_en": "Privacy",
+		"privacy_title_ar": "الخصوصية",
+		"privacy_policy_en": "<p>We use customer data only to provide, secure, and improve the shopping experience. We do not expose sensitive information to the browser assistant.</p>",
+		"privacy_policy_ar": "<p>نستخدم بيانات العملاء فقط لتقديم تجربة التسوق وتأمينها وتحسينها، ولا نعرض المعلومات الحساسة على مساعد المتصفح.</p>",
+	}
+	if frappe.db.exists("DocType", "Webshop Policy Settings"):
+		doc = frappe.get_single("Webshop Policy Settings")
+		changed = False
+		for fieldname, value in policy_defaults.items():
+			if not doc.get(fieldname):
+				doc.set(fieldname, value)
+				changed = True
+		if changed:
+			doc.save(ignore_permissions=True)
+
 	if frappe.db.exists("DocType", "Webshop Gift Card") and not frappe.db.exists("Webshop Gift Card", {"code": "SYNC-ELITE-2026"}):
+
 		frappe.get_doc({"doctype": "Webshop Gift Card", "code": "SYNC-ELITE-2026", "balance": 100.0, "remaining_balance": 100.0, "status": "Active"}).insert(ignore_permissions=True)
+
+	if frappe.db.exists("DocType", "Webshop Article") and not frappe.db.exists("Webshop Article", {"route": "welcome-to-sync-coffee-house"}):
+		frappe.get_doc({
+			"doctype": "Webshop Article",
+			"title_en": "Welcome to Sync Coffee House",
+			"title_ar": "مرحباً بكم في مقهى سينك",
+							"route": "welcome-to-sync-coffee-house",
+				"excerpt_en": "A short look at the craft, care, and quiet rituals behind our coffee collection.",
+				"excerpt_ar": "نظرة قصيرة على الحرفة والعناية والطقوس الهادئة وراء مجموعة القهوة لدينا.",
+				"content_en": "<p>Discover the journey of our specialty beans, ethically sourced and roasted to perfection for modern coffee lovers.</p>",
+			"content_ar": "<p>اكتشف رحلة حبوب القهوة المختصة لدينا، والتي تم مصدرها بشكل أخلاقي وتحميصها بإتقان لمحبي القهوة العصريين.</p>",
+			"published": 1
+		}).insert(ignore_permissions=True)
+
+	if frappe.db.exists("DocType", "Webshop QA Item") and not frappe.db.exists("Webshop QA Item", {"question_en": "How do I track my order?"}):
+		frappe.get_doc({
+			"doctype": "Webshop QA Item",
+			"question_en": "How do I track my order?",
+			"question_ar": "كيف يمكنني تتبع طلبي؟",
+			"answer_en": "<p>You can track your order in real-time by entering your order confirmation email on our Tracking page or via your Customer Dashboard.</p>",
+			"answer_ar": "<p>يمكنك تتبع طلبك في الوقت الفعلي عن طريق إدخال بريدك الإلكتروني لتأكيد الطلب في صفحة التتبع أو عبر لوحة تحكم العملاء.</p>",
+							"category": "Orders & Shipping",
+				"sort_order": 10,
+				"published": 1
+
+		}).insert(ignore_permissions=True)
 
 	frappe.db.commit()
 	clear_webshop_cache()
-	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, roles, and Help Guide created."
+	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, Dynamic Pages, roles, and Help Guide created."
 
 
 @frappe.whitelist()

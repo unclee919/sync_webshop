@@ -1,0 +1,123 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Dynamic Pages Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "enabled",
+            "label": "Dynamic Pages Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "about_enabled",
+            "label": "About Us Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "about_show_in_nav",
+            "label": "Show About Us in Navigation",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "about_label_en",
+            "label": "About Us Navigation Label (EN)",
+            "fieldtype": "Data",
+            "default": "About us"
+        },
+        {
+            "fieldname": "about_label_ar",
+            "label": "About Us Navigation Label (AR)",
+            "fieldtype": "Data",
+            "default": "\u0645\u0646 \u0646\u062d\u0646"
+        },
+        {
+            "fieldname": "policy_enabled",
+            "label": "Our Policy Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "policy_show_in_nav",
+            "label": "Show Our Policy in Navigation",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "policy_label_en",
+            "label": "Our Policy Navigation Label (EN)",
+            "fieldtype": "Data",
+            "default": "Our policy"
+        },
+        {
+            "fieldname": "policy_label_ar",
+            "label": "Our Policy Navigation Label (AR)",
+            "fieldtype": "Data",
+            "default": "\u0633\u064a\u0627\u0633\u0627\u062a\u0646\u0627"
+        },
+        {
+            "fieldname": "articles_enabled",
+            "label": "Articles Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "articles_show_in_nav",
+            "label": "Show Articles in Navigation",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "articles_label_en",
+            "label": "Articles Navigation Label (EN)",
+            "fieldtype": "Data",
+            "default": "Articles"
+        },
+        {
+            "fieldname": "articles_label_ar",
+            "label": "Articles Navigation Label (AR)",
+            "fieldtype": "Data",
+            "default": "\u0627\u0644\u0645\u0642\u0627\u0644\u0627\u062a"
+        },
+        {
+            "fieldname": "qa_enabled",
+            "label": "Q&A Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "qa_show_in_nav",
+            "label": "Show Q&A in Navigation",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "qa_label_en",
+            "label": "Q&A Navigation Label (EN)",
+            "fieldtype": "Data",
+            "default": "Q&A"
+        },
+        {
+            "fieldname": "qa_label_ar",
+            "label": "Q&A Navigation Label (AR)",
+            "fieldtype": "Data",
+            "default": "\u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0648\u0627\u0644\u0623\u062c\u0648\u0628\u0629"
+        },
+        {
+            "fieldname": "seo_description_en",
+            "label": "Dynamic Pages SEO Description (EN)",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "seo_description_ar",
+            "label": "Dynamic Pages SEO Description (AR)",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

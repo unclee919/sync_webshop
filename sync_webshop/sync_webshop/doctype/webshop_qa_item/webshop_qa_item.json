@@ -1,0 +1,53 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop QA Item",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "question_en",
+            "label": "Question (EN)",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "question_ar",
+            "label": "Question (AR)",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "answer_en",
+            "label": "Answer (EN)",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "answer_ar",
+            "label": "Answer (AR)",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Data",
+            "default": "General"
+        },
+        {
+            "fieldname": "sort_order",
+            "label": "Sort Order",
+            "fieldtype": "Int",
+            "default": 10
+        },
+        {
+            "fieldname": "published",
+            "label": "Published",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
+}
