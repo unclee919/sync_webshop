@@ -225,6 +225,9 @@ def get_content():
 				"fit_guide_enabled": getattr(product_settings, "fit_guide_enabled", 1),
 				"fit_guide_title_en": getattr(product_settings, "fit_guide_title_en", "Find your best fit"),
 				"fit_guide_title_ar": getattr(product_settings, "fit_guide_title_ar", "اعثر على المقاس المناسب"),
+				"material_studio_enabled": getattr(product_settings, "material_studio_enabled", 1),
+				"quote_requests_enabled": getattr(product_settings, "quote_requests_enabled", 0),
+				"quote_request_min_qty": getattr(product_settings, "quote_request_min_qty", 10) or 10,
 
 		}
 	except Exception:
@@ -399,6 +402,15 @@ def get_content():
 	except Exception:
 		pass
 
+	social_proof_events = []
+	try:
+		events = frappe.get_all("Webshop Social Proof Event", filters={"enabled": 1}, fields=["event_type", "item_code", "city_en", "city_ar", "label_en", "label_ar", "minutes_ago", "viewer_count", "sort_order"], order_by="sort_order asc, modified desc", limit_page_length=30)
+		for event in events:
+			item = frappe.db.get_value("Item", event.item_code, ["item_name", "image"], as_dict=True) if event.item_code else None
+			social_proof_events.append({**event, "item_en": item.item_name if item else None, "item_ar": item.item_name if item else None, "image": full_url(item.image) if item and item.image else None, "minutes": event.minutes_ago or 5, "count": event.viewer_count or 3})
+	except Exception:
+		social_proof_events = []
+
 	response = {
 		"site_name": settings.site_name,
 		"contact_us_text_en": settings.get("contact_us_text_en"),
@@ -471,6 +483,12 @@ def get_content():
 		"popups": popups_data,
 		"seo": seo_data,
 		"faqs": faqs,
+		"social_proof_events": social_proof_events,
+		"style_quiz_enabled": settings.get("style_quiz_enabled", 0),
+		"style_quiz_title_en": settings.get("style_quiz_title_en") or "Find your point of view",
+		"style_quiz_title_ar": settings.get("style_quiz_title_ar") or "اكتشف ذوقك",
+		"style_quiz_intro_en": settings.get("style_quiz_intro_en") or "Answer a few questions and we will tune the edit to you.",
+		"style_quiz_intro_ar": settings.get("style_quiz_intro_ar") or "أجب عن بعض الأسئلة لنضبط الاختيارات بما يناسبك.",
 		"enable_user_registration": settings.get("enable_user_registration", 1),
 		"enable_wishlist": settings.get("enable_wishlist", 1),
 		"mega_menu_enabled": settings.get("mega_menu_enabled", 1),

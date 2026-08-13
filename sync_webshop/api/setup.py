@@ -23,6 +23,12 @@ def run_setup():
 			{"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."},
 			{"fieldname": "video_url", "label": "Product Hover Video URL", "fieldtype": "Data", "insert_after": "webshop_curated_tags"},
 			{"fieldname": "webshop_search_keywords", "label": "Visual Search Keywords", "fieldtype": "Data", "insert_after": "video_url", "description": "Comma-separated business-neutral visual descriptors."},
+			{"fieldname": "webshop_style_tags", "label": "Style Profile Tags", "fieldtype": "Data", "insert_after": "webshop_search_keywords", "description": "Comma-separated style tags used only for local catalog personalization."},
+			{"fieldname": "webshop_material_variants", "label": "Material Variants", "fieldtype": "Table", "options": "Webshop Material Variant", "insert_after": "webshop_style_tags"},
+			{"fieldname": "webshop_quote_enabled", "label": "Request Quote Enabled", "fieldtype": "Check", "insert_after": "webshop_material_variants"},
+			{"fieldname": "webshop_quote_min_qty", "label": "Request Quote Minimum Quantity", "fieldtype": "Float", "insert_after": "webshop_quote_enabled"},
+			{"fieldname": "webshop_quote_note_en", "label": "Quote Note (English)", "fieldtype": "Small Text", "insert_after": "webshop_quote_min_qty"},
+			{"fieldname": "webshop_quote_note_ar", "label": "Quote Note (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_quote_note_en"},
 		],
 		"Sales Order": [
 			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
@@ -30,6 +36,14 @@ def run_setup():
 			{"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
 			{"fieldname": "webshop_fulfillment_method", "label": "Fulfillment Method", "fieldtype": "Select", "options": "Delivery\nStore Pickup", "default": "Delivery", "insert_after": "webshop_gift_message"},
 			{"fieldname": "webshop_pickup_warehouse", "label": "Pickup Warehouse", "fieldtype": "Link", "options": "Warehouse", "insert_after": "webshop_fulfillment_method"},
+			{"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check", "insert_after": "webshop_pickup_warehouse"},
+			{"fieldname": "webshop_quotation", "label": "Quotation", "fieldtype": "Link", "options": "Quotation", "insert_after": "webshop_quote_request"},
+			{"fieldname": "webshop_tracking_latitude", "label": "Tracking Latitude", "fieldtype": "Float", "insert_after": "webshop_quotation"},
+			{"fieldname": "webshop_tracking_longitude", "label": "Tracking Longitude", "fieldtype": "Float", "insert_after": "webshop_tracking_latitude"},
+			{"fieldname": "webshop_courier_status", "label": "Courier Status", "fieldtype": "Data", "insert_after": "webshop_tracking_longitude"},
+			{"fieldname": "webshop_courier_zone", "label": "Courier Zone", "fieldtype": "Data", "insert_after": "webshop_courier_status"},
+			{"fieldname": "webshop_stops_remaining", "label": "Stops Remaining", "fieldtype": "Int", "insert_after": "webshop_courier_zone"},
+			{"fieldname": "webshop_courier_tracking_url", "label": "Courier Tracking URL", "fieldtype": "Data", "insert_after": "webshop_stops_remaining"},
 			{
 				"fieldname": "tracking_number", 
 				"label": "رقم التتبع (Tracking Number)", 
@@ -92,6 +106,10 @@ def run_setup():
 				"fieldtype": "Data",
 				"insert_after": "webshop_location"
 				},
+		],
+		"Quotation": [
+			{"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check"},
+			{"fieldname": "webshop_quote_source", "label": "Quote Source", "fieldtype": "Data"},
 		],
 		"Delivery Note": [
 			{
@@ -212,6 +230,14 @@ def seed_phase3_demo():
             "pickup_title_ar": "الاستلام من المتجر",
             "membership_title_en": "Your membership",
             "membership_title_ar": "عضويتك",
+            "presence_material_studio_enabled": 1,
+            "style_quiz_enabled": 1,
+            "quote_requests_enabled": 1,
+            "quote_request_title_en": "Request a tailored quote",
+            "quote_request_title_ar": "اطلب عرض سعر مخصص",
+            "live_tracking_map_enabled": 1,
+            "social_proof_enabled": 1,
+            "social_proof_viewer_enabled": 1,
         }
         for fieldname, value in values.items():
             if settings.meta.has_field(fieldname):
@@ -243,6 +269,50 @@ def seed_phase3_demo():
             doc.update(tier)
             doc.enabled = 1
             doc.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Tracking Settings"):
+        tracking = frappe.get_single("Webshop Tracking Settings")
+        tracking.update({"enabled": 1, "map_enabled": 1, "courier_name": "Configured courier", "tracking_url_template": "", "title_en": "Your delivery, in view", "title_ar": "شاهد مسار توصيلك"})
+        tracking.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
+        questions = [
+            {"question_key": "mood", "question_en": "Which mood feels most like your space?", "question_ar": "أي أجواء تشبه مساحتك أكثر؟", "options_json": '[{"label_en":"Quiet and natural","label_ar":"هادئة وطبيعية","tag":"natural"},{"label_en":"Warm and expressive","label_ar":"دافئة ومعبرة","tag":"warm"},{"label_en":"Clean and modern","label_ar":"نظيفة وعصرية","tag":"modern"}]', "sort_order": 10},
+            {"question_key": "pace", "question_en": "What do you value most?", "question_ar": "ما الذي تقدره أكثر؟", "options_json": '[{"label_en":"Daily ease","label_ar":"سهولة يومية","tag":"everyday"},{"label_en":"Craft and detail","label_ar":"الحرفة والتفاصيل","tag":"crafted"},{"label_en":"A bold point of view","label_ar":"رؤية جريئة","tag":"statement"}]', "sort_order": 20},
+        ]
+        for row in questions:
+            existing = frappe.db.get_value("Webshop Style Quiz Question", {"question_key": row["question_key"]}, "name")
+            doc = frappe.get_doc("Webshop Style Quiz Question", existing) if existing else frappe.new_doc("Webshop Style Quiz Question")
+            doc.update(row); doc.enabled = 1; doc.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Social Proof Event"):
+        events = [
+            {"event_type": "Purchase", "city_en": "Riyadh", "city_ar": "الرياض", "label_en": "A considered everyday essential", "label_ar": "اختيار يومي بعناية", "minutes_ago": 8, "viewer_count": 0, "sort_order": 10},
+            {"event_type": "Viewer Pulse", "city_en": "", "city_ar": "", "label_en": "A few customers are viewing this edit", "label_ar": "بعض العملاء يشاهدون هذه المجموعة", "minutes_ago": 0, "viewer_count": 4, "sort_order": 20},
+        ]
+        for row in events:
+            existing = frappe.db.get_value("Webshop Social Proof Event", {"event_type": row["event_type"], "sort_order": row["sort_order"]}, "name")
+            doc = frappe.get_doc("Webshop Social Proof Event", existing) if existing else frappe.new_doc("Webshop Social Proof Event")
+            doc.update(row); doc.enabled = 1; doc.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Item"):
+        sample = frappe.db.get_value("Item", {"item_code": "SYNC-KIT-001", "disabled": 0}, "name") or frappe.db.get_value("Item", {"disabled": 0}, "name")
+        if sample:
+            item = frappe.get_doc("Item", sample)
+            if item.meta.has_field("webshop_style_tags"):
+                item.webshop_style_tags = "everyday, natural, crafted"
+            if item.meta.has_field("webshop_quote_enabled"):
+                item.webshop_quote_enabled = 1
+            if item.meta.has_field("webshop_quote_min_qty"):
+                item.webshop_quote_min_qty = 10
+            if item.meta.has_field("webshop_quote_note_en"):
+                item.webshop_quote_note_en = "For teams, projects, and considered spaces, request a tailored proposal."
+            if item.meta.has_field("webshop_quote_note_ar"):
+                item.webshop_quote_note_ar = "للفرق والمشاريع والمساحات المميزة، اطلب عرضاً مخصصاً."
+            if item.meta.has_field("webshop_material_variants") and not item.get("webshop_material_variants"):
+                item.append("webshop_material_variants", {"material_name": "Natural oak", "material_name_ar": "بلوط طبيعي", "swatch_color": "#C8A96B", "enabled": 1, "sort_order": 10})
+                item.append("webshop_material_variants", {"material_name": "Charcoal", "material_name_ar": "فحمي", "swatch_color": "#334155", "enabled": 1, "sort_order": 20})
+            item.save(ignore_permissions=True)
 
     columns = set(frappe.db.get_table_columns("Item")) if frappe.db.exists("DocType", "Item") else set()
     if "webshop_search_keywords" in columns:

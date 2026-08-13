@@ -84,7 +84,13 @@ def get_order_status(order_name, email=None, phone=None):
 			"currency",
 			"docstatus",
 			"tracking_number",
-			"webshop_payment_status"
+			"webshop_payment_status",
+                "webshop_tracking_latitude",
+                "webshop_tracking_longitude",
+                "webshop_courier_status",
+                "webshop_courier_zone",
+                "webshop_stops_remaining",
+                "webshop_courier_tracking_url"
 		],
 		limit=1
 	)
@@ -106,5 +112,20 @@ def get_order_status(order_name, email=None, phone=None):
 		fields=["name", "status", "tracking_number"]
 	)
 	order["delivery_notes"] = delivery_notes
-	
+	try:
+		tracking_settings = frappe.get_single("Webshop Tracking Settings")
+		tracking_template = getattr(tracking_settings, "tracking_url_template", "") or ""
+		order["tracking"] = {
+			"enabled": bool(getattr(tracking_settings, "enabled", 0)),
+			"map_enabled": bool(getattr(tracking_settings, "map_enabled", 0)),
+			"courier_name": getattr(tracking_settings, "courier_name", None),
+			"tracking_url": order.get("webshop_courier_tracking_url") or tracking_template.replace("{tracking_number}", order.get("tracking_number") or ""),
+			"latitude": order.get("webshop_tracking_latitude"),
+			"longitude": order.get("webshop_tracking_longitude"),
+			"courier_status": order.get("webshop_courier_status"),
+			"courier_zone": order.get("webshop_courier_zone"),
+			"stops_remaining": order.get("webshop_stops_remaining"),
+		}
+	except Exception:
+		order["tracking"] = {"enabled": False, "map_enabled": False}
 	return order

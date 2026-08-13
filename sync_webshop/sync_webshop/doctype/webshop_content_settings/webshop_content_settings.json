@@ -199,7 +199,27 @@
   "pickup_note_ar",
   "membership_enabled",
   "membership_title_en",
-  "membership_title_ar"
+  "membership_title_ar",
+  "presence_material_studio_enabled",
+  "presence_material_studio_title_en",
+  "presence_material_studio_title_ar",
+  "style_quiz_enabled",
+  "style_quiz_title_en",
+  "style_quiz_title_ar",
+  "style_quiz_intro_en",
+  "style_quiz_intro_ar",
+  "quote_requests_enabled",
+  "quote_request_title_en",
+  "quote_request_title_ar",
+  "quote_request_threshold",
+  "live_tracking_map_enabled",
+  "live_tracking_title_en",
+  "live_tracking_title_ar",
+  "courier_tracking_url_template",
+  "social_proof_enabled",
+  "social_proof_viewer_enabled",
+  "social_proof_viewer_template_en",
+  "social_proof_viewer_template_ar"
  ],
  "fields": [
   {
@@ -1262,6 +1282,126 @@
    "label": "Membership Title (Arabic)",
    "fieldtype": "Data",
    "default": "عضويتك"
+  },
+  {
+   "fieldname": "presence_material_studio_enabled",
+   "label": "3D Material Studio Enabled",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "presence_material_studio_title_en",
+   "label": "Material Studio Title (English)",
+   "fieldtype": "Data",
+   "default": "Make it yours"
+  },
+  {
+   "fieldname": "presence_material_studio_title_ar",
+   "label": "Material Studio Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "صممه بطريقتك"
+  },
+  {
+   "fieldname": "style_quiz_enabled",
+   "label": "Style Quiz Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "style_quiz_title_en",
+   "label": "Style Quiz Title (English)",
+   "fieldtype": "Data",
+   "default": "Find your point of view"
+  },
+  {
+   "fieldname": "style_quiz_title_ar",
+   "label": "Style Quiz Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "اكتشف ذوقك"
+  },
+  {
+   "fieldname": "style_quiz_intro_en",
+   "label": "Style Quiz Intro (English)",
+   "fieldtype": "Small Text",
+   "default": "Answer a few questions and we will tune the edit to you."
+  },
+  {
+   "fieldname": "style_quiz_intro_ar",
+   "label": "Style Quiz Intro (Arabic)",
+   "fieldtype": "Small Text",
+   "default": "أجب عن بعض الأسئلة لنضبط الاختيارات بما يناسبك."
+  },
+  {
+   "fieldname": "quote_requests_enabled",
+   "label": "B2B Quote Requests Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "quote_request_title_en",
+   "label": "Quote Request Title (English)",
+   "fieldtype": "Data",
+   "default": "Request a tailored quote"
+  },
+  {
+   "fieldname": "quote_request_title_ar",
+   "label": "Quote Request Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "اطلب عرض سعر مخصص"
+  },
+  {
+   "fieldname": "quote_request_threshold",
+   "label": "Quote Request Minimum Quantity",
+   "fieldtype": "Float",
+   "default": "10"
+  },
+  {
+   "fieldname": "live_tracking_map_enabled",
+   "label": "Live Tracking Map Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "live_tracking_title_en",
+   "label": "Live Tracking Title (English)",
+   "fieldtype": "Data",
+   "default": "Your delivery, in view"
+  },
+  {
+   "fieldname": "live_tracking_title_ar",
+   "label": "Live Tracking Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "شاهد مسار توصيلك"
+  },
+  {
+   "fieldname": "courier_tracking_url_template",
+   "label": "Courier Tracking URL Template",
+   "fieldtype": "Data",
+   "description": "Use {tracking_number} as the replacement token."
+  },
+  {
+   "fieldname": "social_proof_enabled",
+   "label": "Social Proof Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "social_proof_viewer_enabled",
+   "label": "Live Viewer Pulse Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "social_proof_viewer_template_en",
+   "label": "Viewer Pulse Template (English)",
+   "fieldtype": "Data",
+   "default": "{count} people are viewing this now"
+  },
+  {
+   "fieldname": "social_proof_viewer_template_ar",
+   "label": "Viewer Pulse Template (Arabic)",
+   "fieldtype": "Data",
+   "default": "{count} أشخاص يشاهدون هذا الآن"
   }
  ],
  "issingle": 1,

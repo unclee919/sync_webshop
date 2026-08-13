@@ -111,13 +111,21 @@ def _get_item_experience(item_codes):
         available_columns = set(frappe.db.get_table_columns("Item"))
     except Exception:
         return {}
-    wanted = [field for field in ["video_url", "webshop_stage_image", "webshop_stage_image_2", "webshop_stage_label_en", "webshop_stage_label_ar", "webshop_curated_tags", "webshop_search_keywords"] if field in available_columns]
+    wanted = [field for field in ["video_url", "webshop_stage_image", "webshop_stage_image_2", "webshop_stage_label_en", "webshop_stage_label_ar", "webshop_curated_tags", "webshop_search_keywords", "webshop_style_tags", "webshop_quote_enabled", "webshop_quote_min_qty", "webshop_quote_note_en", "webshop_quote_note_ar", "webshop_material_variants"] if field in available_columns]
     if not wanted:
         return {}
     try:
         rows = frappe.get_all("Item", filters={"item_code": ["in", item_codes]}, fields=["item_code"] + wanted)
     except Exception:
         return {}
+    material_by_item = {}
+    if frappe.db.exists("DocType", "Webshop Material Variant"):
+        try:
+            material_rows = frappe.get_all("Webshop Material Variant", filters={"parent": ["in", item_codes], "parenttype": "Item", "parentfield": "webshop_material_variants", "enabled": 1}, fields=["parent", "material_name", "material_name_ar", "swatch_color", "texture_url", "image_url", "model_url"], order_by="sort_order asc")
+            for variant in material_rows:
+                material_by_item.setdefault(variant.parent, []).append({"name": variant.material_name, "name_ar": variant.material_name_ar, "swatch_color": variant.swatch_color, "texture_url": full_url(variant.texture_url) if variant.texture_url else None, "image_url": full_url(variant.image_url) if variant.image_url else None, "model_url": full_url(variant.model_url) if variant.model_url else None})
+        except Exception:
+            material_by_item = {}
     result = {}
     for row in rows:
         stage_images = [full_url(value) for value in [row.get("webshop_stage_image"), row.get("webshop_stage_image_2")] if value]
@@ -128,6 +136,12 @@ def _get_item_experience(item_codes):
             "stage_labels": {"en": row.get("webshop_stage_label_en"), "ar": row.get("webshop_stage_label_ar")},
             "curated_tags": tags,
             "search_keywords": [value.strip().lower() for value in str(row.get("webshop_search_keywords") or "").split(",") if value.strip()],
+            "style_tags": [value.strip().lower() for value in str(row.get("webshop_style_tags") or "").split(",") if value.strip()],
+            "quote_enabled": bool(row.get("webshop_quote_enabled")),
+            "quote_min_qty": float(row.get("webshop_quote_min_qty") or 10),
+            "quote_note_en": row.get("webshop_quote_note_en"),
+            "quote_note_ar": row.get("webshop_quote_note_ar"),
+            "material_variants": material_by_item.get(row.item_code, []),
         }
     return result
 
@@ -145,13 +159,18 @@ def _empty_catalog(page, page_size, price_list, item_group=None):
 
 
 @frappe.whitelist(allow_guest=True)
-def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=None, max_price=None, attributes=None):
+def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=None, max_price=None, attributes=None, style_profile=None):
     set_cors_headers()
     require_catalog_access()
     page = max(int(page), 1)
     page_size = min(max(int(page_size), 1), 100)
     min_price = float(min_price) if min_price not in (None, "") else None
     max_price = float(max_price) if max_price not in (None, "") else None
+    if style_profile and isinstance(style_profile, str):
+        try:
+            style_profile = json.loads(style_profile)
+        except Exception:
+            style_profile = None
     if attributes and isinstance(attributes, str):
         try:
             attributes = json.loads(attributes)
@@ -166,6 +185,7 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         "min_price": min_price,
         "max_price": max_price,
         "attributes": attributes or {},
+        "style_profile": style_profile or {},
     }
     cached = get_json_cache("catalog", cache_payload)
     if cached is not None:
@@ -231,9 +251,11 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
     prices = _get_prices(codes, price_list)
     stocks = _get_stock(codes)
     variants = _get_variant_attributes(codes)
+    experiences = _get_item_experience(codes)
     results = []
     for item in items:
         price = prices.get(item.item_code) or {}
+        exp = experiences.get(item.item_code, {})
         results.append({
             "item_code": item.item_code,
             "item_name": item.item_name,
@@ -250,8 +272,18 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
             "stage_labels": exp.get("stage_labels", {}),
             "curated_tags": exp.get("curated_tags", []),
             "search_keywords": exp.get("search_keywords", []),
+            "style_tags": exp.get("style_tags", []),
+            "quote_enabled": exp.get("quote_enabled", False),
+            "quote_min_qty": exp.get("quote_min_qty", 10),
+            "quote_note_en": exp.get("quote_note_en"),
+            "quote_note_ar": exp.get("quote_note_ar"),
+            "material_variants": exp.get("material_variants", []),
         })
 
+    if style_profile and results:
+        wanted_tags = {str(value).strip().lower() for value in (style_profile.get("tags") or []) if str(value).strip()}
+        if wanted_tags:
+            results.sort(key=lambda row: len(wanted_tags.intersection(set(row.get("style_tags") or []) | set(row.get("curated_tags") or []))), reverse=True)
     response = {
         "items": results,
         "page": page,

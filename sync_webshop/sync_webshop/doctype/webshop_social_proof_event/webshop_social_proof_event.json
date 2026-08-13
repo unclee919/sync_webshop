@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-13 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "event_type",
+  "item_code",
+  "city_en",
+  "city_ar",
+  "label_en",
+  "label_ar",
+  "minutes_ago",
+  "viewer_count",
+  "enabled",
+  "sort_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Select",
+   "label": "Event Type",
+   "options": "Purchase\nViewer Pulse",
+   "default": "Purchase"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "city_en",
+   "fieldtype": "Data",
+   "label": "City (English)"
+  },
+  {
+   "fieldname": "city_ar",
+   "fieldtype": "Data",
+   "label": "City (Arabic)"
+  },
+  {
+   "fieldname": "label_en",
+   "fieldtype": "Data",
+   "label": "Label (English)"
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "label": "Label (Arabic)"
+  },
+  {
+   "fieldname": "minutes_ago",
+   "fieldtype": "Int",
+   "label": "Minutes Ago",
+   "default": "5"
+  },
+  {
+   "fieldname": "viewer_count",
+   "fieldtype": "Int",
+   "label": "Viewer Count",
+   "default": "3"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled",
+   "default": "1"
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order",
+   "default": "10"
+  }
+ ],
+ "module": "Sync Webshop",
+ "name": "Webshop Social Proof Event",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 1
+}

@@ -33,7 +33,10 @@
   "exploded_view_title_ar",
   "fit_guide_enabled",
   "fit_guide_title_en",
-  "fit_guide_title_ar"
+  "fit_guide_title_ar",
+  "material_studio_enabled",
+  "quote_requests_enabled",
+  "quote_request_min_qty"
  ],
  "fields": [
   {
@@ -211,6 +214,24 @@
    "fieldtype": "Data",
    "label": "Fit Guide Title (Arabic)",
    "default": "اعثر على المقاس المناسب"
+  },
+  {
+   "fieldname": "material_studio_enabled",
+   "label": "Material Studio Enabled",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "quote_requests_enabled",
+   "label": "Quote Requests Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "quote_request_min_qty",
+   "label": "Quote Request Minimum Quantity",
+   "fieldtype": "Float",
+   "default": "10"
   }
  ],
  "issingle": 1,

@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-13 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "material_name",
+  "material_name_ar",
+  "swatch_color",
+  "texture_url",
+  "image_url",
+  "model_url",
+  "enabled",
+  "sort_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "material_name",
+   "fieldtype": "Data",
+   "label": "Material Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "material_name_ar",
+   "fieldtype": "Data",
+   "label": "Material Name (Arabic)"
+  },
+  {
+   "fieldname": "swatch_color",
+   "fieldtype": "Color",
+   "label": "Swatch Color"
+  },
+  {
+   "fieldname": "texture_url",
+   "fieldtype": "Attach",
+   "label": "Texture URL / File"
+  },
+  {
+   "fieldname": "image_url",
+   "fieldtype": "Attach Image",
+   "label": "Material Preview Image"
+  },
+  {
+   "fieldname": "model_url",
+   "fieldtype": "Data",
+   "label": "Material 3D Model URL"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled",
+   "default": "1"
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order",
+   "default": "10"
+  }
+ ],
+ "istable": 1,
+ "module": "Sync Webshop",
+ "name": "Webshop Material Variant",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 1
+}
