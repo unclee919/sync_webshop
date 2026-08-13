@@ -489,6 +489,7 @@ def get_recommendations(item_code=None, item_group=None, limit=8):
     codes = [row.item_code for row in items]
     prices = _get_prices(codes, _get_price_list())
     stocks = _get_stock(codes)
+    recommendation_experience = _get_item_experience(codes)
     response = [
         {
             "item_code": row.item_code,
