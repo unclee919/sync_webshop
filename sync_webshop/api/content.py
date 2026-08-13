@@ -9,7 +9,7 @@ def get_content():
 	Returns this server's text content and settings.
 	"""
 	set_cors_headers()
-	cached = get_json_cache("content", {})
+	cached = get_json_cache("content_elite_v2", {})
 	if cached is not None:
 		return cached
 	try:
@@ -397,4 +397,4 @@ def get_content():
 		"complete_the_look_title_en": settings.get("complete_the_look_title_en") or "Complete the look",
 		"complete_the_look_title_ar": settings.get("complete_the_look_title_ar") or "أكمل الإطلالة",
 	}
-	return set_json_cache("content", {}, response, expires_in_sec=120)
+	return set_json_cache("content_elite_v2", {}, response, expires_in_sec=120)
