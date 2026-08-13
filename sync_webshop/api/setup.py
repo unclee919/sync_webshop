@@ -5,423 +5,423 @@ from sync_webshop.api.master_tier import seed_master_tier
 
 @frappe.whitelist()
 def run_setup():
-	"""
-	Creates custom fields required for Batch 2.
-	This should be run once after deploying the code.
-	"""
-	# Check if user is System Manager
-	if frappe.session.user == "Guest":
-		frappe.throw("Guest users cannot run setup.")
-		
-	# In a real scenario, we might want to restrict this further
-	# but for this task, we'll allow it if called correctly.
-	
-	custom_fields = {
-		"Item": [
-			{"fieldname": "webshop_stage_image", "label": "Webshop Stage Image", "fieldtype": "Attach Image", "insert_after": "image"},
-			{"fieldname": "webshop_stage_image_2", "label": "Webshop Alternate Stage Image", "fieldtype": "Attach Image", "insert_after": "webshop_stage_image"},
-			{"fieldname": "webshop_stage_label_en", "label": "Stage Label (English)", "fieldtype": "Data", "insert_after": "webshop_stage_image_2"},
-			{"fieldname": "webshop_stage_label_ar", "label": "Stage Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_stage_label_en"},
-			{"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."},
-			{"fieldname": "video_url", "label": "Product Hover Video URL", "fieldtype": "Data", "insert_after": "webshop_curated_tags"},
-			{"fieldname": "webshop_search_keywords", "label": "Visual Search Keywords", "fieldtype": "Data", "insert_after": "video_url", "description": "Comma-separated business-neutral visual descriptors."},
-			{"fieldname": "webshop_style_tags", "label": "Style Profile Tags", "fieldtype": "Data", "insert_after": "webshop_search_keywords", "description": "Comma-separated style tags used only for local catalog personalization."},
-			{"fieldname": "webshop_material_variants", "label": "Material Variants", "fieldtype": "Table", "options": "Webshop Material Variant", "insert_after": "webshop_style_tags"},
-			{"fieldname": "webshop_quote_enabled", "label": "Request Quote Enabled", "fieldtype": "Check", "insert_after": "webshop_material_variants"},
-			{"fieldname": "webshop_quote_min_qty", "label": "Request Quote Minimum Quantity", "fieldtype": "Float", "insert_after": "webshop_quote_enabled"},
-			{"fieldname": "webshop_quote_note_en", "label": "Quote Note (English)", "fieldtype": "Small Text", "insert_after": "webshop_quote_min_qty"},
-			{"fieldname": "webshop_quote_note_ar", "label": "Quote Note (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_quote_note_en"},
-			],
-			"Item Group": [
-				{"fieldname": "webshop_label_en", "label": "Storefront Label (English)", "fieldtype": "Data", "insert_after": "item_group_name"},
-				{"fieldname": "webshop_label_ar", "label": "Storefront Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_label_en"},
-				{"fieldname": "webshop_description_en", "label": "Storefront Description (English)", "fieldtype": "Small Text", "insert_after": "webshop_label_ar"},
-				{"fieldname": "webshop_description_ar", "label": "Storefront Description (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_description_en"},
-			],
-			"Sales Order": [
-			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
-			{"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},
-			{"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
-			{"fieldname": "webshop_fulfillment_method", "label": "Fulfillment Method", "fieldtype": "Select", "options": "Delivery\nStore Pickup", "default": "Delivery", "insert_after": "webshop_gift_message"},
-			{"fieldname": "webshop_pickup_warehouse", "label": "Pickup Warehouse", "fieldtype": "Link", "options": "Warehouse", "insert_after": "webshop_fulfillment_method"},
-			{"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check", "insert_after": "webshop_pickup_warehouse"},
-			{"fieldname": "webshop_quotation", "label": "Quotation", "fieldtype": "Link", "options": "Quotation", "insert_after": "webshop_quote_request"},
-			{"fieldname": "webshop_tracking_latitude", "label": "Tracking Latitude", "fieldtype": "Float", "insert_after": "webshop_quotation"},
-			{"fieldname": "webshop_tracking_longitude", "label": "Tracking Longitude", "fieldtype": "Float", "insert_after": "webshop_tracking_latitude"},
-			{"fieldname": "webshop_courier_status", "label": "Courier Status", "fieldtype": "Data", "insert_after": "webshop_tracking_longitude"},
-			{"fieldname": "webshop_courier_zone", "label": "Courier Zone", "fieldtype": "Data", "insert_after": "webshop_courier_status"},
-			{"fieldname": "webshop_stops_remaining", "label": "Stops Remaining", "fieldtype": "Int", "insert_after": "webshop_courier_zone"},
-			{"fieldname": "webshop_courier_tracking_url", "label": "Courier Tracking URL", "fieldtype": "Data", "insert_after": "webshop_stops_remaining"},
-			{
-				"fieldname": "tracking_number", 
-				"label": "رقم التتبع (Tracking Number)", 
-				"fieldtype": "Data", 
-				"insert_after": "delivery_date"
-			},
-			{
-				"fieldname": "webshop_payment_method", 
-				"label": "طريقة الدفع (Payment Method)", 
-				"fieldtype": "Data", 
-				"insert_after": "payment_terms_template"
-			},
-			{
-				"fieldname": "webshop_payment_status", 
-				"label": "حالة الدفع (Payment Status)", 
-				"fieldtype": "Data", 
-				"insert_after": "webshop_payment_method"
-			},
-						{
-				"fieldname": "stripe_payment_intent", 
-				"label": "معرف دفع سترايب (Stripe Intent)", 
-				"fieldtype": "Data", 
-				"insert_after": "webshop_payment_status"
-				},
-			{
-				"fieldname": "webshop_coupon_code",
-				"label": "Coupon Code",
-				"fieldtype": "Data",
-				"insert_after": "stripe_payment_intent"
-				},
-			{
-				"fieldname": "webshop_coupon_discount",
-				"label": "Coupon Discount",
-				"fieldtype": "Currency",
-				"insert_after": "webshop_coupon_code"
-				},
-			{
-				"fieldname": "webshop_governorate",
-				"label": "Governorate",
-				"fieldtype": "Link",
-				"options": "Territory",
-				"insert_after": "webshop_coupon_discount"
-				},
-			{
-				"fieldname": "webshop_city",
-				"label": "City",
-				"fieldtype": "Link",
-				"options": "Territory",
-				"insert_after": "webshop_governorate"
-				},
-			{
-				"fieldname": "webshop_location",
-				"label": "Optional Location",
-				"fieldtype": "Small Text",
-				"insert_after": "webshop_city"
-				},
-			{
-				"fieldname": "webshop_second_phone",
-				"label": "Second Phone Number",
-				"fieldtype": "Data",
-				"insert_after": "webshop_location"
-				},
-		],
-		"Quotation": [
-			{"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check"},
-			{"fieldname": "webshop_quote_source", "label": "Quote Source", "fieldtype": "Data"},
-		],
-		"Delivery Note": [
-			{
-				"fieldname": "tracking_number", 
-				"label": "رقم التتبع (Tracking Number)", 
-				"fieldtype": "Data", 
-				"insert_after": "delivery_date"
-			},
-		]
-	}
-	
-	create_custom_fields(custom_fields)
-	
-	# Create Landing Sections if none exist
-	if not frappe.db.count("Webshop Landing Section"):
-		featured = frappe.get_doc({
-			"doctype": "Webshop Landing Section",
-			"section_title_en": "Featured Products",
-			"section_title_ar": "المنتجات المميزة",
-			"enabled": 1,
-			"sort_order": 1,
-			"items": []
-		})
-		featured.insert(ignore_permissions=True)
-		
-		offers = frappe.get_doc({
-			"doctype": "Webshop Landing Section",
-			"section_title_en": "Best Offers",
-			"section_title_ar": "أفضل العروض",
-			"enabled": 1,
-			"sort_order": 2,
-			"items": []
-		})
-		offers.insert(ignore_permissions=True)
-		
-	# Create a default Webshop Payment Settings record if it doesn't exist
-	if not frappe.db.exists("Webshop Payment Settings", "Webshop Payment Settings"):
-		doc = frappe.get_doc({
-			"doctype": "Webshop Payment Settings",
-			"cod_enabled": 1,
-			"cod_label_en": "Cash on Delivery",
-			"cod_label_ar": "الدفع عند الاستلام"
-		})
-		doc.insert(ignore_permissions=True)
-		
-	# Create a default Webshop Shipping Rule if none exists
-	if not frappe.db.count("Webshop Shipping Rule"):
-		doc = frappe.get_doc({
-			"doctype": "Webshop Shipping Rule",
-			"rule_name": "Standard Shipping",
-			"enabled": 1,
-			"shipping_cost": 5.0,
-			"free_shipping_threshold": 50.0
-		})
-		doc.insert(ignore_permissions=True)
-		
-	# Create Help Guide content
-	if not frappe.db.exists("Webshop Help Guide", "Webshop Help Guide"):
-		doc = frappe.get_doc({"doctype": "Webshop Help Guide"})
-		doc.insert(ignore_permissions=True)
-	
-	help_doc = frappe.get_single("Webshop Help Guide")
-	help_doc.help_content = """
-		<div dir="rtl" style="padding: 20px; font-family: Cairo, sans-serif;">
-			<h2 style="color: #21504C; border-bottom: 2px solid #84B082; padding-bottom: 10px;">دليل أنواع الحقول في المتجر</h2>
-			<p>هذا الجدول يوضح أنواع الحقول التي ستواجهها عند تعديل إعدادات المتجر ومعنى كل منها بالعربية:</p>
-			<table class="table table-bordered" style="width: 100%; margin-top: 20px;">
-				<thead>
-					<tr style="background-color: #f8f9fa;">
-						<th>نوع الحقل (Field Type)</th>
-						<th>الترجمة بالعربية</th>
-						<th>الاستخدام الشائع</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr><td><b>Data</b></td><td>بيانات / نص قصير</td><td>الأسماء، الأرقام، المفاتيح النصية.</td></tr>
-					<tr><td><b>Int</b></td><td>رقم صحيح</td><td>الأبعاد (عرض/ارتفاع)، المسافات، الترتيب.</td></tr>
-					<tr><td><b>Check</b></td><td>خيار تفعيل</td><td>تفعيل أو تعطيل ميزة معينة (صح/خطأ).</td></tr>
-					<tr><td><b>Select</b></td><td>قائمة اختيار</td><td>اختيار واحد من خيارات محددة مسبقاً.</td></tr>
-					<tr><td><b>Color</b></td><td>منتقي الألوان</td><td>تغيير ألوان الخلفية، النصوص، أو الأزرار.</td></tr>
-					<tr><td><b>Attach Image</b></td><td>إرفاق صورة</td><td>رفع الشعار (Logo) أو صور الخلفيات.</td></tr>
-					<tr><td><b>Currency</b></td><td>عملة</td><td>الأسعار، تكاليف الشحن، الخصومات.</td></tr>
-					<tr><td><b>Date</b></td><td>تاريخ</td><td>تحديد أيام محددة للتوصيل أو العروض.</td></tr>
-					<tr><td><b>Link</b></td><td>رابط سجل</td><td>ربط الحقل ببيانات أخرى (مثل اختيار منتج).</td></tr>
-					<tr><td><b>Table</b></td><td>جدول</td><td>إضافة قائمة من العناصر (مثل قائمة منتجات).</td></tr>
-					<tr><td><b>Section Break</b></td><td>فاصل قسم</td><td>تنظيم الإعدادات تحت عنوان جانبي.</td></tr>
-				</tbody>
-			</table>
-			<div style="margin-top: 30px; padding: 15px; background-color: #e8f5e9; border-radius: 8px;">
-				<h4 style="color: #2e7d32;">نصيحة للمدير:</h4>
-				<p>دائماً تأكد من الضغط على زر <b>Save</b> بعد أي تعديل في الإعدادات لتظهر النتائج فوراً على المتجر.</p>
-			</div>
-		</div>
-	"""
-	help_doc.save(ignore_permissions=True)
+    """
+    Creates custom fields required for Batch 2.
+    This should be run once after deploying the code.
+    """
+    # Check if user is System Manager
+    if frappe.session.user == "Guest":
+        frappe.throw("Guest users cannot run setup.")
+        
+    # In a real scenario, we might want to restrict this further
+    # but for this task, we'll allow it if called correctly.
+    
+    custom_fields = {
+        "Item": [
+            {"fieldname": "webshop_stage_image", "label": "Webshop Stage Image", "fieldtype": "Attach Image", "insert_after": "image"},
+            {"fieldname": "webshop_stage_image_2", "label": "Webshop Alternate Stage Image", "fieldtype": "Attach Image", "insert_after": "webshop_stage_image"},
+            {"fieldname": "webshop_stage_label_en", "label": "Stage Label (English)", "fieldtype": "Data", "insert_after": "webshop_stage_image_2"},
+            {"fieldname": "webshop_stage_label_ar", "label": "Stage Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_stage_label_en"},
+            {"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."},
+            {"fieldname": "video_url", "label": "Product Hover Video URL", "fieldtype": "Data", "insert_after": "webshop_curated_tags"},
+            {"fieldname": "webshop_search_keywords", "label": "Visual Search Keywords", "fieldtype": "Data", "insert_after": "video_url", "description": "Comma-separated business-neutral visual descriptors."},
+            {"fieldname": "webshop_style_tags", "label": "Style Profile Tags", "fieldtype": "Data", "insert_after": "webshop_search_keywords", "description": "Comma-separated style tags used only for local catalog personalization."},
+            {"fieldname": "webshop_material_variants", "label": "Material Variants", "fieldtype": "Table", "options": "Webshop Material Variant", "insert_after": "webshop_style_tags"},
+            {"fieldname": "webshop_quote_enabled", "label": "Request Quote Enabled", "fieldtype": "Check", "insert_after": "webshop_material_variants"},
+            {"fieldname": "webshop_quote_min_qty", "label": "Request Quote Minimum Quantity", "fieldtype": "Float", "insert_after": "webshop_quote_enabled"},
+            {"fieldname": "webshop_quote_note_en", "label": "Quote Note (English)", "fieldtype": "Small Text", "insert_after": "webshop_quote_min_qty"},
+            {"fieldname": "webshop_quote_note_ar", "label": "Quote Note (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_quote_note_en"},
+            ],
+            "Item Group": [
+                {"fieldname": "webshop_label_en", "label": "Storefront Label (English)", "fieldtype": "Data", "insert_after": "item_group_name"},
+                {"fieldname": "webshop_label_ar", "label": "Storefront Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_label_en"},
+                {"fieldname": "webshop_description_en", "label": "Storefront Description (English)", "fieldtype": "Small Text", "insert_after": "webshop_label_ar"},
+                {"fieldname": "webshop_description_ar", "label": "Storefront Description (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_description_en"},
+            ],
+            "Sales Order": [
+            {"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
+            {"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},
+            {"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
+            {"fieldname": "webshop_fulfillment_method", "label": "Fulfillment Method", "fieldtype": "Select", "options": "Delivery\nStore Pickup", "default": "Delivery", "insert_after": "webshop_gift_message"},
+            {"fieldname": "webshop_pickup_warehouse", "label": "Pickup Warehouse", "fieldtype": "Link", "options": "Warehouse", "insert_after": "webshop_fulfillment_method"},
+            {"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check", "insert_after": "webshop_pickup_warehouse"},
+            {"fieldname": "webshop_quotation", "label": "Quotation", "fieldtype": "Link", "options": "Quotation", "insert_after": "webshop_quote_request"},
+            {"fieldname": "webshop_tracking_latitude", "label": "Tracking Latitude", "fieldtype": "Float", "insert_after": "webshop_quotation"},
+            {"fieldname": "webshop_tracking_longitude", "label": "Tracking Longitude", "fieldtype": "Float", "insert_after": "webshop_tracking_latitude"},
+            {"fieldname": "webshop_courier_status", "label": "Courier Status", "fieldtype": "Data", "insert_after": "webshop_tracking_longitude"},
+            {"fieldname": "webshop_courier_zone", "label": "Courier Zone", "fieldtype": "Data", "insert_after": "webshop_courier_status"},
+            {"fieldname": "webshop_stops_remaining", "label": "Stops Remaining", "fieldtype": "Int", "insert_after": "webshop_courier_zone"},
+            {"fieldname": "webshop_courier_tracking_url", "label": "Courier Tracking URL", "fieldtype": "Data", "insert_after": "webshop_stops_remaining"},
+            {
+                "fieldname": "tracking_number", 
+                "label": "رقم التتبع (Tracking Number)", 
+                "fieldtype": "Data", 
+                "insert_after": "delivery_date"
+            },
+            {
+                "fieldname": "webshop_payment_method", 
+                "label": "طريقة الدفع (Payment Method)", 
+                "fieldtype": "Data", 
+                "insert_after": "payment_terms_template"
+            },
+            {
+                "fieldname": "webshop_payment_status", 
+                "label": "حالة الدفع (Payment Status)", 
+                "fieldtype": "Data", 
+                "insert_after": "webshop_payment_method"
+            },
+                        {
+                "fieldname": "stripe_payment_intent", 
+                "label": "معرف دفع سترايب (Stripe Intent)", 
+                "fieldtype": "Data", 
+                "insert_after": "webshop_payment_status"
+                },
+            {
+                "fieldname": "webshop_coupon_code",
+                "label": "Coupon Code",
+                "fieldtype": "Data",
+                "insert_after": "stripe_payment_intent"
+                },
+            {
+                "fieldname": "webshop_coupon_discount",
+                "label": "Coupon Discount",
+                "fieldtype": "Currency",
+                "insert_after": "webshop_coupon_code"
+                },
+            {
+                "fieldname": "webshop_governorate",
+                "label": "Governorate",
+                "fieldtype": "Link",
+                "options": "Territory",
+                "insert_after": "webshop_coupon_discount"
+                },
+            {
+                "fieldname": "webshop_city",
+                "label": "City",
+                "fieldtype": "Link",
+                "options": "Territory",
+                "insert_after": "webshop_governorate"
+                },
+            {
+                "fieldname": "webshop_location",
+                "label": "Optional Location",
+                "fieldtype": "Small Text",
+                "insert_after": "webshop_city"
+                },
+            {
+                "fieldname": "webshop_second_phone",
+                "label": "Second Phone Number",
+                "fieldtype": "Data",
+                "insert_after": "webshop_location"
+                },
+        ],
+        "Quotation": [
+            {"fieldname": "webshop_quote_request", "label": "Quote Request", "fieldtype": "Check"},
+            {"fieldname": "webshop_quote_source", "label": "Quote Source", "fieldtype": "Data"},
+        ],
+        "Delivery Note": [
+            {
+                "fieldname": "tracking_number", 
+                "label": "رقم التتبع (Tracking Number)", 
+                "fieldtype": "Data", 
+                "insert_after": "delivery_date"
+            },
+        ]
+    }
+    
+    create_custom_fields(custom_fields)
+    
+    # Create Landing Sections if none exist
+    if not frappe.db.count("Webshop Landing Section"):
+        featured = frappe.get_doc({
+            "doctype": "Webshop Landing Section",
+            "section_title_en": "Featured Products",
+            "section_title_ar": "المنتجات المميزة",
+            "enabled": 1,
+            "sort_order": 1,
+            "items": []
+        })
+        featured.insert(ignore_permissions=True)
+        
+        offers = frappe.get_doc({
+            "doctype": "Webshop Landing Section",
+            "section_title_en": "Best Offers",
+            "section_title_ar": "أفضل العروض",
+            "enabled": 1,
+            "sort_order": 2,
+            "items": []
+        })
+        offers.insert(ignore_permissions=True)
+        
+    # Create a default Webshop Payment Settings record if it doesn't exist
+    if not frappe.db.exists("Webshop Payment Settings", "Webshop Payment Settings"):
+        doc = frappe.get_doc({
+            "doctype": "Webshop Payment Settings",
+            "cod_enabled": 1,
+            "cod_label_en": "Cash on Delivery",
+            "cod_label_ar": "الدفع عند الاستلام"
+        })
+        doc.insert(ignore_permissions=True)
+        
+    # Create a default Webshop Shipping Rule if none exists
+    if not frappe.db.count("Webshop Shipping Rule"):
+        doc = frappe.get_doc({
+            "doctype": "Webshop Shipping Rule",
+            "rule_name": "Standard Shipping",
+            "enabled": 1,
+            "shipping_cost": 5.0,
+            "free_shipping_threshold": 50.0
+        })
+        doc.insert(ignore_permissions=True)
+        
+    # Create Help Guide content
+    if not frappe.db.exists("Webshop Help Guide", "Webshop Help Guide"):
+        doc = frappe.get_doc({"doctype": "Webshop Help Guide"})
+        doc.insert(ignore_permissions=True)
+    
+    help_doc = frappe.get_single("Webshop Help Guide")
+    help_doc.help_content = """
+        <div dir="rtl" style="padding: 20px; font-family: Cairo, sans-serif;">
+            <h2 style="color: #21504C; border-bottom: 2px solid #84B082; padding-bottom: 10px;">دليل أنواع الحقول في المتجر</h2>
+            <p>هذا الجدول يوضح أنواع الحقول التي ستواجهها عند تعديل إعدادات المتجر ومعنى كل منها بالعربية:</p>
+            <table class="table table-bordered" style="width: 100%; margin-top: 20px;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th>نوع الحقل (Field Type)</th>
+                        <th>الترجمة بالعربية</th>
+                        <th>الاستخدام الشائع</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>Data</b></td><td>بيانات / نص قصير</td><td>الأسماء، الأرقام، المفاتيح النصية.</td></tr>
+                    <tr><td><b>Int</b></td><td>رقم صحيح</td><td>الأبعاد (عرض/ارتفاع)، المسافات، الترتيب.</td></tr>
+                    <tr><td><b>Check</b></td><td>خيار تفعيل</td><td>تفعيل أو تعطيل ميزة معينة (صح/خطأ).</td></tr>
+                    <tr><td><b>Select</b></td><td>قائمة اختيار</td><td>اختيار واحد من خيارات محددة مسبقاً.</td></tr>
+                    <tr><td><b>Color</b></td><td>منتقي الألوان</td><td>تغيير ألوان الخلفية، النصوص، أو الأزرار.</td></tr>
+                    <tr><td><b>Attach Image</b></td><td>إرفاق صورة</td><td>رفع الشعار (Logo) أو صور الخلفيات.</td></tr>
+                    <tr><td><b>Currency</b></td><td>عملة</td><td>الأسعار، تكاليف الشحن، الخصومات.</td></tr>
+                    <tr><td><b>Date</b></td><td>تاريخ</td><td>تحديد أيام محددة للتوصيل أو العروض.</td></tr>
+                    <tr><td><b>Link</b></td><td>رابط سجل</td><td>ربط الحقل ببيانات أخرى (مثل اختيار منتج).</td></tr>
+                    <tr><td><b>Table</b></td><td>جدول</td><td>إضافة قائمة من العناصر (مثل قائمة منتجات).</td></tr>
+                    <tr><td><b>Section Break</b></td><td>فاصل قسم</td><td>تنظيم الإعدادات تحت عنوان جانبي.</td></tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 30px; padding: 15px; background-color: #e8f5e9; border-radius: 8px;">
+                <h4 style="color: #2e7d32;">نصيحة للمدير:</h4>
+                <p>دائماً تأكد من الضغط على زر <b>Save</b> بعد أي تعديل في الإعدادات لتظهر النتائج فوراً على المتجر.</p>
+            </div>
+        </div>
+    """
+    help_doc.save(ignore_permissions=True)
 
-	# Create the two app roles used to separate configuration users from managers.
-	for role_name, desk_access in (("Sync Webshop User", 1), ("Sync Webshop Manager", 1)):
-		if not frappe.db.exists("Role", role_name):
-			frappe.get_doc({"doctype": "Role", "role_name": role_name, "desk_access": desk_access}).insert(ignore_permissions=True)
+    # Create the two app roles used to separate configuration users from managers.
+    for role_name, desk_access in (("Sync Webshop User", 1), ("Sync Webshop Manager", 1)):
+        if not frappe.db.exists("Role", role_name):
+            frappe.get_doc({"doctype": "Role", "role_name": role_name, "desk_access": desk_access}).insert(ignore_permissions=True)
 
-	# Seed safe defaults for every new Elite settings Single. Secrets remain empty and are entered only in Desk.
-	elite_defaults = {
-		"Webshop AI Vision Settings": {"visual_search_enabled": 1, "auto_tagging_enabled": 1, "ai_model_name": "gpt-5-mini", "confidence_threshold": 0.85, "nlp_enabled": 1, "welcome_message_en": "Hello! I am your AI shopping assistant. How can I help you discover the right product?", "welcome_message_ar": "مرحباً! أنا مساعد التسوق الذكي. كيف يمكنني مساعدتك في اكتشاف المنتج المناسب؟"},
-		"Webshop Marketplace Settings": {"amazon_sa_enabled": 0, "noon_enabled": 0, "sync_interval_minutes": 30},
-		"Webshop Regional Payment Settings": {"regional_live_mode": 0, "tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1},
-		"Webshop PWA Settings": {"pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A", "offline_message_en": "You are currently offline. Browsing cached catalog.", "offline_message_ar": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ."},
-	}
-	for doctype, values in elite_defaults.items():
-		if frappe.db.exists("DocType", doctype):
-			doc = frappe.get_single(doctype)
-			changed = False
-			for fieldname, value in values.items():
-				if not doc.get(fieldname):
-					doc.set(fieldname, value)
-					changed = True
-			if changed:
-				doc.save(ignore_permissions=True)
+    # Seed safe defaults for every new Elite settings Single. Secrets remain empty and are entered only in Desk.
+    elite_defaults = {
+        "Webshop AI Vision Settings": {"visual_search_enabled": 1, "auto_tagging_enabled": 1, "ai_model_name": "gpt-5-mini", "confidence_threshold": 0.85, "nlp_enabled": 1, "welcome_message_en": "Hello! I am your AI shopping assistant. How can I help you discover the right product?", "welcome_message_ar": "مرحباً! أنا مساعد التسوق الذكي. كيف يمكنني مساعدتك في اكتشاف المنتج المناسب؟"},
+        "Webshop Marketplace Settings": {"amazon_sa_enabled": 0, "noon_enabled": 0, "sync_interval_minutes": 30},
+        "Webshop Regional Payment Settings": {"regional_live_mode": 0, "tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1},
+        "Webshop PWA Settings": {"pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A", "offline_message_en": "You are currently offline. Browsing cached catalog.", "offline_message_ar": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ."},
+    }
+    for doctype, values in elite_defaults.items():
+        if frappe.db.exists("DocType", doctype):
+            doc = frappe.get_single(doctype)
+            changed = False
+            for fieldname, value in values.items():
+                if not doc.get(fieldname):
+                    doc.set(fieldname, value)
+                    changed = True
+            if changed:
+                doc.save(ignore_permissions=True)
 
-	master_defaults = {
-		"Webshop Landing Page Builder": {"enabled": 1, "hero_heading_en": "Small details. Better everyday living.", "hero_heading_ar": "تفاصيل صغيرة. حياة يومية أفضل.", "featured_grid_title_en": "The edit, in moments", "featured_grid_title_ar": "مختارات في لحظات"},
-		"Webshop Subscription Settings": {"enabled": 1, "discount_percent": 10, "intervals": "Monthly,Every 2 Months,Quarterly"},
-		"Webshop Courier Settings": {"provider": "Manual", "auto_waybill": 0},
-		"Webshop Return Policy": {"allowed_days": 14, "policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع."},
-		"Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD,EUR", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667, "EUR": 0.245}'},
-	}
-	for doctype, values in master_defaults.items():
-		if frappe.db.exists("DocType", doctype):
-			doc = frappe.get_single(doctype)
-			changed = False
-			for fieldname, value in values.items():
-				placeholder_rate = doctype == "Webshop Currency Settings" and fieldname == "exchange_rates_json" and str(doc.get(fieldname) or "").replace(" ", "") in ("{\"SAR\":1}", "")
-				if not doc.get(fieldname) or placeholder_rate:
-					doc.set(fieldname, value)
-					changed = True
-			if changed:
-				doc.save(ignore_permissions=True)
-	if frappe.db.exists("DocType", "Webshop Social Feed") and not frappe.db.exists("Webshop Social Feed", {"caption": "Coffee ritual, thoughtfully selected."}):
-		frappe.get_doc({"doctype": "Webshop Social Feed", "platform": "Instagram", "caption": "Coffee ritual, thoughtfully selected.", "linked_item_code": "COFFEE-ETHIOPIA-001", "enabled": 1}).insert(ignore_permissions=True)
+    master_defaults = {
+        "Webshop Landing Page Builder": {"enabled": 1, "hero_heading_en": "Small details. Better everyday living.", "hero_heading_ar": "تفاصيل صغيرة. حياة يومية أفضل.", "featured_grid_title_en": "The edit, in moments", "featured_grid_title_ar": "مختارات في لحظات"},
+        "Webshop Subscription Settings": {"enabled": 1, "discount_percent": 10, "intervals": "Monthly,Every 2 Months,Quarterly"},
+        "Webshop Courier Settings": {"provider": "Manual", "auto_waybill": 0},
+        "Webshop Return Policy": {"allowed_days": 14, "policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع."},
+        "Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD,EUR", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667, "EUR": 0.245}'},
+    }
+    for doctype, values in master_defaults.items():
+        if frappe.db.exists("DocType", doctype):
+            doc = frappe.get_single(doctype)
+            changed = False
+            for fieldname, value in values.items():
+                placeholder_rate = doctype == "Webshop Currency Settings" and fieldname == "exchange_rates_json" and str(doc.get(fieldname) or "").replace(" ", "") in ("{\"SAR\":1}", "")
+                if not doc.get(fieldname) or placeholder_rate:
+                    doc.set(fieldname, value)
+                    changed = True
+            if changed:
+                doc.save(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Social Feed") and not frappe.db.exists("Webshop Social Feed", {"caption": "Coffee ritual, thoughtfully selected."}):
+        frappe.get_doc({"doctype": "Webshop Social Feed", "platform": "Instagram", "caption": "Coffee ritual, thoughtfully selected.", "linked_item_code": "COFFEE-ETHIOPIA-001", "enabled": 1}).insert(ignore_permissions=True)
 
-	if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
-		frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
+        frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
 
-	enterprise_defaults = {
-		"Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
-		"Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
-		"Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
-		"Webshop Flash Sale Settings": {"flash_sale_enabled": 1, "scarcity_threshold": 5, "discount_percent": 20},
-		"Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
-		"Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
-		"Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
-	}
-	for doctype, values in enterprise_defaults.items():
-		if frappe.db.exists("DocType", doctype):
-			doc = frappe.get_single(doctype)
-			changed = False
-			for fieldname, value in values.items():
-				if not doc.get(fieldname):
-					doc.set(fieldname, value)
-					changed = True
-			if changed:
-				doc.save(ignore_permissions=True)
-	if frappe.db.exists("DocType", "Webshop Volume Pricing Rule") and not frappe.db.exists("Webshop Volume Pricing Rule", {"item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10}):
-		frappe.get_doc({"doctype": "Webshop Volume Pricing Rule", "item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10, "discount_percent": 5, "enabled": 1}).insert(ignore_permissions=True)
-	if frappe.db.exists("DocType", "Webshop Flash Sale Item") and not frappe.db.exists("Webshop Flash Sale Item", {"item_code": "COFFEE-HOUSE-001"}):
-		frappe.get_doc({"doctype": "Webshop Flash Sale Item", "item_code": "COFFEE-HOUSE-001", "discount_percent": 20, "enabled": 1}).insert(ignore_permissions=True)
-	if frappe.db.exists("DocType", "Webshop Fraud Rule") and not frappe.db.exists("Webshop Fraud Rule", {"rule_key": "High Value"}):
-		frappe.get_doc({"doctype": "Webshop Fraud Rule", "rule_key": "High Value", "threshold": 5000, "action": "Review", "enabled": 1}).insert(ignore_permissions=True)
+    enterprise_defaults = {
+        "Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
+        "Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
+        "Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
+        "Webshop Flash Sale Settings": {"flash_sale_enabled": 1, "scarcity_threshold": 5, "discount_percent": 20},
+        "Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
+        "Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
+        "Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
+    }
+    for doctype, values in enterprise_defaults.items():
+        if frappe.db.exists("DocType", doctype):
+            doc = frappe.get_single(doctype)
+            changed = False
+            for fieldname, value in values.items():
+                if not doc.get(fieldname):
+                    doc.set(fieldname, value)
+                    changed = True
+            if changed:
+                doc.save(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Volume Pricing Rule") and not frappe.db.exists("Webshop Volume Pricing Rule", {"item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10}):
+        frappe.get_doc({"doctype": "Webshop Volume Pricing Rule", "item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10, "discount_percent": 5, "enabled": 1}).insert(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Flash Sale Item") and not frappe.db.exists("Webshop Flash Sale Item", {"item_code": "COFFEE-HOUSE-001"}):
+        frappe.get_doc({"doctype": "Webshop Flash Sale Item", "item_code": "COFFEE-HOUSE-001", "discount_percent": 20, "enabled": 1}).insert(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Fraud Rule") and not frappe.db.exists("Webshop Fraud Rule", {"rule_key": "High Value"}):
+        frappe.get_doc({"doctype": "Webshop Fraud Rule", "rule_key": "High Value", "threshold": 5000, "action": "Review", "enabled": 1}).insert(ignore_permissions=True)
 
-	ecosystem_defaults = {
-		"Webshop Ecosystem AI Settings": {"rag_support_enabled": 1, "demand_forecaster_enabled": 1, "marketing_hub_enabled": 1},
-		"Webshop Marketplace Vendor Settings": {"multi_vendor_enabled": 1, "commission_percent": 15.0, "affiliate_enabled": 1},
-		"Webshop Fintech Settings": {"gift_cards_enabled": 1, "subscription_box_enabled": 1},
-		"Webshop Omnichannel Settings": {"bopis_enabled": 1, "kiosk_mode_enabled": 1},
-	}
-	for doctype, values in ecosystem_defaults.items():
-		if frappe.db.exists("DocType", doctype):
-			doc = frappe.get_single(doctype)
-			for fieldname, value in values.items():
-				doc.set(fieldname, value)
-			doc.save(ignore_permissions=True)
-	for doctype, values in ecosystem_defaults.items():
-		if frappe.db.exists("DocType", doctype):
-			doc = frappe.get_single(doctype)
-			changed = False
-			for fieldname, value in values.items():
-				if not doc.get(fieldname):
-					doc.set(fieldname, value)
-					changed = True
-			if changed:
-				doc.save(ignore_permissions=True)
+    ecosystem_defaults = {
+        "Webshop Ecosystem AI Settings": {"rag_support_enabled": 1, "demand_forecaster_enabled": 1, "marketing_hub_enabled": 1},
+        "Webshop Marketplace Vendor Settings": {"multi_vendor_enabled": 1, "commission_percent": 15.0, "affiliate_enabled": 1},
+        "Webshop Fintech Settings": {"gift_cards_enabled": 1, "subscription_box_enabled": 1},
+        "Webshop Omnichannel Settings": {"bopis_enabled": 1, "kiosk_mode_enabled": 1},
+    }
+    for doctype, values in ecosystem_defaults.items():
+        if frappe.db.exists("DocType", doctype):
+            doc = frappe.get_single(doctype)
+            for fieldname, value in values.items():
+                doc.set(fieldname, value)
+            doc.save(ignore_permissions=True)
+    for doctype, values in ecosystem_defaults.items():
+        if frappe.db.exists("DocType", doctype):
+            doc = frappe.get_single(doctype)
+            changed = False
+            for fieldname, value in values.items():
+                if not doc.get(fieldname):
+                    doc.set(fieldname, value)
+                    changed = True
+            if changed:
+                doc.save(ignore_permissions=True)
 
-	dynamic_pages_defaults = {
-	"enabled": 1,
-	"about_enabled": 1,
-	"about_show_in_nav": 1,
-	"about_label_en": "About us",
-	"about_label_ar": "من نحن",
-	"policy_enabled": 1,
-	"policy_show_in_nav": 1,
-	"policy_label_en": "Our policy",
-	"policy_label_ar": "سياساتنا",
-	"articles_enabled": 1,
-	"articles_show_in_nav": 1,
-	"articles_label_en": "Articles",
-	"articles_label_ar": "المقالات",
-	"qa_enabled": 1,
-	"qa_show_in_nav": 1,
-	"qa_label_en": "Q&A",
-	"qa_label_ar": "الأسئلة والأجوبة",
-	"seo_description_en": "Discover our story, policies, and helpful answers from the Sync Webshop team.",
-	"seo_description_ar": "اكتشف قصتنا وسياساتنا وإجاباتنا المفيدة من فريق متجر سينك.",
+    dynamic_pages_defaults = {
+    "enabled": 1,
+    "about_enabled": 1,
+    "about_show_in_nav": 1,
+    "about_label_en": "About us",
+    "about_label_ar": "من نحن",
+    "policy_enabled": 1,
+    "policy_show_in_nav": 1,
+    "policy_label_en": "Our policy",
+    "policy_label_ar": "سياساتنا",
+    "articles_enabled": 1,
+    "articles_show_in_nav": 1,
+    "articles_label_en": "Articles",
+    "articles_label_ar": "المقالات",
+    "qa_enabled": 1,
+    "qa_show_in_nav": 1,
+    "qa_label_en": "Q&A",
+    "qa_label_ar": "الأسئلة والأجوبة",
+    "seo_description_en": "Discover our story, policies, and helpful answers from the Sync Webshop team.",
+    "seo_description_ar": "اكتشف قصتنا وسياساتنا وإجاباتنا المفيدة من فريق متجر سينك.",
 }
-	if frappe.db.exists("DocType", "Webshop Dynamic Pages Settings"):
-		doc = frappe.get_single("Webshop Dynamic Pages Settings")
-		changed = False
-		for fieldname, value in dynamic_pages_defaults.items():
-			if doc.get(fieldname) is None or doc.get(fieldname) == "":
-				doc.set(fieldname, value)
-				changed = True
+    if frappe.db.exists("DocType", "Webshop Dynamic Pages Settings"):
+        doc = frappe.get_single("Webshop Dynamic Pages Settings")
+        changed = False
+        for fieldname, value in dynamic_pages_defaults.items():
+            if doc.get(fieldname) is None or doc.get(fieldname) == "":
+                doc.set(fieldname, value)
+                changed = True
 
-		if changed:
-			doc.save(ignore_permissions=True)
+        if changed:
+            doc.save(ignore_permissions=True)
 
-	about_defaults = {
-		"title_en": "About Our Brand",
-		"title_ar": "عن علامتنا التجارية",
-		"subtitle_en": "A considered way to discover what belongs in your everyday.",
-		"subtitle_ar": "طريقة مدروسة لاكتشاف ما يناسب تفاصيل يومك.",
-		"content_en": "<p>We curate thoughtfully selected essentials for modern living, with a focus on quality, clarity, and a warmer way to shop.</p>",
-		"content_ar": "<p>نختار بعناية فائقة أساسيات الحياة العصرية، مع التركيز على الجودة والوضوح وتجربة تسوق أكثر دفئاً.</p>",
-	}
-	if frappe.db.exists("DocType", "Webshop About Settings"):
-		doc = frappe.get_single("Webshop About Settings")
-		changed = False
-		for fieldname, value in about_defaults.items():
-			if not doc.get(fieldname):
-				doc.set(fieldname, value)
-				changed = True
-		if changed:
-			doc.save(ignore_permissions=True)
+    about_defaults = {
+        "title_en": "About Our Brand",
+        "title_ar": "عن علامتنا التجارية",
+        "subtitle_en": "A considered way to discover what belongs in your everyday.",
+        "subtitle_ar": "طريقة مدروسة لاكتشاف ما يناسب تفاصيل يومك.",
+        "content_en": "<p>We curate thoughtfully selected essentials for modern living, with a focus on quality, clarity, and a warmer way to shop.</p>",
+        "content_ar": "<p>نختار بعناية فائقة أساسيات الحياة العصرية، مع التركيز على الجودة والوضوح وتجربة تسوق أكثر دفئاً.</p>",
+    }
+    if frappe.db.exists("DocType", "Webshop About Settings"):
+        doc = frappe.get_single("Webshop About Settings")
+        changed = False
+        for fieldname, value in about_defaults.items():
+            if not doc.get(fieldname):
+                doc.set(fieldname, value)
+                changed = True
+        if changed:
+            doc.save(ignore_permissions=True)
 
-	policy_defaults = {
-		"title_en": "Our Policy",
-		"title_ar": "سياساتنا",
-		"subtitle_en": "Clear commitments for every order and every customer.",
-		"subtitle_ar": "التزامات واضحة لكل طلب ولكل عميل.",
-		"shipping_title_en": "Shipping",
-		"shipping_title_ar": "الشحن",
-		"shipping_policy_en": "<p>Reliable regional shipping with clear tracking. Delivery estimates and fees are shown before you place an order.</p>",
-		"shipping_policy_ar": "<p>شحن موثوق في جميع أنحاء المنطقة مع تتبع دقيق. تظهر تقديرات وعمولة التوصيل قبل إتمام الطلب.</p>",
-		"return_title_en": "Returns & Exchanges",
-		"return_title_ar": "الإرجاع والاستبدال",
-		"return_policy_en": "<p>Contact our team within 14 days for unused items in their original condition. We will guide you through the next step.</p>",
-		"return_policy_ar": "<p>تواصل مع فريقنا خلال 14 يوماً للأصناف غير المستخدمة وبحالتها الأصلية، وسنرشدك إلى الخطوة التالية.</p>",
-		"privacy_title_en": "Privacy",
-		"privacy_title_ar": "الخصوصية",
-		"privacy_policy_en": "<p>We use customer data only to provide, secure, and improve the shopping experience. We do not expose sensitive information to the browser assistant.</p>",
-		"privacy_policy_ar": "<p>نستخدم بيانات العملاء فقط لتقديم تجربة التسوق وتأمينها وتحسينها، ولا نعرض المعلومات الحساسة على مساعد المتصفح.</p>",
-	}
-	if frappe.db.exists("DocType", "Webshop Policy Settings"):
-		doc = frappe.get_single("Webshop Policy Settings")
-		changed = False
-		for fieldname, value in policy_defaults.items():
-			if not doc.get(fieldname):
-				doc.set(fieldname, value)
-				changed = True
-		if changed:
-			doc.save(ignore_permissions=True)
+    policy_defaults = {
+        "title_en": "Our Policy",
+        "title_ar": "سياساتنا",
+        "subtitle_en": "Clear commitments for every order and every customer.",
+        "subtitle_ar": "التزامات واضحة لكل طلب ولكل عميل.",
+        "shipping_title_en": "Shipping",
+        "shipping_title_ar": "الشحن",
+        "shipping_policy_en": "<p>Reliable regional shipping with clear tracking. Delivery estimates and fees are shown before you place an order.</p>",
+        "shipping_policy_ar": "<p>شحن موثوق في جميع أنحاء المنطقة مع تتبع دقيق. تظهر تقديرات وعمولة التوصيل قبل إتمام الطلب.</p>",
+        "return_title_en": "Returns & Exchanges",
+        "return_title_ar": "الإرجاع والاستبدال",
+        "return_policy_en": "<p>Contact our team within 14 days for unused items in their original condition. We will guide you through the next step.</p>",
+        "return_policy_ar": "<p>تواصل مع فريقنا خلال 14 يوماً للأصناف غير المستخدمة وبحالتها الأصلية، وسنرشدك إلى الخطوة التالية.</p>",
+        "privacy_title_en": "Privacy",
+        "privacy_title_ar": "الخصوصية",
+        "privacy_policy_en": "<p>We use customer data only to provide, secure, and improve the shopping experience. We do not expose sensitive information to the browser assistant.</p>",
+        "privacy_policy_ar": "<p>نستخدم بيانات العملاء فقط لتقديم تجربة التسوق وتأمينها وتحسينها، ولا نعرض المعلومات الحساسة على مساعد المتصفح.</p>",
+    }
+    if frappe.db.exists("DocType", "Webshop Policy Settings"):
+        doc = frappe.get_single("Webshop Policy Settings")
+        changed = False
+        for fieldname, value in policy_defaults.items():
+            if not doc.get(fieldname):
+                doc.set(fieldname, value)
+                changed = True
+        if changed:
+            doc.save(ignore_permissions=True)
 
-	if frappe.db.exists("DocType", "Webshop Gift Card") and not frappe.db.exists("Webshop Gift Card", {"code": "SYNC-ELITE-2026"}):
+    if frappe.db.exists("DocType", "Webshop Gift Card") and not frappe.db.exists("Webshop Gift Card", {"code": "SYNC-ELITE-2026"}):
 
-		frappe.get_doc({"doctype": "Webshop Gift Card", "code": "SYNC-ELITE-2026", "balance": 100.0, "remaining_balance": 100.0, "status": "Active"}).insert(ignore_permissions=True)
+        frappe.get_doc({"doctype": "Webshop Gift Card", "code": "SYNC-ELITE-2026", "balance": 100.0, "remaining_balance": 100.0, "status": "Active"}).insert(ignore_permissions=True)
 
-	if frappe.db.exists("DocType", "Webshop Article") and not frappe.db.exists("Webshop Article", {"route": "welcome-to-sync-coffee-house"}):
-		frappe.get_doc({
-			"doctype": "Webshop Article",
-			"title_en": "Welcome to Sync Coffee House",
-			"title_ar": "مرحباً بكم في مقهى سينك",
-							"route": "welcome-to-sync-coffee-house",
-				"excerpt_en": "A short look at the craft, care, and quiet rituals behind our coffee collection.",
-				"excerpt_ar": "نظرة قصيرة على الحرفة والعناية والطقوس الهادئة وراء مجموعة القهوة لدينا.",
-				"content_en": "<p>Discover the journey of our specialty beans, ethically sourced and roasted to perfection for modern coffee lovers.</p>",
-			"content_ar": "<p>اكتشف رحلة حبوب القهوة المختصة لدينا، والتي تم مصدرها بشكل أخلاقي وتحميصها بإتقان لمحبي القهوة العصريين.</p>",
-			"published": 1
-		}).insert(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Article") and not frappe.db.exists("Webshop Article", {"route": "welcome-to-sync-coffee-house"}):
+        frappe.get_doc({
+            "doctype": "Webshop Article",
+            "title_en": "Welcome to Sync Coffee House",
+            "title_ar": "مرحباً بكم في مقهى سينك",
+                            "route": "welcome-to-sync-coffee-house",
+                "excerpt_en": "A short look at the craft, care, and quiet rituals behind our coffee collection.",
+                "excerpt_ar": "نظرة قصيرة على الحرفة والعناية والطقوس الهادئة وراء مجموعة القهوة لدينا.",
+                "content_en": "<p>Discover the journey of our specialty beans, ethically sourced and roasted to perfection for modern coffee lovers.</p>",
+            "content_ar": "<p>اكتشف رحلة حبوب القهوة المختصة لدينا، والتي تم مصدرها بشكل أخلاقي وتحميصها بإتقان لمحبي القهوة العصريين.</p>",
+            "published": 1
+        }).insert(ignore_permissions=True)
 
-	if frappe.db.exists("DocType", "Webshop QA Item") and not frappe.db.exists("Webshop QA Item", {"question_en": "How do I track my order?"}):
-		frappe.get_doc({
-			"doctype": "Webshop QA Item",
-			"question_en": "How do I track my order?",
-			"question_ar": "كيف يمكنني تتبع طلبي؟",
-			"answer_en": "<p>You can track your order in real-time by entering your order confirmation email on our Tracking page or via your Customer Dashboard.</p>",
-			"answer_ar": "<p>يمكنك تتبع طلبك في الوقت الفعلي عن طريق إدخال بريدك الإلكتروني لتأكيد الطلب في صفحة التتبع أو عبر لوحة تحكم العملاء.</p>",
-							"category": "Orders & Shipping",
-				"sort_order": 10,
-				"published": 1
+    if frappe.db.exists("DocType", "Webshop QA Item") and not frappe.db.exists("Webshop QA Item", {"question_en": "How do I track my order?"}):
+        frappe.get_doc({
+            "doctype": "Webshop QA Item",
+            "question_en": "How do I track my order?",
+            "question_ar": "كيف يمكنني تتبع طلبي؟",
+            "answer_en": "<p>You can track your order in real-time by entering your order confirmation email on our Tracking page or via your Customer Dashboard.</p>",
+            "answer_ar": "<p>يمكنك تتبع طلبك في الوقت الفعلي عن طريق إدخال بريدك الإلكتروني لتأكيد الطلب في صفحة التتبع أو عبر لوحة تحكم العملاء.</p>",
+                            "category": "Orders & Shipping",
+                "sort_order": 10,
+                "published": 1
 
-		}).insert(ignore_permissions=True)
+        }).insert(ignore_permissions=True)
 
-	seed_master_tier()
-	frappe.db.commit()
-	clear_webshop_cache()
-	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, Dynamic Pages, Master Tier settings, roles, and Help Guide created."
+    seed_master_tier()
+    frappe.db.commit()
+    clear_webshop_cache()
+    return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, Dynamic Pages, Master Tier settings, roles, and Help Guide created."
 
 
 @frappe.whitelist()
