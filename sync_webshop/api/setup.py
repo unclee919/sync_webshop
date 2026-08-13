@@ -539,6 +539,29 @@ def seed_phase3_demo():
                 item.webshop_curated_tags = "everyday, staff picks"
             item.save(ignore_permissions=True)
 
+    if frappe.db.exists("DocType", "Webshop Sensory Settings"):
+        try:
+            doc = frappe.get_single("Webshop Sensory Settings")
+            for fieldname in ["enabled", "magnetic_cursor_enabled", "cinematic_transitions_enabled", "circadian_theme_enabled", "predictive_prefetch_enabled", "webxr_ar_enabled", "exploder_3d_enabled"]:
+                if doc.meta.has_field(fieldname):
+                    doc.set(fieldname, 1)
+            doc.save(ignore_permissions=True)
+        except Exception:
+            pass
+
+    if frappe.db.exists("DocType", "Webshop Live Session") and not frappe.get_all("Webshop Live Session", limit=1):
+        try:
+            frappe.get_doc({"doctype": "Webshop Live Session", "title_en": "Live Masterclass: Brewing & Living", "title_ar": "جلسة حية: فن التحضير والمعيشة", "stream_url": "https://www.w3schools.com/html/mov_bbb.mp4", "is_live": 1, "viewer_count": 420}).insert(ignore_permissions=True)
+        except Exception:
+            pass
+
+    if frappe.db.exists("DocType", "Webshop Social Pulse") and not frappe.get_all("Webshop Social Pulse", limit=1):
+        try:
+            frappe.get_doc({"doctype": "Webshop Social Pulse", "text_en": "Someone in Riyadh just reserved Coffee Master Edition", "text_ar": "قام شخص في الرياض بحجز إصدار القهوة الفاخر", "city": "Riyadh", "enabled": 1}).insert(ignore_permissions=True)
+            frappe.get_doc({"doctype": "Webshop Social Pulse", "text_en": "New 5-star review from Dubai boutique", "text_ar": "تقييم جديد 5 نجوم من بوتيك دبي", "city": "Dubai", "enabled": 1}).insert(ignore_permissions=True)
+        except Exception:
+            pass
+
     frappe.db.commit()
     frappe.clear_cache()
     return {"ok": True, "message": "Elite Phase 3 demo settings and sample data seeded safely."}

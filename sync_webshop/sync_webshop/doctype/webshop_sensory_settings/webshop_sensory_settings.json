@@ -1,0 +1,71 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Sensory Settings",
+ "module": "Sync Webshop",
+ "issingle": 1,
+ "custom": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "magnetic_cursor_enabled",
+  "cinematic_transitions_enabled",
+  "circadian_theme_enabled",
+  "predictive_prefetch_enabled",
+  "webxr_ar_enabled",
+  "exploder_3d_enabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable Luxury Sensory Suite",
+   "default": 1
+  },
+  {
+   "fieldname": "magnetic_cursor_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Magnetic Adaptive Cursor",
+   "default": 1
+  },
+  {
+   "fieldname": "cinematic_transitions_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Cinematic Morphing Transitions",
+   "default": 1
+  },
+  {
+   "fieldname": "circadian_theme_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Circadian Theme Adaptation",
+   "default": 1
+  },
+  {
+   "fieldname": "predictive_prefetch_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Predictive Prefetching",
+   "default": 1
+  },
+  {
+   "fieldname": "webxr_ar_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Direct Browser AR (WebXR)",
+   "default": 1
+  },
+  {
+   "fieldname": "exploder_3d_enabled",
+   "fieldtype": "Check",
+   "label": "Enable 3D Interactive Exploder",
+   "default": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

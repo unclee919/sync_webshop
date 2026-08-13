@@ -1,0 +1,53 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Social Pulse",
+ "module": "Sync Webshop",
+ "issingle": 0,
+ "custom": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "text_en",
+  "text_ar",
+  "city",
+  "enabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "text_en",
+   "fieldtype": "Data",
+   "label": "Ticker Text (EN)",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "text_ar",
+   "fieldtype": "Data",
+   "label": "Ticker Text (AR)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "Location / City",
+   "in_list_view": 1,
+   "default": "Riyadh"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled",
+   "default": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

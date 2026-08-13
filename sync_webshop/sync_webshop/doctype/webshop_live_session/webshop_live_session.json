@@ -1,0 +1,67 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Live Session",
+ "module": "Sync Webshop",
+ "issingle": 0,
+ "custom": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title_en",
+  "title_ar",
+  "stream_url",
+  "is_live",
+  "featured_item",
+  "viewer_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "title_en",
+   "fieldtype": "Data",
+   "label": "Title (EN)",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "title_ar",
+   "fieldtype": "Data",
+   "label": "Title (AR)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "stream_url",
+   "fieldtype": "Data",
+   "label": "Stream / Video URL",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_live",
+   "fieldtype": "Check",
+   "label": "Currently Live",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "featured_item",
+   "fieldtype": "Link",
+   "label": "Featured Item Code",
+   "options": "Item",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "viewer_count",
+   "fieldtype": "Int",
+   "label": "Simulated Viewer Count",
+   "default": 342
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}
