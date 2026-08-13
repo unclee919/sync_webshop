@@ -202,6 +202,8 @@ def seed_phase3_demo():
         values = {
             "visual_search_enabled": 1,
             "visual_search_ai_enabled": 0,
+            "performance_adaptive_media_enabled": 1,
+            "performance_lazy_spatial_enabled": 1,
             "pickup_enabled": 1,
             "membership_enabled": 1,
             "visual_search_title_en": "Search by image",
