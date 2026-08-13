@@ -264,6 +264,29 @@ def get_content():
 			order_by="sort_order asc, modified desc",
 		)
 		for collection in collections:
+			hotspot_rows = []
+			try:
+				hotspot_rows = frappe.get_all(
+					"Webshop Editorial Hotspot",
+					filters={"parent": collection.name, "parenttype": "Webshop Editorial Collection", "parentfield": "hotspots", "enabled": 1},
+					fields=["section_sort_order", "label_en", "label_ar", "description_en", "description_ar", "item_code", "link_url", "x_percent", "y_percent", "sort_order"],
+					order_by="sort_order asc",
+				)
+			except Exception:
+				hotspot_rows = []
+			hotspots_by_section = {}
+			for hotspot in hotspot_rows:
+				featured = None
+				if hotspot.item_code:
+					featured = frappe.db.get_value("Item", hotspot.item_code, ["item_code", "item_name", "image", "item_group"], as_dict=True)
+				entry = {
+					"label_en": hotspot.label_en, "label_ar": hotspot.label_ar,
+					"description_en": hotspot.description_en, "description_ar": hotspot.description_ar,
+					"link_url": hotspot.link_url, "x_percent": max(0, min(100, float(hotspot.x_percent or 50))),
+					"y_percent": max(0, min(100, float(hotspot.y_percent or 50))),
+					"featured_item": {**featured, "image": full_url(featured.image) if featured and featured.image else None} if featured else None,
+				}
+				hotspots_by_section.setdefault(int(hotspot.section_sort_order or 0), []).append(entry)
 			sections = frappe.get_all(
 				"Webshop Editorial Section",
 				filters={"parent": collection.name, "parenttype": "Webshop Editorial Collection"},
@@ -290,6 +313,7 @@ def get_content():
 					"cta_text_en": section.cta_text_en,
 					"cta_text_ar": section.cta_text_ar,
 					"sort_order": section.sort_order,
+					"hotspots": hotspots_by_section.get(int(section.sort_order or 0), []),
 					"featured_item": {**featured_item, "image": full_url(featured_item.image) if featured_item and featured_item.image else None} if featured_item else None,
 				})
 			editorial_collections.append({
@@ -306,6 +330,7 @@ def get_content():
 				"cta_text_ar": collection.cta_text_ar,
 				"cta_url": collection.cta_url,
 				"sections": serialized_sections,
+				"hotspots_enabled": bool(settings.get("lookbook_hotspots_enabled", 1)),
 			})
 	except Exception:
 		pass
@@ -466,6 +491,28 @@ def get_content():
 		"complete_the_look_enabled": settings.get("complete_the_look_enabled", 1),
 		"complete_the_look_title_en": settings.get("complete_the_look_title_en") or "Complete the look",
 					"complete_the_look_title_ar": settings.get("complete_the_look_title_ar") or "أكمل الإطلالة",
+			"experience_settings": {
+				"sensory_ui_enabled": settings.get("sensory_ui_enabled", 1),
+				"cinematic_transitions_enabled": settings.get("cinematic_transitions_enabled", 1),
+				"lookbook_hotspots_enabled": settings.get("lookbook_hotspots_enabled", 1),
+				"curated_for_you_enabled": settings.get("curated_for_you_enabled", 1),
+				"curated_for_you_title_en": settings.get("curated_for_you_title_en") or "Curated for you",
+				"curated_for_you_title_ar": settings.get("curated_for_you_title_ar") or "مختارات لك",
+				"express_checkout_enabled": settings.get("express_checkout_enabled", 1),
+				"express_checkout_title_en": settings.get("express_checkout_title_en") or "A faster way to checkout",
+				"express_checkout_title_ar": settings.get("express_checkout_title_ar") or "طريقة أسرع لإتمام الطلب",
+				"express_checkout_subtitle_en": settings.get("express_checkout_subtitle_en") or "Use your saved details and continue in one fluid step.",
+				"express_checkout_subtitle_ar": settings.get("express_checkout_subtitle_ar") or "استخدم بياناتك المحفوظة وأكمل طلبك بخطوة سلسة.",
+				"express_checkout_cta_en": settings.get("express_checkout_cta_en") or "Checkout faster",
+				"express_checkout_cta_ar": settings.get("express_checkout_cta_ar") or "إتمام أسرع",
+				"gifting_enabled": settings.get("gifting_enabled", 1),
+				"gifting_title_en": settings.get("gifting_title_en") or "Make it a gift",
+				"gifting_title_ar": settings.get("gifting_title_ar") or "اجعلها هدية",
+				"gifting_message_placeholder_en": settings.get("gifting_message_placeholder_en") or "Add a personal note",
+				"gifting_message_placeholder_ar": settings.get("gifting_message_placeholder_ar") or "أضف رسالة شخصية",
+				"gifting_wrap_label_en": settings.get("gifting_wrap_label_en") or "Add gift wrapping",
+				"gifting_wrap_label_ar": settings.get("gifting_wrap_label_ar") or "إضافة تغليف هدايا",
+			},
 			"ultra_settings": {
 				"adaptive_palette_enabled": settings.get("adaptive_palette_enabled", 1),
 				"circadian_theme_enabled": settings.get("circadian_theme_enabled", 1),

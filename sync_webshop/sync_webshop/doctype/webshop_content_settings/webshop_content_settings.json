@@ -40,6 +40,7 @@
   "magnetic_cursor_enabled",
   "predictive_prefetch_enabled",
   "palette_transition_ms",
+  "ultra_storytelling_section",
   "nav_links",
   "about_section",
   "about_text_en",
@@ -162,7 +163,27 @@
   "facebook_pixel_id",
   "tiktok_pixel_id",
   "analytics_events_enabled",
-  "elite_ui_section"
+  "elite_ui_section",
+  "sensory_ui_enabled",
+  "cinematic_transitions_enabled",
+  "lookbook_hotspots_enabled",
+  "curated_for_you_enabled",
+  "curated_for_you_title_en",
+  "curated_for_you_title_ar",
+  "express_checkout_enabled",
+  "express_checkout_title_en",
+  "express_checkout_title_ar",
+  "express_checkout_subtitle_en",
+  "express_checkout_subtitle_ar",
+  "express_checkout_cta_en",
+  "express_checkout_cta_ar",
+  "gifting_enabled",
+  "gifting_title_en",
+  "gifting_title_ar",
+  "gifting_message_placeholder_en",
+  "gifting_message_placeholder_ar",
+  "gifting_wrap_label_en",
+  "gifting_wrap_label_ar"
  ],
  "fields": [
   {
@@ -1004,6 +1025,131 @@
    "fieldtype": "Int",
    "label": "Palette Transition Duration (ms)",
    "default": 520
+  },
+  {
+   "fieldname": "ultra_storytelling_section",
+   "fieldtype": "Section Break",
+   "label": "Ultra-Elite Storytelling & Commerce"
+  },
+  {
+   "fieldname": "sensory_ui_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Sensory UI (Cursor, Micro-interactions)",
+   "default": 1
+  },
+  {
+   "fieldname": "cinematic_transitions_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Cinematic Page Transitions",
+   "default": 1
+  },
+  {
+   "fieldname": "lookbook_hotspots_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Editorial Lookbook Hotspots",
+   "default": 1
+  },
+  {
+   "fieldname": "curated_for_you_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Curated For You",
+   "default": 1
+  },
+  {
+   "fieldname": "curated_for_you_title_en",
+   "fieldtype": "Data",
+   "label": "Curated For You Title (English)",
+   "default": "Curated for you"
+  },
+  {
+   "fieldname": "curated_for_you_title_ar",
+   "fieldtype": "Data",
+   "label": "Curated For You Title (Arabic)",
+   "default": "مختارات لك"
+  },
+  {
+   "fieldname": "express_checkout_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Express Checkout",
+   "default": 1
+  },
+  {
+   "fieldname": "express_checkout_title_en",
+   "fieldtype": "Data",
+   "label": "Express Checkout Title (English)",
+   "default": "A faster way to checkout"
+  },
+  {
+   "fieldname": "express_checkout_title_ar",
+   "fieldtype": "Data",
+   "label": "Express Checkout Title (Arabic)",
+   "default": "طريقة أسرع لإتمام الطلب"
+  },
+  {
+   "fieldname": "express_checkout_subtitle_en",
+   "fieldtype": "Data",
+   "label": "Express Checkout Subtitle (English)",
+   "default": "Use your saved details and continue in one fluid step."
+  },
+  {
+   "fieldname": "express_checkout_subtitle_ar",
+   "fieldtype": "Data",
+   "label": "Express Checkout Subtitle (Arabic)",
+   "default": "استخدم بياناتك المحفوظة وأكمل طلبك بخطوة سلسة."
+  },
+  {
+   "fieldname": "express_checkout_cta_en",
+   "fieldtype": "Data",
+   "label": "Express Checkout CTA (English)",
+   "default": "Checkout faster"
+  },
+  {
+   "fieldname": "express_checkout_cta_ar",
+   "fieldtype": "Data",
+   "label": "Express Checkout CTA (Arabic)",
+   "default": "إتمام أسرع"
+  },
+  {
+   "fieldname": "gifting_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Gifting Suite",
+   "default": 1
+  },
+  {
+   "fieldname": "gifting_title_en",
+   "fieldtype": "Data",
+   "label": "Gifting Title (English)",
+   "default": "Make it a gift"
+  },
+  {
+   "fieldname": "gifting_title_ar",
+   "fieldtype": "Data",
+   "label": "Gifting Title (Arabic)",
+   "default": "اجعلها هدية"
+  },
+  {
+   "fieldname": "gifting_message_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Gift Message Placeholder (English)",
+   "default": "Add a personal note"
+  },
+  {
+   "fieldname": "gifting_message_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Gift Message Placeholder (Arabic)",
+   "default": "أضف رسالة شخصية"
+  },
+  {
+   "fieldname": "gifting_wrap_label_en",
+   "fieldtype": "Data",
+   "label": "Gift Wrap Label (English)",
+   "default": "Add gift wrapping"
+  },
+  {
+   "fieldname": "gifting_wrap_label_ar",
+   "fieldtype": "Data",
+   "label": "Gift Wrap Label (Arabic)",
+   "default": "إضافة تغليف هدايا"
   }
  ],
  "issingle": 1,

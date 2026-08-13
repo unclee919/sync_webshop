@@ -103,6 +103,34 @@ def _get_available_attributes(item_codes):
     return {key: sorted(values) for key, values in facets.items()}
 
 
+def _get_item_experience(item_codes):
+    """Serialize optional Desk-managed media and curation fields without exposing private ERP data."""
+    if not item_codes:
+        return {}
+    try:
+        available_columns = set(frappe.db.get_table_columns("Item"))
+    except Exception:
+        return {}
+    wanted = [field for field in ["video_url", "webshop_stage_image", "webshop_stage_image_2", "webshop_stage_label_en", "webshop_stage_label_ar", "webshop_curated_tags"] if field in available_columns]
+    if not wanted:
+        return {}
+    try:
+        rows = frappe.get_all("Item", filters={"item_code": ["in", item_codes]}, fields=["item_code"] + wanted)
+    except Exception:
+        return {}
+    result = {}
+    for row in rows:
+        stage_images = [full_url(value) for value in [row.get("webshop_stage_image"), row.get("webshop_stage_image_2")] if value]
+        tags = [value.strip().lower() for value in str(row.get("webshop_curated_tags") or "").split(",") if value.strip()]
+        result[row.item_code] = {
+            "video_url": full_url(row.get("video_url")) if row.get("video_url") else None,
+            "stage_images": stage_images,
+            "stage_labels": {"en": row.get("webshop_stage_label_en"), "ar": row.get("webshop_stage_label_ar")},
+            "curated_tags": tags,
+        }
+    return result
+
+
 def _empty_catalog(page, page_size, price_list, item_group=None):
     return {
         "items": [],
@@ -216,6 +244,10 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
             "rating": item.webshop_rating,
             "stock": stocks.get(item.item_code, {"available_qty": 0, "in_stock": False}),
             "attributes": variants.get(item.item_code, []),
+            "video_url": exp.get("video_url"),
+            "stage_images": exp.get("stage_images", []),
+            "stage_labels": exp.get("stage_labels", {}),
+            "curated_tags": exp.get("curated_tags", []),
         })
 
     response = {
@@ -265,7 +297,10 @@ def get_item(item_code):
         "rating": item.webshop_rating,
         "price_list": price_list,
         "images": [full_url(value) for value in [item.image, item.get("image_2"), item.get("image_3"), item.get("image_4")] if value],
-        "video_url": full_url(item.get("video_url")) if item.get("video_url") else None,
+        "video_url": item_experience.get("video_url") or (full_url(item.get("video_url")) if item.get("video_url") else None),
+        "stage_images": item_experience.get("stage_images", []),
+        "stage_labels": item_experience.get("stage_labels", {}),
+        "curated_tags": item_experience.get("curated_tags", []),
         "ar_ios_model_url": full_url(item.get("ar_ios_model_url")) if item.get("ar_ios_model_url") else None,
         "ar_android_model_url": full_url(item.get("ar_android_model_url")) if item.get("ar_android_model_url") else None,
         "three_d_model_url": full_url(item.get("three_d_model_url")) if item.get("three_d_model_url") else None,
@@ -423,6 +458,9 @@ def get_recommendations(item_code=None, item_group=None, limit=8):
             "currency": (prices.get(row.item_code) or {}).get("currency"),
             "stock": stocks.get(row.item_code, {"available_qty": 0, "in_stock": False}),
             "in_stock": stocks.get(row.item_code, {}).get("in_stock", False),
+            "video_url": recommendation_experience.get(row.item_code, {}).get("video_url"),
+            "stage_images": recommendation_experience.get(row.item_code, {}).get("stage_images", []),
+            "curated_tags": recommendation_experience.get(row.item_code, {}).get("curated_tags", []),
         }
         for row in items
     ]

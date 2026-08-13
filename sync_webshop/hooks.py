@@ -5,6 +5,7 @@ app_email = "dev@dpono.com"
 app_license = "mit"
 
 doc_events = {
+    "Webshop Editorial Collection": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Content Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop API Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Theme Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},

@@ -16,6 +16,9 @@ def run_setup():
 	
 	custom_fields = {
 		"Sales Order": [
+			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
+			{"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},
+			{"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
 			{
 				"fieldname": "tracking_number", 
 				"label": "رقم التتبع (Tracking Number)", 

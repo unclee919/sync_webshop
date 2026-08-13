@@ -237,7 +237,7 @@ def get_checkout_settings():
 
 
 @frappe.whitelist(allow_guest=True)
-def create_order(customer, items, payment_method=None, stripe_payment_intent=None, delivery_date=None, coupon_code=None, governorate=None, city=None, location=None, second_phone=None, submit=False):
+def create_order(customer, items, payment_method=None, stripe_payment_intent=None, delivery_date=None, coupon_code=None, governorate=None, city=None, location=None, second_phone=None, gift_message=None, gift_wrap=False, submit=False):
     set_cors_headers()
     rows = _normalise_items(items)
     customer = customer if isinstance(customer, dict) else {}
@@ -246,6 +246,8 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
     city = city or customer.get("city")
     location = location or customer.get("location")
     second_phone = second_phone or customer.get("second_phone")
+    gift_message = gift_message if gift_message is not None else customer.get("gift_message")
+    gift_wrap = bool(gift_wrap or customer.get("gift_wrap"))
     if getattr(content_settings, "require_city_governorate", 0):
         governorate, city = _validate_territory(governorate, city)
     if getattr(content_settings, "require_second_phone", 0) and not str(second_phone or "").strip():
@@ -318,6 +320,9 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
         "webshop_city": city,
         "webshop_location": location,
         "webshop_second_phone": second_phone,
+        "webshop_is_gift": bool(gift_message or gift_wrap),
+        "webshop_gift_wrap": gift_wrap,
+        "webshop_gift_message": gift_message,
     }.items():
         if so.meta.has_field(fieldname):
             so.set(fieldname, value)
