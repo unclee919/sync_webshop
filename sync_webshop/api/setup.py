@@ -470,6 +470,8 @@ def seed_coffee_shop_demo():
     if not warehouse:
         warehouse = frappe.db.get_value("Warehouse", {"is_group": 0, "disabled": 0}, "name")
     company = frappe.db.get_single_value("Global Defaults", "default_company") if frappe.db.exists("DocType", "Global Defaults") else None
+    if not company and warehouse:
+        company = frappe.db.get_value("Warehouse", warehouse, "company")
     if warehouse and company and frappe.db.exists("DocType", "Stock Entry"):
         marker = "Sync Webshop Coffee Demo Opening Stock"
         stock_entry_name = frappe.db.exists("Stock Entry", {"remarks": marker})
