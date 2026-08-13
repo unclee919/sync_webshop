@@ -20,12 +20,16 @@ def run_setup():
 			{"fieldname": "webshop_stage_image_2", "label": "Webshop Alternate Stage Image", "fieldtype": "Attach Image", "insert_after": "webshop_stage_image"},
 			{"fieldname": "webshop_stage_label_en", "label": "Stage Label (English)", "fieldtype": "Data", "insert_after": "webshop_stage_image_2"},
 			{"fieldname": "webshop_stage_label_ar", "label": "Stage Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_stage_label_en"},
-			{"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."}
+			{"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."},
+			{"fieldname": "video_url", "label": "Product Hover Video URL", "fieldtype": "Data", "insert_after": "webshop_curated_tags"},
+			{"fieldname": "webshop_search_keywords", "label": "Visual Search Keywords", "fieldtype": "Data", "insert_after": "video_url", "description": "Comma-separated business-neutral visual descriptors."},
 		],
 		"Sales Order": [
 			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
 			{"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},
 			{"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
+			{"fieldname": "webshop_fulfillment_method", "label": "Fulfillment Method", "fieldtype": "Select", "options": "Delivery\nStore Pickup", "default": "Delivery", "insert_after": "webshop_gift_message"},
+			{"fieldname": "webshop_pickup_warehouse", "label": "Pickup Warehouse", "fieldtype": "Link", "options": "Warehouse", "insert_after": "webshop_fulfillment_method"},
 			{
 				"fieldname": "tracking_number", 
 				"label": "رقم التتبع (Tracking Number)", 
@@ -88,7 +92,6 @@ def run_setup():
 				"fieldtype": "Data",
 				"insert_after": "webshop_location"
 				},
-
 		],
 		"Delivery Note": [
 			{

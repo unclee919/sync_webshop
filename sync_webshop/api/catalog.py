@@ -111,7 +111,7 @@ def _get_item_experience(item_codes):
         available_columns = set(frappe.db.get_table_columns("Item"))
     except Exception:
         return {}
-    wanted = [field for field in ["video_url", "webshop_stage_image", "webshop_stage_image_2", "webshop_stage_label_en", "webshop_stage_label_ar", "webshop_curated_tags"] if field in available_columns]
+    wanted = [field for field in ["video_url", "webshop_stage_image", "webshop_stage_image_2", "webshop_stage_label_en", "webshop_stage_label_ar", "webshop_curated_tags", "webshop_search_keywords"] if field in available_columns]
     if not wanted:
         return {}
     try:
@@ -127,6 +127,7 @@ def _get_item_experience(item_codes):
             "stage_images": stage_images,
             "stage_labels": {"en": row.get("webshop_stage_label_en"), "ar": row.get("webshop_stage_label_ar")},
             "curated_tags": tags,
+            "search_keywords": [value.strip().lower() for value in str(row.get("webshop_search_keywords") or "").split(",") if value.strip()],
         }
     return result
 
@@ -248,6 +249,7 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
             "stage_images": exp.get("stage_images", []),
             "stage_labels": exp.get("stage_labels", {}),
             "curated_tags": exp.get("curated_tags", []),
+            "search_keywords": exp.get("search_keywords", []),
         })
 
     response = {
@@ -302,6 +304,7 @@ def get_item(item_code):
         "stage_images": item_experience.get("stage_images", []),
         "stage_labels": item_experience.get("stage_labels", {}),
         "curated_tags": item_experience.get("curated_tags", []),
+        "search_keywords": item_experience.get("search_keywords", []),
         "ar_ios_model_url": full_url(item.get("ar_ios_model_url")) if item.get("ar_ios_model_url") else None,
         "ar_android_model_url": full_url(item.get("ar_android_model_url")) if item.get("ar_android_model_url") else None,
         "three_d_model_url": full_url(item.get("three_d_model_url")) if item.get("three_d_model_url") else None,
@@ -462,6 +465,7 @@ def get_recommendations(item_code=None, item_group=None, limit=8):
             "video_url": recommendation_experience.get(row.item_code, {}).get("video_url"),
             "stage_images": recommendation_experience.get(row.item_code, {}).get("stage_images", []),
             "curated_tags": recommendation_experience.get(row.item_code, {}).get("curated_tags", []),
+            "search_keywords": recommendation_experience.get(row.item_code, {}).get("search_keywords", []),
         }
         for row in items
     ]

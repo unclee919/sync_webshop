@@ -26,6 +26,17 @@ def _get_default_warehouse(company):
     return frappe.db.get_value("Warehouse", {"company": company, "is_group": 0, "disabled": 0}, "name")
 
 
+
+
+def _password_present(doc, fieldname):
+    if not doc:
+        return False
+    try:
+        return bool(doc.get_password(fieldname))
+    except Exception:
+        return bool(doc.get(fieldname))
+
+
 def _find_or_create_customer(customer):
     email = (customer.get("email") or "").strip()
     phone = (customer.get("phone") or "").strip()
@@ -207,12 +218,32 @@ def get_checkout_settings():
         })
     if frappe.db.exists("DocType", "Webshop Paymob Settings"):
         paymob = frappe.get_single("Webshop Paymob Settings")
-        if paymob.enabled and paymob.public_key:
+        configured_ids = []
+        for fieldname in ("card_integration_id", "wallet_integration_id", "kiosk_integration_id"):
+            value = str(getattr(paymob, fieldname, None) or "").strip()
+            if value and value not in configured_ids:
+                configured_ids.append(value)
+        for value in str(getattr(paymob, "payment_methods", None) or "").replace(";", ",").split(","):
+            value = value.strip()
+            if value and value not in configured_ids:
+                configured_ids.append(value)
+        if (paymob.enabled and getattr(paymob, "online_payment_enabled", 1) and paymob.public_key
+                and _password_present(paymob, "secret_key") and _password_present(paymob, "hmac_secret") and configured_ids):
+            methods = []
+            for key, fieldname, label_en, label_ar in (
+                ("card", "card_integration_id", getattr(paymob, "card_label_en", None) or "Cards", getattr(paymob, "card_label_ar", None) or "البطاقات"),
+                ("wallet", "wallet_integration_id", getattr(paymob, "wallet_label_en", None) or "Mobile wallets", getattr(paymob, "wallet_label_ar", None) or "المحافظ الإلكترونية"),
+                ("kiosk", "kiosk_integration_id", getattr(paymob, "kiosk_label_en", None) or "Kiosk and cash networks", getattr(paymob, "kiosk_label_ar", None) or "الأكشاك وشبكات الدفع النقدي"),
+            ):
+                if str(getattr(paymob, fieldname, None) or "").strip() in configured_ids:
+                    methods.append({"key": key, "label_en": label_en, "label_ar": label_ar})
             gateways.append({
                 "name": "paymob",
-                "label_en": getattr(paymob, "label_en", None) or "Paymob",
-                "label_ar": getattr(paymob, "label_ar", None) or "الدفع عبر Paymob",
-                "public_key": paymob.public_key,
+                "label_en": getattr(paymob, "online_label_en", None) or "Online payment",
+                "label_ar": getattr(paymob, "online_label_ar", None) or "الدفع الإلكتروني",
+                "note_en": getattr(paymob, "online_note_en", None) or "Pay securely with the methods enabled in Paymob.",
+                "note_ar": getattr(paymob, "online_note_ar", None) or "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
+                "methods": methods,
                 "checkout_mode": getattr(paymob, "checkout_mode", None) or "redirect",
             })
     shipping_rules = frappe.get_all(
@@ -221,8 +252,21 @@ def get_checkout_settings():
         fields=["rule_name", "shipping_cost", "free_shipping_threshold"],
         order_by="free_shipping_threshold asc",
     )
+    pickup_enabled = bool(getattr(content_settings, "pickup_enabled", 0))
+    pickup_warehouses = []
+    if pickup_enabled:
+        fields = [field for field in ["name", "warehouse_name", "address_line_1", "city", "company"] if frappe.get_meta("Warehouse").has_field(field) or field == "name"]
+        pickup_warehouses = frappe.get_all("Warehouse", filters={"is_group": 0, "disabled": 0}, fields=fields, order_by="warehouse_name asc, name asc")
     response = {
         "payment_gateways": gateways,
+        "fulfillment": {
+            "pickup_enabled": pickup_enabled,
+            "pickup_title_en": getattr(content_settings, "pickup_title_en", None) or "Store pickup",
+            "pickup_title_ar": getattr(content_settings, "pickup_title_ar", None) or "الاستلام من المتجر",
+            "pickup_note_en": getattr(content_settings, "pickup_note_en", None) or "Choose an available warehouse and collect your order there.",
+            "pickup_note_ar": getattr(content_settings, "pickup_note_ar", None) or "اختر مستودعاً متاحاً لاستلام طلبك منه.",
+            "warehouses": pickup_warehouses,
+        },
         "shipping_rules": shipping_rules,
         "delivery_settings": {
             "min_days": content_settings.min_delivery_days or 1,
@@ -237,7 +281,7 @@ def get_checkout_settings():
 
 
 @frappe.whitelist(allow_guest=True)
-def create_order(customer, items, payment_method=None, stripe_payment_intent=None, delivery_date=None, coupon_code=None, governorate=None, city=None, location=None, second_phone=None, gift_message=None, gift_wrap=False, submit=False):
+def create_order(customer, items, payment_method=None, stripe_payment_intent=None, delivery_date=None, coupon_code=None, governorate=None, city=None, location=None, second_phone=None, gift_message=None, gift_wrap=False, fulfillment_method=None, pickup_warehouse=None, submit=False):
     set_cors_headers()
     rows = _normalise_items(items)
     customer = customer if isinstance(customer, dict) else {}
@@ -248,12 +292,24 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
     second_phone = second_phone or customer.get("second_phone")
     gift_message = gift_message if gift_message is not None else customer.get("gift_message")
     gift_wrap = bool(gift_wrap or customer.get("gift_wrap"))
+    fulfillment_method = str(fulfillment_method or customer.get("fulfillment_method") or "Delivery").strip()
+    pickup_warehouse = str(pickup_warehouse or customer.get("pickup_warehouse") or "").strip()
     if getattr(content_settings, "require_city_governorate", 0):
         governorate, city = _validate_territory(governorate, city)
     if getattr(content_settings, "require_second_phone", 0) and not str(second_phone or "").strip():
         frappe.throw("A second phone number is required.")
     company = _get_default_company()
-    warehouse = _get_default_warehouse(company)
+    if fulfillment_method not in {"Delivery", "Store Pickup"}:
+        frappe.throw("Invalid fulfillment method.")
+    pickup_enabled = bool(getattr(content_settings, "pickup_enabled", 0))
+    if fulfillment_method == "Store Pickup":
+        if not pickup_enabled:
+            frappe.throw("Store pickup is currently disabled.")
+        warehouse = frappe.db.get_value("Warehouse", {"name": pickup_warehouse, "is_group": 0, "disabled": 0}, "name") if pickup_warehouse else None
+        if not warehouse:
+            frappe.throw("Please select an available pickup warehouse.")
+    else:
+        warehouse = _get_default_warehouse(company)
     if not company:
         frappe.throw("No default company is configured in ERPNext.")
     if not warehouse:
@@ -323,6 +379,8 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
         "webshop_is_gift": bool(gift_message or gift_wrap),
         "webshop_gift_wrap": gift_wrap,
         "webshop_gift_message": gift_message,
+        "webshop_fulfillment_method": fulfillment_method,
+        "webshop_pickup_warehouse": pickup_warehouse if fulfillment_method == "Store Pickup" else None,
     }.items():
         if so.meta.has_field(fieldname):
             so.set(fieldname, value)
@@ -349,6 +407,8 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
         "grand_total": so.grand_total,
         "currency": so.currency,
         "shipping_cost": shipping_cost,
+        "fulfillment_method": fulfillment_method,
+        "pickup_warehouse": pickup_warehouse if fulfillment_method == "Store Pickup" else None,
         "coupon_code": coupon["coupon_code"],
         "coupon_discount": coupon_discount,
         "stock_checked": True,

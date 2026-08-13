@@ -17,7 +17,18 @@
   "payment_methods",
   "checkout_mode",
   "label_en",
-  "label_ar"
+  "label_ar",
+  "online_payment_enabled",
+  "online_label_en",
+  "online_label_ar",
+  "online_note_en",
+  "online_note_ar",
+  "card_label_en",
+  "card_label_ar",
+  "wallet_label_en",
+  "wallet_label_ar",
+  "kiosk_label_en",
+  "kiosk_label_ar"
  ],
  "fields": [
   {
@@ -75,10 +86,76 @@
    "label": "English Label"
   },
   {
-   "default": "\u0627\u0644\u062f\u0641\u0639 \u0639\u0628\u0631 Paymob",
+   "default": "الدفع عبر Paymob",
    "fieldname": "label_ar",
    "fieldtype": "Data",
    "label": "Arabic Label"
+  },
+  {
+   "fieldname": "online_payment_enabled",
+   "label": "Online Payment Enabled",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "online_label_en",
+   "label": "Online Payment Label (English)",
+   "fieldtype": "Data",
+   "default": "Online payment"
+  },
+  {
+   "fieldname": "online_label_ar",
+   "label": "Online Payment Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "الدفع الإلكتروني"
+  },
+  {
+   "fieldname": "online_note_en",
+   "label": "Online Payment Note (English)",
+   "fieldtype": "Small Text",
+   "default": "Pay securely with the methods enabled in Paymob."
+  },
+  {
+   "fieldname": "online_note_ar",
+   "label": "Online Payment Note (Arabic)",
+   "fieldtype": "Small Text",
+   "default": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob."
+  },
+  {
+   "fieldname": "card_label_en",
+   "label": "Card Method Label (English)",
+   "fieldtype": "Data",
+   "default": "Cards"
+  },
+  {
+   "fieldname": "card_label_ar",
+   "label": "Card Method Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "البطاقات"
+  },
+  {
+   "fieldname": "wallet_label_en",
+   "label": "Wallet Method Label (English)",
+   "fieldtype": "Data",
+   "default": "Mobile wallets"
+  },
+  {
+   "fieldname": "wallet_label_ar",
+   "label": "Wallet Method Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "المحافظ الإلكترونية"
+  },
+  {
+   "fieldname": "kiosk_label_en",
+   "label": "Kiosk Method Label (English)",
+   "fieldtype": "Data",
+   "default": "Kiosk and cash networks"
+  },
+  {
+   "fieldname": "kiosk_label_ar",
+   "label": "Kiosk Method Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "الأكشاك وشبكات الدفع النقدي"
   }
  ],
  "grid_page_length": 50,

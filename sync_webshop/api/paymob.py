@@ -120,13 +120,29 @@ def get_paymob_settings():
     if not frappe.db.exists("DocType", "Webshop Paymob Settings"):
         return {"enabled": False, "public_key": "", "payment_methods": []}
     settings = frappe.get_single("Webshop Paymob Settings")
+    configured_ids = _payment_methods(settings) if settings.enabled else []
+    methods = []
+    for key, fieldname, label_en, label_ar in (
+        ("card", "card_integration_id", getattr(settings, "card_label_en", None) or "Cards", getattr(settings, "card_label_ar", None) or "البطاقات"),
+        ("wallet", "wallet_integration_id", getattr(settings, "wallet_label_en", None) or "Mobile wallets", getattr(settings, "wallet_label_ar", None) or "المحافظ الإلكترونية"),
+        ("kiosk", "kiosk_integration_id", getattr(settings, "kiosk_label_en", None) or "Kiosk and cash networks", getattr(settings, "kiosk_label_ar", None) or "الأكشاك وشبكات الدفع النقدي"),
+    ):
+        method_id = _int(getattr(settings, fieldname, None))
+        if method_id and method_id in configured_ids:
+            methods.append({"key": key, "label_en": label_en, "label_ar": label_ar})
     return {
         "enabled": bool(settings.enabled),
+        "online_enabled": bool(getattr(settings, "online_payment_enabled", 1)) and bool(settings.public_key) and bool(_secret(settings, "secret_key")) and bool(_secret(settings, "hmac_secret")) and bool(configured_ids),
         "public_key": settings.public_key or "",
-        "payment_methods": _payment_methods(settings) if settings.enabled else [],
+        "payment_methods": configured_ids,
+        "methods": methods,
         "checkout_mode": getattr(settings, "checkout_mode", None) or "redirect",
         "label_en": getattr(settings, "label_en", None) or "Paymob",
         "label_ar": getattr(settings, "label_ar", None) or "الدفع عبر Paymob",
+        "online_label_en": getattr(settings, "online_label_en", None) or "Online payment",
+        "online_label_ar": getattr(settings, "online_label_ar", None) or "الدفع الإلكتروني",
+        "online_note_en": getattr(settings, "online_note_en", None) or "Pay securely with the methods enabled in Paymob.",
+        "online_note_ar": getattr(settings, "online_note_ar", None) or "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
     }
 
 

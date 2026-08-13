@@ -32,6 +32,15 @@ def _dashboard_settings():
         }
     except (TypeError, ValueError):
         settings["tracking_labels"] = {"en": json.loads(defaults["tracking_labels_en"]), "ar": json.loads(defaults["tracking_labels_ar"])}
+    try:
+        content_settings = frappe.get_single("Webshop Content Settings")
+        settings["membership_enabled"] = bool(getattr(content_settings, "membership_enabled", 1))
+        settings["membership_title_en"] = getattr(content_settings, "membership_title_en", None) or "Your membership"
+        settings["membership_title_ar"] = getattr(content_settings, "membership_title_ar", None) or "عضويتك"
+    except Exception:
+        settings["membership_enabled"] = True
+        settings["membership_title_en"] = "Your membership"
+        settings["membership_title_ar"] = "عضويتك"
     return settings
 
 
@@ -151,6 +160,24 @@ def _loyalty(customer):
     return {"points": sum(float(row.get("loyalty_points") or 0) for row in entries), "entries": entries}
 
 
+
+def _membership(analytics):
+    if not frappe.db.exists("DocType", "Webshop Membership Tier"):
+        return None
+    try:
+        settings = frappe.get_single("Webshop Content Settings")
+        if not getattr(settings, "membership_enabled", 1):
+            return None
+        tiers = frappe.get_all("Webshop Membership Tier", filters={"enabled": 1}, fields=["name", "tier_name", "tier_code", "minimum_spend", "discount_percent", "badge_color", "perks_en", "perks_ar", "sort_order"], order_by="minimum_spend desc, sort_order asc")
+        spend = float((analytics or {}).get("total_spend") or 0)
+        selected = next((tier for tier in tiers if spend >= float(tier.minimum_spend or 0)), None)
+        if not selected:
+            return {"tier_name": "", "tier_code": "", "minimum_spend": 0, "discount_percent": 0, "badge_color": "#C8A96B", "perks_en": "", "perks_ar": "", "next_tier": tiers[-1] if tiers else None}
+        return dict(selected)
+    except Exception:
+        return None
+
+
 def _guard_order(order_name, customer):
     order = frappe.db.get_value(
         "Sales Order",
@@ -224,6 +251,7 @@ def get_customer_portal(email=None, phone=None):
         "returns": returns,
         "analytics": _analytics(customer, orders) if settings["enable_analytics"] else None,
         "loyalty": _loyalty(customer) if settings["enable_loyalty"] else None,
+        "membership": _membership(_analytics(customer, orders)) if settings.get("enable_loyalty") else None,
         "addresses": _customer_addresses(customer) if settings["enable_addresses"] else [],
         "settings": settings,
     }

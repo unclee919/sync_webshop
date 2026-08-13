@@ -183,7 +183,23 @@
   "gifting_message_placeholder_en",
   "gifting_message_placeholder_ar",
   "gifting_wrap_label_en",
-  "gifting_wrap_label_ar"
+  "gifting_wrap_label_ar",
+  "visual_search_enabled",
+  "visual_search_ai_enabled",
+  "visual_search_title_en",
+  "visual_search_title_ar",
+  "visual_search_hint_en",
+  "visual_search_hint_ar",
+  "performance_adaptive_media_enabled",
+  "performance_lazy_spatial_enabled",
+  "pickup_enabled",
+  "pickup_title_en",
+  "pickup_title_ar",
+  "pickup_note_en",
+  "pickup_note_ar",
+  "membership_enabled",
+  "membership_title_en",
+  "membership_title_ar"
  ],
  "fields": [
   {
@@ -1150,6 +1166,102 @@
    "fieldtype": "Data",
    "label": "Gift Wrap Label (Arabic)",
    "default": "إضافة تغليف هدايا"
+  },
+  {
+   "fieldname": "visual_search_enabled",
+   "label": "Visual Search Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "visual_search_ai_enabled",
+   "label": "AI Visual Search Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "visual_search_title_en",
+   "label": "Visual Search Title (English)",
+   "fieldtype": "Data",
+   "default": "Search by image"
+  },
+  {
+   "fieldname": "visual_search_title_ar",
+   "label": "Visual Search Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "البحث بالصورة"
+  },
+  {
+   "fieldname": "visual_search_hint_en",
+   "label": "Visual Search Hint (English)",
+   "fieldtype": "Data",
+   "default": "Upload a product photo to find similar items"
+  },
+  {
+   "fieldname": "visual_search_hint_ar",
+   "label": "Visual Search Hint (Arabic)",
+   "fieldtype": "Data",
+   "default": "ارفع صورة منتج للعثور على منتجات مشابهة"
+  },
+  {
+   "fieldname": "performance_adaptive_media_enabled",
+   "label": "Adaptive Media Delivery Enabled",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "performance_lazy_spatial_enabled",
+   "label": "Lazy Load Spatial Features",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "pickup_enabled",
+   "label": "Store Pickup Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "pickup_title_en",
+   "label": "Store Pickup Title (English)",
+   "fieldtype": "Data",
+   "default": "Store pickup"
+  },
+  {
+   "fieldname": "pickup_title_ar",
+   "label": "Store Pickup Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "الاستلام من المتجر"
+  },
+  {
+   "fieldname": "pickup_note_en",
+   "label": "Store Pickup Note (English)",
+   "fieldtype": "Small Text",
+   "default": "Choose an available warehouse and collect your order there."
+  },
+  {
+   "fieldname": "pickup_note_ar",
+   "label": "Store Pickup Note (Arabic)",
+   "fieldtype": "Small Text",
+   "default": "اختر مستودعاً متاحاً لاستلام طلبك منه."
+  },
+  {
+   "fieldname": "membership_enabled",
+   "label": "Membership Tiers Enabled",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "membership_title_en",
+   "label": "Membership Title (English)",
+   "fieldtype": "Data",
+   "default": "Your membership"
+  },
+  {
+   "fieldname": "membership_title_ar",
+   "label": "Membership Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "عضويتك"
   }
  ],
  "issingle": 1,
