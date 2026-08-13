@@ -295,6 +295,12 @@ def run_setup():
 	for doctype, values in ecosystem_defaults.items():
 		if frappe.db.exists("DocType", doctype):
 			doc = frappe.get_single(doctype)
+			for fieldname, value in values.items():
+				doc.set(fieldname, value)
+			doc.save(ignore_permissions=True)
+	for doctype, values in ecosystem_defaults.items():
+		if frappe.db.exists("DocType", doctype):
+			doc = frappe.get_single(doctype)
 			changed = False
 			for fieldname, value in values.items():
 				if not doc.get(fieldname):
