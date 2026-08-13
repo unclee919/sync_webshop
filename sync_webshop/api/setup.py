@@ -190,3 +190,69 @@ def run_setup():
 	frappe.db.commit()
 	
 	return "Setup completed successfully. Custom fields, Arabic labels, and Help Guide created."
+
+
+@frappe.whitelist()
+def seed_phase3_demo():
+    """Seed safe, business-neutral sample data for Elite Phase 3 verification."""
+    if frappe.session.user == "Guest":
+        frappe.throw("Guest users cannot seed demo settings.")
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
+        settings = frappe.get_single("Webshop Content Settings")
+        values = {
+            "visual_search_enabled": 1,
+            "visual_search_ai_enabled": 0,
+            "pickup_enabled": 1,
+            "membership_enabled": 1,
+            "visual_search_title_en": "Search by image",
+            "visual_search_title_ar": "البحث بالصورة",
+            "pickup_title_en": "Store pickup",
+            "pickup_title_ar": "الاستلام من المتجر",
+            "membership_title_en": "Your membership",
+            "membership_title_ar": "عضويتك",
+        }
+        for fieldname, value in values.items():
+            if settings.meta.has_field(fieldname):
+                settings.set(fieldname, value)
+        settings.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Paymob Settings"):
+        paymob = frappe.get_single("Webshop Paymob Settings")
+        for fieldname, value in {
+            "online_payment_enabled": 1,
+            "online_label_en": "Online payment",
+            "online_label_ar": "الدفع الإلكتروني",
+            "online_note_en": "Pay securely with the methods enabled in Paymob.",
+            "online_note_ar": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
+        }.items():
+            if paymob.meta.has_field(fieldname):
+                paymob.set(fieldname, value)
+        paymob.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Membership Tier"):
+        tiers = [
+            {"tier_name": "Starter", "tier_code": "STARTER", "minimum_spend": 0, "discount_percent": 0, "badge_color": "#9CA3AF", "perks_en": "Welcome benefits", "perks_ar": "مزايا الترحيب", "sort_order": 30},
+            {"tier_name": "Preferred", "tier_code": "PREFERRED", "minimum_spend": 500, "discount_percent": 5, "badge_color": "#C8A96B", "perks_en": "Priority support and member offers", "perks_ar": "دعم أولوية وعروض للأعضاء", "sort_order": 20},
+            {"tier_name": "Circle", "tier_code": "CIRCLE", "minimum_spend": 1500, "discount_percent": 10, "badge_color": "#0F766E", "perks_en": "Early access and complimentary delivery", "perks_ar": "وصول مبكر وتوصيل مجاني", "sort_order": 10},
+        ]
+        for tier in tiers:
+            existing = frappe.db.get_value("Webshop Membership Tier", {"tier_code": tier["tier_code"]}, "name")
+            doc = frappe.get_doc("Webshop Membership Tier", existing) if existing else frappe.new_doc("Webshop Membership Tier")
+            doc.update(tier)
+            doc.enabled = 1
+            doc.save(ignore_permissions=True)
+
+    columns = set(frappe.db.get_table_columns("Item")) if frappe.db.exists("DocType", "Item") else set()
+    if "webshop_search_keywords" in columns:
+        items = frappe.get_all("Item", filters={"disabled": 0}, fields=["name", "item_name", "item_group", "webshop_search_keywords", "webshop_curated_tags"], limit_page_length=20, order_by="modified desc")
+        for row in items:
+            item = frappe.get_doc("Item", row.name)
+            if not item.webshop_search_keywords:
+                item.webshop_search_keywords = ", ".join(filter(None, [item.item_name, item.item_group, item.webshop_curated_tags or "everyday essentials"]))
+            if not item.webshop_curated_tags:
+                item.webshop_curated_tags = "everyday, staff picks"
+            item.save(ignore_permissions=True)
+
+    frappe.db.commit()
+    frappe.clear_cache()
+    return {"ok": True, "message": "Elite Phase 3 demo settings and sample data seeded safely."}
