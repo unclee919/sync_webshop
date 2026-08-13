@@ -1,5 +1,6 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from sync_webshop.api.utils import clear_webshop_cache
 
 @frappe.whitelist()
 def run_setup():
@@ -446,5 +447,6 @@ def seed_coffee_shop_demo():
             doc.save(ignore_permissions=True)
 
     frappe.db.commit()
+    clear_webshop_cache()
     frappe.clear_cache()
     return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups]}

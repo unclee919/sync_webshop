@@ -9,7 +9,7 @@ def get_content():
 	Returns this server's text content and settings.
 	"""
 	set_cors_headers()
-	cached = get_json_cache("content_elite_v2", {})
+	cached = get_json_cache("content_elite_v4", {})
 	if cached is not None:
 		return cached
 	try:
@@ -413,6 +413,15 @@ def get_content():
 
 	response = {
 		"site_name": settings.site_name,
+		"business_profile": {
+			"vertical": settings.get("business_vertical") or "General Retail",
+			"vertical_label_en": settings.get("business_vertical_label_en") or "Thoughtfully selected",
+			"vertical_label_ar": settings.get("business_vertical_label_ar") or "مختارات بعناية",
+			"intro_en": settings.get("business_intro_en") or settings.get("tagline_en") or "Everyday essentials, thoughtfully selected.",
+			"intro_ar": settings.get("business_intro_ar") or settings.get("tagline_ar") or "احتياجاتك اليومية، مختارة بعناية.",
+			"unit_label_en": settings.get("catalog_unit_label_en") or "item",
+			"unit_label_ar": settings.get("catalog_unit_label_ar") or "منتج",
+		},
 		"contact_us_text_en": settings.get("contact_us_text_en"),
 		"contact_us_text_ar": settings.get("contact_us_text_ar"),
 		"track_order_text_en": settings.get("track_order_text_en"),
