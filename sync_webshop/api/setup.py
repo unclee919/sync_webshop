@@ -502,4 +502,4 @@ def seed_coffee_shop_demo():
     frappe.db.commit()
     clear_webshop_cache()
     frappe.clear_cache()
-    return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups], "stock_entry": stock_entry_name, "warehouse": warehouse}
+    return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups], "stock_entry": stock_entry_name, "warehouse": warehouse, "company": company, "stock_entry_ready": bool(warehouse and company and frappe.db.exists("DocType", "Stock Entry"))}
