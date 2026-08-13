@@ -465,6 +465,26 @@ def seed_coffee_shop_demo():
         price_doc.currency = "SAR"
         price_doc.save(ignore_permissions=True)
 
+    stock_entry_name = None
+    warehouse = frappe.db.get_single_value("Stock Settings", "default_warehouse") if frappe.db.exists("DocType", "Stock Settings") else None
+    if not warehouse:
+        warehouse = frappe.db.get_value("Warehouse", {"is_group": 0, "disabled": 0}, "name")
+    company = frappe.db.get_single_value("Global Defaults", "default_company") if frappe.db.exists("DocType", "Global Defaults") else None
+    if warehouse and company and frappe.db.exists("DocType", "Stock Entry"):
+        marker = "Sync Webshop Coffee Demo Opening Stock"
+        stock_entry_name = frappe.db.exists("Stock Entry", {"remarks": marker})
+        if not stock_entry_name:
+            receipt = frappe.new_doc("Stock Entry")
+            receipt.stock_entry_type = "Material Receipt"
+            receipt.company = company
+            receipt.posting_date = frappe.utils.today()
+            receipt.remarks = marker
+            for row in items:
+                receipt.append("items", {"item_code": row["item_code"], "qty": 100, "uom": "Nos", "t_warehouse": warehouse, "basic_rate": row["price"]})
+            receipt.insert(ignore_permissions=True)
+            receipt.submit()
+            stock_entry_name = receipt.name
+
     if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
         questions = [
             {"question_key": "roast", "question_en": "Which cup sounds like you today?", "question_ar": "أي فنجان يناسبك اليوم؟", "options_json": '[{"label_en":"Bright and floral","label_ar":"مشرق وزهري","tag":"bright"},{"label_en":"Balanced and chocolatey","label_ar":"متوازن وشوكولاتي","tag":"warm"},{"label_en":"Bold and concentrated","label_ar":"قوي ومركز","tag":"statement"}]', "sort_order": 10},
@@ -480,4 +500,4 @@ def seed_coffee_shop_demo():
     frappe.db.commit()
     clear_webshop_cache()
     frappe.clear_cache()
-    return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups]}
+    return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups], "stock_entry": stock_entry_name, "warehouse": warehouse}
