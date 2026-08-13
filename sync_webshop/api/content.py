@@ -107,8 +107,10 @@ def get_content():
 			fields=["name", "section_title_en", "section_title_ar", "section_subtitle_en", "section_subtitle_ar", "sort_order"],
 			order_by="sort_order asc"
 		)
+			
 		price_list = _get_price_list()
-		currency = frappe.db.get_value("Price List", price_list, "currency") or "SAR"
+		currency = frappe.db.get_value("Price List", price_list, "currency") or frappe.db.get_single_value("Global Defaults", "default_currency") or ""
+
 
 		for sec in sections:
 			sec_doc = frappe.get_doc("Webshop Landing Section", sec.name)
@@ -123,6 +125,8 @@ def get_content():
 					{"price_list": price_list, "item_code": item_code, "selling": 1},
 					"price_list_rate"
 				) or 0
+				if float(rate) <= 0:
+					continue
 				items_list.append({
 					"item_code": item_code,
 					"item_name": item_doc.item_name,

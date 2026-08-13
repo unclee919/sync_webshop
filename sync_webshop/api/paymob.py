@@ -29,10 +29,14 @@ def _settings():
 
 
 def _secret(settings, fieldname):
+    """Read a protected Desk secret without leaking Frappe password-field errors."""
     try:
-        return settings.get_password(fieldname) or ""
+        value = settings.get_password(fieldname)
     except Exception:
-        return getattr(settings, fieldname, "") or ""
+        value = None
+    if value:
+        return value
+    return getattr(settings, fieldname, "") or ""
 
 
 def _int(value):

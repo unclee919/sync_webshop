@@ -21,10 +21,17 @@ def _get_prices(item_codes, price_list):
         return {}
     rows = frappe.get_all(
         "Item Price",
-        filters={"item_code": ["in", item_codes], "price_list": price_list, "selling": 1},
+        filters={"item_code": ["in", item_codes], "price_list": price_list, "selling": 1, "price_list_rate": [">", 0]},
         fields=["item_code", "price_list_rate", "currency"],
     )
     return {row.item_code: {"rate": row.price_list_rate, "currency": row.currency} for row in rows}
+
+
+def _positive_price_codes(price_list, item_codes=None):
+    filters = {"price_list": price_list, "selling": 1, "price_list_rate": [">", 0]}
+    if item_codes is not None:
+        filters["item_code"] = ["in", item_codes]
+    return frappe.get_all("Item Price", filters=filters, pluck="item_code")
 
 
 def _get_price_range(price_list, item_group=None):
@@ -202,6 +209,10 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         ]
 
     price_list = _get_price_list()
+    priced_codes = _positive_price_codes(price_list)
+    if not priced_codes:
+        return _empty_catalog(page, page_size, price_list, item_group)
+    filters["item_code"] = ["in", priced_codes]
     if min_price is not None or max_price is not None:
         price_filters = {"price_list": price_list, "selling": 1}
         if min_price is not None and max_price is not None:
@@ -213,7 +224,9 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         codes = frappe.get_all("Item Price", filters=price_filters, pluck="item_code")
         if not codes:
             return _empty_catalog(page, page_size, price_list, item_group)
-        filters["item_code"] = ["in", codes]
+        filters["item_code"] = ["in", list(set(filters["item_code"][1]).intersection(codes))]
+        if not filters["item_code"][1]:
+            return _empty_catalog(page, page_size, price_list, item_group)
 
     if attributes:
         matching_codes = None
@@ -309,6 +322,8 @@ def get_item(item_code):
     item = frappe.get_doc("Item", item_code)
     price_list = _get_price_list()
     price = (_get_prices([item_code], price_list).get(item_code) or {})
+    if not price or float(price.get("rate") or 0) <= 0:
+        frappe.throw("This item is not currently available for purchase.", frappe.ValidationError)
     stock = _get_stock([item_code]).get(item_code, {"available_qty": 0, "in_stock": False})
     attributes = _get_variant_attributes([item_code]).get(item_code, [])
     item_experience = _get_item_experience([item_code]).get(item_code, {})
@@ -443,6 +458,7 @@ def get_search_suggestions(search):
     ]
     price_list = _get_price_list()
     prices = _get_prices([row.item_code for row in items], price_list)
+    items = [row for row in items if float((prices.get(row.item_code) or {}).get("rate") or 0) > 0]
     results.extend([
         {
             "type": "item",
@@ -479,6 +495,10 @@ def get_recommendations(item_code=None, item_group=None, limit=8):
         filters["item_group"] = source_group
     if item_code:
         filters["item_code"] = ["!=", item_code]
+    priced_codes = _positive_price_codes(_get_price_list())
+    filters["item_code"] = ["in", priced_codes]
+    if item_code:
+        filters["item_code"] = ["in", [code for code in priced_codes if code != item_code]]
     items = frappe.get_all(
         "Item",
         filters=filters,
