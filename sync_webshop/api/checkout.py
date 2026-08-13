@@ -227,8 +227,7 @@ def get_checkout_settings():
             value = value.strip()
             if value and value not in configured_ids:
                 configured_ids.append(value)
-        if (paymob.enabled and getattr(paymob, "online_payment_enabled", 1) and paymob.public_key
-                and _password_present(paymob, "secret_key") and _password_present(paymob, "hmac_secret") and configured_ids):
+        if paymob.enabled and getattr(paymob, "online_payment_enabled", 1):
             methods = []
             for key, fieldname, label_en, label_ar in (
                 ("card", "card_integration_id", getattr(paymob, "card_label_en", None) or "Cards", getattr(paymob, "card_label_ar", None) or "البطاقات"),
@@ -256,7 +255,17 @@ def get_checkout_settings():
             ("apple_pay", "apple_pay_enabled", "Apple Pay", "Apple Pay"),
         )):
             if regional.get(fieldname):
-                regional_payment_options.append({"name": key, "label_en": label_en, "label_ar": label_ar, "safe_mode": not bool(regional.get("regional_live_mode"))})
+                option = {"name": key, "label_en": label_en, "label_ar": label_ar, "safe_mode": not bool(regional.get("regional_live_mode"))}
+                regional_payment_options.append(option)
+                # Also add as a selectable gateway
+                gateways.append({
+                    "name": key,
+                    "label_en": label_en,
+                    "label_ar": label_ar,
+                    "is_regional": True,
+                    "note_en": f"Pay with {label_en}",
+                    "note_ar": f"الدفع بواسطة {label_ar}",
+                })
     shipping_rules = frappe.get_all(
         "Webshop Shipping Rule",
         filters={"enabled": 1},
