@@ -388,5 +388,13 @@ def get_content():
 		"mega_menu_featured_title_en": settings.get("mega_menu_featured_title_en"),
 		"mega_menu_featured_title_ar": settings.get("mega_menu_featured_title_ar"),
 		"mega_menu_featured_url": settings.get("mega_menu_featured_url"),
+		"stories": stories_data,
+		"stories_enabled": settings.get("stories_enabled", 1),
+		"stories_title_en": settings.get("stories_title_en") or "The edit, in moments",
+		"stories_title_ar": settings.get("stories_title_ar") or "مختارات في لحظات",
+		"mobile_quick_actions_enabled": settings.get("mobile_quick_actions_enabled", 1),
+		"complete_the_look_enabled": settings.get("complete_the_look_enabled", 1),
+		"complete_the_look_title_en": settings.get("complete_the_look_title_en") or "Complete the look",
+		"complete_the_look_title_ar": settings.get("complete_the_look_title_ar") or "أكمل الإطلالة",
 	}
 	return set_json_cache("content", {}, response, expires_in_sec=120)
