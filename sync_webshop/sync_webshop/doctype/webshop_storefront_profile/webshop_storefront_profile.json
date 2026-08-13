@@ -1,0 +1,154 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Storefront Profile",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "profile_name",
+  "store_key",
+  "enabled",
+  "is_default",
+  "domain",
+  "label_en",
+  "label_ar",
+  "accent_color",
+  "price_list",
+  "warehouse",
+  "company"
+ ],
+ "fields": [
+  {
+   "fieldname": "profile_name",
+   "label": "Profile Name",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "store_key",
+   "label": "Store Key",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "is_default",
+   "label": "Default Storefront",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 0,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "domain",
+   "label": "Domain",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "label_en",
+   "label": "Label (English)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "label_ar",
+   "label": "Label (Arabic)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "accent_color",
+   "label": "Accent Color",
+   "fieldtype": "Color",
+   "options": null,
+   "default": "#C5A059",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "price_list",
+   "label": "Selling Price List",
+   "fieldtype": "Link",
+   "options": "Price List",
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "warehouse",
+   "label": "Default Warehouse",
+   "fieldtype": "Link",
+   "options": "Warehouse",
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "company",
+   "label": "Company",
+   "fieldtype": "Link",
+   "options": "Company",
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Sync Webshop Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Sync Webshop User",
+   "read": 1
+  }
+ ]
+}

@@ -212,9 +212,36 @@ def run_setup():
 		</div>
 	"""
 	help_doc.save(ignore_permissions=True)
+
+	# Create the two app roles used to separate configuration users from managers.
+	for role_name, desk_access in (("Sync Webshop User", 1), ("Sync Webshop Manager", 1)):
+		if not frappe.db.exists("Role", role_name):
+			frappe.get_doc({"doctype": "Role", "role_name": role_name, "desk_access": desk_access}).insert(ignore_permissions=True)
+
+	# Seed safe defaults for every new Elite settings Single. Secrets remain empty and are entered only in Desk.
+	elite_defaults = {
+		"Webshop AI Vision Settings": {"visual_search_enabled": 1, "auto_tagging_enabled": 1, "ai_model_name": "gpt-5-mini", "confidence_threshold": 0.85, "nlp_enabled": 1, "welcome_message_en": "Hello! I am your AI shopping assistant. How can I help you discover the right product?", "welcome_message_ar": "مرحباً! أنا مساعد التسوق الذكي. كيف يمكنني مساعدتك في اكتشاف المنتج المناسب؟"},
+		"Webshop Marketplace Settings": {"amazon_sa_enabled": 0, "noon_enabled": 0, "sync_interval_minutes": 30},
+		"Webshop Regional Payment Settings": {"regional_live_mode": 0, "tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1},
+		"Webshop PWA Settings": {"pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A", "offline_message_en": "You are currently offline. Browsing cached catalog.", "offline_message_ar": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ."},
+	}
+	for doctype, values in elite_defaults.items():
+		if frappe.db.exists("DocType", doctype):
+			doc = frappe.get_single(doctype)
+			changed = False
+			for fieldname, value in values.items():
+				if not doc.get(fieldname):
+					doc.set(fieldname, value)
+					changed = True
+			if changed:
+				doc.save(ignore_permissions=True)
+
+	if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
+		frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
+
 	frappe.db.commit()
-	
-	return "Setup completed successfully. Custom fields, Arabic labels, and Help Guide created."
+	clear_webshop_cache()
+	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, roles, and Help Guide created."
 
 
 @frappe.whitelist()

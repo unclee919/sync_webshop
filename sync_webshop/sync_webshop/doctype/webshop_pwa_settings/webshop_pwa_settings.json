@@ -1,0 +1,88 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop PWA Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pwa_enabled",
+  "app_short_name",
+  "theme_color",
+  "offline_message_en",
+  "offline_message_ar"
+ ],
+ "fields": [
+  {
+   "fieldname": "pwa_enabled",
+   "label": "Enable PWA Offline Service Worker",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "app_short_name",
+   "label": "App Short Name",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "Sync Webshop",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "theme_color",
+   "label": "Theme Color",
+   "fieldtype": "Color",
+   "options": null,
+   "default": "#173F3A",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "offline_message_en",
+   "label": "Offline Message (English)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "You are currently offline. Browsing cached catalog.",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "offline_message_ar",
+   "label": "Offline Message (Arabic)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ.",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Sync Webshop Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Sync Webshop User",
+   "read": 1
+  }
+ ]
+}

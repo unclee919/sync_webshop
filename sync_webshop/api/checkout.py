@@ -246,6 +246,17 @@ def get_checkout_settings():
                 "methods": methods,
                 "checkout_mode": getattr(paymob, "checkout_mode", None) or "redirect",
             })
+    regional_payment_options = []
+    if frappe.db.exists("DocType", "Webshop Regional Payment Settings"):
+        regional = frappe.get_single("Webshop Regional Payment Settings")
+        for key, fieldname, label_en, label_ar in ((
+            ("tabby", "tabby_enabled", "Tabby", "تابي"),
+            ("tamara", "tamara_enabled", "Tamara", "تمارا"),
+            ("mada", "mada_enabled", "Mada", "مدى"),
+            ("apple_pay", "apple_pay_enabled", "Apple Pay", "Apple Pay"),
+        )):
+            if regional.get(fieldname):
+                regional_payment_options.append({"name": key, "label_en": label_en, "label_ar": label_ar, "safe_mode": not bool(regional.get("regional_live_mode"))})
     shipping_rules = frappe.get_all(
         "Webshop Shipping Rule",
         filters={"enabled": 1},
@@ -259,6 +270,7 @@ def get_checkout_settings():
         pickup_warehouses = frappe.get_all("Warehouse", filters={"is_group": 0, "disabled": 0}, fields=fields, order_by="warehouse_name asc, name asc")
     response = {
         "payment_gateways": gateways,
+        "regional_payment_options": regional_payment_options,
         "fulfillment": {
             "pickup_enabled": pickup_enabled,
             "pickup_title_en": getattr(content_settings, "pickup_title_en", None) or "Store pickup",

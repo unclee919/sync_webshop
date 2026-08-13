@@ -24,4 +24,15 @@ doc_events = {
     "Webshop Product Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Review": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop SEO Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop AI Vision Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Marketplace Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Regional Payment Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop PWA Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+}
+
+
+scheduler_events = {
+    "hourly": [
+        "sync_webshop.api.elite.run_scheduled_marketplace_sync",
+    ],
 }

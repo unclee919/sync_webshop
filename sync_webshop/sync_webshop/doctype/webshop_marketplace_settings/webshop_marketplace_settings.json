@@ -1,0 +1,121 @@
+{
+ "doctype": "DocType",
+ "name": "Webshop Marketplace Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "amazon_sa_enabled",
+  "amazon_seller_id",
+  "amazon_mws_token",
+  "section_noon",
+  "noon_enabled",
+  "noon_partner_id",
+  "noon_api_key",
+  "sync_interval_minutes"
+ ],
+ "fields": [
+  {
+   "fieldname": "amazon_sa_enabled",
+   "label": "Enable Amazon Saudi Sync",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 0,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "amazon_seller_id",
+   "label": "Amazon Seller ID",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "amazon_mws_token",
+   "label": "Amazon MWS Auth Token",
+   "fieldtype": "Password",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "section_noon",
+   "label": "Noon Marketplace",
+   "fieldtype": "Section Break",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "noon_enabled",
+   "label": "Enable Noon Marketplace Sync",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 0,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "noon_partner_id",
+   "label": "Noon Partner ID",
+   "fieldtype": "Data",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "noon_api_key",
+   "label": "Noon API Key",
+   "fieldtype": "Password",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "sync_interval_minutes",
+   "label": "Inventory Sync Interval (Minutes)",
+   "fieldtype": "Int",
+   "options": null,
+   "default": 30,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Sync Webshop Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Sync Webshop User",
+   "read": 1
+  }
+ ]
+}
