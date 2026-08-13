@@ -353,6 +353,8 @@ def seed_coffee_shop_demo():
         "catalog_unit_label_en": "item",
         "catalog_unit_label_ar": "قطعة",
         "site_name": "Sync Coffee House",
+        "site_name_en": "Sync Coffee House",
+        "site_name_ar": "بيت قهوة سينك",
         "tagline_en": "Small-batch coffee for better daily rituals.",
         "tagline_ar": "قهوة محمصة بعناية لطقوس يومية أجمل.",
         "hero_quote_en": "Brew something worth slowing down for.",
