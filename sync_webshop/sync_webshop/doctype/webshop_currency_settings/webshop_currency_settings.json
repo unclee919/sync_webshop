@@ -24,7 +24,7 @@
             "label": "Exchange Rates JSON",
             "fieldtype": "Code",
             "options": "JSON",
-            "default": "{\"SAR\": 1}"
+            "default": "{\"SAR\": 1, \"AED\": 0.98, \"USD\": 0.2667, \"EUR\": 0.245}"
         }
     ]
 }

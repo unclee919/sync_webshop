@@ -241,14 +241,15 @@ def run_setup():
 		"Webshop Subscription Settings": {"enabled": 1, "discount_percent": 10, "intervals": "Monthly,Every 2 Months,Quarterly"},
 		"Webshop Courier Settings": {"provider": "Manual", "auto_waybill": 0},
 		"Webshop Return Policy": {"allowed_days": 14, "policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع."},
-		"Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667}'},
+		"Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD,EUR", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667, "EUR": 0.245}'},
 	}
 	for doctype, values in master_defaults.items():
 		if frappe.db.exists("DocType", doctype):
 			doc = frappe.get_single(doctype)
 			changed = False
 			for fieldname, value in values.items():
-				if not doc.get(fieldname):
+				placeholder_rate = doctype == "Webshop Currency Settings" and fieldname == "exchange_rates_json" and str(doc.get(fieldname) or "").replace(" ", "") in ("{\"SAR\":1}", "")
+				if not doc.get(fieldname) or placeholder_rate:
 					doc.set(fieldname, value)
 					changed = True
 			if changed:
