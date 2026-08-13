@@ -1,0 +1,36 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Vendor",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "vendor_name",
+            "label": "Vendor Name",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "email",
+            "label": "Email",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "commission_percent",
+            "label": "Commission %",
+            "fieldtype": "Float",
+            "default": 15.0
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Active\nPending\nSuspended",
+            "default": "Active"
+        }
+    ]
+}

@@ -286,9 +286,29 @@ def run_setup():
 	if frappe.db.exists("DocType", "Webshop Fraud Rule") and not frappe.db.exists("Webshop Fraud Rule", {"rule_key": "High Value"}):
 		frappe.get_doc({"doctype": "Webshop Fraud Rule", "rule_key": "High Value", "threshold": 5000, "action": "Review", "enabled": 1}).insert(ignore_permissions=True)
 
+	ecosystem_defaults = {
+		"Webshop Ecosystem AI Settings": {"rag_support_enabled": 1, "demand_forecaster_enabled": 1, "marketing_hub_enabled": 1},
+		"Webshop Marketplace Vendor Settings": {"multi_vendor_enabled": 1, "commission_percent": 15.0, "affiliate_enabled": 1},
+		"Webshop Fintech Settings": {"gift_cards_enabled": 1, "subscription_box_enabled": 1},
+		"Webshop Omnichannel Settings": {"bopis_enabled": 1, "kiosk_mode_enabled": 1},
+	}
+	for doctype, values in ecosystem_defaults.items():
+		if frappe.db.exists("DocType", doctype):
+			doc = frappe.get_single(doctype)
+			changed = False
+			for fieldname, value in values.items():
+				if not doc.get(fieldname):
+					doc.set(fieldname, value)
+					changed = True
+			if changed:
+				doc.save(ignore_permissions=True)
+
+	if frappe.db.exists("DocType", "Webshop Gift Card") and not frappe.db.exists("Webshop Gift Card", {"code": "SYNC-ELITE-2026"}):
+		frappe.get_doc({"doctype": "Webshop Gift Card", "code": "SYNC-ELITE-2026", "balance": 100.0, "remaining_balance": 100.0, "status": "Active"}).insert(ignore_permissions=True)
+
 	frappe.db.commit()
 	clear_webshop_cache()
-	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, roles, and Help Guide created."
+	return "Setup completed successfully. Custom fields, Arabic labels, Elite settings, Enterprise settings, Ecosystem settings, roles, and Help Guide created."
 
 
 @frappe.whitelist()

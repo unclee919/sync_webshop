@@ -44,6 +44,11 @@ doc_events = {
     "Webshop Volume Pricing Rule": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Flash Sale Item": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Fraud Rule": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Ecosystem AI Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Marketplace Vendor Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Fintech Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Omnichannel Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Gift Card": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
 
 
