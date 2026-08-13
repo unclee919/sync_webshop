@@ -1,0 +1,35 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop B2B Wholesale Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "b2b_enabled",
+            "label": "Enable B2B Wholesale Portal",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "volume_pricing_enabled",
+            "label": "Enable Volume-Based Pricing",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "corporate_credit_enabled",
+            "label": "Enable Corporate Credit Lines",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "quick_order_enabled",
+            "label": "Enable Bulk Quick Order Sheet",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
+}

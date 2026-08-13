@@ -34,6 +34,16 @@ doc_events = {
     "Webshop Return Policy": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Currency Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Social Feed": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Enterprise AI Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop B2B Wholesale Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Live Shopping Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Flash Sale Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Recovery Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Fraud Shield Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Infrastructure Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Volume Pricing Rule": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Flash Sale Item": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Fraud Rule": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
 
 
@@ -41,5 +51,7 @@ scheduler_events = {
     "hourly": [
         "sync_webshop.api.elite.run_scheduled_marketplace_sync",
         "sync_webshop.api.master_class.process_due_subscriptions",
+        "sync_webshop.api.enterprise.process_abandoned_cart_recovery",
+        "sync_webshop.api.enterprise.run_enterprise_maintenance",
     ],
 }

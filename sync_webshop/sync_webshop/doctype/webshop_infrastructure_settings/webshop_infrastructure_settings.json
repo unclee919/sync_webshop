@@ -1,0 +1,23 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Infrastructure Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "edge_cache_enabled",
+            "label": "Enable Global Edge Caching",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "auto_healing_enabled",
+            "label": "Enable Auto-Healing Worker Queues",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
+}

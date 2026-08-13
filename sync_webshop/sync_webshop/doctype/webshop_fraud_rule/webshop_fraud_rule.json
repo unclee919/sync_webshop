@@ -1,0 +1,37 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Fraud Rule",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "enabled",
+            "label": "Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "rule_key",
+            "label": "Rule Key",
+            "fieldtype": "Select",
+            "options": "High Value\nMultiple Failed Payments\nUnusual Velocity\nAddress Mismatch",
+            "default": "High Value"
+        },
+        {
+            "fieldname": "threshold",
+            "label": "Threshold",
+            "fieldtype": "Float",
+            "default": 5000
+        },
+        {
+            "fieldname": "action",
+            "label": "Action",
+            "fieldtype": "Select",
+            "options": "Review\nHold\nReject",
+            "default": "Review"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Live Shopping Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "live_stream_enabled",
+            "label": "Enable Live Shopping Stream",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "stream_url",
+            "label": "Stream Embed URL / HLS",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "stream_title_en",
+            "label": "Stream Title (English)",
+            "fieldtype": "Data",
+            "default": "Live Tasting & Masterclass"
+        },
+        {
+            "fieldname": "stream_title_ar",
+            "label": "Stream Title (Arabic)",
+            "fieldtype": "Data",
+            "default": "\u062c\u0644\u0633\u0629 \u062a\u0630\u0648\u0642 \u062d\u064a\u0629 \u0648\u0631\u0634\u0629 \u0639\u0645\u0644"
+        }
+    ]
+}
