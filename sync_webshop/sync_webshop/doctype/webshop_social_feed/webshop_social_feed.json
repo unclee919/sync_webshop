@@ -1,0 +1,40 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Social Feed",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 0,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "enabled",
+            "label": "Enabled",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "platform",
+            "label": "Platform",
+            "fieldtype": "Select",
+            "options": "Instagram\nTikTok",
+            "default": "Instagram"
+        },
+        {
+            "fieldname": "post_image",
+            "label": "Post Image",
+            "fieldtype": "Attach Image"
+        },
+        {
+            "fieldname": "caption",
+            "label": "Caption",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "linked_item_code",
+            "label": "Linked Item Code",
+            "fieldtype": "Link",
+            "options": "Item"
+        }
+    ]
+}

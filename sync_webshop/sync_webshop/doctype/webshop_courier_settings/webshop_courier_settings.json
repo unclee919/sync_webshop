@@ -1,0 +1,29 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Courier Settings",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "provider",
+            "label": "Courier Provider",
+            "fieldtype": "Select",
+            "options": "Aramex\nSMSA\nZajil\nManual",
+            "default": "SMSA"
+        },
+        {
+            "fieldname": "api_key",
+            "label": "API Key / Token",
+            "fieldtype": "Password"
+        },
+        {
+            "fieldname": "auto_waybill",
+            "label": "Auto-Generate Waybill on Order",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
+}

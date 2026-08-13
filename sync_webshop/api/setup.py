@@ -236,6 +236,26 @@ def run_setup():
 			if changed:
 				doc.save(ignore_permissions=True)
 
+	master_defaults = {
+		"Webshop Landing Page Builder": {"enabled": 1, "hero_heading_en": "Small details. Better everyday living.", "hero_heading_ar": "تفاصيل صغيرة. حياة يومية أفضل.", "featured_grid_title_en": "The edit, in moments", "featured_grid_title_ar": "مختارات في لحظات"},
+		"Webshop Subscription Settings": {"enabled": 1, "discount_percent": 10, "intervals": "Monthly,Every 2 Months,Quarterly"},
+		"Webshop Courier Settings": {"provider": "Manual", "auto_waybill": 0},
+		"Webshop Return Policy": {"allowed_days": 14, "policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع."},
+		"Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667}'},
+	}
+	for doctype, values in master_defaults.items():
+		if frappe.db.exists("DocType", doctype):
+			doc = frappe.get_single(doctype)
+			changed = False
+			for fieldname, value in values.items():
+				if not doc.get(fieldname):
+					doc.set(fieldname, value)
+					changed = True
+			if changed:
+				doc.save(ignore_permissions=True)
+	if frappe.db.exists("DocType", "Webshop Social Feed") and not frappe.db.exists("Webshop Social Feed", {"caption": "Coffee ritual, thoughtfully selected."}):
+		frappe.get_doc({"doctype": "Webshop Social Feed", "platform": "Instagram", "caption": "Coffee ritual, thoughtfully selected.", "linked_item_code": "COFFEE-ETHIOPIA-001", "enabled": 1}).insert(ignore_permissions=True)
+
 	if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
 		frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
 

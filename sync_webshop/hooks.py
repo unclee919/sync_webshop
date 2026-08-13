@@ -28,11 +28,18 @@ doc_events = {
     "Webshop Marketplace Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop Regional Payment Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
     "Webshop PWA Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Landing Page Builder": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Subscription Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Courier Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Return Policy": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Currency Settings": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
+    "Webshop Social Feed": {"on_update": "sync_webshop.api.utils.clear_webshop_cache"},
 }
 
 
 scheduler_events = {
     "hourly": [
         "sync_webshop.api.elite.run_scheduled_marketplace_sync",
+        "sync_webshop.api.master_class.process_due_subscriptions",
     ],
 }

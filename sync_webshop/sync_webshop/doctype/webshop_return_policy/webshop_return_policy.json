@@ -1,0 +1,27 @@
+{
+    "doctype": "DocType",
+    "name": "Webshop Return Policy",
+    "module": "Sync Webshop",
+    "custom": 1,
+    "issingle": 1,
+    "is_table": 0,
+    "editable_grid": 1,
+    "fields": [
+        {
+            "fieldname": "allowed_days",
+            "label": "Return Window (Days)",
+            "fieldtype": "Int",
+            "default": 14
+        },
+        {
+            "fieldname": "policy_text_en",
+            "label": "Return Policy (English)",
+            "fieldtype": "Text"
+        },
+        {
+            "fieldname": "policy_text_ar",
+            "label": "Return Policy (Arabic)",
+            "fieldtype": "Text"
+        }
+    ]
+}
