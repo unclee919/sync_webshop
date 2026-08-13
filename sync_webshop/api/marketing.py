@@ -1,7 +1,57 @@
 import frappe
 import json
 import requests
+from frappe.utils import flt, getdate, nowdate
+
 from sync_webshop.api.utils import set_cors_headers
+
+
+@frappe.whitelist(allow_guest=True)
+def validate_coupon(coupon_code, total_amount=0):
+    set_cors_headers()
+    settings = frappe.get_single("Webshop Content Settings")
+    if not getattr(settings, "enable_coupons", 0):
+        frappe.throw("Coupons are currently disabled")
+
+    normalized_code = str(coupon_code or "").strip()
+    if not normalized_code:
+        frappe.throw("Coupon code is required")
+
+    coupon = frappe.db.get_value(
+        "Coupon Code",
+        {"coupon_code": normalized_code},
+        ["name", "pricing_rule", "valid_from", "valid_upto", "maximum_use", "used"],
+        as_dict=True,
+    )
+    if not coupon:
+        frappe.throw("Invalid coupon code")
+
+    today = getdate(nowdate())
+    if coupon.valid_from and getdate(coupon.valid_from) > today:
+        frappe.throw("Coupon is not yet valid")
+    if coupon.valid_upto and getdate(coupon.valid_upto) < today:
+        frappe.throw("Coupon has expired")
+    if coupon.maximum_use and flt(coupon.used) >= flt(coupon.maximum_use):
+        frappe.throw("Coupon usage limit has been reached")
+    if not coupon.pricing_rule:
+        frappe.throw("Coupon has no pricing rule")
+
+    pricing_rule = frappe.get_doc("Pricing Rule", coupon.pricing_rule)
+    if getattr(pricing_rule, "disable", 0):
+        frappe.throw("Coupon is disabled")
+
+    subtotal = max(flt(total_amount), 0)
+    discount_amount = 0
+    if pricing_rule.rate_or_discount == "Discount Amount":
+        discount_amount = flt(pricing_rule.discount_amount)
+    elif pricing_rule.rate_or_discount == "Discount Percentage":
+        discount_amount = subtotal * flt(pricing_rule.discount_percentage) / 100
+
+    return {
+        "coupon_code": normalized_code,
+        "discount_amount": min(max(discount_amount, 0), subtotal),
+        "pricing_rule": pricing_rule.name,
+    }
 
 
 @frappe.whitelist()
