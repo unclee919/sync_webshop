@@ -219,7 +219,15 @@
   "social_proof_enabled",
   "social_proof_viewer_enabled",
   "social_proof_viewer_template_en",
-  "social_proof_viewer_template_ar"
+  "social_proof_viewer_template_ar",
+  "business_profile_section",
+  "business_vertical",
+  "business_vertical_label_en",
+  "business_vertical_label_ar",
+  "business_intro_en",
+  "business_intro_ar",
+  "catalog_unit_label_en",
+  "catalog_unit_label_ar"
  ],
  "fields": [
   {
@@ -1402,6 +1410,53 @@
    "label": "Viewer Pulse Template (Arabic)",
    "fieldtype": "Data",
    "default": "{count} أشخاص يشاهدون هذا الآن"
+  },
+  {
+   "fieldname": "business_profile_section",
+   "label": "Business Profile",
+   "fieldtype": "Section Break",
+   "description": "Business-neutral storefront profile. Change this in Desk when serving a different category."
+  },
+  {
+   "fieldname": "business_vertical",
+   "label": "Business Vertical",
+   "fieldtype": "Select",
+   "options": "General Retail\nCoffee Shop\nFurniture\nServices\nFood & Beverage\nHospitality\nOther",
+   "default": "General Retail"
+  },
+  {
+   "fieldname": "business_vertical_label_en",
+   "label": "Business Vertical Label (English)",
+   "fieldtype": "Data",
+   "default": "Thoughtfully selected"
+  },
+  {
+   "fieldname": "business_vertical_label_ar",
+   "label": "Business Vertical Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "مختارات بعناية"
+  },
+  {
+   "fieldname": "business_intro_en",
+   "label": "Business Introduction (English)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "business_intro_ar",
+   "label": "Business Introduction (Arabic)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "catalog_unit_label_en",
+   "label": "Catalog Unit Label (English)",
+   "fieldtype": "Data",
+   "default": "item"
+  },
+  {
+   "fieldname": "catalog_unit_label_ar",
+   "label": "Catalog Unit Label (Arabic)",
+   "fieldtype": "Data",
+   "default": "منتج"
   }
  ],
  "issingle": 1,

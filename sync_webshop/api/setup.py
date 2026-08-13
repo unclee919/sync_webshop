@@ -29,8 +29,14 @@ def run_setup():
 			{"fieldname": "webshop_quote_min_qty", "label": "Request Quote Minimum Quantity", "fieldtype": "Float", "insert_after": "webshop_quote_enabled"},
 			{"fieldname": "webshop_quote_note_en", "label": "Quote Note (English)", "fieldtype": "Small Text", "insert_after": "webshop_quote_min_qty"},
 			{"fieldname": "webshop_quote_note_ar", "label": "Quote Note (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_quote_note_en"},
-		],
-		"Sales Order": [
+			],
+			"Item Group": [
+				{"fieldname": "webshop_label_en", "label": "Storefront Label (English)", "fieldtype": "Data", "insert_after": "item_group_name"},
+				{"fieldname": "webshop_label_ar", "label": "Storefront Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_label_en"},
+				{"fieldname": "webshop_description_en", "label": "Storefront Description (English)", "fieldtype": "Small Text", "insert_after": "webshop_label_ar"},
+				{"fieldname": "webshop_description_ar", "label": "Storefront Description (Arabic)", "fieldtype": "Small Text", "insert_after": "webshop_description_en"},
+			],
+			"Sales Order": [
 			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
 			{"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},
 			{"fieldname": "webshop_gift_message", "label": "Gift Message", "fieldtype": "Small Text", "insert_after": "webshop_gift_wrap"},
@@ -328,3 +334,117 @@ def seed_phase3_demo():
     frappe.db.commit()
     frappe.clear_cache()
     return {"ok": True, "message": "Elite Phase 3 demo settings and sample data seeded safely."}
+
+
+@frappe.whitelist()
+def seed_coffee_shop_demo():
+    """Seed a reversible, business-neutral Coffee Shop profile for multi-business QA."""
+    if frappe.session.user == "Guest":
+        frappe.throw("Guest users cannot seed demo settings.")
+
+    settings = frappe.get_single("Webshop Content Settings")
+    profile = {
+        "business_vertical": "Coffee Shop",
+        "business_vertical_label_en": "Coffee & brew",
+        "business_vertical_label_ar": "القهوة وأدوات التحضير",
+        "business_intro_en": "Small-batch coffee, considered brewing tools, and a calmer daily ritual.",
+        "business_intro_ar": "قهوة محمصة بعناية وأدوات تحضير مختارة لطقس يومي أكثر هدوءاً.",
+        "catalog_unit_label_en": "item",
+        "catalog_unit_label_ar": "قطعة",
+        "site_name": "Sync Coffee House",
+        "tagline_en": "Small-batch coffee for better daily rituals.",
+        "tagline_ar": "قهوة محمصة بعناية لطقوس يومية أجمل.",
+        "hero_quote_en": "Brew something worth slowing down for.",
+        "hero_quote_ar": "حضّر لحظتك على مهل.",
+        "about_text_en": "A Desk-configured coffee shop demo with beans, brewing tools, and considered café details.",
+        "about_text_ar": "عرض تجريبي لمقهى يتم التحكم به من لوحة Desk ويضم البن وأدوات التحضير وتفاصيل المقهى.",
+    }
+    for fieldname, value in profile.items():
+        if settings.meta.has_field(fieldname):
+            settings.set(fieldname, value)
+    settings.save(ignore_permissions=True)
+
+    parent_group = frappe.db.get_value("Item Group", {"parent_item_group": ["is", "not set"], "is_group": 1}, "name") or frappe.db.get_value("Item Group", {}, "name")
+    if not parent_group:
+        parent_group = "All Item Groups"
+    groups = [
+        ("Coffee Beans", "حبوب القهوة"),
+        ("Brewing Gear", "أدوات التحضير"),
+        ("Cafe Goods", "مستلزمات المقهى"),
+    ]
+    group_descriptions = {
+        "Coffee Beans": ("Beans for espresso, filter, and slower mornings.", "حبوب للإسبريسو والترشيح ولصباحات أكثر هدوءاً."),
+        "Brewing Gear": ("Considered tools for a more precise brew.", "أدوات مختارة لتحضير أكثر دقة."),
+        "Cafe Goods": ("Cups and details for the café ritual.", "أكواب وتفاصيل لطقس المقهى."),
+    }
+    for group_name, group_ar in groups:
+        existing_group = frappe.db.exists("Item Group", group_name)
+        group = frappe.get_doc("Item Group", existing_group) if existing_group else frappe.new_doc("Item Group")
+        group.item_group_name = group_name
+        group.parent_item_group = parent_group
+        group.is_group = 0
+        if group.meta.has_field("item_group_name_ar"):
+            group.item_group_name_ar = group_ar
+        if group.meta.has_field("webshop_label_en"):
+            group.webshop_label_en = group_name
+        if group.meta.has_field("webshop_label_ar"):
+            group.webshop_label_ar = group_ar
+        description_en, description_ar = group_descriptions[group_name]
+        if group.meta.has_field("webshop_description_en"):
+            group.webshop_description_en = description_en
+        if group.meta.has_field("webshop_description_ar"):
+            group.webshop_description_ar = description_ar
+        group.save(ignore_permissions=True)
+
+    items = [
+        {"item_code": "COFFEE-ETHIOPIA-001", "item_name": "Ethiopia Natural Coffee Beans", "item_group": "Coffee Beans", "description": "Floral, fruit-forward beans for filter brewing and slow mornings.", "price": 68, "image": "/files/pouch733759733759.png", "style_tags": "natural, crafted, bright", "keywords": "coffee, beans, Ethiopia, filter, floral"},
+        {"item_code": "COFFEE-HOUSE-001", "item_name": "Sync House Blend Beans", "item_group": "Coffee Beans", "description": "A balanced daily blend with chocolate notes and a smooth finish.", "price": 54, "image": "/files/kit2a65be.png", "style_tags": "everyday, warm, crafted", "keywords": "coffee, beans, house blend, chocolate, espresso"},
+        {"item_code": "COFFEE-KETTLE-001", "item_name": "Brushed Steel Pour-Over Kettle", "item_group": "Brewing Gear", "description": "A precise gooseneck kettle for calm, controlled pour-over brewing.", "price": 249, "image": "/files/lampa1dbe8a1dbe8.png", "style_tags": "modern, crafted, statement", "keywords": "kettle, pour over, brewing, coffee gear"},
+        {"item_code": "COFFEE-CUP-001", "item_name": "Stoneware Espresso Cup", "item_group": "Cafe Goods", "description": "A tactile stoneware cup for espresso, cortado, or a small daily pause.", "price": 39, "image": "/files/mug1a117f1a117f.png", "style_tags": "natural, everyday, warm", "keywords": "espresso cup, ceramic, cafe, coffee cup"},
+    ]
+    price_list = frappe.get_single("Webshop API Settings").default_price_list or "Standard Selling"
+    for row in items:
+        if frappe.db.exists("Item", row["item_code"]):
+            item = frappe.get_doc("Item", row["item_code"])
+        else:
+            item = frappe.new_doc("Item")
+            item.item_code = row["item_code"]
+            item.item_name = row["item_name"]
+            item.item_group = row["item_group"]
+            item.stock_uom = "Nos"
+            item.is_stock_item = 1
+        item.description = row["description"]
+        item.image = row["image"]
+        for fieldname, value in {
+            "webshop_style_tags": row["style_tags"],
+            "webshop_curated_tags": "coffee, staff picks, everyday",
+            "webshop_search_keywords": row["keywords"],
+        }.items():
+            if item.meta.has_field(fieldname):
+                item.set(fieldname, value)
+        item.save(ignore_permissions=True)
+        price_filters = {"item_code": item.item_code, "price_list": price_list, "selling": 1}
+        price_name = frappe.db.get_value("Item Price", price_filters, "name")
+        price_doc = frappe.get_doc("Item Price", price_name) if price_name else frappe.new_doc("Item Price")
+        price_doc.item_code = item.item_code
+        price_doc.price_list = price_list
+        price_doc.price_list_rate = row["price"]
+        price_doc.selling = 1
+        price_doc.currency = "SAR"
+        price_doc.save(ignore_permissions=True)
+
+    if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
+        questions = [
+            {"question_key": "roast", "question_en": "Which cup sounds like you today?", "question_ar": "أي فنجان يناسبك اليوم؟", "options_json": '[{"label_en":"Bright and floral","label_ar":"مشرق وزهري","tag":"bright"},{"label_en":"Balanced and chocolatey","label_ar":"متوازن وشوكولاتي","tag":"warm"},{"label_en":"Bold and concentrated","label_ar":"قوي ومركز","tag":"statement"}]', "sort_order": 10},
+            {"question_key": "ritual", "question_en": "How do you like to brew?", "question_ar": "كيف تحب تحضير قهوتك؟", "options_json": '[{"label_en":"Slow pour-over","label_ar":"ترشيح بطيء","tag":"crafted"},{"label_en":"Quick espresso","label_ar":"إسبريسو سريع","tag":"everyday"},{"label_en":"A shared café moment","label_ar":"لحظة مقهى مشتركة","tag":"warm"}]', "sort_order": 20},
+        ]
+        for row in questions:
+            existing = frappe.db.get_value("Webshop Style Quiz Question", {"question_key": row["question_key"]}, "name")
+            doc = frappe.get_doc("Webshop Style Quiz Question", existing) if existing else frappe.new_doc("Webshop Style Quiz Question")
+            doc.update(row)
+            doc.enabled = 1
+            doc.save(ignore_permissions=True)
+
+    frappe.db.commit()
+    frappe.clear_cache()
+    return {"ok": True, "business_vertical": "Coffee Shop", "items": [row["item_code"] for row in items], "item_groups": [row[0] for row in groups]}

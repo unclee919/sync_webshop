@@ -382,16 +382,22 @@ def get_categories():
     cached = get_json_cache("categories", {})
     if cached is not None:
         return cached
+    group_columns = set(frappe.db.get_table_columns("Item Group"))
+    optional_fields = [field for field in ["webshop_label_en", "webshop_label_ar", "webshop_description_en", "webshop_description_ar"] if field in group_columns]
     groups = frappe.get_all(
         "Item Group",
         filters={"show_in_website": 1},
-        fields=["name", "item_group_name", "image", "parent_item_group"],
+        fields=["name", "item_group_name", "image", "parent_item_group"] + optional_fields,
         order_by="name asc",
     )
     nodes = {
         group.name: {
             "name": group.name,
-            "label": group.item_group_name,
+            "label": group.get("webshop_label_en") or group.item_group_name,
+            "label_en": group.get("webshop_label_en") or group.item_group_name,
+            "label_ar": group.get("webshop_label_ar") or group.get("webshop_label_en") or group.item_group_name,
+            "description_en": group.get("webshop_description_en") or "",
+            "description_ar": group.get("webshop_description_ar") or group.get("webshop_description_en") or "",
             "image": full_url(group.image),
             "parent": group.parent_item_group,
             "children": [],
