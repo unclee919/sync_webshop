@@ -1,6 +1,5 @@
 import frappe
 import stripe
-import json
 from sync_webshop.api.utils import set_cors_headers
 
 @frappe.whitelist(allow_guest=True)
@@ -36,11 +35,11 @@ def stripe_webhook():
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
         )
-    except ValueError as e:
+    except ValueError:
         # Invalid payload
         frappe.local.response.http_status_code = 400
         return {"error": "Invalid payload"}
-    except stripe.error.SignatureVerificationError as e:
+    except stripe.error.SignatureVerificationError:
         # Invalid signature
         frappe.local.response.http_status_code = 400
         return {"error": "Invalid signature"}

@@ -1,4 +1,3 @@
-import frappe
 import asyncio
 import aiohttp
 import time

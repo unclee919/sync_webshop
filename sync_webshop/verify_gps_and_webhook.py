@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def run_verification():
     print("=== 1. Testing GPS Location Picker E2E Recording in Sales Order ===")

@@ -81,14 +81,6 @@ def visual_search_match():
     return {"ok": True, "matches": result}
 
 
-@frappe.whitelist(allow_guest=True)
-def sync_marketplaces():
-    """Trigger background synchronization with Amazon Saudi and Noon marketplaces."""
-    set_cors_headers()
-    if frappe.session.user == "Guest":
-        frappe.throw("Unauthorized marketplace sync.")
-    return {"ok": True, "message": "Successfully synchronized inventory and orders with Amazon Saudi and Noon API endpoints."}
-
 
 @frappe.whitelist(allow_guest=True)
 def get_storefront_profiles():

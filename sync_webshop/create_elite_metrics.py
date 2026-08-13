@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def create_metrics():
     # 1. Create Number Cards

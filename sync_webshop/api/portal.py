@@ -296,7 +296,7 @@ def request_return(order_name, item_code, qty=1, reason=None, email=None, phone=
     customer = _find_customer(email=email, phone=phone)
     if not customer:
         frappe.throw("Customer verification is required before requesting a return.")
-    order = _guard_order(order_name, customer)
+    _guard_order(order_name, customer)
     order_item = frappe.db.get_value(
         "Sales Order Item",
         {"parent": order_name, "item_code": item_code},

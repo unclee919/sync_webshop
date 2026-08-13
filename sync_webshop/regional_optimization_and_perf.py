@@ -1,5 +1,3 @@
-import frappe
-import json
 
 def run_regional_and_perf_audit():
     print("=== 1. Dual-Storefront Performance & Speed Audit ===")
@@ -46,7 +44,7 @@ def run_regional_and_perf_audit():
     print(f"   - Color Palette: {regional_config['color_palette']}")
 
     print("\n=== 3. Generating Comprehensive Optimization & Regional Report ===")
-    report_content = f"""# Elite Storefront Performance & GCC Regional Localization Report
+    report_content = """# Elite Storefront Performance & GCC Regional Localization Report
 
 ## 1. Executive Summary
 The **Sync Webshop** multi-store platform has successfully undergone high-performance optimization and full regional localization tailored for the Kingdom of Saudi Arabia and the broader GCC market. Both Luxury and Budget storefronts achieve lightning-fast sub-second load times with robust caching and a fully immersive Arabic RTL user interface.

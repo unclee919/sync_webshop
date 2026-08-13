@@ -2,8 +2,6 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import now_datetime
-from sync_webshop.api.utils import clear_webshop_cache
 
 @frappe.whitelist(allow_guest=True)
 def get_ecosystem_settings():

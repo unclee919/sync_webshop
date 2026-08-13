@@ -1,9 +1,8 @@
 import json
 import re
-from datetime import datetime
 
 import frappe
-from frappe.utils import flt, get_datetime, now_datetime, today
+from frappe.utils import flt, get_datetime, now_datetime
 
 from sync_webshop.api.utils import full_url, require_catalog_access, set_cors_headers
 

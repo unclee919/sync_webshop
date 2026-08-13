@@ -1,9 +1,6 @@
-import frappe
 import asyncio
 import aiohttp
 import time
-import hmac
-import hashlib
 
 def review_hmac_code():
     print("=== 1. Reviewing Paymob HMAC Signature Verification Code ==/")
@@ -45,7 +42,7 @@ async def simulate_geolocation_request(session, url, sem):
                 status = response.status
                 duration = time.time() - start
                 return status, duration
-        except Exception as e:
+        except Exception:
             return 500, time.time() - start
 
 async def run_load_test():

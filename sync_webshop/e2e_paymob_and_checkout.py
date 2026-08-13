@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def e2e_paymob_test():
     print("=== 1. E2E Customer Journey & Paymob Checkout Simulation ===")

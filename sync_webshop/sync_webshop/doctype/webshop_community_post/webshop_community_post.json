@@ -23,7 +23,7 @@
   },
   {
    "fieldname": "image_url",
-   "fieldtype": "AttachImage",
+   "fieldtype": "Attach Image",
    "label": "Post Photo",
    "reqd": 1
   },

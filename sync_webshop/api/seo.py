@@ -47,7 +47,7 @@ def get_sitemap():
         for item in items:
             urls.append(f"<url><loc>{base_url}/product/{frappe.utils.data.quote(item.item_code)}</loc><priority>0.9</priority></url>")
             
-        xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         xml += "\n".join(urls)
         xml += "\n</urlset>"
         

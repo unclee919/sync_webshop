@@ -1,6 +1,5 @@
 import frappe
 
-from sync_webshop.api.catalog import _get_price_list, _get_prices
 from sync_webshop.api.portal import _find_customer, _guard_order
 from sync_webshop.api.utils import get_json_cache, set_cors_headers, set_json_cache
 

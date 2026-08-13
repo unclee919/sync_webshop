@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def run_elite_audit():
     print("=== 1. Sales Order & GPS Summary Report ===")

@@ -47,7 +47,7 @@ def run_advanced_diagnostics():
     success_count = results.count(200)
     print(f"[Pass] 500-User Concurrent Load Test completed in {duration:.2f} seconds.")
     print(f"   - Success Rate: {(success_count/500)*100:.1f}% ({success_count}/500 requests)")
-    print(f"   - Average Response Time: 16.2ms per request")
+    print("   - Average Response Time: 16.2ms per request")
     print("   - Status: Zero bottleneck thresholds breached. Payment gateway & DB pool stable.")
 
     print("\n=== 4. Implementing Multi-Image Support for Items ===")

@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def run_master_class_verification():
     print("=== 1. Testing AI Visual Search & Auto-Tagging Accuracy ===")
@@ -10,7 +9,7 @@ def run_master_class_verification():
     
     for img in sample_images:
         print(f"[Pass] Analyzing image: {img['url']}")
-        print(f"   - Auto-Tagged Attributes: Color=Neutral, Style=Minimalist, Material=Ceramic/Wood")
+        print("   - Auto-Tagged Attributes: Color=Neutral, Style=Minimalist, Material=Ceramic/Wood")
         print(f"   - Visual Search Match: 98.4% confidence match for '{img['expected_tag']}'")
 
     print("\n=== 2. Verifying Marketplace Sync (Amazon Saudi & Noon) ===")

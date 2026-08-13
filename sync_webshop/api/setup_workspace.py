@@ -2,8 +2,6 @@ import frappe
 import json
 
 def setup_workspace():
-    workspace_name = "Sync Webshop"
-    
     # 1. Ensure Module Def exists
     if not frappe.db.exists("Module Def", "Sync Webshop"):
         frappe.get_doc({

@@ -1,5 +1,4 @@
 import json
-from datetime import date
 
 import frappe
 from frappe.utils import add_months, getdate, today

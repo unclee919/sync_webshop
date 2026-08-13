@@ -1,5 +1,4 @@
 import frappe
-import json
 
 def apply_theme():
     theme_json = {"logo":"/files/stBnm71.jpg","favicon":"/files/yGTT3y7.jpg","layout_style":"Bold","primary_color":"#6F4E37","secondary_color":"#C9A66B","accent_color":"#2E2A25","background_color":"#f2f4f5","font_heading":"Playfair Display","font_body":"Cairo","hero_background_image":"/files/pono.jpeg","top_bar_bg_color":"#EC864B","top_bar_text_color":"#f58989","header_bg_color":"#39E4A5","header_text_color":"#852146","nav_bg_color":"#4463F0","nav_text_color":"#0f0f0f","footer_bg_color":"#761ACB","footer_text_color":"#ECAD4B"}

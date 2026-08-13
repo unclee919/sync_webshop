@@ -3,39 +3,6 @@ import json
 import requests
 from sync_webshop.api.utils import set_cors_headers
 
-@frappe.whitelist(allow_guest=True)
-def validate_coupon(coupon_code, total_amount):
-    set_cors_headers()
-    settings = frappe.get_single("Webshop Content Settings")
-    if not settings.enable_coupons:
-        frappe.throw("Coupons are currently disabled")
-        
-    coupon = frappe.db.get_value("Coupon Code", {"coupon_code": coupon_code}, ["name", "pricing_rule"], as_dict=True)
-    if not coupon:
-        frappe.throw("Invalid coupon code")
-        
-    pricing_rule = frappe.get_doc("Pricing Rule", coupon.pricing_rule)
-    
-    # Simple validation: Check if active and date range
-    from frappe.utils import getdate, nowdate
-    if pricing_rule.disable:
-        frappe.throw("Coupon is disabled")
-    if pricing_rule.valid_from and getdate(pricing_rule.valid_from) > getdate(nowdate()):
-        frappe.throw("Coupon is not yet valid")
-    if pricing_rule.valid_upto and getdate(pricing_rule.valid_upto) < getdate(nowdate()):
-        frappe.throw("Coupon has expired")
-        
-    discount_amount = 0
-    if pricing_rule.rate_or_discount == "Discount Amount":
-        discount_amount = pricing_rule.discount_amount
-    elif pricing_rule.rate_or_discount == "Discount Percentage":
-        discount_amount = (float(total_amount) * pricing_rule.discount_percentage) / 100.0
-        
-    return {
-        "coupon_code": coupon_code,
-        "discount_amount": discount_amount,
-        "pricing_rule": pricing_rule.name
-    }
 
 @frappe.whitelist()
 def sync_cart(cart_data):
