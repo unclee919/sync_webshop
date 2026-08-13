@@ -15,6 +15,13 @@ def run_setup():
 	# but for this task, we'll allow it if called correctly.
 	
 	custom_fields = {
+		"Item": [
+			{"fieldname": "webshop_stage_image", "label": "Webshop Stage Image", "fieldtype": "Attach Image", "insert_after": "image"},
+			{"fieldname": "webshop_stage_image_2", "label": "Webshop Alternate Stage Image", "fieldtype": "Attach Image", "insert_after": "webshop_stage_image"},
+			{"fieldname": "webshop_stage_label_en", "label": "Stage Label (English)", "fieldtype": "Data", "insert_after": "webshop_stage_image_2"},
+			{"fieldname": "webshop_stage_label_ar", "label": "Stage Label (Arabic)", "fieldtype": "Data", "insert_after": "webshop_stage_label_en"},
+			{"fieldname": "webshop_curated_tags", "label": "Curated For You Tags", "fieldtype": "Data", "insert_after": "webshop_stage_label_ar", "description": "Comma-separated business-neutral tags such as seasonal, staff picks, or everyday."}
+		],
 		"Sales Order": [
 			{"fieldname": "webshop_is_gift", "label": "Is Gift", "fieldtype": "Check", "insert_after": "webshop_second_phone"},
 			{"fieldname": "webshop_gift_wrap", "label": "Gift Wrap", "fieldtype": "Check", "insert_after": "webshop_is_gift"},

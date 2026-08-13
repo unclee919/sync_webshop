@@ -277,6 +277,7 @@ def get_item(item_code):
     price = (_get_prices([item_code], price_list).get(item_code) or {})
     stock = _get_stock([item_code]).get(item_code, {"available_qty": 0, "in_stock": False})
     attributes = _get_variant_attributes([item_code]).get(item_code, [])
+    item_experience = _get_item_experience([item_code]).get(item_code, {})
     recommendations = frappe.get_all(
         "Item",
         filters={"item_group": item.item_group, "disabled": 0, "item_code": ["!=", item_code]},
