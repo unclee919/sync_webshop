@@ -24,14 +24,14 @@
             "fieldname": "interval",
             "label": "Delivery Interval",
             "fieldtype": "Select",
-            "options": "Monthly\\nEvery 2 Months\\nQuarterly",
+            "options": "Monthly\nEvery 2 Months\nQuarterly",
             "default": "Monthly"
         },
         {
             "fieldname": "status",
             "label": "Status",
             "fieldtype": "Select",
-            "options": "Active\\nPaused\\nCancelled\\nCompleted",
+            "options": "Active\nPaused\nCancelled\nCompleted",
             "default": "Active"
         },
         {
