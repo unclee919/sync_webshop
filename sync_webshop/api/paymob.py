@@ -291,3 +291,30 @@ def paymob_callback():
             so.db_set("webshop_paymob_transaction_id", transaction_id)
 
     return {"ok": True, "status": status, "transaction_id": transaction_id}
+
+
+@frappe.whitelist(allow_guest=True)
+def create_paymob_intention(amount=None, currency="EGP", customer=None, items=None, sales_order=None, delivery_date=None, salesOrder=None, deliveryDate=None, **kwargs):
+    """Wrapper to support frontend call to create_paymob_intention with camelCase or snake_case arguments."""
+    set_cors_headers()
+    # Support parameters passed inside kwargs or form_dict if nested
+    if not amount and frappe.local.form_dict:
+        fd = frappe.local.form_dict
+        amount = amount or fd.get("amount")
+        currency = currency or fd.get("currency", "EGP")
+        customer = customer or fd.get("customer")
+        items = items or fd.get("items")
+        sales_order = sales_order or salesOrder or fd.get("sales_order") or fd.get("salesOrder")
+        delivery_date = delivery_date or deliveryDate or fd.get("delivery_date") or fd.get("deliveryDate")
+
+    s_order = sales_order or salesOrder
+    d_date = delivery_date or deliveryDate
+
+    return create_payment_intention(
+        amount=amount,
+        currency=currency,
+        customer=customer,
+        items=items,
+        sales_order=s_order,
+        delivery_date=d_date
+    )
