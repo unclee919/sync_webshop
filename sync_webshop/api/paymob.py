@@ -102,6 +102,8 @@ def _request(method, path, settings, payload=None, headers=None):
         response.raise_for_status()
         return response.json()
     except requests.RequestException as exc:
+        if hasattr(exc, "response") and exc.response is not None and exc.response.status_code == 401:
+            frappe.throw("Paymob authentication failed. Please check your Secret Key in 'Webshop Paymob Settings' in Frappe Desk.")
         frappe.log_error(frappe.get_traceback(), "Paymob API request failed")
         frappe.throw(f"Paymob payment service is unavailable: {exc}")
     except ValueError:
