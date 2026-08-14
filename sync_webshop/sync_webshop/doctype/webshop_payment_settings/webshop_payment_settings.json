@@ -1,5 +1,6 @@
 {
- "custom": 0,
+ "actions": [],
+ "creation": "2026-08-12 18:20:37.683031",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -12,7 +13,15 @@
   "cod_section",
   "cod_enabled",
   "cod_label_en",
-  "cod_label_ar"
+  "cod_label_ar",
+  "paymob_enabled",
+  "tabby_enabled",
+  "tamara_enabled",
+  "mada_enabled",
+  "apple_pay_enabled",
+  "wallet_enabled",
+  "visa_enabled",
+  "value_enabled"
  ],
  "fields": [
   {
@@ -21,7 +30,7 @@
    "label": "\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0633\u062a\u0631\u0627\u064a\u0628 (Stripe Settings)"
   },
   {
-   "default": 0,
+   "default": "0",
    "fieldname": "stripe_enabled",
    "fieldtype": "Check",
    "label": "\u062a\u0641\u0639\u064a\u0644 \u0633\u062a\u0631\u0627\u064a\u0628 (Enable Stripe)"
@@ -54,7 +63,7 @@
    "label": "\u0627\u0644\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0627\u0633\u062a\u0644\u0627\u0645 (Cash on Delivery)"
   },
   {
-   "default": 1,
+   "default": "1",
    "fieldname": "cod_enabled",
    "fieldtype": "Check",
    "label": "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0627\u0633\u062a\u0644\u0627\u0645 (Enable COD)"
@@ -70,12 +79,63 @@
    "fieldname": "cod_label_ar",
    "fieldtype": "Data",
    "label": "COD Label (Arabic)"
+  },
+  {
+   "default": "0",
+   "fieldname": "paymob_enabled",
+   "fieldtype": "Check",
+   "label": "Paymob Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "tabby_enabled",
+   "fieldtype": "Check",
+   "label": "Tabby Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "tamara_enabled",
+   "fieldtype": "Check",
+   "label": "Tamara Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "mada_enabled",
+   "fieldtype": "Check",
+   "label": "Mada Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "apple_pay_enabled",
+   "fieldtype": "Check",
+   "label": "Apple Pay Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "wallet_enabled",
+   "fieldtype": "Check",
+   "label": "Mobile Wallet Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "visa_enabled",
+   "fieldtype": "Check",
+   "label": "Visa Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "value_enabled",
+   "fieldtype": "Check",
+   "label": "valu Enabled"
   }
  ],
  "issingle": 1,
- "istable": 0,
+ "links": [],
+ "modified": "2026-08-14 09:18:18.343405",
+ "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Webshop Payment Settings",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -84,5 +144,9 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
