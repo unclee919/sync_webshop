@@ -1,23 +1,23 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Omnichannel Settings",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "bopis_enabled",
-            "label": "Enable Advanced BOPIS Locator",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "kiosk_mode_enabled",
-            "label": "Enable In-Store Kiosk Mode",
-            "fieldtype": "Check",
-            "default": 1
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Omnichannel Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "bopis_enabled",
+   "label": "Enable Advanced BOPIS Locator",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "kiosk_mode_enabled",
+   "label": "Enable In-Store Kiosk Mode",
+   "fieldtype": "Check",
+   "default": 1
+  }
+ ]
 }

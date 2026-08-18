@@ -1,43 +1,43 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Volume Pricing Rule",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "enabled",
-            "label": "Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "item_code",
-            "label": "Item",
-            "fieldtype": "Link",
-            "options": "Item",
-            "reqd": 1
-        },
-        {
-            "fieldname": "minimum_qty",
-            "label": "Minimum Quantity",
-            "fieldtype": "Float",
-            "default": 10,
-            "reqd": 1
-        },
-        {
-            "fieldname": "discount_percent",
-            "label": "Discount %",
-            "fieldtype": "Float",
-            "default": 5
-        },
-        {
-            "fieldname": "price_list",
-            "label": "Price List",
-            "fieldtype": "Link",
-            "options": "Price List"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Volume Pricing Rule",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "item_code",
+   "label": "Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "minimum_qty",
+   "label": "Minimum Quantity",
+   "fieldtype": "Float",
+   "default": 10,
+   "reqd": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "label": "Discount %",
+   "fieldtype": "Float",
+   "default": 5
+  },
+  {
+   "fieldname": "price_list",
+   "label": "Price List",
+   "fieldtype": "Link",
+   "options": "Price List"
+  }
+ ]
 }

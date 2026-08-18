@@ -1,29 +1,29 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Recovery Settings",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "abandoned_cart_enabled",
-            "label": "Enable Abandoned Cart Recovery",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "delay_hours",
-            "label": "Follow-up Delay (Hours)",
-            "fieldtype": "Int",
-            "default": 2
-        },
-        {
-            "fieldname": "coupon_discount",
-            "label": "Recovery Coupon Discount %",
-            "fieldtype": "Float",
-            "default": 10.0
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Recovery Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "abandoned_cart_enabled",
+   "label": "Enable Abandoned Cart Recovery",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "delay_hours",
+   "label": "Follow-up Delay (Hours)",
+   "fieldtype": "Int",
+   "default": 2
+  },
+  {
+   "fieldname": "coupon_discount",
+   "label": "Recovery Coupon Discount %",
+   "fieldtype": "Float",
+   "default": 10.0
+  }
+ ]
 }

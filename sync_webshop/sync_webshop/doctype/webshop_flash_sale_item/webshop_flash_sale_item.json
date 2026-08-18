@@ -1,40 +1,40 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Flash Sale Item",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "enabled",
-            "label": "Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "item_code",
-            "label": "Item",
-            "fieldtype": "Link",
-            "options": "Item",
-            "reqd": 1
-        },
-        {
-            "fieldname": "discount_percent",
-            "label": "Discount %",
-            "fieldtype": "Float",
-            "default": 20
-        },
-        {
-            "fieldname": "start_at",
-            "label": "Start At",
-            "fieldtype": "Datetime"
-        },
-        {
-            "fieldname": "end_at",
-            "label": "End At",
-            "fieldtype": "Datetime"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Flash Sale Item",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "item_code",
+   "label": "Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "label": "Discount %",
+   "fieldtype": "Float",
+   "default": 20
+  },
+  {
+   "fieldname": "start_at",
+   "label": "Start At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "end_at",
+   "label": "End At",
+   "fieldtype": "Datetime"
+  }
+ ]
 }

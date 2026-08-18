@@ -1,29 +1,29 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Enterprise AI Settings",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "auto_translate_enabled",
-            "label": "Enable AI Auto-Translation",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "intelligent_merchandising",
-            "label": "Enable Intelligent Merchandising",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "voice_actions_enabled",
-            "label": "Enable Voice-to-Action Assistant",
-            "fieldtype": "Check",
-            "default": 1
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Enterprise AI Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "auto_translate_enabled",
+   "label": "Enable AI Auto-Translation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "intelligent_merchandising",
+   "label": "Enable Intelligent Merchandising",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "voice_actions_enabled",
+   "label": "Enable Voice-to-Action Assistant",
+   "fieldtype": "Check",
+   "default": 1
+  }
+ ]
 }

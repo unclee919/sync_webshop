@@ -1,61 +1,61 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Article",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "title_en",
-            "label": "Title (EN)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "title_ar",
-            "label": "Title (AR)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "route",
-            "label": "Route Slug",
-            "fieldtype": "Data",
-            "unique": 1,
-            "reqd": 1
-        },
-        {
-            "fieldname": "excerpt_en",
-            "label": "Excerpt (EN)",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "excerpt_ar",
-            "label": "Excerpt (AR)",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "image",
-            "label": "Featured Image",
-            "fieldtype": "Attach Image"
-        },
-        {
-            "fieldname": "content_en",
-            "label": "Content (EN)",
-            "fieldtype": "Text Editor"
-        },
-        {
-            "fieldname": "content_ar",
-            "label": "Content (AR)",
-            "fieldtype": "Text Editor"
-        },
-        {
-            "fieldname": "published",
-            "label": "Published",
-            "fieldtype": "Check",
-            "default": 1
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Article",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "title_en",
+   "label": "Title (EN)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title_ar",
+   "label": "Title (AR)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "route",
+   "label": "Route Slug",
+   "fieldtype": "Data",
+   "unique": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "excerpt_en",
+   "label": "Excerpt (EN)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "excerpt_ar",
+   "label": "Excerpt (AR)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "image",
+   "label": "Featured Image",
+   "fieldtype": "Attach Image"
+  },
+  {
+   "fieldname": "content_en",
+   "label": "Content (EN)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "content_ar",
+   "label": "Content (AR)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "published",
+   "label": "Published",
+   "fieldtype": "Check",
+   "default": 1
+  }
+ ]
 }

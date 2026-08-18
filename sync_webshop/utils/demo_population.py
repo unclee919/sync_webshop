@@ -151,6 +151,12 @@ def make_named_doc(doctype, filters, values, child_tables=None):
     return doc
 
 
+def _public_storefront_url():
+    """Use the Desk-configured storefront URL when creating portable demo data."""
+    configured = frappe.db.get_single_value("Webshop API Settings", "public_storefront_url")
+    return str(configured or frappe.utils.get_url()).strip().rstrip("/")
+
+
 def populate_demo():
     frappe.reload_doc('webshop', 'doctype', 'webshop_content_settings')
 
@@ -193,11 +199,13 @@ def populate_demo():
         item_names.append(item.name)
 
     # Single settings: intentionally safe demo values; payment secrets remain empty and Stripe disabled.
+    public_storefront_url = _public_storefront_url()
     save_single('Webshop API Settings', {
         'api_user': 'Guest',
         'enable_guest_catalog_access': 1,
         'default_price_list': 'Standard Selling',
-        'allowed_origins': 'http://194.163.131.237\nhttps://194.163.131.237',
+        'allowed_origins': public_storefront_url,
+        'public_storefront_url': public_storefront_url,
     })
 
     content = save_single('Webshop Content Settings', {
@@ -420,10 +428,10 @@ def populate_demo():
         'og_title_ar': 'متجر سينك التجريبي',
         'og_description_en': 'Everyday essentials, thoughtfully selected.',
         'og_description_ar': 'احتياجات يومية مختارة بعناية.',
-        'canonical_url': 'http://194.163.131.237/',
+        'canonical_url': f'{public_storefront_url}/',
         'robots_txt': 'User-agent: *\nAllow: /',
         'sitemap_enabled': 1,
-        'structured_data': json.dumps({'@context': 'https://schema.org', '@type': 'Store', 'name': 'Sync Demo Market', 'url': 'http://194.163.131.237/'}, ensure_ascii=False),
+        'structured_data': json.dumps({'@context': 'https://schema.org', '@type': 'Store', 'name': 'Sync Demo Market', 'url': f'{public_storefront_url}/'}, ensure_ascii=False),
     })
     seo = frappe.get_single('Webshop SEO Settings')
     append_rows(seo, 'redirects', [

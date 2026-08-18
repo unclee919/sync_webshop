@@ -7,10 +7,25 @@
   "api_user",
   "column_break_1",
   "enable_guest_catalog_access",
+  "checkout_section",
+  "checkout_require_city_governorate",
+  "checkout_require_second_phone",
+  "coupon_placeholder_en",
+  "coupon_placeholder_ar",
+  "delivery_section",
+  "min_delivery_days",
+  "max_delivery_days",
+  "fulfillment_section",
+  "enable_pickup",
+  "pickup_title_en",
+  "pickup_title_ar",
+  "pickup_note_en",
+  "pickup_note_ar",
   "catalog_section",
   "default_price_list",
   "cors_section",
-  "allowed_origins"
+  "allowed_origins",
+  "public_storefront_url"
  ],
  "fields": [
   {
@@ -19,7 +34,6 @@
    "label": "Connection"
   },
   {
-   "description": "A restricted-role user whose API Key/Secret the React frontend uses for write calls (checkout, etc). Created and scoped in Step 3.",
    "fieldname": "api_user",
    "fieldtype": "Link",
    "label": "API User",
@@ -31,10 +45,90 @@
   },
   {
    "default": "1",
-   "description": "Allow the item/price catalog and theme/content endpoints to be read without login, so the storefront can render for anonymous visitors.",
    "fieldname": "enable_guest_catalog_access",
    "fieldtype": "Check",
    "label": "Enable Guest Catalog Access"
+  },
+  {
+   "fieldname": "checkout_section",
+   "fieldtype": "Section Break",
+   "label": "Checkout Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "checkout_require_city_governorate",
+   "fieldtype": "Check",
+   "label": "Require City and Governorate"
+  },
+  {
+   "default": "1",
+   "fieldname": "checkout_require_second_phone",
+   "fieldtype": "Check",
+   "label": "Require Second Phone Number"
+  },
+  {
+   "default": "Enter coupon code",
+   "fieldname": "coupon_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Coupon Placeholder (English)"
+  },
+  {
+   "default": "أدخل كود الخصم",
+   "fieldname": "coupon_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Placeholder (Arabic)"
+  },
+  {
+   "fieldname": "delivery_section",
+   "fieldtype": "Section Break",
+   "label": "Delivery Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "min_delivery_days",
+   "fieldtype": "Int",
+   "label": "Min Delivery Days"
+  },
+  {
+   "default": "5",
+   "fieldname": "max_delivery_days",
+   "fieldtype": "Int",
+   "label": "Max Delivery Days"
+  },
+  {
+   "fieldname": "fulfillment_section",
+   "fieldtype": "Section Break",
+   "label": "Fulfillment Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_pickup",
+   "fieldtype": "Check",
+   "label": "Enable Store Pickup"
+  },
+  {
+   "default": "Store pickup",
+   "fieldname": "pickup_title_en",
+   "fieldtype": "Data",
+   "label": "Pickup Title (English)"
+  },
+  {
+   "default": "الاستلام من المتجر",
+   "fieldname": "pickup_title_ar",
+   "fieldtype": "Data",
+   "label": "Pickup Title (Arabic)"
+  },
+  {
+   "default": "Choose an available warehouse and collect your order there.",
+   "fieldname": "pickup_note_en",
+   "fieldtype": "Small Text",
+   "label": "Pickup Note (English)"
+  },
+  {
+   "default": "اختر مستودعاً متاحاً لاستلام طلبك منه.",
+   "fieldname": "pickup_note_ar",
+   "fieldtype": "Small Text",
+   "label": "Pickup Note (Arabic)"
   },
   {
    "fieldname": "catalog_section",
@@ -42,7 +136,6 @@
    "label": "Catalog"
   },
   {
-   "description": "Which ERPNext Price List the storefront's item prices are read from (e.g. Standard Selling).",
    "fieldname": "default_price_list",
    "fieldtype": "Link",
    "label": "Default Price List",
@@ -54,10 +147,15 @@
    "label": "CORS"
   },
   {
-   "description": "One origin per line, e.g. https://shop.dpono.com - this server's frontend domain(s) allowed to call the API.",
    "fieldname": "allowed_origins",
    "fieldtype": "Small Text",
    "label": "Allowed Frontend Origins"
+  },
+  {
+   "fieldname": "public_storefront_url",
+   "label": "Public Storefront URL",
+   "fieldtype": "Data",
+   "description": "Public base URL of the React storefront, used for payment return URLs. Use HTTPS in production, for example https://shop.example.com."
   }
  ],
  "issingle": 1,

@@ -1,42 +1,42 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Landing Page Builder",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "enabled",
-            "label": "Enable Dynamic Landing Builder",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "section_blocks",
-            "label": "Landing Sections",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "hero_heading_en",
-            "label": "Hero Heading (English)",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "hero_heading_ar",
-            "label": "Hero Heading (Arabic)",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "featured_grid_title_en",
-            "label": "Featured Grid Title (English)",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "featured_grid_title_ar",
-            "label": "Featured Grid Title (Arabic)",
-            "fieldtype": "Data"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Landing Page Builder",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "label": "Enable Dynamic Landing Builder",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "section_blocks",
+   "label": "Landing Sections",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hero_heading_en",
+   "label": "Hero Heading (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "hero_heading_ar",
+   "label": "Hero Heading (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "featured_grid_title_en",
+   "label": "Featured Grid Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "featured_grid_title_ar",
+   "label": "Featured Grid Title (Arabic)",
+   "fieldtype": "Data"
+  }
+ ]
 }

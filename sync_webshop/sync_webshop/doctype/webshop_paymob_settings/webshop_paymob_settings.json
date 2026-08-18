@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "enabled",
+  "api_key",
   "secret_key",
   "public_key",
   "hmac_secret",
@@ -36,6 +37,11 @@
    "fieldname": "enabled",
    "fieldtype": "Check",
    "label": "Enabled"
+  },
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Data",
+   "label": "API Key"
   },
   {
    "fieldname": "secret_key",
@@ -162,7 +168,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-08-12 18:19:33.492811",
+ "modified": "2026-08-14 10:20:00.000000",
  "modified_by": "Administrator",
  "module": "Sync Webshop",
  "name": "Webshop Paymob Settings",

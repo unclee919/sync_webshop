@@ -1,108 +1,108 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Master Tier Settings",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "enabled",
-            "label": "Master Tier Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "style_quiz_enabled",
-            "label": "Style Quiz Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "ghost_search_enabled",
-            "label": "Predictive Ghost Search Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "loyalty_enabled",
-            "label": "VIP Loyalty Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "referrals_enabled",
-            "label": "Referral Hub Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "hotspots_enabled",
-            "label": "Shoppable Hotspots Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "abandoned_cart_enabled",
-            "label": "Abandoned Cart Recovery Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "ai_seo_enabled",
-            "label": "AI SEO Automation Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "points_per_currency",
-            "label": "Points Per SAR Spent",
-            "fieldtype": "Float",
-            "default": 1.0
-        },
-        {
-            "fieldname": "wallet_value_per_point",
-            "label": "Wallet Value Per Point (SAR)",
-            "fieldtype": "Currency",
-            "default": 0.1
-        },
-        {
-            "fieldname": "min_redeem_points",
-            "label": "Minimum Points To Redeem",
-            "fieldtype": "Float",
-            "default": 100
-        },
-        {
-            "fieldname": "referral_reward_points",
-            "label": "Referral Reward Points",
-            "fieldtype": "Float",
-            "default": 50
-        },
-        {
-            "fieldname": "referral_code_prefix",
-            "label": "Referral Code Prefix",
-            "fieldtype": "Data",
-            "default": "SYNC"
-        },
-        {
-            "fieldname": "recovery_delay_hours",
-            "label": "Recovery Delay Hours",
-            "fieldtype": "Int",
-            "default": 2
-        },
-        {
-            "fieldname": "recovery_coupon_percent",
-            "label": "Recovery Coupon Discount %",
-            "fieldtype": "Float",
-            "default": 10
-        },
-        {
-            "fieldname": "style_profile_retention_days",
-            "label": "Style Profile Retention Days",
-            "fieldtype": "Int",
-            "default": 0,
-            "description": "0 means keep the profile in the browser only; no server retention."
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Master Tier Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "label": "Master Tier Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "style_quiz_enabled",
+   "label": "Style Quiz Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ghost_search_enabled",
+   "label": "Predictive Ghost Search Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "loyalty_enabled",
+   "label": "VIP Loyalty Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "referrals_enabled",
+   "label": "Referral Hub Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "hotspots_enabled",
+   "label": "Shoppable Hotspots Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "abandoned_cart_enabled",
+   "label": "Abandoned Cart Recovery Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ai_seo_enabled",
+   "label": "AI SEO Automation Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "points_per_currency",
+   "label": "Points Per SAR Spent",
+   "fieldtype": "Float",
+   "default": 1.0
+  },
+  {
+   "fieldname": "wallet_value_per_point",
+   "label": "Wallet Value Per Point (SAR)",
+   "fieldtype": "Currency",
+   "default": 0.1
+  },
+  {
+   "fieldname": "min_redeem_points",
+   "label": "Minimum Points To Redeem",
+   "fieldtype": "Float",
+   "default": 100
+  },
+  {
+   "fieldname": "referral_reward_points",
+   "label": "Referral Reward Points",
+   "fieldtype": "Float",
+   "default": 50
+  },
+  {
+   "fieldname": "referral_code_prefix",
+   "label": "Referral Code Prefix",
+   "fieldtype": "Data",
+   "default": "SYNC"
+  },
+  {
+   "fieldname": "recovery_delay_hours",
+   "label": "Recovery Delay Hours",
+   "fieldtype": "Int",
+   "default": 2
+  },
+  {
+   "fieldname": "recovery_coupon_percent",
+   "label": "Recovery Coupon Discount %",
+   "fieldtype": "Float",
+   "default": 10
+  },
+  {
+   "fieldname": "style_profile_retention_days",
+   "label": "Style Profile Retention Days",
+   "fieldtype": "Int",
+   "default": 0,
+   "description": "0 means keep the profile in the browser only; no server retention."
+  }
+ ]
 }

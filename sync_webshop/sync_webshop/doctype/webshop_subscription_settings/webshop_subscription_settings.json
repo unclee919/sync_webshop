@@ -1,29 +1,29 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Subscription Settings",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 1,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "enabled",
-            "label": "Enable Subscribe & Save",
-            "fieldtype": "Check",
-            "default": 1
-        },
-        {
-            "fieldname": "discount_percent",
-            "label": "Subscription Discount %",
-            "fieldtype": "Float",
-            "default": 10.0
-        },
-        {
-            "fieldname": "intervals",
-            "label": "Available Intervals",
-            "fieldtype": "Data",
-            "default": "Monthly,Every 2 Months,Quarterly"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Subscription Settings",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 1,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "label": "Enable Subscribe & Save",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "label": "Subscription Discount %",
+   "fieldtype": "Float",
+   "default": 10.0
+  },
+  {
+   "fieldname": "intervals",
+   "label": "Available Intervals",
+   "fieldtype": "Data",
+   "default": "Monthly,Every 2 Months,Quarterly"
+  }
+ ]
 }

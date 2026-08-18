@@ -1,41 +1,41 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Gift Card",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "code",
-            "label": "Gift Card Code",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "unique": 1
-        },
-        {
-            "fieldname": "balance",
-            "label": "Initial Balance",
-            "fieldtype": "Currency",
-            "reqd": 1
-        },
-        {
-            "fieldname": "remaining_balance",
-            "label": "Remaining Balance",
-            "fieldtype": "Currency"
-        },
-        {
-            "fieldname": "recipient_email",
-            "label": "Recipient Email",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Active\nRedeemed\nExpired",
-            "default": "Active"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Gift Card",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "code",
+   "label": "Gift Card Code",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "balance",
+   "label": "Initial Balance",
+   "fieldtype": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remaining_balance",
+   "label": "Remaining Balance",
+   "fieldtype": "Currency"
+  },
+  {
+   "fieldname": "recipient_email",
+   "label": "Recipient Email",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Active\nRedeemed\nExpired",
+   "default": "Active"
+  }
+ ]
 }

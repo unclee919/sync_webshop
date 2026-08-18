@@ -1,55 +1,55 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Subscription",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "customer_email",
-            "label": "Customer Email",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "item_code",
-            "label": "Item",
-            "fieldtype": "Link",
-            "options": "Item",
-            "reqd": 1
-        },
-        {
-            "fieldname": "interval",
-            "label": "Delivery Interval",
-            "fieldtype": "Select",
-            "options": "Monthly\nEvery 2 Months\nQuarterly",
-            "default": "Monthly"
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Active\nPaused\nCancelled\nCompleted",
-            "default": "Active"
-        },
-        {
-            "fieldname": "discount_percent",
-            "label": "Discount %",
-            "fieldtype": "Float",
-            "default": 10.0
-        },
-        {
-            "fieldname": "next_delivery_date",
-            "label": "Next Delivery Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "last_order",
-            "label": "Last Sales Order",
-            "fieldtype": "Link",
-            "options": "Sales Order"
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Subscription",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "customer_email",
+   "label": "Customer Email",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "label": "Item",
+   "fieldtype": "Link",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interval",
+   "label": "Delivery Interval",
+   "fieldtype": "Select",
+   "options": "Monthly\nEvery 2 Months\nQuarterly",
+   "default": "Monthly"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Active\nPaused\nCancelled\nCompleted",
+   "default": "Active"
+  },
+  {
+   "fieldname": "discount_percent",
+   "label": "Discount %",
+   "fieldtype": "Float",
+   "default": 10.0
+  },
+  {
+   "fieldname": "next_delivery_date",
+   "label": "Next Delivery Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "last_order",
+   "label": "Last Sales Order",
+   "fieldtype": "Link",
+   "options": "Sales Order"
+  }
+ ]
 }

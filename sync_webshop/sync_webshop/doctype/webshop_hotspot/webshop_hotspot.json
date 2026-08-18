@@ -1,53 +1,53 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Hotspot",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "title_en",
-            "label": "Title (EN)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "title_ar",
-            "label": "Title (AR)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "image_url",
-            "label": "Image URL",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "item_code",
-            "label": "Linked Item",
-            "fieldtype": "Link",
-            "options": "Item"
-        },
-        {
-            "fieldname": "coord_x",
-            "label": "Position X (%)",
-            "fieldtype": "Float",
-            "default": 50.0
-        },
-        {
-            "fieldname": "coord_y",
-            "label": "Position Y (%)",
-            "fieldtype": "Float",
-            "default": 50.0
-        },
-        {
-            "fieldname": "enabled",
-            "label": "Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Hotspot",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "title_en",
+   "label": "Title (EN)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title_ar",
+   "label": "Title (AR)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "image_url",
+   "label": "Image URL",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "label": "Linked Item",
+   "fieldtype": "Link",
+   "options": "Item"
+  },
+  {
+   "fieldname": "coord_x",
+   "label": "Position X (%)",
+   "fieldtype": "Float",
+   "default": 50.0
+  },
+  {
+   "fieldname": "coord_y",
+   "label": "Position Y (%)",
+   "fieldtype": "Float",
+   "default": 50.0
+  },
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  }
+ ]
 }

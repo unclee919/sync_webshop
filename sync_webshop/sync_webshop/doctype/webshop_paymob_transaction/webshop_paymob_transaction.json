@@ -10,6 +10,8 @@
  "field_order": [
   "sales_order",
   "intention_id",
+  "paymob_order_id",
+  "payment_method",
   "transaction_id",
   "amount",
   "currency",
@@ -31,6 +33,20 @@
    "fieldtype": "Data",
    "label": "Intention ID",
    "unique": 1
+  },
+  {
+   "fieldname": "paymob_order_id",
+   "label": "Paymob Order ID",
+   "fieldtype": "Data",
+   "unique": 1,
+   "read_only": 1,
+   "description": "Paymob order identifier returned by the Intention API and used to reconcile callbacks."
+  },
+  {
+   "fieldname": "payment_method",
+   "label": "Selected Payment Method",
+   "fieldtype": "Data",
+   "read_only": 1
   },
   {
    "fieldname": "transaction_id",

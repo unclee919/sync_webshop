@@ -1,48 +1,48 @@
 {
-    "doctype": "DocType",
-    "name": "Webshop Style Quiz Question",
-    "module": "Sync Webshop",
-    "custom": 1,
-    "issingle": 0,
-    "is_table": 0,
-    "editable_grid": 1,
-    "fields": [
-        {
-            "fieldname": "question_key",
-            "label": "Question Key",
-            "fieldtype": "Data",
-            "unique": 1,
-            "reqd": 1
-        },
-        {
-            "fieldname": "question_en",
-            "label": "Question (EN)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "question_ar",
-            "label": "Question (AR)",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "options_json",
-            "label": "Options JSON",
-            "fieldtype": "Long Text",
-            "description": "JSON array of objects with label_en, label_ar, and tag."
-        },
-        {
-            "fieldname": "sort_order",
-            "label": "Sort Order",
-            "fieldtype": "Int",
-            "default": 10
-        },
-        {
-            "fieldname": "enabled",
-            "label": "Enabled",
-            "fieldtype": "Check",
-            "default": 1
-        }
-    ]
+ "doctype": "DocType",
+ "name": "Webshop Style Quiz Question",
+ "module": "Sync Webshop",
+ "custom": 0,
+ "issingle": 0,
+ "is_table": 0,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "question_key",
+   "label": "Question Key",
+   "fieldtype": "Data",
+   "unique": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "question_en",
+   "label": "Question (EN)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "question_ar",
+   "label": "Question (AR)",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "options_json",
+   "label": "Options JSON",
+   "fieldtype": "Long Text",
+   "description": "JSON array of objects with label_en, label_ar, and tag."
+  },
+  {
+   "fieldname": "sort_order",
+   "label": "Sort Order",
+   "fieldtype": "Int",
+   "default": 10
+  },
+  {
+   "fieldname": "enabled",
+   "label": "Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  }
+ ]
 }
