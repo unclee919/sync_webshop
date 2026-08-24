@@ -214,13 +214,11 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         return _empty_catalog(page, page_size, price_list, item_group)
     filters["item_code"] = ["in", priced_codes]
     if min_price is not None or max_price is not None:
-        price_filters = {"price_list": price_list, "selling": 1}
-        if min_price is not None and max_price is not None:
-            price_filters["price_list_rate"] = ["between", [min_price, max_price]]
-        elif min_price is not None:
-            price_filters["price_list_rate"] = [">=", min_price]
-        else:
-            price_filters["price_list_rate"] = ["<=", max_price]
+        price_filters = [["price_list", "=", price_list], ["selling", "=", 1]]
+        if min_price is not None:
+            price_filters.append(["price_list_rate", ">=", min_price])
+        if max_price is not None:
+            price_filters.append(["price_list_rate", "<=", max_price])
         codes = frappe.get_all("Item Price", filters=price_filters, pluck="item_code")
         if not codes:
             return _empty_catalog(page, page_size, price_list, item_group)
