@@ -261,25 +261,57 @@ def run_setup():
     if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
         frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
 
-    enterprise_defaults = {
-        "Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
-        "Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
-        "Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
-        "Webshop Flash Sale Settings": {"flash_sale_enabled": 1, "scarcity_threshold": 5, "discount_percent": 20},
-        "Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
-        "Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
-        "Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
+    feature_defaults = {
+        "auto_translate_enabled": 1,
+        "intelligent_merchandising": 1,
+        "voice_actions_enabled": 1,
+        "b2b_enabled": 1,
+        "volume_pricing_enabled": 1,
+        "corporate_credit_enabled": 1,
+        "quick_order_enabled": 1,
+        "live_stream_enabled": 0,
+        "stream_title_en": "Live Tasting & Masterclass",
+        "stream_title_ar": "جلسة تذوق حية وورشة عمل",
+        "flash_sale_enabled": 1,
+        "scarcity_threshold": 5,
+        "discount_percent": 20,
+        "abandoned_cart_enabled": 1,
+        "delay_hours": 2,
+        "coupon_discount": 10,
+        "fraud_shield_enabled": 1,
+        "max_order_amount": 5000,
+        "edge_cache_enabled": 1,
+        "auto_healing_enabled": 1,
     }
-    for doctype, values in enterprise_defaults.items():
-        if frappe.db.exists("DocType", doctype):
-            doc = frappe.get_single(doctype)
-            changed = False
-            for fieldname, value in values.items():
-                if not doc.get(fieldname):
-                    doc.set(fieldname, value)
-                    changed = True
-            if changed:
-                doc.save(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Feature Settings"):
+        feature_doc = frappe.get_single("Webshop Feature Settings")
+        changed = False
+        for fieldname, value in feature_defaults.items():
+            if not feature_doc.get(fieldname):
+                feature_doc.set(fieldname, value)
+                changed = True
+        if changed:
+            feature_doc.save(ignore_permissions=True)
+    else:
+        legacy_feature_defaults = {
+            "Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
+            "Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
+            "Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
+            "Webshop Flash Sale Settings": {"flash_sale_enabled": 1, "scarcity_threshold": 5, "discount_percent": 20},
+            "Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
+            "Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
+            "Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
+        }
+        for doctype, values in legacy_feature_defaults.items():
+            if frappe.db.exists("DocType", doctype):
+                doc = frappe.get_single(doctype)
+                changed = False
+                for fieldname, value in values.items():
+                    if not doc.get(fieldname):
+                        doc.set(fieldname, value)
+                        changed = True
+                if changed:
+                    doc.save(ignore_permissions=True)
     if frappe.db.exists("DocType", "Webshop Volume Pricing Rule") and not frappe.db.exists("Webshop Volume Pricing Rule", {"item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10}):
         frappe.get_doc({"doctype": "Webshop Volume Pricing Rule", "item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10, "discount_percent": 5, "enabled": 1}).insert(ignore_permissions=True)
     if frappe.db.exists("DocType", "Webshop Flash Sale Item") and not frappe.db.exists("Webshop Flash Sale Item", {"item_code": "COFFEE-HOUSE-001"}):

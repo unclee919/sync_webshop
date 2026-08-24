@@ -7,11 +7,26 @@ from frappe.utils import flt, get_datetime, now_datetime
 from sync_webshop.api.utils import full_url, require_catalog_access, set_cors_headers
 
 
+FEATURE_SETTINGS_FIELDS = {
+    "Webshop Enterprise AI Settings": ("auto_translate_enabled", "intelligent_merchandising", "voice_actions_enabled"),
+    "Webshop B2B Wholesale Settings": ("b2b_enabled", "volume_pricing_enabled", "corporate_credit_enabled", "quick_order_enabled"),
+    "Webshop Live Shopping Settings": ("live_stream_enabled", "stream_url", "stream_title_en", "stream_title_ar"),
+    "Webshop Flash Sale Settings": ("flash_sale_enabled", "scarcity_threshold", "discount_percent"),
+    "Webshop Recovery Settings": ("abandoned_cart_enabled", "delay_hours", "coupon_discount"),
+    "Webshop Fraud Shield Settings": ("fraud_shield_enabled", "max_order_amount"),
+    "Webshop Infrastructure Settings": ("edge_cache_enabled", "auto_healing_enabled"),
+}
+
+
 def _single(doctype, defaults=None):
-    try:
+    if frappe.db.exists("DocType", doctype):
         return frappe.get_single(doctype)
-    except Exception:
-        return frappe._dict(defaults or {})
+    fields = FEATURE_SETTINGS_FIELDS.get(doctype)
+    if fields and frappe.db.exists("DocType", "Webshop Feature Settings"):
+        feature = frappe.get_single("Webshop Feature Settings")
+        values = {fieldname: feature.get(fieldname) for fieldname in fields if feature.get(fieldname) is not None}
+        return frappe._dict({**(defaults or {}), **values})
+    return frappe._dict(defaults or {})
 
 
 def _enabled(setting, field, default=0):

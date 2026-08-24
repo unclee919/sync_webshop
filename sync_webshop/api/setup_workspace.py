@@ -90,7 +90,7 @@ def setup_workspace():
     custom_doctypes = [
         "Webshop Content Settings", "Webshop Theme Settings", "Webshop SEO Settings",
         "Webshop Dashboard Settings", "Webshop AI Chat Settings", "Webshop Review",
-        "Webshop Product Settings", "Webshop Paymob Settings", "Webshop Paymob Transaction",
+        "Webshop Product Settings", "Webshop Payment Settings", "Webshop Feature Settings", "Webshop Paymob Transaction",
         "Webshop Abandoned Cart", "Webshop Announcement Bar", "Webshop FAQ",
         "Webshop Popup", "Webshop Landing Section", "Webshop Landing Section Item",
         "Webshop Navigation Link", "Webshop Banner", "Webshop Featured Category",

@@ -1,0 +1,233 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-08-24 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "webshop_enterprise_ai_settings_section",
+    "auto_translate_enabled",
+    "intelligent_merchandising",
+    "voice_actions_enabled",
+    "webshop_b2b_wholesale_settings_section",
+    "b2b_enabled",
+    "volume_pricing_enabled",
+    "corporate_credit_enabled",
+    "quick_order_enabled",
+    "webshop_live_shopping_settings_section",
+    "live_stream_enabled",
+    "stream_url",
+    "stream_title_en",
+    "stream_title_ar",
+    "webshop_flash_sale_settings_section",
+    "flash_sale_enabled",
+    "scarcity_threshold",
+    "discount_percent",
+    "webshop_recovery_settings_section",
+    "abandoned_cart_enabled",
+    "delay_hours",
+    "coupon_discount",
+    "webshop_fraud_shield_settings_section",
+    "fraud_shield_enabled",
+    "max_order_amount",
+    "webshop_infrastructure_settings_section",
+    "edge_cache_enabled",
+    "auto_healing_enabled"
+  ],
+  "fields": [
+    {
+      "fieldname": "webshop_enterprise_ai_settings_section",
+      "fieldtype": "Section Break",
+      "label": "AI & Merchandising"
+    },
+    {
+      "fieldname": "auto_translate_enabled",
+      "label": "Enable AI Auto-Translation",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "intelligent_merchandising",
+      "label": "Enable Intelligent Merchandising",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "voice_actions_enabled",
+      "label": "Enable Voice-to-Action Assistant",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "webshop_b2b_wholesale_settings_section",
+      "fieldtype": "Section Break",
+      "label": "B2B & Wholesale"
+    },
+    {
+      "fieldname": "b2b_enabled",
+      "label": "Enable B2B Wholesale Portal",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "volume_pricing_enabled",
+      "label": "Enable Volume-Based Pricing",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "corporate_credit_enabled",
+      "label": "Enable Corporate Credit Lines",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "quick_order_enabled",
+      "label": "Enable Bulk Quick Order Sheet",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "webshop_live_shopping_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Live Shopping"
+    },
+    {
+      "fieldname": "live_stream_enabled",
+      "label": "Enable Live Shopping Stream",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "stream_url",
+      "label": "Stream Embed URL / HLS",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "stream_title_en",
+      "label": "Stream Title (English)",
+      "fieldtype": "Data",
+      "default": "Live Tasting & Masterclass"
+    },
+    {
+      "fieldname": "stream_title_ar",
+      "label": "Stream Title (Arabic)",
+      "fieldtype": "Data",
+      "default": "جلسة تذوق حية ورشة عمل"
+    },
+    {
+      "fieldname": "webshop_flash_sale_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Flash Sales"
+    },
+    {
+      "fieldname": "flash_sale_enabled",
+      "label": "Enable Flash Sale & Scarcity",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "scarcity_threshold",
+      "label": "Low Stock Scarcity Threshold",
+      "fieldtype": "Int",
+      "default": 5
+    },
+    {
+      "fieldname": "discount_percent",
+      "label": "Flash Sale Discount %",
+      "fieldtype": "Float",
+      "default": 20.0
+    },
+    {
+      "fieldname": "webshop_recovery_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Recovery"
+    },
+    {
+      "fieldname": "abandoned_cart_enabled",
+      "label": "Enable Abandoned Cart Recovery",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "delay_hours",
+      "label": "Follow-up Delay (Hours)",
+      "fieldtype": "Int",
+      "default": 2
+    },
+    {
+      "fieldname": "coupon_discount",
+      "label": "Recovery Coupon Discount %",
+      "fieldtype": "Float",
+      "default": 10.0
+    },
+    {
+      "fieldname": "webshop_fraud_shield_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Fraud Shield"
+    },
+    {
+      "fieldname": "fraud_shield_enabled",
+      "label": "Enable Fraud & Risk Shield",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "max_order_amount",
+      "label": "Max Auto-Approve Order Amount (SAR)",
+      "fieldtype": "Currency",
+      "default": 5000.0
+    },
+    {
+      "fieldname": "webshop_infrastructure_settings_section",
+      "fieldtype": "Section Break",
+      "label": "Infrastructure"
+    },
+    {
+      "fieldname": "edge_cache_enabled",
+      "label": "Enable Global Edge Caching",
+      "fieldtype": "Check",
+      "default": 1
+    },
+    {
+      "fieldname": "auto_healing_enabled",
+      "label": "Enable Auto-Healing Worker Queues",
+      "fieldtype": "Check",
+      "default": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 1,
+  "istable": 0,
+  "module": "Sync Webshop",
+  "name": "Webshop Feature Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Sync Webshop Manager",
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}
