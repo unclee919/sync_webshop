@@ -257,7 +257,9 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         order_by="item_name asc",
     )
     if or_filters:
-        total_count = frappe.db.count("Item", filters=filters, or_filters=or_filters)
+        # frappe.db.count does not accept or_filters on all supported Frappe versions.
+        # Use the same Frappe query builder as the item fetch to keep search contracts compatible.
+        total_count = len(frappe.get_all("Item", filters=filters, or_filters=or_filters, pluck="name", limit_page_length=0))
     else:
         total_count = frappe.db.count("Item", filters=filters)
     codes = [row.item_code for row in items]
