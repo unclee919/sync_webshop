@@ -16,7 +16,7 @@ def get_elite_settings():
         market_settings = frappe._dict({"amazon_sa_enabled": 0, "noon_enabled": 0})
 
     try:
-        payment_settings = frappe.get_single("Webshop Regional Payment Settings")
+        payment_settings = frappe.get_single("Webshop Payment Settings")
     except Exception:
         payment_settings = frappe._dict({"tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1})
 
@@ -169,7 +169,7 @@ def sync_marketplaces():
 def get_regional_payment_options():
     """Return enabled regional payment options without exposing credentials or performing capture."""
     set_cors_headers()
-    settings = frappe.get_single("Webshop Regional Payment Settings")
+    settings = frappe.get_single("Webshop Payment Settings")
     options = []
     for key, fieldname, label_en, label_ar in [
         ("tabby", "tabby_enabled", "Tabby", "تابي"),
@@ -187,7 +187,7 @@ def create_regional_payment_session(gateway, amount, currency="SAR", order_refer
     """Create a non-capturing regional payment handoff; capture remains delegated to the configured provider."""
     if frappe.session.user == "Guest":
         frappe.throw("Authentication is required to initialize a payment session.")
-    settings = frappe.get_single("Webshop Regional Payment Settings")
+    settings = frappe.get_single("Webshop Payment Settings")
     enabled = {"tabby": "tabby_enabled", "tamara": "tamara_enabled", "mada": "mada_enabled", "apple_pay": "apple_pay_enabled"}
     if gateway not in enabled or not settings.get(enabled[gateway]):
         frappe.throw("This regional payment method is disabled in Desk.")

@@ -490,14 +490,14 @@ def seed_phase3_demo():
                 settings.set(fieldname, value)
         settings.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Paymob Settings"):
-        paymob = frappe.get_single("Webshop Paymob Settings")
+    if frappe.db.exists("DocType", "Webshop Payment Settings"):
+        paymob = frappe.get_single("Webshop Payment Settings")
         for fieldname, value in {
-            "online_payment_enabled": 1,
-            "online_label_en": "Online payment",
-            "online_label_ar": "الدفع الإلكتروني",
-            "online_note_en": "Pay securely with the methods enabled in Paymob.",
-            "online_note_ar": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
+            "paymob_online_payment_enabled": 1,
+            "paymob_online_label_en": "Online payment",
+            "paymob_online_label_ar": "الدفع الإلكتروني",
+            "paymob_online_note_en": "Pay securely with the methods enabled in Paymob.",
+            "paymob_online_note_ar": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
         }.items():
             if paymob.meta.has_field(fieldname):
                 paymob.set(fieldname, value)
