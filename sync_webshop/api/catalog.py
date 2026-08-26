@@ -34,10 +34,25 @@ def _positive_price_codes(price_list, item_codes=None):
     return frappe.get_all("Item Price", filters=filters, pluck="item_code")
 
 
+def _get_item_group_scope(item_group):
+    """Return the selected item group plus descendants for parent-category browsing."""
+    if not item_group:
+        return None
+    groups = [item_group]
+    try:
+        descendants = frappe.db.get_descendants("Item Group", item_group) or []
+        groups.extend(descendants)
+    except Exception:
+        # Preserve exact-group behavior if a legacy Frappe version lacks get_descendants.
+        pass
+    return list(dict.fromkeys(groups))
+
+
 def _get_price_range(price_list, item_group=None):
     filters = {"price_list": price_list, "selling": 1}
-    if item_group:
-        codes = frappe.get_all("Item", filters={"item_group": item_group, "disabled": 0}, pluck="item_code")
+    group_scope = _get_item_group_scope(item_group)
+    if group_scope:
+        codes = frappe.get_all("Item", filters={"item_group": ["in", group_scope], "disabled": 0}, pluck="item_code")
         if not codes:
             return {"min_price": 0, "max_price": 0}
         filters["item_code"] = ["in", codes]
@@ -199,8 +214,9 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         return cached
 
     filters = {"disabled": 0}
-    if item_group:
-        filters["item_group"] = item_group
+    group_scope = _get_item_group_scope(item_group)
+    if group_scope:
+        filters["item_group"] = ["in", group_scope]
     or_filters = None
     if search:
         or_filters = [
