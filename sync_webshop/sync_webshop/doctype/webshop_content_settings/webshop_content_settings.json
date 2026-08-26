@@ -110,6 +110,88 @@
   "min_delivery_days",
   "max_delivery_days",
   "ui_labels_section",
+  "full_name_placeholder_en",
+  "full_name_placeholder_ar",
+  "required_fields_en",
+  "required_fields_ar",
+  "valid_fields_en",
+  "valid_fields_ar",
+  "payment_start_error_en",
+  "payment_start_error_ar",
+  "shipping_information_en",
+  "shipping_information_ar",
+  "full_name_en",
+  "full_name_ar",
+  "email_en",
+  "email_ar",
+  "primary_phone_en",
+  "primary_phone_ar",
+  "second_phone_en",
+  "second_phone_ar",
+  "governorate_en",
+  "governorate_ar",
+  "select_governorate_en",
+  "select_governorate_ar",
+  "city_en",
+  "city_ar",
+  "select_city_en",
+  "select_city_ar",
+  "detailed_address_en",
+  "detailed_address_ar",
+  "optional_location_en",
+  "optional_location_ar",
+  "location_placeholder_en",
+  "location_placeholder_ar",
+  "coupon_code_en",
+  "coupon_code_ar",
+  "apply_en",
+  "apply_ar",
+  "invalid_coupon_en",
+  "invalid_coupon_ar",
+  "coupon_applied_en",
+  "coupon_applied_ar",
+  "make_it_gift_en",
+  "make_it_gift_ar",
+  "add_gift_wrapping_en",
+  "add_gift_wrapping_ar",
+  "personal_note_en",
+  "personal_note_ar",
+  "fulfillment_en",
+  "fulfillment_ar",
+  "delivery_en",
+  "delivery_ar",
+  "store_pickup_en",
+  "store_pickup_ar",
+  "select_warehouse_en",
+  "select_warehouse_ar",
+  "delivery_date_en",
+  "delivery_date_ar",
+  "preferred_delivery_date_en",
+  "preferred_delivery_date_ar",
+  "payment_method_en",
+  "payment_method_ar",
+  "paymob_secure_hint_en",
+  "paymob_secure_hint_ar",
+  "processing_en",
+  "processing_ar",
+  "continue_payment_en",
+  "continue_payment_ar",
+  "confirm_order_en",
+  "confirm_order_ar",
+  "order_summary_en",
+  "order_summary_ar",
+  "discount_en",
+  "discount_ar",
+  "shipping_en",
+  "shipping_ar",
+  "free_en",
+  "free_ar",
+  "total_en",
+  "total_ar",
+  "retry_en",
+  "retry_ar",
+  "loading_en",
+  "loading_ar",
   "close_quick_actions_en",
   "close_quick_actions_ar",
   "quick_actions_en",
@@ -352,6 +434,130 @@
   "style_quiz_next_ar",
   "style_quiz_finish_en",
   "style_quiz_finish_ar",
+  "account_title_en",
+  "account_title_ar",
+  "account_subtitle_en",
+  "account_subtitle_ar",
+  "account_email_placeholder_en",
+  "account_email_placeholder_ar",
+  "open_dashboard_en",
+  "open_dashboard_ar",
+  "no_orders_en",
+  "no_orders_ar",
+  "orders_en",
+  "orders_ar",
+  "invoices_en",
+  "invoices_ar",
+  "return_requests_en",
+  "return_requests_ar",
+  "account_summary_en",
+  "account_summary_ar",
+  "loyalty_points_en",
+  "loyalty_points_ar",
+  "my_profile_en",
+  "my_profile_ar",
+  "save_changes_en",
+  "save_changes_ar",
+  "edit_profile_en",
+  "edit_profile_ar",
+  "download_pdf_en",
+  "download_pdf_ar",
+  "request_return_en",
+  "request_return_ar",
+  "cancel_en",
+  "cancel_ar",
+  "submit_request_en",
+  "submit_request_ar",
+  "return_reason_en",
+  "return_reason_ar",
+  "quantity_en",
+  "quantity_ar",
+  "return_success_en",
+  "return_success_ar",
+  "profile_saved_en",
+  "profile_saved_ar",
+  "address_saved_en",
+  "address_saved_ar",
+  "address_deleted_en",
+  "address_deleted_ar",
+  "total_spend_en",
+  "total_spend_ar",
+  "average_order_en",
+  "average_order_ar",
+  "completed_orders_en",
+  "completed_orders_ar",
+  "saved_addresses_en",
+  "saved_addresses_ar",
+  "add_address_en",
+  "add_address_ar",
+  "edit_address_en",
+  "edit_address_ar",
+  "delete_address_en",
+  "delete_address_ar",
+  "delete_address_confirm_en",
+  "delete_address_confirm_ar",
+  "address_line_en",
+  "address_line_ar",
+  "country_en",
+  "country_ar",
+  "postcode_en",
+  "postcode_ar",
+  "no_saved_addresses_en",
+  "no_saved_addresses_ar",
+  "no_invoices_en",
+  "no_invoices_ar",
+  "no_returns_en",
+  "no_returns_ar",
+  "item_added_to_bag_en",
+  "item_added_to_bag_ar",
+  "reorder_en",
+  "reorder_ar",
+  "membership_title_en",
+  "membership_title_ar",
+  "new_member_en",
+  "new_member_ar",
+  "member_discount_en",
+  "member_discount_ar",
+  "quote_status_prefix_en",
+  "quote_status_prefix_ar",
+  "quote_title_en",
+  "quote_title_ar",
+  "quote_kicker_en",
+  "quote_kicker_ar",
+  "quote_body_en",
+  "quote_body_ar",
+  "quote_name_en",
+  "quote_name_ar",
+  "quote_email_en",
+  "quote_email_ar",
+  "quote_phone_en",
+  "quote_phone_ar",
+  "quote_company_en",
+  "quote_company_ar",
+  "quote_notes_en",
+  "quote_notes_ar",
+  "quote_sending_en",
+  "quote_sending_ar",
+  "quote_send_en",
+  "quote_send_ar",
+  "login_validation_en",
+  "login_validation_ar",
+  "login_failed_en",
+  "login_failed_ar",
+  "connection_error_en",
+  "connection_error_ar",
+  "customer_sign_in_en",
+  "customer_sign_in_ar",
+  "mobile_phone_en",
+  "mobile_phone_ar",
+  "verifying_en",
+  "verifying_ar",
+  "continue_en",
+  "continue_ar",
+  "stripe_secure_hint_en",
+  "stripe_secure_hint_ar",
+  "pay_now_en",
+  "pay_now_ar",
   "ui_icons_section",
   "wishlist_icon",
   "cart_icon",
@@ -411,8 +617,6 @@
   "pickup_note_en",
   "pickup_note_ar",
   "membership_enabled",
-  "membership_title_en",
-  "membership_title_ar",
   "presence_material_studio_enabled",
   "presence_material_studio_title_en",
   "presence_material_studio_title_ar",
@@ -2962,6 +3166,1230 @@
    "fieldtype": "Data",
    "label": "Menu Label (Arabic)",
    "default": "القائمة"
+  },
+  {
+   "fieldname": "shipping_information_en",
+   "fieldtype": "Data",
+   "label": "Shipping Information Heading (English)",
+   "default": "Shipping Information"
+  },
+  {
+   "fieldname": "shipping_information_ar",
+   "fieldtype": "Data",
+   "label": "Shipping Information Heading (Arabic)",
+   "default": "معلومات الشحن"
+  },
+  {
+   "fieldname": "full_name_en",
+   "fieldtype": "Data",
+   "label": "Full Name Label (English)",
+   "default": "Full Name"
+  },
+  {
+   "fieldname": "full_name_ar",
+   "fieldtype": "Data",
+   "label": "Full Name Label (Arabic)",
+   "default": "الاسم الكامل"
+  },
+  {
+   "fieldname": "email_en",
+   "fieldtype": "Data",
+   "label": "Email Label (English)",
+   "default": "Email"
+  },
+  {
+   "fieldname": "email_ar",
+   "fieldtype": "Data",
+   "label": "Email Label (Arabic)",
+   "default": "البريد الإلكتروني"
+  },
+  {
+   "fieldname": "primary_phone_en",
+   "fieldtype": "Data",
+   "label": "Primary Phone Label (English)",
+   "default": "Primary Phone"
+  },
+  {
+   "fieldname": "primary_phone_ar",
+   "fieldtype": "Data",
+   "label": "Primary Phone Label (Arabic)",
+   "default": "رقم الهاتف الأساسي"
+  },
+  {
+   "fieldname": "second_phone_en",
+   "fieldtype": "Data",
+   "label": "Second Phone Label (English)",
+   "default": "Second Phone Number"
+  },
+  {
+   "fieldname": "second_phone_ar",
+   "fieldtype": "Data",
+   "label": "Second Phone Label (Arabic)",
+   "default": "رقم هاتف ثانٍ"
+  },
+  {
+   "fieldname": "governorate_en",
+   "fieldtype": "Data",
+   "label": "Governorate Label (English)",
+   "default": "Governorate"
+  },
+  {
+   "fieldname": "governorate_ar",
+   "fieldtype": "Data",
+   "label": "Governorate Label (Arabic)",
+   "default": "المحافظة"
+  },
+  {
+   "fieldname": "select_governorate_en",
+   "fieldtype": "Data",
+   "label": "Select Governorate Label (English)",
+   "default": "Select governorate"
+  },
+  {
+   "fieldname": "select_governorate_ar",
+   "fieldtype": "Data",
+   "label": "Select Governorate Label (Arabic)",
+   "default": "اختر المحافظة"
+  },
+  {
+   "fieldname": "city_en",
+   "fieldtype": "Data",
+   "label": "City Label (English)",
+   "default": "City"
+  },
+  {
+   "fieldname": "city_ar",
+   "fieldtype": "Data",
+   "label": "City Label (Arabic)",
+   "default": "المدينة"
+  },
+  {
+   "fieldname": "select_city_en",
+   "fieldtype": "Data",
+   "label": "Select City Label (English)",
+   "default": "Select city"
+  },
+  {
+   "fieldname": "select_city_ar",
+   "fieldtype": "Data",
+   "label": "Select City Label (Arabic)",
+   "default": "اختر المدينة"
+  },
+  {
+   "fieldname": "detailed_address_en",
+   "fieldtype": "Data",
+   "label": "Detailed Address Label (English)",
+   "default": "Detailed Address"
+  },
+  {
+   "fieldname": "detailed_address_ar",
+   "fieldtype": "Data",
+   "label": "Detailed Address Label (Arabic)",
+   "default": "العنوان بالتفصيل"
+  },
+  {
+   "fieldname": "optional_location_en",
+   "fieldtype": "Data",
+   "label": "Optional Location Label (English)",
+   "default": "Optional Location"
+  },
+  {
+   "fieldname": "optional_location_ar",
+   "fieldtype": "Data",
+   "label": "Optional Location Label (Arabic)",
+   "default": "موقع اختياري"
+  },
+  {
+   "fieldname": "location_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Location Placeholder (English)",
+   "default": "Map link or nearby landmark"
+  },
+  {
+   "fieldname": "location_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Location Placeholder (Arabic)",
+   "default": "رابط الخريطة أو علامة مميزة"
+  },
+  {
+   "fieldname": "coupon_code_en",
+   "fieldtype": "Data",
+   "label": "Coupon Code Heading (English)",
+   "default": "Coupon Code"
+  },
+  {
+   "fieldname": "coupon_code_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Code Heading (Arabic)",
+   "default": "كود الخصم"
+  },
+  {
+   "fieldname": "apply_en",
+   "fieldtype": "Data",
+   "label": "Apply Label (English)",
+   "default": "Apply"
+  },
+  {
+   "fieldname": "apply_ar",
+   "fieldtype": "Data",
+   "label": "Apply Label (Arabic)",
+   "default": "تطبيق"
+  },
+  {
+   "fieldname": "invalid_coupon_en",
+   "fieldtype": "Data",
+   "label": "Invalid Coupon Message (English)",
+   "default": "Invalid coupon code"
+  },
+  {
+   "fieldname": "invalid_coupon_ar",
+   "fieldtype": "Data",
+   "label": "Invalid Coupon Message (Arabic)",
+   "default": "كود غير صالح"
+  },
+  {
+   "fieldname": "coupon_applied_en",
+   "fieldtype": "Data",
+   "label": "Coupon Applied Message (English)",
+   "default": "Coupon applied successfully"
+  },
+  {
+   "fieldname": "coupon_applied_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Applied Message (Arabic)",
+   "default": "تم تطبيق الكود بنجاح"
+  },
+  {
+   "fieldname": "make_it_gift_en",
+   "fieldtype": "Data",
+   "label": "Gift Heading (English)",
+   "default": "Make it a gift"
+  },
+  {
+   "fieldname": "make_it_gift_ar",
+   "fieldtype": "Data",
+   "label": "Gift Heading (Arabic)",
+   "default": "اجعلها هدية"
+  },
+  {
+   "fieldname": "add_gift_wrapping_en",
+   "fieldtype": "Data",
+   "label": "Gift Wrapping Label (English)",
+   "default": "Add gift wrapping"
+  },
+  {
+   "fieldname": "add_gift_wrapping_ar",
+   "fieldtype": "Data",
+   "label": "Gift Wrapping Label (Arabic)",
+   "default": "إضافة تغليف هدايا"
+  },
+  {
+   "fieldname": "personal_note_en",
+   "fieldtype": "Data",
+   "label": "Personal Note Placeholder (English)",
+   "default": "Add a personal note"
+  },
+  {
+   "fieldname": "personal_note_ar",
+   "fieldtype": "Data",
+   "label": "Personal Note Placeholder (Arabic)",
+   "default": "أضف ملاحظة شخصية"
+  },
+  {
+   "fieldname": "fulfillment_en",
+   "fieldtype": "Data",
+   "label": "Fulfillment Heading (English)",
+   "default": "Fulfillment"
+  },
+  {
+   "fieldname": "fulfillment_ar",
+   "fieldtype": "Data",
+   "label": "Fulfillment Heading (Arabic)",
+   "default": "التنفيذ"
+  },
+  {
+   "fieldname": "delivery_en",
+   "fieldtype": "Data",
+   "label": "Delivery Label (English)",
+   "default": "Delivery"
+  },
+  {
+   "fieldname": "delivery_ar",
+   "fieldtype": "Data",
+   "label": "Delivery Label (Arabic)",
+   "default": "توصيل"
+  },
+  {
+   "fieldname": "store_pickup_en",
+   "fieldtype": "Data",
+   "label": "Store Pickup Label (English)",
+   "default": "Store pickup"
+  },
+  {
+   "fieldname": "store_pickup_ar",
+   "fieldtype": "Data",
+   "label": "Store Pickup Label (Arabic)",
+   "default": "الاستلام من المتجر"
+  },
+  {
+   "fieldname": "select_warehouse_en",
+   "fieldtype": "Data",
+   "label": "Select Warehouse Label (English)",
+   "default": "Select warehouse"
+  },
+  {
+   "fieldname": "select_warehouse_ar",
+   "fieldtype": "Data",
+   "label": "Select Warehouse Label (Arabic)",
+   "default": "اختر المستودع"
+  },
+  {
+   "fieldname": "delivery_date_en",
+   "fieldtype": "Data",
+   "label": "Delivery Date Heading (English)",
+   "default": "Delivery Date"
+  },
+  {
+   "fieldname": "delivery_date_ar",
+   "fieldtype": "Data",
+   "label": "Delivery Date Heading (Arabic)",
+   "default": "تاريخ التوصيل"
+  },
+  {
+   "fieldname": "preferred_delivery_date_en",
+   "fieldtype": "Data",
+   "label": "Preferred Delivery Date Hint (English)",
+   "default": "Select your preferred delivery date"
+  },
+  {
+   "fieldname": "preferred_delivery_date_ar",
+   "fieldtype": "Data",
+   "label": "Preferred Delivery Date Hint (Arabic)",
+   "default": "اختر موعد التوصيل المفضل لديك"
+  },
+  {
+   "fieldname": "payment_method_en",
+   "fieldtype": "Data",
+   "label": "Payment Method Heading (English)",
+   "default": "Payment Method"
+  },
+  {
+   "fieldname": "payment_method_ar",
+   "fieldtype": "Data",
+   "label": "Payment Method Heading (Arabic)",
+   "default": "طريقة الدفع"
+  },
+  {
+   "fieldname": "paymob_secure_hint_en",
+   "fieldtype": "Data",
+   "label": "Paymob Secure Hint (English)",
+   "default": "Pay securely through Paymob"
+  },
+  {
+   "fieldname": "paymob_secure_hint_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Secure Hint (Arabic)",
+   "default": "ادفع بأمان عبر Paymob"
+  },
+  {
+   "fieldname": "processing_en",
+   "fieldtype": "Data",
+   "label": "Processing Label (English)",
+   "default": "Processing..."
+  },
+  {
+   "fieldname": "processing_ar",
+   "fieldtype": "Data",
+   "label": "Processing Label (Arabic)",
+   "default": "جاري المعالجة..."
+  },
+  {
+   "fieldname": "continue_payment_en",
+   "fieldtype": "Data",
+   "label": "Continue to Payment Label (English)",
+   "default": "Continue to Payment"
+  },
+  {
+   "fieldname": "continue_payment_ar",
+   "fieldtype": "Data",
+   "label": "Continue to Payment Label (Arabic)",
+   "default": "المتابعة إلى الدفع"
+  },
+  {
+   "fieldname": "confirm_order_en",
+   "fieldtype": "Data",
+   "label": "Confirm Order Label (English)",
+   "default": "Confirm Order"
+  },
+  {
+   "fieldname": "confirm_order_ar",
+   "fieldtype": "Data",
+   "label": "Confirm Order Label (Arabic)",
+   "default": "تأكيد الطلب"
+  },
+  {
+   "fieldname": "order_summary_en",
+   "fieldtype": "Data",
+   "label": "Order Summary Heading (English)",
+   "default": "Order Summary"
+  },
+  {
+   "fieldname": "order_summary_ar",
+   "fieldtype": "Data",
+   "label": "Order Summary Heading (Arabic)",
+   "default": "ملخص الطلب"
+  },
+  {
+   "fieldname": "discount_en",
+   "fieldtype": "Data",
+   "label": "Discount Label (English)",
+   "default": "Discount"
+  },
+  {
+   "fieldname": "discount_ar",
+   "fieldtype": "Data",
+   "label": "Discount Label (Arabic)",
+   "default": "الخصم"
+  },
+  {
+   "fieldname": "shipping_en",
+   "fieldtype": "Data",
+   "label": "Shipping Label (English)",
+   "default": "Shipping"
+  },
+  {
+   "fieldname": "shipping_ar",
+   "fieldtype": "Data",
+   "label": "Shipping Label (Arabic)",
+   "default": "الشحن"
+  },
+  {
+   "fieldname": "free_en",
+   "fieldtype": "Data",
+   "label": "Free Label (English)",
+   "default": "Free"
+  },
+  {
+   "fieldname": "free_ar",
+   "fieldtype": "Data",
+   "label": "Free Label (Arabic)",
+   "default": "مجاني"
+  },
+  {
+   "fieldname": "total_en",
+   "fieldtype": "Data",
+   "label": "Total Label (English)",
+   "default": "Total"
+  },
+  {
+   "fieldname": "total_ar",
+   "fieldtype": "Data",
+   "label": "Total Label (Arabic)",
+   "default": "الإجمالي"
+  },
+  {
+   "fieldname": "retry_en",
+   "fieldtype": "Data",
+   "label": "Retry Label (English)",
+   "default": "Retry"
+  },
+  {
+   "fieldname": "retry_ar",
+   "fieldtype": "Data",
+   "label": "Retry Label (Arabic)",
+   "default": "إعادة المحاولة"
+  },
+  {
+   "fieldname": "loading_en",
+   "fieldtype": "Data",
+   "label": "Loading Label (English)",
+   "default": "Loading..."
+  },
+  {
+   "fieldname": "loading_ar",
+   "fieldtype": "Data",
+   "label": "Loading Label (Arabic)",
+   "default": "جارٍ التحميل..."
+  },
+  {
+   "fieldname": "account_title_en",
+   "fieldtype": "Data",
+   "label": "Account Title (English)",
+   "default": "My account"
+  },
+  {
+   "fieldname": "account_title_ar",
+   "fieldtype": "Data",
+   "label": "Account Title (Arabic)",
+   "default": "حسابي"
+  },
+  {
+   "fieldname": "account_subtitle_en",
+   "fieldtype": "Data",
+   "label": "Account Subtitle (English)",
+   "default": "Track orders, invoices, loyalty points, profile details, and returns in one place."
+  },
+  {
+   "fieldname": "account_subtitle_ar",
+   "fieldtype": "Data",
+   "label": "Account Subtitle (Arabic)",
+   "default": "تابع طلباتك وفواتيرك ونقاطك وطلبات الإرجاع من مكان واحد."
+  },
+  {
+   "fieldname": "account_email_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Account Email Placeholder (English)",
+   "default": "Enter the email used at checkout"
+  },
+  {
+   "fieldname": "account_email_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Account Email Placeholder (Arabic)",
+   "default": "أدخل البريد الإلكتروني المستخدم عند الدفع"
+  },
+  {
+   "fieldname": "open_dashboard_en",
+   "fieldtype": "Data",
+   "label": "Open Dashboard Label (English)",
+   "default": "Open my dashboard"
+  },
+  {
+   "fieldname": "open_dashboard_ar",
+   "fieldtype": "Data",
+   "label": "Open Dashboard Label (Arabic)",
+   "default": "عرض لوحة حسابي"
+  },
+  {
+   "fieldname": "no_orders_en",
+   "fieldtype": "Data",
+   "label": "No Orders Message (English)",
+   "default": "No orders found for that email."
+  },
+  {
+   "fieldname": "no_orders_ar",
+   "fieldtype": "Data",
+   "label": "No Orders Message (Arabic)",
+   "default": "لا توجد طلبات لهذا البريد الإلكتروني."
+  },
+  {
+   "fieldname": "orders_en",
+   "fieldtype": "Data",
+   "label": "Orders Label (English)",
+   "default": "Orders"
+  },
+  {
+   "fieldname": "orders_ar",
+   "fieldtype": "Data",
+   "label": "Orders Label (Arabic)",
+   "default": "الطلبات"
+  },
+  {
+   "fieldname": "invoices_en",
+   "fieldtype": "Data",
+   "label": "Invoices Label (English)",
+   "default": "Invoices"
+  },
+  {
+   "fieldname": "invoices_ar",
+   "fieldtype": "Data",
+   "label": "Invoices Label (Arabic)",
+   "default": "الفواتير"
+  },
+  {
+   "fieldname": "return_requests_en",
+   "fieldtype": "Data",
+   "label": "Return Requests Label (English)",
+   "default": "Return requests"
+  },
+  {
+   "fieldname": "return_requests_ar",
+   "fieldtype": "Data",
+   "label": "Return Requests Label (Arabic)",
+   "default": "طلبات الإرجاع"
+  },
+  {
+   "fieldname": "account_summary_en",
+   "fieldtype": "Data",
+   "label": "Account Summary Label (English)",
+   "default": "Account summary"
+  },
+  {
+   "fieldname": "account_summary_ar",
+   "fieldtype": "Data",
+   "label": "Account Summary Label (Arabic)",
+   "default": "ملخص الحساب"
+  },
+  {
+   "fieldname": "loyalty_points_en",
+   "fieldtype": "Data",
+   "label": "Loyalty Points Label (English)",
+   "default": "Loyalty points"
+  },
+  {
+   "fieldname": "loyalty_points_ar",
+   "fieldtype": "Data",
+   "label": "Loyalty Points Label (Arabic)",
+   "default": "نقاط الولاء"
+  },
+  {
+   "fieldname": "my_profile_en",
+   "fieldtype": "Data",
+   "label": "My Profile Label (English)",
+   "default": "My profile"
+  },
+  {
+   "fieldname": "my_profile_ar",
+   "fieldtype": "Data",
+   "label": "My Profile Label (Arabic)",
+   "default": "بياناتي"
+  },
+  {
+   "fieldname": "save_changes_en",
+   "fieldtype": "Data",
+   "label": "Save Changes Label (English)",
+   "default": "Save changes"
+  },
+  {
+   "fieldname": "save_changes_ar",
+   "fieldtype": "Data",
+   "label": "Save Changes Label (Arabic)",
+   "default": "حفظ التغييرات"
+  },
+  {
+   "fieldname": "edit_profile_en",
+   "fieldtype": "Data",
+   "label": "Edit Profile Label (English)",
+   "default": "Edit profile"
+  },
+  {
+   "fieldname": "edit_profile_ar",
+   "fieldtype": "Data",
+   "label": "Edit Profile Label (Arabic)",
+   "default": "تعديل البيانات"
+  },
+  {
+   "fieldname": "download_pdf_en",
+   "fieldtype": "Data",
+   "label": "Download PDF Label (English)",
+   "default": "Download PDF"
+  },
+  {
+   "fieldname": "download_pdf_ar",
+   "fieldtype": "Data",
+   "label": "Download PDF Label (Arabic)",
+   "default": "تحميل PDF"
+  },
+  {
+   "fieldname": "request_return_en",
+   "fieldtype": "Data",
+   "label": "Request Return Label (English)",
+   "default": "Request return"
+  },
+  {
+   "fieldname": "request_return_ar",
+   "fieldtype": "Data",
+   "label": "Request Return Label (Arabic)",
+   "default": "طلب إرجاع"
+  },
+  {
+   "fieldname": "cancel_en",
+   "fieldtype": "Data",
+   "label": "Cancel Label (English)",
+   "default": "Cancel"
+  },
+  {
+   "fieldname": "cancel_ar",
+   "fieldtype": "Data",
+   "label": "Cancel Label (Arabic)",
+   "default": "إلغاء"
+  },
+  {
+   "fieldname": "submit_request_en",
+   "fieldtype": "Data",
+   "label": "Submit Request Label (English)",
+   "default": "Submit request"
+  },
+  {
+   "fieldname": "submit_request_ar",
+   "fieldtype": "Data",
+   "label": "Submit Request Label (Arabic)",
+   "default": "إرسال الطلب"
+  },
+  {
+   "fieldname": "return_reason_en",
+   "fieldtype": "Data",
+   "label": "Return Reason Label (English)",
+   "default": "Reason for return"
+  },
+  {
+   "fieldname": "return_reason_ar",
+   "fieldtype": "Data",
+   "label": "Return Reason Label (Arabic)",
+   "default": "سبب الإرجاع"
+  },
+  {
+   "fieldname": "quantity_en",
+   "fieldtype": "Data",
+   "label": "Quantity Label (English)",
+   "default": "Quantity"
+  },
+  {
+   "fieldname": "quantity_ar",
+   "fieldtype": "Data",
+   "label": "Quantity Label (Arabic)",
+   "default": "الكمية"
+  },
+  {
+   "fieldname": "return_success_en",
+   "fieldtype": "Data",
+   "label": "Return Success Message (English)",
+   "default": "Return request submitted successfully."
+  },
+  {
+   "fieldname": "return_success_ar",
+   "fieldtype": "Data",
+   "label": "Return Success Message (Arabic)",
+   "default": "تم إرسال طلب الإرجاع."
+  },
+  {
+   "fieldname": "profile_saved_en",
+   "fieldtype": "Data",
+   "label": "Profile Saved Message (English)",
+   "default": "Profile updated successfully."
+  },
+  {
+   "fieldname": "profile_saved_ar",
+   "fieldtype": "Data",
+   "label": "Profile Saved Message (Arabic)",
+   "default": "تم تحديث البيانات."
+  },
+  {
+   "fieldname": "address_saved_en",
+   "fieldtype": "Data",
+   "label": "Address Saved Message (English)",
+   "default": "Address saved successfully."
+  },
+  {
+   "fieldname": "address_saved_ar",
+   "fieldtype": "Data",
+   "label": "Address Saved Message (Arabic)",
+   "default": "تم حفظ العنوان."
+  },
+  {
+   "fieldname": "address_deleted_en",
+   "fieldtype": "Data",
+   "label": "Address Deleted Message (English)",
+   "default": "Address deleted successfully."
+  },
+  {
+   "fieldname": "address_deleted_ar",
+   "fieldtype": "Data",
+   "label": "Address Deleted Message (Arabic)",
+   "default": "تم حذف العنوان."
+  },
+  {
+   "fieldname": "total_spend_en",
+   "fieldtype": "Data",
+   "label": "Total Spend Label (English)",
+   "default": "Total spend"
+  },
+  {
+   "fieldname": "total_spend_ar",
+   "fieldtype": "Data",
+   "label": "Total Spend Label (Arabic)",
+   "default": "إجمالي الإنفاق"
+  },
+  {
+   "fieldname": "average_order_en",
+   "fieldtype": "Data",
+   "label": "Average Order Label (English)",
+   "default": "Average order"
+  },
+  {
+   "fieldname": "average_order_ar",
+   "fieldtype": "Data",
+   "label": "Average Order Label (Arabic)",
+   "default": "متوسط الطلب"
+  },
+  {
+   "fieldname": "completed_orders_en",
+   "fieldtype": "Data",
+   "label": "Completed Orders Label (English)",
+   "default": "Completed orders"
+  },
+  {
+   "fieldname": "completed_orders_ar",
+   "fieldtype": "Data",
+   "label": "Completed Orders Label (Arabic)",
+   "default": "طلبات مكتملة"
+  },
+  {
+   "fieldname": "saved_addresses_en",
+   "fieldtype": "Data",
+   "label": "Saved Addresses Label (English)",
+   "default": "Saved addresses"
+  },
+  {
+   "fieldname": "saved_addresses_ar",
+   "fieldtype": "Data",
+   "label": "Saved Addresses Label (Arabic)",
+   "default": "عناويني"
+  },
+  {
+   "fieldname": "add_address_en",
+   "fieldtype": "Data",
+   "label": "Add Address Label (English)",
+   "default": "Add address"
+  },
+  {
+   "fieldname": "add_address_ar",
+   "fieldtype": "Data",
+   "label": "Add Address Label (Arabic)",
+   "default": "إضافة عنوان"
+  },
+  {
+   "fieldname": "edit_address_en",
+   "fieldtype": "Data",
+   "label": "Edit Address Label (English)",
+   "default": "Edit address"
+  },
+  {
+   "fieldname": "edit_address_ar",
+   "fieldtype": "Data",
+   "label": "Edit Address Label (Arabic)",
+   "default": "تعديل العنوان"
+  },
+  {
+   "fieldname": "delete_address_en",
+   "fieldtype": "Data",
+   "label": "Delete Address Label (English)",
+   "default": "Delete"
+  },
+  {
+   "fieldname": "delete_address_ar",
+   "fieldtype": "Data",
+   "label": "Delete Address Label (Arabic)",
+   "default": "حذف"
+  },
+  {
+   "fieldname": "delete_address_confirm_en",
+   "fieldtype": "Data",
+   "label": "Delete Address Confirmation (English)",
+   "default": "Delete this address?"
+  },
+  {
+   "fieldname": "delete_address_confirm_ar",
+   "fieldtype": "Data",
+   "label": "Delete Address Confirmation (Arabic)",
+   "default": "هل تريد حذف هذا العنوان؟"
+  },
+  {
+   "fieldname": "address_line_en",
+   "fieldtype": "Data",
+   "label": "Address Line Label (English)",
+   "default": "Address line"
+  },
+  {
+   "fieldname": "address_line_ar",
+   "fieldtype": "Data",
+   "label": "Address Line Label (Arabic)",
+   "default": "العنوان"
+  },
+  {
+   "fieldname": "country_en",
+   "fieldtype": "Data",
+   "label": "Country Label (English)",
+   "default": "Country"
+  },
+  {
+   "fieldname": "country_ar",
+   "fieldtype": "Data",
+   "label": "Country Label (Arabic)",
+   "default": "الدولة"
+  },
+  {
+   "fieldname": "postcode_en",
+   "fieldtype": "Data",
+   "label": "Postcode Label (English)",
+   "default": "Postcode"
+  },
+  {
+   "fieldname": "postcode_ar",
+   "fieldtype": "Data",
+   "label": "Postcode Label (Arabic)",
+   "default": "الرمز البريدي"
+  },
+  {
+   "fieldname": "no_saved_addresses_en",
+   "fieldtype": "Data",
+   "label": "No Saved Addresses Message (English)",
+   "default": "No saved addresses yet."
+  },
+  {
+   "fieldname": "no_saved_addresses_ar",
+   "fieldtype": "Data",
+   "label": "No Saved Addresses Message (Arabic)",
+   "default": "لا توجد عناوين محفوظة."
+  },
+  {
+   "fieldname": "no_invoices_en",
+   "fieldtype": "Data",
+   "label": "No Invoices Message (English)",
+   "default": "No invoices available."
+  },
+  {
+   "fieldname": "no_invoices_ar",
+   "fieldtype": "Data",
+   "label": "No Invoices Message (Arabic)",
+   "default": "لا توجد فواتير."
+  },
+  {
+   "fieldname": "no_returns_en",
+   "fieldtype": "Data",
+   "label": "No Returns Message (English)",
+   "default": "No return requests yet."
+  },
+  {
+   "fieldname": "no_returns_ar",
+   "fieldtype": "Data",
+   "label": "No Returns Message (Arabic)",
+   "default": "لا توجد طلبات إرجاع."
+  },
+  {
+   "fieldname": "item_added_to_bag_en",
+   "fieldtype": "Data",
+   "label": "Item Added Message (English)",
+   "default": "Item added to your bag."
+  },
+  {
+   "fieldname": "item_added_to_bag_ar",
+   "fieldtype": "Data",
+   "label": "Item Added Message (Arabic)",
+   "default": "تمت إضافة المنتج إلى السلة."
+  },
+  {
+   "fieldname": "new_member_en",
+   "fieldtype": "Data",
+   "label": "New Member Label (English)",
+   "default": "New member"
+  },
+  {
+   "fieldname": "new_member_ar",
+   "fieldtype": "Data",
+   "label": "New Member Label (Arabic)",
+   "default": "عضو جديد"
+  },
+  {
+   "fieldname": "member_discount_en",
+   "fieldtype": "Data",
+   "label": "Member Discount Label (English)",
+   "default": "member discount"
+  },
+  {
+   "fieldname": "member_discount_ar",
+   "fieldtype": "Data",
+   "label": "Member Discount Label (Arabic)",
+   "default": "خصم للأعضاء"
+  },
+  {
+   "fieldname": "quote_status_prefix_en",
+   "fieldtype": "Data",
+   "label": "Quote Status Prefix (English)",
+   "default": "Quote request"
+  },
+  {
+   "fieldname": "quote_status_prefix_ar",
+   "fieldtype": "Data",
+   "label": "Quote Status Prefix (Arabic)",
+   "default": "طلب عرض السعر"
+  },
+  {
+   "fieldname": "quote_kicker_en",
+   "fieldtype": "Data",
+   "label": "Quote Kicker (English)",
+   "default": "Concierge service"
+  },
+  {
+   "fieldname": "quote_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Quote Kicker (Arabic)",
+   "default": "خدمة مخصصة"
+  },
+  {
+   "fieldname": "quote_body_en",
+   "fieldtype": "Data",
+   "label": "Quote Body (English)",
+   "default": "Tell us what you need and our team will prepare a considered proposal."
+  },
+  {
+   "fieldname": "quote_body_ar",
+   "fieldtype": "Data",
+   "label": "Quote Body (Arabic)",
+   "default": "أخبرنا بما تحتاجه وسنعد لك عرضاً مناسباً."
+  },
+  {
+   "fieldname": "quote_name_en",
+   "fieldtype": "Data",
+   "label": "Quote Name Label (English)",
+   "default": "Name"
+  },
+  {
+   "fieldname": "quote_name_ar",
+   "fieldtype": "Data",
+   "label": "Quote Name Label (Arabic)",
+   "default": "الاسم"
+  },
+  {
+   "fieldname": "quote_email_en",
+   "fieldtype": "Data",
+   "label": "Quote Email Label (English)",
+   "default": "Email"
+  },
+  {
+   "fieldname": "quote_email_ar",
+   "fieldtype": "Data",
+   "label": "Quote Email Label (Arabic)",
+   "default": "البريد الإلكتروني"
+  },
+  {
+   "fieldname": "quote_phone_en",
+   "fieldtype": "Data",
+   "label": "Quote Phone Label (English)",
+   "default": "Phone"
+  },
+  {
+   "fieldname": "quote_phone_ar",
+   "fieldtype": "Data",
+   "label": "Quote Phone Label (Arabic)",
+   "default": "الهاتف"
+  },
+  {
+   "fieldname": "quote_company_en",
+   "fieldtype": "Data",
+   "label": "Quote Company Label (English)",
+   "default": "Company or project"
+  },
+  {
+   "fieldname": "quote_company_ar",
+   "fieldtype": "Data",
+   "label": "Quote Company Label (Arabic)",
+   "default": "الشركة أو المشروع"
+  },
+  {
+   "fieldname": "quote_notes_en",
+   "fieldtype": "Data",
+   "label": "Quote Notes Label (English)",
+   "default": "Notes"
+  },
+  {
+   "fieldname": "quote_notes_ar",
+   "fieldtype": "Data",
+   "label": "Quote Notes Label (Arabic)",
+   "default": "ملاحظات"
+  },
+  {
+   "fieldname": "quote_sending_en",
+   "fieldtype": "Data",
+   "label": "Quote Sending Label (English)",
+   "default": "Sending..."
+  },
+  {
+   "fieldname": "quote_sending_ar",
+   "fieldtype": "Data",
+   "label": "Quote Sending Label (Arabic)",
+   "default": "جارٍ الإرسال..."
+  },
+  {
+   "fieldname": "quote_send_en",
+   "fieldtype": "Data",
+   "label": "Quote Send Label (English)",
+   "default": "Send request"
+  },
+  {
+   "fieldname": "quote_send_ar",
+   "fieldtype": "Data",
+   "label": "Quote Send Label (Arabic)",
+   "default": "إرسال الطلب"
+  },
+  {
+   "fieldname": "login_validation_en",
+   "fieldtype": "Data",
+   "label": "Login Validation Message (English)",
+   "default": "Please enter email and phone number"
+  },
+  {
+   "fieldname": "login_validation_ar",
+   "fieldtype": "Data",
+   "label": "Login Validation Message (Arabic)",
+   "default": "الرجاء إدخال البريد الإلكتروني ورقم الهاتف"
+  },
+  {
+   "fieldname": "login_failed_en",
+   "fieldtype": "Data",
+   "label": "Login Failed Message (English)",
+   "default": "Login failed"
+  },
+  {
+   "fieldname": "login_failed_ar",
+   "fieldtype": "Data",
+   "label": "Login Failed Message (Arabic)",
+   "default": "فشل تسجيل الدخول"
+  },
+  {
+   "fieldname": "connection_error_en",
+   "fieldtype": "Data",
+   "label": "Connection Error Message (English)",
+   "default": "Connection error"
+  },
+  {
+   "fieldname": "connection_error_ar",
+   "fieldtype": "Data",
+   "label": "Connection Error Message (Arabic)",
+   "default": "خطأ في الاتصال"
+  },
+  {
+   "fieldname": "customer_sign_in_en",
+   "fieldtype": "Data",
+   "label": "Customer Sign In Heading (English)",
+   "default": "Customer Sign In"
+  },
+  {
+   "fieldname": "customer_sign_in_ar",
+   "fieldtype": "Data",
+   "label": "Customer Sign In Heading (Arabic)",
+   "default": "تسجيل دخول العميل"
+  },
+  {
+   "fieldname": "mobile_phone_en",
+   "fieldtype": "Data",
+   "label": "Mobile Phone Label (English)",
+   "default": "Mobile Phone"
+  },
+  {
+   "fieldname": "mobile_phone_ar",
+   "fieldtype": "Data",
+   "label": "Mobile Phone Label (Arabic)",
+   "default": "رقم الهاتف المحمول"
+  },
+  {
+   "fieldname": "verifying_en",
+   "fieldtype": "Data",
+   "label": "Verifying Label (English)",
+   "default": "Verifying..."
+  },
+  {
+   "fieldname": "verifying_ar",
+   "fieldtype": "Data",
+   "label": "Verifying Label (Arabic)",
+   "default": "جاري التحقق..."
+  },
+  {
+   "fieldname": "continue_en",
+   "fieldtype": "Data",
+   "label": "Continue Label (English)",
+   "default": "Continue"
+  },
+  {
+   "fieldname": "continue_ar",
+   "fieldtype": "Data",
+   "label": "Continue Label (Arabic)",
+   "default": "متابعة الدخول"
+  },
+  {
+   "fieldname": "stripe_secure_hint_en",
+   "fieldtype": "Data",
+   "label": "Stripe Secure Hint (English)",
+   "default": "Payment will be processed securely via Stripe"
+  },
+  {
+   "fieldname": "stripe_secure_hint_ar",
+   "fieldtype": "Data",
+   "label": "Stripe Secure Hint (Arabic)",
+   "default": "سيتم معالجة الدفع بأمان عبر Stripe"
+  },
+  {
+   "fieldname": "pay_now_en",
+   "fieldtype": "Data",
+   "label": "Pay Now Label (English)",
+   "default": "Pay Now"
+  },
+  {
+   "fieldname": "pay_now_ar",
+   "fieldtype": "Data",
+   "label": "Pay Now Label (Arabic)",
+   "default": "ادفع الآن"
+  },
+  {
+   "fieldname": "full_name_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Full Name Placeholder (English)",
+   "default": "Enter your full name"
+  },
+  {
+   "fieldname": "full_name_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Full Name Placeholder (Arabic)",
+   "default": "أدخل اسمك الكامل"
+  },
+  {
+   "fieldname": "required_fields_en",
+   "fieldtype": "Data",
+   "label": "Required Fields Validation (English)",
+   "default": "Please complete all required fields"
+  },
+  {
+   "fieldname": "required_fields_ar",
+   "fieldtype": "Data",
+   "label": "Required Fields Validation (Arabic)",
+   "default": "يرجى إكمال جميع الحقول المطلوبة"
+  },
+  {
+   "fieldname": "valid_fields_en",
+   "fieldtype": "Data",
+   "label": "Valid Fields Validation (English)",
+   "default": "Please ensure all entered data is valid"
+  },
+  {
+   "fieldname": "valid_fields_ar",
+   "fieldtype": "Data",
+   "label": "Valid Fields Validation (Arabic)",
+   "default": "يرجى التأكد من صحة البيانات المدخلة"
+  },
+  {
+   "fieldname": "payment_start_error_en",
+   "fieldtype": "Data",
+   "label": "Payment Start Error (English)",
+   "default": "Unable to start the online payment."
+  },
+  {
+   "fieldname": "payment_start_error_ar",
+   "fieldtype": "Data",
+   "label": "Payment Start Error (Arabic)",
+   "default": "تعذر بدء عملية الدفع الإلكتروني."
+  },
+  {
+   "fieldname": "reorder_en",
+   "fieldtype": "Data",
+   "label": "Reorder Label (English)",
+   "default": "Reorder"
+  },
+  {
+   "fieldname": "reorder_ar",
+   "fieldtype": "Data",
+   "label": "Reorder Label (Arabic)",
+   "default": "إعادة الطلب"
+  },
+  {
+   "fieldname": "quote_title_en",
+   "fieldtype": "Data",
+   "label": "Quote Request Title (English)",
+   "default": "Request a tailored quote"
+  },
+  {
+   "fieldname": "quote_title_ar",
+   "fieldtype": "Data",
+   "label": "Quote Request Title (Arabic)",
+   "default": "اطلب عرض سعر مخصص"
   }
  ],
  "issingle": 1,
