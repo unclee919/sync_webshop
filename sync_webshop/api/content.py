@@ -428,6 +428,40 @@ def get_content():
             "unit_label_en": settings.get("catalog_unit_label_en") or "item",
             "unit_label_ar": settings.get("catalog_unit_label_ar") or "منتج",
         },
+        "copy": {
+            "footer": {key: settings.get(key) for key in (
+                "footer_eyebrow_en", "footer_eyebrow_ar", "footer_contact_heading_en", "footer_contact_heading_ar",
+                "footer_phone_label_en", "footer_phone_label_ar", "footer_email_label_en", "footer_email_label_ar",
+                "footer_address_label_en", "footer_address_label_ar", "footer_social_eyebrow_en", "footer_social_eyebrow_ar",
+                "footer_social_heading_en", "footer_social_heading_ar", "footer_social_aria_label_en", "footer_social_aria_label_ar",
+                "footer_social_empty_en", "footer_social_empty_ar", "footer_design_credit_en", "footer_design_credit_ar",
+                "footer_links_aria_label_en", "footer_links_aria_label_ar", "footer_navigation_aria_label_en", "footer_navigation_aria_label_ar",
+                "footer_explore_title_en", "footer_explore_title_ar", "footer_customer_care_title_en", "footer_customer_care_title_ar",
+                "footer_information_title_en", "footer_information_title_ar", "footer_visit_social_text_en", "footer_visit_social_text_ar"
+            )},
+            "ui": {key: settings.get(key) for key in (
+                "language_switch_en", "language_switch_ar", "explore_collection_en", "explore_collection_ar",
+                "best_match_en", "best_match_ar", "search_result_category_en", "search_result_category_ar",
+                "search_result_product_en", "search_result_product_ar", "no_image_en", "no_image_ar",
+                "on_request_en", "on_request_ar", "unavailable_en", "unavailable_ar", "view_product_en", "view_product_ar",
+                "view_details_en", "view_details_ar", "all_rights_reserved_en", "all_rights_reserved_ar", "support_en", "support_ar",
+                "close_en", "close_ar", "selected_product_en", "selected_product_ar", "cart_title_en", "cart_title_ar", "cart_empty_en", "cart_empty_ar", "browse_products_en", "browse_products_ar", "checkout_en", "checkout_ar", "view_cart_en", "view_cart_ar", "free_shipping_unlocked_en", "free_shipping_unlocked_ar", "free_shipping_away_en", "free_shipping_away_ar", "cart_item_en", "cart_item_ar", "close_cart_en", "close_cart_ar",                 "free_shipping_progress_en", "free_shipping_progress_ar", "decrease_quantity_en", "decrease_quantity_ar", "increase_quantity_en", "increase_quantity_ar", "remove_en", "remove_ar", "subtotal_en", "subtotal_ar", "compare_products_en", "compare_products_ar", "compare_items_en", "compare_items_ar", "compare_now_en", "compare_now_ar", "clear_en", "clear_ar", "comparison_kicker_en", "comparison_kicker_ar", "comparison_title_en", "comparison_title_ar",                 "rating_en", "rating_ar", "availability_en", "availability_ar", "available_en", "available_ar", "close_quick_actions_en", "close_quick_actions_ar", "quick_actions_en", "quick_actions_ar", "search_en", "search_ar", "saved_en", "saved_ar", "bag_en", "bag_ar", "ai_help_en", "ai_help_ar", "whatsapp_en", "whatsapp_ar", "light_en", "light_ar", "dark_en", "dark_ar", "top_en", "top_ar", "open_quick_actions_en", "open_quick_actions_ar", "menu_en", "menu_ar"
+
+
+            )},
+            "feature": {key: settings.get(key) for key in (
+                "complete_look_kicker_en", "complete_look_kicker_ar", "complete_look_subtitle_en", "complete_look_subtitle_ar",
+                "complete_look_total_label_en", "complete_look_total_label_ar", "add_set_to_bag_en", "add_set_to_bag_ar",
+                "fit_guide_empty_state_en", "fit_guide_empty_state_ar", "fit_guide_kicker_en", "fit_guide_kicker_ar", "fit_guide_subtitle_en", "fit_guide_subtitle_ar", "fit_guide_privacy_en", "fit_guide_privacy_ar", "fit_guide_height_label_en", "fit_guide_height_label_ar", "fit_guide_chest_label_en", "fit_guide_chest_label_ar", "fit_guide_waist_label_en", "fit_guide_waist_label_ar", "fit_guide_recommendation_label_en", "fit_guide_recommendation_label_ar", "fit_guide_relaxed_note_en", "fit_guide_relaxed_note_ar", "fit_guide_balanced_note_en", "fit_guide_balanced_note_ar", "fit_guide_everyday_note_en", "fit_guide_everyday_note_ar", "fit_guide_refined_note_en", "fit_guide_refined_note_ar", "visual_search_kicker_en", "visual_search_kicker_ar", "visual_search_loading_en", "visual_search_loading_ar", "visual_search_no_results_en", "visual_search_no_results_ar", "visual_search_no_matches_en", "visual_search_no_matches_ar",
+
+                "tracking_map_kicker_en", "tracking_map_kicker_ar", "tracking_map_origin_label_en", "tracking_map_origin_label_ar",
+                "tracking_map_destination_label_en", "tracking_map_destination_label_ar", "tracking_map_cta_en", "tracking_map_cta_ar", "tracking_map_on_way_en", "tracking_map_on_way_ar", "tracking_map_stops_remaining_en", "tracking_map_stops_remaining_ar",
+                "ai_chat_title_en", "ai_chat_title_ar", "ai_chat_open_en", "ai_chat_open_ar", "ai_chat_privacy_en", "ai_chat_privacy_ar", "ai_chat_placeholder_en", "ai_chat_placeholder_ar",
+                "ai_chat_send_en", "ai_chat_send_ar", "ai_chat_close_en", "ai_chat_close_ar", "ai_chat_online_en", "ai_chat_online_ar",
+                "ai_chat_thinking_en", "ai_chat_thinking_ar", "ai_chat_unavailable_en", "ai_chat_unavailable_ar", "style_quiz_kicker_en", "style_quiz_kicker_ar", "style_quiz_cta_en", "style_quiz_cta_ar", "style_quiz_close_en", "style_quiz_close_ar", "style_quiz_next_en", "style_quiz_next_ar", "style_quiz_finish_en", "style_quiz_finish_ar",
+                "ai_chat_error_en", "ai_chat_error_ar"
+            )}
+        },
         "contact_us_text_en": settings.get("contact_us_text_en"),
         "contact_us_text_ar": settings.get("contact_us_text_ar"),
         "track_order_text_en": settings.get("track_order_text_en"),
