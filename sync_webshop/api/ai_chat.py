@@ -14,10 +14,41 @@ import requests
 from sync_webshop.api.utils import set_cors_headers
 
 
+_AI_CHAT_FIELDS = {
+    "enabled": "ai_chat_enabled",
+    "provider": "ai_chat_provider",
+    "api_key": "ai_chat_api_key",
+    "api_base_url": "ai_chat_api_base_url",
+    "model": "ai_chat_model",
+    "system_prompt": "ai_chat_system_prompt",
+    "greeting_message": "ai_chat_greeting_message",
+    "primary_color": "ai_chat_primary_color",
+    "allow_guest": "ai_chat_allow_guest",
+    "rate_limit_per_minute": "ai_chat_rate_limit_per_minute",
+    "max_message_length": "ai_chat_max_message_length",
+    "max_tokens": "ai_chat_max_tokens",
+    "temperature": "ai_chat_temperature",
+    "prevent_sensitive_data": "ai_chat_prevent_sensitive_data",
+}
+
+
+class _AIChatSettings:
+    def __init__(self, doc):
+        self.doc = doc
+
+    def __getattr__(self, name):
+        if name in _AI_CHAT_FIELDS:
+            return self.doc.get(_AI_CHAT_FIELDS[name])
+        raise AttributeError(name)
+
+    def get_password(self, fieldname):
+        return self.doc.get_password(_AI_CHAT_FIELDS.get(fieldname, fieldname))
+
+
 def _settings():
-    if not frappe.db.exists("DocType", "Webshop AI Chat Settings"):
+    if not frappe.db.exists("DocType", "Webshop Content Settings"):
         frappe.throw("AI chat settings are not installed.")
-    return frappe.get_single("Webshop AI Chat Settings")
+    return _AIChatSettings(frappe.get_single("Webshop Content Settings"))
 
 
 def _password(settings, fieldname):

@@ -1,9 +1,18 @@
 import json
 
 import frappe
-from frappe.utils import add_months, getdate, today
+from frappe.utils import flt, getdate, today
 
+from sync_webshop.api.catalog import _get_price_list
+from sync_webshop.api.checkout import _find_or_create_customer, _get_default_company, _get_default_warehouse
 from sync_webshop.api.utils import full_url, require_catalog_access, set_cors_headers
+
+
+AUTO_REPEAT_FREQUENCIES = {"Daily", "Weekly", "Monthly", "Quarterly", "Half-yearly", "Yearly"}
+
+
+def _supported_subscription_intervals(value):
+    return [interval for interval in _csv(value) if interval in AUTO_REPEAT_FREQUENCIES]
 
 
 def _single(doctype, defaults=None):
@@ -47,43 +56,41 @@ def _social_feed_rows(limit=12):
 def get_master_class_settings():
     """Return all non-secret Master Class settings and content managed in Desk."""
     set_cors_headers()
-    landing = _single('Webshop Landing Page Builder', {'enabled': 0})
-    subscription = _single('Webshop Subscription Settings', {'enabled': 0, 'discount_percent': 0, 'intervals': ''})
-    courier = _single('Webshop Courier Settings', {'provider': 'Manual', 'auto_waybill': 0})
-    returns = _single('Webshop Return Policy', {'allowed_days': 14})
-    currencies = _single('Webshop Currency Settings', {'auto_detect': 1, 'supported_currencies': 'SAR'})
+    landing = _single('Webshop Content Settings', {'landing_builder_enabled': 0, 'landing_hero_heading_en': None, 'landing_hero_heading_ar': None, 'landing_featured_grid_title_en': None, 'landing_featured_grid_title_ar': None})
+    commerce = _single('Webshop Content Settings', {'subscription_enabled': 0, 'subscription_discount_percent': 0, 'subscription_intervals': '', 'courier_provider': 'Manual', 'courier_auto_waybill': 0, 'currency_auto_detect': 1, 'supported_currencies': 'SAR'})
+    returns = _single('Webshop Content Settings', {'return_window_days': 14})
     try:
-        rates = json.loads(currencies.get('exchange_rates_json') or '{}')
+        rates = json.loads(commerce.get('exchange_rates_json') or '{}')
         if not isinstance(rates, dict):
             rates = {}
     except Exception:
         rates = {}
     return {
         'landing': {
-            'enabled': bool(landing.get('enabled', 0)),
-            'hero_heading_en': landing.get('hero_heading_en'),
-            'hero_heading_ar': landing.get('hero_heading_ar'),
-            'featured_grid_title_en': landing.get('featured_grid_title_en'),
-            'featured_grid_title_ar': landing.get('featured_grid_title_ar'),
+            'enabled': bool(landing.get('landing_builder_enabled', 0)),
+            'hero_heading_en': landing.get('landing_hero_heading_en'),
+            'hero_heading_ar': landing.get('landing_hero_heading_ar'),
+            'featured_grid_title_en': landing.get('landing_featured_grid_title_en'),
+            'featured_grid_title_ar': landing.get('landing_featured_grid_title_ar'),
         },
         'subscriptions': {
-            'enabled': bool(subscription.get('enabled', 0)),
-            'discount_percent': float(subscription.get('discount_percent') or 0),
-            'intervals': _csv(subscription.get('intervals')),
+            'enabled': bool(commerce.get('subscription_enabled', 0)),
+            'discount_percent': float(commerce.get('subscription_discount_percent') or 0),
+            'intervals': _supported_subscription_intervals(commerce.get('subscription_intervals')),
         },
         'courier': {
-            'provider': courier.get('provider') or 'Manual',
-            'auto_waybill': bool(courier.get('auto_waybill', 0)),
-            'configured': bool(courier.get_password('api_key') if courier.get('api_key') else False),
+            'provider': commerce.get('courier_provider') or 'Manual',
+            'auto_waybill': bool(commerce.get('courier_auto_waybill', 0)),
+            'configured': bool(commerce.get_password('courier_api_key') if commerce.get('courier_api_key') else False),
         },
         'returns': {
-            'allowed_days': int(returns.get('allowed_days') or 14),
-            'policy_text_en': returns.get('policy_text_en'),
-            'policy_text_ar': returns.get('policy_text_ar'),
+            'allowed_days': int(returns.get('return_window_days') or 14),
+            'policy_text_en': returns.get('return_window_policy_text_en'),
+            'policy_text_ar': returns.get('return_window_policy_text_ar'),
         },
         'currencies': {
-            'auto_detect': bool(currencies.get('auto_detect', 1)),
-            'supported': _csv(currencies.get('supported_currencies')),
+            'auto_detect': bool(commerce.get('currency_auto_detect', 1)),
+            'supported': _csv(commerce.get('supported_currencies')),
             'rates': rates,
         },
         'social_feed': _social_feed_rows(),
@@ -119,23 +126,59 @@ def get_personalized_landing(style_profile=None, limit=8):
 def create_subscription(customer_email, item_code, interval='Monthly'):
     if frappe.session.user == 'Guest':
         frappe.throw('Authentication is required to create a subscription.')
-    settings = _single('Webshop Subscription Settings', {'enabled': 0})
-    if not settings.get('enabled'):
+    settings = _single('Webshop Content Settings', {'subscription_enabled': 0})
+    if not settings.get('subscription_enabled'):
         frappe.throw('Subscribe & Save is disabled in Desk settings.')
     if not frappe.db.exists('Item', item_code):
         frappe.throw('The selected item does not exist.')
-    allowed = _csv(settings.get('intervals')) or ['Monthly']
+    allowed = _supported_subscription_intervals(settings.get('subscription_intervals')) or ['Monthly']
     if interval not in allowed:
-        frappe.throw('The selected delivery interval is not enabled in Desk settings.')
-    doc = frappe.new_doc('Webshop Subscription')
-    doc.customer_email = frappe.scrub(customer_email).replace('_', '.') if '@' not in customer_email else customer_email.strip().lower()
-    doc.item_code = item_code
-    doc.interval = interval
-    doc.status = 'Active'
-    doc.discount_percent = float(settings.get('discount_percent') or 0)
-    doc.next_delivery_date = today()
-    doc.insert(ignore_permissions=True)
-    return {'ok': True, 'name': doc.name, 'status': doc.status, 'next_delivery_date': doc.next_delivery_date, 'discount_percent': doc.discount_percent}
+        frappe.throw('The selected delivery interval is not supported by standard Frappe Auto Repeat or is not enabled in Desk settings.')
+    email = frappe.scrub(customer_email).replace('_', '.') if '@' not in customer_email else customer_email.strip().lower()
+    price_list = _get_price_list()
+    price = frappe.db.get_value('Item Price', {'item_code': item_code, 'price_list': price_list, 'selling': 1}, ['price_list_rate', 'currency'], as_dict=True)
+    if not price or not flt(price.price_list_rate):
+        frappe.throw('No selling price is configured for the selected item.')
+    company = _get_default_company()
+    if not company:
+        frappe.throw('No default company is configured for subscriptions.')
+    customer = _find_or_create_customer({'email': email, 'name': email.split('@')[0]})
+    warehouse = _get_default_warehouse(company)
+    discount = max(0, min(flt(settings.get('subscription_discount_percent')), 100))
+    item = {'item_code': item_code, 'qty': 1, 'rate': flt(price.price_list_rate), 'discount_percentage': discount}
+    if warehouse:
+        item['warehouse'] = warehouse
+    reference = frappe.get_doc({
+        'doctype': 'Sales Order',
+        'customer': customer,
+        'company': company,
+        'currency': price.currency or frappe.db.get_value('Company', company, 'default_currency') or 'SAR',
+        'selling_price_list': price_list,
+        'transaction_date': today(),
+        'delivery_date': today(),
+        'contact_email': email,
+        'items': [item],
+    })
+    reference.flags.ignore_permissions = True
+    reference.insert(ignore_permissions=True)
+    repeat = frappe.get_doc({
+        'doctype': 'Auto Repeat',
+        'reference_doctype': 'Sales Order',
+        'reference_document': reference.name,
+        'frequency': interval,
+        'start_date': today(),
+        'submit_on_creation': 0,
+        'disabled': 0,
+    })
+    repeat.insert(ignore_permissions=True)
+    return {
+        'ok': True,
+        'name': repeat.name,
+        'status': repeat.status,
+        'next_delivery_date': repeat.next_schedule_date,
+        'discount_percent': discount,
+        'reference_document': reference.name,
+    }
 
 
 @frappe.whitelist()
@@ -145,32 +188,41 @@ def get_customer_subscriptions(customer_email):
     email = (customer_email or '').strip().lower()
     if not email:
         return []
-    return frappe.get_all('Webshop Subscription', filters={'customer_email': email}, fields=['name', 'item_code', 'interval', 'status', 'discount_percent', 'next_delivery_date', 'last_order'], order_by='modified desc')
+    result = []
+    repeats = frappe.get_all('Auto Repeat', filters={'reference_doctype': 'Sales Order'}, fields=['name', 'reference_document', 'frequency', 'status', 'disabled', 'next_schedule_date'], order_by='modified desc', limit_page_length=100)
+    for repeat in repeats:
+        if not repeat.reference_document or not frappe.db.exists('Sales Order', repeat.reference_document):
+            continue
+        order = frappe.get_doc('Sales Order', repeat.reference_document)
+        if (order.contact_email or '').strip().lower() != email:
+            continue
+        first_item = order.items[0] if order.items else None
+        result.append({
+            'name': repeat.name,
+            'item_code': first_item.item_code if first_item else None,
+            'interval': repeat.frequency,
+            'status': 'Paused' if repeat.status == 'Disabled' else repeat.status,
+            'discount_percent': flt(first_item.discount_percentage) if first_item else 0,
+            'next_delivery_date': repeat.next_schedule_date,
+            'last_order': repeat.reference_document,
+        })
+    return result
 
 
 @frappe.whitelist()
 def prepare_courier_waybill(order_name):
     if frappe.session.user == 'Guest':
         frappe.throw('Authentication is required to prepare a courier waybill.')
-    settings = _single('Webshop Courier Settings', {'provider': 'Manual', 'auto_waybill': 0})
-    if not settings.get('auto_waybill'):
+    settings = _single('Webshop Content Settings', {'courier_provider': 'Manual', 'courier_auto_waybill': 0})
+    if not settings.get('courier_auto_waybill'):
         return {'ok': True, 'status': 'disabled', 'message': 'Automatic courier waybills are disabled in Desk.'}
     if not frappe.db.exists('Sales Order', order_name):
         frappe.throw('Sales Order not found.')
-    provider = settings.get('provider') or 'Manual'
-    configured = bool(settings.get_password('api_key') if settings.get('api_key') else False)
+    provider = settings.get('courier_provider') or 'Manual'
+    configured = bool(settings.get_password('courier_api_key') if settings.get('courier_api_key') else False)
     return {'ok': True, 'status': 'ready' if configured and provider != 'Manual' else 'safe_mode', 'provider': provider, 'order_name': order_name, 'message': 'Waybill plan prepared. External courier writes remain disabled until provider credentials are verified.'}
 
 
 def process_due_subscriptions():
-    """Scheduled, idempotent planning hook; it never creates an order without a configured payment/customer workflow."""
-    settings = _single('Webshop Subscription Settings', {'enabled': 0})
-    if not settings.get('enabled') or not frappe.db.exists('DocType', 'Webshop Subscription'):
-        return {'status': 'disabled', 'count': 0}
-    due = frappe.get_all('Webshop Subscription', filters={'status': 'Active', 'next_delivery_date': ['<=', today()]}, fields=['name', 'interval', 'next_delivery_date'], limit_page_length=100)
-    for row in due:
-        next_date = getdate(row.next_delivery_date or today())
-        months = {'Monthly': 1, 'Every 2 Months': 2, 'Quarterly': 3}.get(row.interval, 1)
-        frappe.db.set_value('Webshop Subscription', row.name, 'next_delivery_date', add_months(next_date, months))
-    frappe.db.commit()
-    return {'status': 'planned', 'count': len(due)}
+    """Compatibility status endpoint; standard Frappe Auto Repeat owns recurring scheduling."""
+    return {'status': 'delegated_to_auto_repeat', 'count': 0}

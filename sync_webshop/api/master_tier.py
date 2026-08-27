@@ -12,7 +12,6 @@ from sync_webshop.api.utils import full_url, require_catalog_access, set_cors_he
 
 DEFAULTS = {
     "enabled": 1,
-    "style_quiz_enabled": 1,
     "ghost_search_enabled": 1,
     "loyalty_enabled": 1,
     "referrals_enabled": 1,
@@ -32,12 +31,12 @@ DEFAULTS = {
 
 def _settings():
     values = dict(DEFAULTS)
-    if not frappe.db.exists("DocType", "Webshop Master Tier Settings"):
+    if not frappe.db.exists("DocType", "Webshop Content Settings"):
         return values
     try:
-        doc = frappe.get_single("Webshop Master Tier Settings")
+        doc = frappe.get_single("Webshop Content Settings")
         for key in DEFAULTS:
-            value = doc.get(key)
+            value = doc.get(f"master_{key}")
             if value is not None:
                 values[key] = value
     except Exception:
@@ -133,7 +132,6 @@ def get_master_tier_settings():
     settings = _settings()
     return {
         "enabled": bool(settings["enabled"]),
-        "style_quiz_enabled": _enabled(settings, "style_quiz_enabled"),
         "ghost_search_enabled": _enabled(settings, "ghost_search_enabled"),
         "loyalty_enabled": _enabled(settings, "loyalty_enabled"),
         "referrals_enabled": _enabled(settings, "referrals_enabled"),
@@ -379,9 +377,9 @@ def seed_master_tier():
         frappe.throw("Guest users cannot seed Master Tier settings.")
 
     single_defaults = {
-        "Webshop Master Tier Settings": DEFAULTS,
-        "Webshop SEO Automation Settings": {
-            "enabled": 1,
+        "Webshop Content Settings": {
+            **{f"master_{key}": value for key, value in DEFAULTS.items()},
+            "seo_automation_enabled": 1,
             "auto_generate_product_meta": 1,
             "include_json_ld": 1,
             "description_max_length": 155,
@@ -419,16 +417,6 @@ def seed_master_tier():
             if changed or not existing:
                 doc.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
-        questions = [
-            {"question_key": "roast", "question_en": "Which cup sounds like you today?", "question_ar": "أي فنجان يناسبك اليوم؟", "options_json": json.dumps([{"label_en": "Bright and floral", "label_ar": "مشرق وزهري", "tag": "bright"}, {"label_en": "Balanced and chocolatey", "label_ar": "متوازن وشوكولاتي", "tag": "warm"}, {"label_en": "Bold and concentrated", "label_ar": "قوي ومركز", "tag": "statement"}], ensure_ascii=False), "sort_order": 10, "enabled": 1},
-            {"question_key": "ritual", "question_en": "How do you like to brew?", "question_ar": "كيف تحب تحضير قهوتك؟", "options_json": json.dumps([{"label_en": "Slow pour-over", "label_ar": "ترشيح بطيء", "tag": "crafted"}, {"label_en": "Quick espresso", "label_ar": "إسبريسو سريع", "tag": "everyday"}, {"label_en": "A shared café moment", "label_ar": "لحظة مقهى مشتركة", "tag": "warm"}], ensure_ascii=False), "sort_order": 20, "enabled": 1},
-        ]
-        for row in questions:
-            existing = frappe.db.get_value("Webshop Style Quiz Question", {"question_key": row["question_key"]}, "name")
-            doc = frappe.get_doc("Webshop Style Quiz Question", existing) if existing else frappe.new_doc("Webshop Style Quiz Question")
-            doc.update(row)
-            doc.save(ignore_permissions=True)
 
     if frappe.db.exists("DocType", "Webshop Hotspot") and not frappe.db.count("Webshop Hotspot"):
         item = frappe.db.get_value("Item", {"disabled": 0}, ["item_code", "item_name", "image"], as_dict=True)
@@ -459,9 +447,9 @@ def get_product_seo(item_code, lang="en"):
         frappe.throw("Item not found.")
     item = frappe.db.get_value("Item", item_code, ["item_code", "item_name", "description", "item_group", "image", "stock_uom"], as_dict=True)
     seo_settings = {}
-    if frappe.db.exists("DocType", "Webshop SEO Automation Settings"):
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
         try:
-            seo_settings = frappe.get_single("Webshop SEO Automation Settings")
+            seo_settings = frappe.get_single("Webshop Content Settings")
         except Exception:
             seo_settings = {}
     max_length = max(80, min(int(seo_settings.get("description_max_length") or 155), 300))

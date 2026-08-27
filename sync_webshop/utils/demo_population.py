@@ -376,14 +376,14 @@ def populate_demo():
     if hero_url and has_field('Webshop Theme Settings', 'hero_background_image'):
         frappe.db.set_value('Webshop Theme Settings', theme.name, 'hero_background_image', hero_url, update_modified=False)
 
-    footer = save_single('Webshop Footer Settings', {
-        'enabled': 1,
-        'copyright_en': '© 2026 Sync Demo Market. All rights reserved.',
-        'copyright_ar': '© ٢٠٢٦ متجر سينك التجريبي. جميع الحقوق محفوظة.',
+    footer = save_single('Webshop Content Settings', {
+        'footer_enabled': 1,
+        'footer_copyright_en': '© 2026 Sync Demo Market. All rights reserved.',
+        'footer_copyright_ar': '© ٢٠٢٦ متجر سينك التجريبي. جميع الحقوق محفوظة.',
     })
-    footer_url = attach_asset('Webshop Footer Settings', footer.name, 'home_hero.png')
-    if footer_url and has_field('Webshop Footer Settings', 'footer_logo'):
-        frappe.db.set_value('Webshop Footer Settings', footer.name, 'footer_logo', footer_url, update_modified=False)
+    footer_url = attach_asset('Webshop Content Settings', footer.name, 'home_hero.png')
+    if footer_url and has_field('Webshop Content Settings', 'footer_logo'):
+        frappe.db.set_value('Webshop Content Settings', footer.name, 'footer_logo', footer_url, update_modified=False)
 
     make_named_doc('Webshop Footer Column', {'title_en': 'Explore'}, {'title_en': 'Explore', 'title_ar': 'استكشف', 'sort_order': 1, 'enabled': 1}, {'links': [
         {'label_en': 'Home', 'label_ar': 'الرئيسية', 'link_url': '/', 'is_external': 0},
@@ -396,14 +396,14 @@ def populate_demo():
         {'label_en': 'Why shop with us', 'label_ar': 'لماذا نحن', 'link_url': '/features', 'is_external': 0},
     ]})
 
-    save_single('Webshop Announcement Bar', {
-        'enabled': 1,
-        'message_en': 'Welcome to the Sync Demo Market — all content is managed from Frappe Desk.',
-        'message_ar': 'مرحباً بك في متجر سينك التجريبي — كل المحتوى يُدار من Frappe Desk.',
-        'background_color': '#D6A85E',
-        'text_color': '#173F3A',
-        'link_url': '/products',
-        'show_close_button': 1,
+    save_single('Webshop Content Settings', {
+        'announcement_enabled': 1,
+        'announcement_message_en': 'Welcome to the Sync Demo Market — all content is managed from Frappe Desk.',
+        'announcement_message_ar': 'مرحباً بك في متجر سينك التجريبي — كل المحتوى يُدار من Frappe Desk.',
+        'announcement_background_color': '#D6A85E',
+        'announcement_text_color': '#173F3A',
+        'announcement_link_url': '/products',
+        'announcement_show_close_button': 1,
     })
     save_single('Webshop Payment Settings', {
         'stripe_enabled': 0,
@@ -419,7 +419,7 @@ def populate_demo():
         'related_products_title_ar': 'قد يعجبك أيضاً',
         'show_sidebar': 1,
     })
-    save_single('Webshop SEO Settings', {
+    save_single('Webshop Content Settings', {
         'meta_title_en': 'Sync Demo Market | Everyday essentials',
         'meta_title_ar': 'متجر سينك التجريبي | احتياجات يومية',
         'meta_description_en': 'Discover practical home, lifestyle, gift, and everyday products in a clear bilingual storefront.',
@@ -433,16 +433,16 @@ def populate_demo():
         'sitemap_enabled': 1,
         'structured_data': json.dumps({'@context': 'https://schema.org', '@type': 'Store', 'name': 'Sync Demo Market', 'url': f'{public_storefront_url}/'}, ensure_ascii=False),
     })
-    seo = frappe.get_single('Webshop SEO Settings')
+    seo = frappe.get_single('Webshop Content Settings')
     append_rows(seo, 'redirects', [
         {'source_url': '/demo', 'target_url': '/products', 'redirect_type': '301'},
     ])
     seo.save(ignore_permissions=True)
-    seo_url = attach_asset('Webshop SEO Settings', seo.name, 'home_hero.png')
-    if seo_url and has_field('Webshop SEO Settings', 'og_image'):
-        frappe.db.set_value('Webshop SEO Settings', seo.name, 'og_image', seo_url, update_modified=False)
+    seo_url = attach_asset('Webshop Content Settings', seo.name, 'home_hero.png')
+    if seo_url and has_field('Webshop Content Settings', 'og_image'):
+        frappe.db.set_value('Webshop Content Settings', seo.name, 'og_image', seo_url, update_modified=False)
 
-    save_single('Webshop Help Guide', {
+    save_single('Webshop Content Settings', {
         'help_content': '<h2>Sync Demo Market</h2><p>Use Frappe Desk to update banners, categories, navigation, theme colors, pricing, and product availability. This record is safe demo content.</p>',
     })
 

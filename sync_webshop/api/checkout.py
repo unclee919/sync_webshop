@@ -1,5 +1,6 @@
 import frappe
 
+from sync_webshop.api.auth import get_authenticated_customer
 from sync_webshop.api.catalog import _get_price_list, _get_stock, _get_prices
 from sync_webshop.api.utils import full_url, get_json_cache, set_cors_headers, set_json_cache
 
@@ -322,6 +323,10 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
     set_cors_headers()
     rows = _normalise_items(items)
     customer = customer if isinstance(customer, dict) else {}
+    authenticated = get_authenticated_customer()
+    if authenticated:
+        profile = authenticated["profile"]
+        customer = {**customer, "name": profile.get("customer_name") or customer.get("name"), "email": profile.get("email") or customer.get("email"), "phone": profile.get("phone") or customer.get("phone")}
     checkout_settings = frappe.get_single("Webshop API Settings")
     governorate = governorate or customer.get("governorate")
     city = city or customer.get("city")
@@ -450,4 +455,5 @@ def create_order(customer, items, payment_method=None, stripe_payment_intent=Non
         "coupon_discount": coupon_discount,
         "stock_checked": True,
         "price_list": price_list,
+        "authenticated_account": bool(authenticated),
     }

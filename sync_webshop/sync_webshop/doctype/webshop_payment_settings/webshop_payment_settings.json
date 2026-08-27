@@ -64,7 +64,28 @@
   "apple_pay_label_en",
   "apple_pay_label_ar",
   "apple_pay_icon",
-  "apple_pay_integration_id"
+  "apple_pay_integration_id",
+  "paymob_legacy_section",
+  "paymob_kiosk_integration_id",
+  "paymob_payment_methods",
+  "paymob_checkout_mode",
+  "paymob_label_en",
+  "paymob_label_ar",
+  "paymob_online_payment_enabled",
+  "paymob_online_label_en",
+  "paymob_online_label_ar",
+  "paymob_online_note_en",
+  "paymob_online_note_ar",
+  "paymob_card_label_en",
+  "paymob_card_label_ar",
+  "paymob_wallet_label_en",
+  "paymob_wallet_label_ar",
+  "paymob_kiosk_label_en",
+  "paymob_kiosk_label_ar",
+  "regional_live_mode",
+  "tabby_public_key",
+  "tamara_token",
+  "paymob_legacy_api_key"
  ],
  "fields": [
   {
@@ -406,6 +427,113 @@
    "fieldname": "apple_pay_integration_id",
    "fieldtype": "Data",
    "label": "Apple Pay Integration ID"
+  },
+  {
+   "fieldname": "paymob_legacy_section",
+   "fieldtype": "Section Break",
+   "label": "Paymob Legacy Presentation Compatibility"
+  },
+  {
+   "fieldname": "paymob_kiosk_integration_id",
+   "fieldtype": "Data",
+   "label": "Paymob Kiosk Integration ID"
+  },
+  {
+   "fieldname": "paymob_payment_methods",
+   "fieldtype": "Data",
+   "label": "Paymob Additional Payment Method IDs"
+  },
+  {
+   "fieldname": "paymob_checkout_mode",
+   "fieldtype": "Select",
+   "label": "Paymob Checkout Mode",
+   "options": "redirect\npixel",
+   "default": "redirect"
+  },
+  {
+   "fieldname": "paymob_label_en",
+   "fieldtype": "Data",
+   "label": "Paymob Label (English)"
+  },
+  {
+   "fieldname": "paymob_label_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Label (Arabic)"
+  },
+  {
+   "fieldname": "paymob_online_payment_enabled",
+   "fieldtype": "Check",
+   "label": "Paymob Online Payment Enabled"
+  },
+  {
+   "fieldname": "paymob_online_label_en",
+   "fieldtype": "Data",
+   "label": "Paymob Online Label (English)"
+  },
+  {
+   "fieldname": "paymob_online_label_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Online Label (Arabic)"
+  },
+  {
+   "fieldname": "paymob_online_note_en",
+   "fieldtype": "Small Text",
+   "label": "Paymob Online Note (English)"
+  },
+  {
+   "fieldname": "paymob_online_note_ar",
+   "fieldtype": "Small Text",
+   "label": "Paymob Online Note (Arabic)"
+  },
+  {
+   "fieldname": "paymob_card_label_en",
+   "fieldtype": "Data",
+   "label": "Paymob Card Label (English)"
+  },
+  {
+   "fieldname": "paymob_card_label_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Card Label (Arabic)"
+  },
+  {
+   "fieldname": "paymob_wallet_label_en",
+   "fieldtype": "Data",
+   "label": "Paymob Wallet Label (English)"
+  },
+  {
+   "fieldname": "paymob_wallet_label_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Wallet Label (Arabic)"
+  },
+  {
+   "fieldname": "paymob_kiosk_label_en",
+   "fieldtype": "Data",
+   "label": "Paymob Kiosk Label (English)"
+  },
+  {
+   "fieldname": "paymob_kiosk_label_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Kiosk Label (Arabic)"
+  },
+  {
+   "fieldname": "regional_live_mode",
+   "fieldtype": "Check",
+   "label": "Enable Live Regional Payment Handoff"
+  },
+  {
+   "fieldname": "tabby_public_key",
+   "fieldtype": "Data",
+   "label": "Tabby Public Key"
+  },
+  {
+   "fieldname": "tamara_token",
+   "fieldtype": "Password",
+   "label": "Tamara API Token"
+  },
+  {
+   "fieldname": "paymob_legacy_api_key",
+   "fieldtype": "Password",
+   "label": "Paymob Legacy API Key (Compatibility)"
   }
  ],
  "issingle": 1,

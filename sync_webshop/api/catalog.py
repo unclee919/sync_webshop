@@ -34,10 +34,27 @@ def _positive_price_codes(price_list, item_codes=None):
     return frappe.get_all("Item Price", filters=filters, pluck="item_code")
 
 
+def _get_item_group_scope(item_group):
+    """Return the selected item group plus descendants for parent-category browsing."""
+    if not item_group:
+        return None
+    groups = [item_group]
+    try:
+        descendants = frappe.db.get_descendants("Item Group", item_group) or []
+        groups.extend(descendants)
+    except Exception:
+        # Preserve exact-group behavior if a legacy Frappe version lacks get_descendants.
+        pass
+    return list(dict.fromkeys(groups))
+
+
+
+
 def _get_price_range(price_list, item_group=None):
     filters = {"price_list": price_list, "selling": 1}
-    if item_group:
-        codes = frappe.get_all("Item", filters={"item_group": item_group, "disabled": 0}, pluck="item_code")
+    group_scope = _get_item_group_scope(item_group)
+    if group_scope:
+        codes = frappe.get_all("Item", filters={"item_group": ["in", group_scope], "disabled": 0}, pluck="item_code")
         if not codes:
             return {"min_price": 0, "max_price": 0}
         filters["item_code"] = ["in", codes]
@@ -199,8 +216,9 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         return cached
 
     filters = {"disabled": 0}
-    if item_group:
-        filters["item_group"] = item_group
+    group_scope = _get_item_group_scope(item_group)
+    if group_scope:
+        filters["item_group"] = ["in", group_scope]
     or_filters = None
     if search:
         or_filters = [
@@ -214,13 +232,11 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         return _empty_catalog(page, page_size, price_list, item_group)
     filters["item_code"] = ["in", priced_codes]
     if min_price is not None or max_price is not None:
-        price_filters = {"price_list": price_list, "selling": 1}
-        if min_price is not None and max_price is not None:
-            price_filters["price_list_rate"] = ["between", [min_price, max_price]]
-        elif min_price is not None:
-            price_filters["price_list_rate"] = [">=", min_price]
-        else:
-            price_filters["price_list_rate"] = ["<=", max_price]
+        price_filters = [["price_list", "=", price_list], ["selling", "=", 1]]
+        if min_price is not None:
+            price_filters.append(["price_list_rate", ">=", min_price])
+        if max_price is not None:
+            price_filters.append(["price_list_rate", "<=", max_price])
         codes = frappe.get_all("Item Price", filters=price_filters, pluck="item_code")
         if not codes:
             return _empty_catalog(page, page_size, price_list, item_group)
@@ -257,7 +273,9 @@ def get_catalog(item_group=None, search=None, page=1, page_size=20, min_price=No
         order_by="item_name asc",
     )
     if or_filters:
-        total_count = frappe.db.count("Item", filters=filters, or_filters=or_filters)
+        # frappe.db.count does not accept or_filters on all supported Frappe versions.
+        # Use the same Frappe query builder as the item fetch to keep search contracts compatible.
+        total_count = len(frappe.get_all("Item", filters=filters, or_filters=or_filters, pluck="name", limit_page_length=0))
     else:
         total_count = frappe.db.count("Item", filters=filters)
     codes = [row.item_code for row in items]
@@ -473,6 +491,121 @@ def get_search_suggestions(search):
     ])
     return set_json_cache("suggestions", cache_payload, results, expires_in_sec=30)
 
+
+@frappe.whitelist(allow_guest=True)
+def get_unified_search(search=None, limit=5):
+    """Return mixed storefront search results for products, groups, and public pages."""
+    set_cors_headers()
+    require_catalog_access()
+    term = str(search or "").strip()
+    try:
+        safe_limit = min(max(int(limit or 5), 1), 8)
+    except (TypeError, ValueError):
+        safe_limit = 5
+    cache_payload = {"search": term.casefold(), "limit": safe_limit}
+    cached = get_json_cache("unified_search", cache_payload)
+    if cached is not None:
+        return cached
+
+    group_columns = set(frappe.db.get_table_columns("Item Group"))
+    group_optional = [field for field in ["webshop_label_en", "webshop_label_ar"] if field in group_columns]
+    groups = frappe.get_all(
+        "Item Group",
+        filters={"show_in_website": 1},
+        fields=["name", "item_group_name", "image"] + group_optional,
+        order_by="item_group_name asc",
+        limit_page_length=60,
+    )
+    group_results = []
+    for row in groups:
+        title_en = row.get("webshop_label_en") or row.item_group_name
+        title_ar = row.get("webshop_label_ar") or title_en
+        haystack = " ".join(str(row.get(field) or "") for field in ["name", "item_group_name", "webshop_label_en", "webshop_label_ar"]).casefold()
+        group_results.append({
+            "type": "category",
+            "id": row.name,
+            "title_en": title_en,
+            "title_ar": title_ar,
+            "subtitle_en": "Category",
+            "subtitle_ar": "فئة",
+            "href": f"/products?category={row.name}",
+            "image": full_url(row.image) if row.image else None,
+            "_haystack": haystack,
+        })
+
+    item_columns = set(frappe.db.get_table_columns("Item"))
+    item_optional = [field for field in ["item_name_ar", "description_ar", "webshop_search_keywords"] if field in item_columns]
+    item_fields = ["item_code", "item_name", "description", "image", "item_group"] + item_optional
+    if term:
+        like = f"%{term}%"
+        or_filters = [["item_name", "like", like], ["item_code", "like", like], ["description", "like", like]]
+        or_filters.extend([[field, "like", like] for field in item_optional])
+        items = frappe.get_all("Item", filters={"disabled": 0}, or_filters=or_filters, fields=item_fields, limit_page_length=40, order_by="modified desc")
+    else:
+        items = frappe.get_all("Item", filters={"disabled": 0}, fields=item_fields, limit_page_length=40, order_by="modified desc")
+    item_codes = [row.item_code for row in items]
+    prices = _get_prices(item_codes, _get_price_list())
+    item_results = []
+    for row in items:
+        price = prices.get(row.item_code) or {}
+        if float(price.get("rate") or 0) <= 0:
+            continue
+        title_en = row.item_name
+        title_ar = row.get("item_name_ar") or title_en
+        item_results.append({
+            "type": "item",
+            "id": row.item_code,
+            "title_en": title_en,
+            "title_ar": title_ar,
+            "subtitle_en": row.item_group or "Product",
+            "subtitle_ar": row.item_group or "منتج",
+            "href": f"/products/{row.item_code}",
+            "image": full_url(row.image) if row.image else None,
+            "price": price.get("rate"),
+            "currency": price.get("currency"),
+        })
+
+    page_results = [
+        {"type": "page", "id": "features", "title_en": "Why shop with us", "title_ar": "لماذا نحن", "subtitle_en": "Store benefits", "subtitle_ar": "مزايا المتجر", "href": "/features"},
+        {"type": "page", "id": "about", "title_en": "About us", "title_ar": "من نحن", "subtitle_en": "Our story", "subtitle_ar": "قصتنا", "href": "/about-us"},
+        {"type": "page", "id": "policy", "title_en": "Our policy", "title_ar": "سياساتنا", "subtitle_en": "Shipping and returns", "subtitle_ar": "الشحن والإرجاع", "href": "/our-policy"},
+        {"type": "page", "id": "articles", "title_en": "Articles", "title_ar": "المقالات", "subtitle_en": "Stories and advice", "subtitle_ar": "قصص ونصائح", "href": "/articles"},
+        {"type": "page", "id": "qa", "title_en": "Q&A", "title_ar": "الأسئلة والأجوبة", "subtitle_en": "Helpful answers", "subtitle_ar": "إجابات مفيدة", "href": "/qa"},
+    ]
+    try:
+        dynamic = frappe.get_single("Webshop Dynamic Pages Settings")
+        enabled = bool(dynamic.get("enabled"))
+        page_results = [row for row in page_results if enabled and dynamic.get(f"{row['id']}_enabled", 1)]
+    except Exception:
+        pass
+
+    if term:
+        folded = term.casefold()
+        group_results = [row for row in group_results if folded in row.pop("_haystack", "")]
+        page_results = [row for row in page_results if folded in " ".join(str(row.get(key) or "") for key in ["title_en", "title_ar", "subtitle_en", "subtitle_ar"]).casefold()]
+        results = (item_results + group_results + page_results)[: max(safe_limit * 3, 12)]
+    else:
+        results = []
+    for row in group_results:
+        row.pop("_haystack", None)
+
+    autocomplete = []
+    candidates = []
+    for row in item_results[:30] + group_results[:30]:
+        pair = {"value_en": row.get("title_en"), "value_ar": row.get("title_ar")}
+        if pair not in candidates:
+            candidates.append(pair)
+    if term:
+        folded = term.casefold()
+        autocomplete = [row for row in candidates if any(str(row.get(key) or "").casefold().startswith(folded) for key in ["value_en", "value_ar"])][:6]
+
+    response = {
+        "query": term,
+        "autocomplete": autocomplete,
+        "recommendations": {"items": item_results[:safe_limit], "categories": group_results[:safe_limit]},
+        "results": results,
+    }
+    return set_json_cache("unified_search", cache_payload, response, expires_in_sec=30)
 
 @frappe.whitelist(allow_guest=True)
 def get_recommendations(item_code=None, item_group=None, limit=8):

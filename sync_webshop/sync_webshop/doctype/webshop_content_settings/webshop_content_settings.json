@@ -48,6 +48,38 @@
   "footer_section",
   "footer_text_en",
   "footer_text_ar",
+  "footer_visit_social_text_ar",
+  "footer_visit_social_text_en",
+  "footer_information_title_ar",
+  "footer_information_title_en",
+  "footer_customer_care_title_ar",
+  "footer_customer_care_title_en",
+  "footer_explore_title_ar",
+  "footer_explore_title_en",
+  "footer_navigation_aria_label_ar",
+  "footer_navigation_aria_label_en",
+  "footer_links_aria_label_ar",
+  "footer_links_aria_label_en",
+  "footer_design_credit_ar",
+  "footer_design_credit_en",
+  "footer_social_empty_ar",
+  "footer_social_empty_en",
+  "footer_social_aria_label_ar",
+  "footer_social_aria_label_en",
+  "footer_social_heading_ar",
+  "footer_social_heading_en",
+  "footer_social_eyebrow_ar",
+  "footer_social_eyebrow_en",
+  "footer_address_label_ar",
+  "footer_address_label_en",
+  "footer_email_label_ar",
+  "footer_email_label_en",
+  "footer_phone_label_ar",
+  "footer_phone_label_en",
+  "footer_contact_heading_ar",
+  "footer_contact_heading_en",
+  "footer_eyebrow_ar",
+  "footer_eyebrow_en",
   "social_links",
   "banners_section",
   "banners",
@@ -78,6 +110,305 @@
   "min_delivery_days",
   "max_delivery_days",
   "ui_labels_section",
+  "payment_start_error_ar",
+  "payment_start_error_en",
+  "valid_fields_ar",
+  "valid_fields_en",
+  "required_fields_ar",
+  "required_fields_en",
+  "full_name_placeholder_ar",
+  "full_name_placeholder_en",
+  "pay_now_ar",
+  "pay_now_en",
+  "continue_ar",
+  "continue_en",
+  "verifying_ar",
+  "verifying_en",
+  "mobile_phone_ar",
+  "mobile_phone_en",
+  "customer_sign_in_ar",
+  "customer_sign_in_en",
+  "connection_error_ar",
+  "connection_error_en",
+  "postcode_ar",
+  "postcode_en",
+  "country_ar",
+  "country_en",
+  "edit_profile_ar",
+  "edit_profile_en",
+  "save_changes_ar",
+  "save_changes_en",
+  "my_profile_ar",
+  "my_profile_en",
+  "loyalty_points_ar",
+  "loyalty_points_en",
+  "invoices_ar",
+  "invoices_en",
+  "orders_ar",
+  "orders_en",
+  "no_orders_ar",
+  "no_orders_en",
+  "open_dashboard_ar",
+  "open_dashboard_en",
+  "loading_ar",
+  "loading_en",
+  "retry_ar",
+  "retry_en",
+  "total_ar",
+  "total_en",
+  "free_ar",
+  "free_en",
+  "shipping_ar",
+  "shipping_en",
+  "discount_ar",
+  "discount_en",
+  "order_summary_ar",
+  "order_summary_en",
+  "confirm_order_ar",
+  "confirm_order_en",
+  "continue_payment_ar",
+  "continue_payment_en",
+  "processing_ar",
+  "processing_en",
+  "paymob_secure_hint_ar",
+  "paymob_secure_hint_en",
+  "payment_method_ar",
+  "payment_method_en",
+  "preferred_delivery_date_ar",
+  "preferred_delivery_date_en",
+  "delivery_date_ar",
+  "delivery_date_en",
+  "select_warehouse_ar",
+  "select_warehouse_en",
+  "store_pickup_ar",
+  "store_pickup_en",
+  "delivery_ar",
+  "delivery_en",
+  "fulfillment_ar",
+  "fulfillment_en",
+  "personal_note_ar",
+  "personal_note_en",
+  "add_gift_wrapping_ar",
+  "add_gift_wrapping_en",
+  "make_it_gift_ar",
+  "make_it_gift_en",
+  "coupon_applied_ar",
+  "coupon_applied_en",
+  "invalid_coupon_ar",
+  "invalid_coupon_en",
+  "apply_ar",
+  "apply_en",
+  "coupon_code_ar",
+  "coupon_code_en",
+  "location_placeholder_ar",
+  "location_placeholder_en",
+  "optional_location_ar",
+  "optional_location_en",
+  "detailed_address_ar",
+  "detailed_address_en",
+  "select_city_ar",
+  "select_city_en",
+  "city_ar",
+  "city_en",
+  "select_governorate_ar",
+  "select_governorate_en",
+  "governorate_ar",
+  "governorate_en",
+  "second_phone_ar",
+  "second_phone_en",
+  "primary_phone_ar",
+  "primary_phone_en",
+  "email_ar",
+  "email_en",
+  "full_name_ar",
+  "full_name_en",
+  "shipping_information_ar",
+  "shipping_information_en",
+  "menu_ar",
+  "menu_en",
+  "open_quick_actions_ar",
+  "open_quick_actions_en",
+  "top_ar",
+  "top_en",
+  "dark_ar",
+  "dark_en",
+  "light_ar",
+  "light_en",
+  "whatsapp_ar",
+  "whatsapp_en",
+  "ai_help_ar",
+  "ai_help_en",
+  "bag_ar",
+  "bag_en",
+  "saved_ar",
+  "saved_en",
+  "search_ar",
+  "search_en",
+  "quick_actions_ar",
+  "quick_actions_en",
+  "close_quick_actions_ar",
+  "close_quick_actions_en",
+  "available_ar",
+  "available_en",
+  "availability_ar",
+  "availability_en",
+  "rating_ar",
+  "rating_en",
+  "comparison_title_ar",
+  "comparison_title_en",
+  "comparison_kicker_ar",
+  "comparison_kicker_en",
+  "clear_ar",
+  "clear_en",
+  "compare_now_ar",
+  "compare_now_en",
+  "compare_items_ar",
+  "compare_items_en",
+  "compare_products_ar",
+  "compare_products_en",
+  "style_quiz_finish_ar",
+  "style_quiz_finish_en",
+  "style_quiz_next_ar",
+  "style_quiz_next_en",
+  "style_quiz_close_ar",
+  "style_quiz_close_en",
+  "style_quiz_cta_ar",
+  "style_quiz_cta_en",
+  "style_quiz_kicker_ar",
+  "style_quiz_kicker_en",
+  "subtotal_ar",
+  "subtotal_en",
+  "remove_ar",
+  "remove_en",
+  "increase_quantity_ar",
+  "increase_quantity_en",
+  "decrease_quantity_ar",
+  "decrease_quantity_en",
+  "free_shipping_progress_ar",
+  "free_shipping_progress_en",
+  "close_cart_ar",
+  "close_cart_en",
+  "cart_item_ar",
+  "cart_item_en",
+  "free_shipping_away_ar",
+  "free_shipping_away_en",
+  "free_shipping_unlocked_ar",
+  "free_shipping_unlocked_en",
+  "view_cart_ar",
+  "view_cart_en",
+  "checkout_ar",
+  "checkout_en",
+  "browse_products_ar",
+  "browse_products_en",
+  "cart_empty_ar",
+  "cart_empty_en",
+  "cart_title_ar",
+  "cart_title_en",
+  "fit_guide_refined_note_ar",
+  "fit_guide_refined_note_en",
+  "fit_guide_everyday_note_ar",
+  "fit_guide_everyday_note_en",
+  "fit_guide_balanced_note_ar",
+  "fit_guide_balanced_note_en",
+  "fit_guide_relaxed_note_ar",
+  "fit_guide_relaxed_note_en",
+  "fit_guide_recommendation_label_ar",
+  "fit_guide_recommendation_label_en",
+  "fit_guide_waist_label_ar",
+  "fit_guide_waist_label_en",
+  "fit_guide_chest_label_ar",
+  "fit_guide_chest_label_en",
+  "fit_guide_height_label_ar",
+  "fit_guide_height_label_en",
+  "fit_guide_privacy_ar",
+  "fit_guide_privacy_en",
+  "fit_guide_subtitle_ar",
+  "fit_guide_subtitle_en",
+  "fit_guide_kicker_ar",
+  "fit_guide_kicker_en",
+  "ai_chat_privacy_ar",
+  "ai_chat_privacy_en",
+  "ai_chat_open_ar",
+  "ai_chat_open_en",
+  "tracking_map_stops_remaining_ar",
+  "tracking_map_stops_remaining_en",
+  "tracking_map_on_way_ar",
+  "tracking_map_on_way_en",
+  "visual_search_no_matches_ar",
+  "visual_search_no_matches_en",
+  "selected_product_ar",
+  "selected_product_en",
+  "close_ar",
+  "close_en",
+  "ai_chat_error_ar",
+  "ai_chat_error_en",
+  "ai_chat_unavailable_ar",
+  "ai_chat_unavailable_en",
+  "ai_chat_thinking_ar",
+  "ai_chat_thinking_en",
+  "ai_chat_online_ar",
+  "ai_chat_online_en",
+  "ai_chat_close_ar",
+  "ai_chat_close_en",
+  "ai_chat_send_ar",
+  "ai_chat_send_en",
+  "ai_chat_placeholder_ar",
+  "ai_chat_placeholder_en",
+  "ai_chat_title_ar",
+  "ai_chat_title_en",
+  "tracking_map_cta_ar",
+  "tracking_map_cta_en",
+  "tracking_map_destination_label_ar",
+  "tracking_map_destination_label_en",
+  "tracking_map_origin_label_ar",
+  "tracking_map_origin_label_en",
+  "tracking_map_kicker_ar",
+  "tracking_map_kicker_en",
+  "visual_search_no_results_ar",
+  "visual_search_no_results_en",
+  "visual_search_loading_ar",
+  "visual_search_loading_en",
+  "visual_search_kicker_ar",
+  "visual_search_kicker_en",
+  "fit_guide_empty_state_ar",
+  "fit_guide_empty_state_en",
+  "add_set_to_bag_ar",
+  "add_set_to_bag_en",
+  "complete_look_total_label_ar",
+  "complete_look_total_label_en",
+  "complete_look_subtitle_ar",
+  "complete_look_subtitle_en",
+  "complete_look_kicker_ar",
+  "complete_look_kicker_en",
+  "support_ar",
+  "support_en",
+  "all_rights_reserved_ar",
+  "all_rights_reserved_en",
+  "view_details_ar",
+  "view_details_en",
+  "view_product_ar",
+  "view_product_en",
+  "unavailable_ar",
+  "unavailable_en",
+  "on_request_ar",
+  "on_request_en",
+  "no_image_ar",
+  "no_image_en",
+  "search_result_product_ar",
+  "search_result_product_en",
+  "search_result_category_ar",
+  "search_result_category_en",
+  "best_match_ar",
+  "best_match_en",
+  "explore_collection_ar",
+  "explore_collection_en",
+  "language_switch_ar",
+  "language_switch_en",
+  "style_quiz_intro_ar",
+  "style_quiz_intro_en",
+  "style_quiz_title_ar",
+  "style_quiz_title_en",
+  "style_quiz_enabled",
   "header_contact_number",
   "need_help_text_en",
   "need_help_text_ar",
@@ -139,6 +470,97 @@
   "product_label_short_ar",
   "enable_quick_view",
   "enable_faceted_search",
+  "quote_title_ar",
+  "quote_title_en",
+  "reorder_ar",
+  "reorder_en",
+  "stripe_secure_hint_ar",
+  "stripe_secure_hint_en",
+  "login_failed_ar",
+  "login_failed_en",
+  "login_validation_ar",
+  "login_validation_en",
+  "quote_send_ar",
+  "quote_send_en",
+  "quote_sending_ar",
+  "quote_sending_en",
+  "quote_notes_ar",
+  "quote_notes_en",
+  "quote_company_ar",
+  "quote_company_en",
+  "quote_phone_ar",
+  "quote_phone_en",
+  "quote_email_ar",
+  "quote_email_en",
+  "quote_name_ar",
+  "quote_name_en",
+  "quote_body_ar",
+  "quote_body_en",
+  "quote_kicker_ar",
+  "quote_kicker_en",
+  "quote_status_prefix_ar",
+  "quote_status_prefix_en",
+  "member_discount_ar",
+  "member_discount_en",
+  "new_member_ar",
+  "new_member_en",
+  "item_added_to_bag_ar",
+  "item_added_to_bag_en",
+  "no_returns_ar",
+  "no_returns_en",
+  "no_invoices_ar",
+  "no_invoices_en",
+  "no_saved_addresses_ar",
+  "no_saved_addresses_en",
+  "address_line_ar",
+  "address_line_en",
+  "delete_address_confirm_ar",
+  "delete_address_confirm_en",
+  "delete_address_ar",
+  "delete_address_en",
+  "edit_address_ar",
+  "edit_address_en",
+  "add_address_ar",
+  "add_address_en",
+  "saved_addresses_ar",
+  "saved_addresses_en",
+  "completed_orders_ar",
+  "completed_orders_en",
+  "average_order_ar",
+  "average_order_en",
+  "total_spend_ar",
+  "total_spend_en",
+  "address_deleted_ar",
+  "address_deleted_en",
+  "address_saved_ar",
+  "address_saved_en",
+  "profile_saved_ar",
+  "profile_saved_en",
+  "return_success_ar",
+  "return_success_en",
+  "quantity_ar",
+  "quantity_en",
+  "return_reason_ar",
+  "return_reason_en",
+  "submit_request_ar",
+  "submit_request_en",
+  "cancel_ar",
+  "cancel_en",
+  "request_return_ar",
+  "request_return_en",
+  "download_pdf_ar",
+  "download_pdf_en",
+  "account_summary_ar",
+  "account_summary_en",
+  "return_requests_ar",
+  "return_requests_en",
+  "account_email_placeholder_ar",
+  "account_email_placeholder_en",
+  "account_subtitle_ar",
+  "account_subtitle_en",
+  "account_title_ar",
+  "account_title_en",
+  "feature_copy_section",
   "ui_icons_section",
   "wishlist_icon",
   "cart_icon",
@@ -163,7 +585,6 @@
   "facebook_pixel_id",
   "tiktok_pixel_id",
   "analytics_events_enabled",
-  "elite_ui_section",
   "sensory_ui_enabled",
   "cinematic_transitions_enabled",
   "lookbook_hotspots_enabled",
@@ -203,11 +624,6 @@
   "presence_material_studio_enabled",
   "presence_material_studio_title_en",
   "presence_material_studio_title_ar",
-  "style_quiz_enabled",
-  "style_quiz_title_en",
-  "style_quiz_title_ar",
-  "style_quiz_intro_en",
-  "style_quiz_intro_ar",
   "quote_requests_enabled",
   "quote_request_title_en",
   "quote_request_title_ar",
@@ -229,7 +645,234 @@
   "catalog_unit_label_en",
   "catalog_unit_label_ar",
   "site_name_en",
-  "site_name_ar"
+  "site_name_ar",
+  "webshop_about_page_section",
+  "about_title_en",
+  "about_title_ar",
+  "about_subtitle_en",
+  "about_subtitle_ar",
+  "about_hero_image",
+  "about_content_en",
+  "about_content_ar",
+  "webshop_announcement_section",
+  "announcement_enabled",
+  "announcement_message_en",
+  "announcement_message_ar",
+  "announcement_background_color",
+  "announcement_text_color",
+  "announcement_link_url",
+  "announcement_show_close_button",
+  "webshop_footer_section",
+  "footer_enabled",
+  "footer_logo",
+  "footer_copyright_en",
+  "footer_copyright_ar",
+  "webshop_policy_page_section",
+  "policy_page_title_en",
+  "policy_page_title_ar",
+  "policy_page_subtitle_en",
+  "policy_page_subtitle_ar",
+  "shipping_policy_title_en",
+  "shipping_policy_title_ar",
+  "shipping_policy_text_en",
+  "shipping_policy_text_ar",
+  "returns_policy_title_en",
+  "returns_policy_title_ar",
+  "returns_policy_text_en",
+  "returns_policy_text_ar",
+  "privacy_policy_title_en",
+  "privacy_policy_title_ar",
+  "privacy_policy_text_en",
+  "privacy_policy_text_ar",
+  "webshop_return_window_section",
+  "return_window_days",
+  "return_window_policy_text_en",
+  "return_window_policy_text_ar",
+  "dynamic_pages_section",
+  "dynamic_pages_enabled",
+  "dynamic_about_enabled",
+  "dynamic_about_show_in_nav",
+  "dynamic_about_label_en",
+  "dynamic_about_label_ar",
+  "dynamic_policy_enabled",
+  "dynamic_policy_show_in_nav",
+  "dynamic_policy_label_en",
+  "dynamic_policy_label_ar",
+  "dynamic_articles_enabled",
+  "dynamic_articles_show_in_nav",
+  "dynamic_articles_label_en",
+  "dynamic_articles_label_ar",
+  "dynamic_qa_enabled",
+  "dynamic_qa_show_in_nav",
+  "dynamic_qa_label_en",
+  "dynamic_qa_label_ar",
+  "dynamic_seo_description_en",
+  "dynamic_seo_description_ar",
+  "landing_builder_section",
+  "landing_builder_enabled",
+  "landing_hero_heading_en",
+  "landing_hero_heading_ar",
+  "landing_featured_grid_title_en",
+  "landing_featured_grid_title_ar",
+  "help_content",
+  "unified_feature_section",
+  "webshop_enterprise_ai_settings_section",
+  "auto_translate_enabled",
+  "intelligent_merchandising",
+  "voice_actions_enabled",
+  "webshop_b2b_wholesale_settings_section",
+  "b2b_enabled",
+  "volume_pricing_enabled",
+  "volume_pricing_rule",
+  "corporate_credit_enabled",
+  "quick_order_enabled",
+  "webshop_live_shopping_settings_section",
+  "live_stream_enabled",
+  "stream_url",
+  "stream_title_en",
+  "stream_title_ar",
+  "webshop_recovery_settings_section",
+  "abandoned_cart_enabled",
+  "delay_hours",
+  "coupon_discount",
+  "webshop_fraud_shield_settings_section",
+  "fraud_shield_enabled",
+  "max_order_amount",
+  "webshop_infrastructure_settings_section",
+  "edge_cache_enabled",
+  "auto_healing_enabled",
+  "ai_vision_section",
+  "ai_vision_visual_search_enabled",
+  "ai_vision_auto_tagging_enabled",
+  "ai_vision_ai_model_name",
+  "ai_vision_confidence_threshold",
+  "ai_vision_section_nlp",
+  "ai_vision_nlp_enabled",
+  "ai_vision_welcome_message_en",
+  "ai_vision_welcome_message_ar",
+  "dashboard_section",
+  "dashboard_enable_analytics",
+  "dashboard_enable_loyalty",
+  "dashboard_enable_profile_edit",
+  "dashboard_enable_rma",
+  "dashboard_enable_tracking_timeline",
+  "dashboard_enable_addresses",
+  "dashboard_tracking_labels_en",
+  "dashboard_tracking_labels_ar",
+  "ecosystem_section",
+  "ecosystem_rag_support_enabled",
+  "ecosystem_demand_forecaster_enabled",
+  "ecosystem_marketing_hub_enabled",
+  "fintech_section",
+  "fintech_gift_cards_enabled",
+  "fintech_subscription_box_enabled",
+  "omnichannel_section",
+  "omnichannel_bopis_enabled",
+  "omnichannel_kiosk_mode_enabled",
+  "webshop_pwa_settings_section",
+  "pwa_enabled",
+  "app_short_name",
+  "theme_color",
+  "offline_message_en",
+  "offline_message_ar",
+  "sensory_section",
+  "sensory_enabled",
+  "sensory_magnetic_cursor_enabled",
+  "sensory_cinematic_transitions_enabled",
+  "sensory_circadian_theme_enabled",
+  "sensory_predictive_prefetch_enabled",
+  "sensory_webxr_ar_enabled",
+  "sensory_exploder_3d_enabled",
+  "ai_chat_section",
+  "ai_chat_enabled",
+  "ai_chat_provider",
+  "ai_chat_api_key",
+  "ai_chat_api_base_url",
+  "ai_chat_model",
+  "ai_chat_system_prompt",
+  "ai_chat_greeting_message",
+  "ai_chat_primary_color",
+  "ai_chat_allow_guest",
+  "ai_chat_rate_limit_per_minute",
+  "ai_chat_max_message_length",
+  "ai_chat_max_tokens",
+  "ai_chat_temperature",
+  "ai_chat_prevent_sensitive_data",
+  "marketplace_section",
+  "marketplace_amazon_sa_enabled",
+  "marketplace_amazon_seller_id",
+  "marketplace_amazon_mws_token",
+  "marketplace_noon_enabled",
+  "marketplace_noon_partner_id",
+  "marketplace_noon_api_key",
+  "marketplace_sync_interval_minutes",
+  "marketplace_multi_vendor_enabled",
+  "marketplace_commission_percent",
+  "marketplace_affiliate_enabled",
+  "master_tier_section",
+  "master_tier_enabled",
+  "master_ghost_search_enabled",
+  "master_loyalty_enabled",
+  "master_referrals_enabled",
+  "master_hotspots_enabled",
+  "master_abandoned_cart_enabled",
+  "master_ai_seo_enabled",
+  "master_points_per_currency",
+  "master_wallet_value_per_point",
+  "master_min_redeem_points",
+  "master_referral_reward_points",
+  "master_referral_code_prefix",
+  "master_recovery_delay_hours",
+  "master_recovery_coupon_percent",
+  "master_style_profile_retention_days",
+  "unified_commerce_section",
+  "subscription_section",
+  "subscription_enabled",
+  "subscription_discount_percent",
+  "subscription_intervals",
+  "courier_section",
+  "courier_provider",
+  "courier_api_key",
+  "courier_auto_waybill",
+  "currency_section",
+  "currency_auto_detect",
+  "supported_currencies",
+  "exchange_rates_json",
+  "tracking_section",
+  "tracking_enabled",
+  "tracking_map_enabled",
+  "tracking_courier_name",
+  "tracking_url_template",
+  "tracking_title_en",
+  "tracking_title_ar",
+  "tracking_status_labels_en",
+  "tracking_status_labels_ar",
+  "unified_seo_section",
+  "meta_section",
+  "meta_title_en",
+  "meta_title_ar",
+  "meta_description_en",
+  "meta_description_ar",
+  "og_section",
+  "og_title_en",
+  "og_title_ar",
+  "og_description_en",
+  "og_description_ar",
+  "og_image",
+  "advanced_section",
+  "canonical_url",
+  "robots_txt",
+  "sitemap_enabled",
+  "structured_data",
+  "redirects_section",
+  "redirects",
+  "webshop_seo_automation_section",
+  "seo_automation_enabled",
+  "auto_generate_product_meta",
+  "include_json_ld",
+  "description_max_length",
+  "brand_voice_en",
+  "brand_voice_ar"
  ],
  "fields": [
   {
@@ -1312,36 +1955,6 @@
    "default": "صممه بطريقتك"
   },
   {
-   "fieldname": "style_quiz_enabled",
-   "label": "Style Quiz Enabled",
-   "fieldtype": "Check",
-   "default": "0"
-  },
-  {
-   "fieldname": "style_quiz_title_en",
-   "label": "Style Quiz Title (English)",
-   "fieldtype": "Data",
-   "default": "Find your point of view"
-  },
-  {
-   "fieldname": "style_quiz_title_ar",
-   "label": "Style Quiz Title (Arabic)",
-   "fieldtype": "Data",
-   "default": "اكتشف ذوقك"
-  },
-  {
-   "fieldname": "style_quiz_intro_en",
-   "label": "Style Quiz Intro (English)",
-   "fieldtype": "Small Text",
-   "default": "Answer a few questions and we will tune the edit to you."
-  },
-  {
-   "fieldname": "style_quiz_intro_ar",
-   "label": "Style Quiz Intro (Arabic)",
-   "fieldtype": "Small Text",
-   "default": "أجب عن بعض الأسئلة لنضبط الاختيارات بما يناسبك."
-  },
-  {
    "fieldname": "quote_requests_enabled",
    "label": "B2B Quote Requests Enabled",
    "fieldtype": "Check",
@@ -1471,6 +2084,3851 @@
    "label": "Store Name (Arabic)",
    "fieldtype": "Data",
    "default": "متجر سينك"
+  },
+  {
+   "fieldname": "webshop_about_page_section",
+   "fieldtype": "Section Break",
+   "label": "About Page"
+  },
+  {
+   "fieldname": "about_title_en",
+   "label": "About Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "about_title_ar",
+   "label": "About Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "about_subtitle_en",
+   "label": "About Subtitle (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "about_subtitle_ar",
+   "label": "About Subtitle (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "about_hero_image",
+   "label": "About Hero Image",
+   "fieldtype": "Attach Image"
+  },
+  {
+   "fieldname": "about_content_en",
+   "label": "About Content (English)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "about_content_ar",
+   "label": "About Content (Arabic)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "webshop_announcement_section",
+   "fieldtype": "Section Break",
+   "label": "Announcement Bar"
+  },
+  {
+   "fieldname": "announcement_enabled",
+   "label": "Enable Announcement Bar",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "announcement_message_en",
+   "label": "Announcement Message (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "announcement_message_ar",
+   "label": "Announcement Message (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "announcement_background_color",
+   "label": "Announcement Background Color",
+   "fieldtype": "Color"
+  },
+  {
+   "fieldname": "announcement_text_color",
+   "label": "Announcement Text Color",
+   "fieldtype": "Color"
+  },
+  {
+   "fieldname": "announcement_link_url",
+   "label": "Announcement Link",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "announcement_show_close_button",
+   "label": "Show Announcement Close Button",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "webshop_footer_section",
+   "fieldtype": "Section Break",
+   "label": "Footer Presentation"
+  },
+  {
+   "fieldname": "footer_enabled",
+   "label": "Enable Footer",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "footer_logo",
+   "label": "Footer Logo",
+   "fieldtype": "Attach Image"
+  },
+  {
+   "fieldname": "footer_copyright_en",
+   "label": "Footer Copyright (English)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "footer_copyright_ar",
+   "label": "Footer Copyright (Arabic)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "webshop_policy_page_section",
+   "fieldtype": "Section Break",
+   "label": "Policy Page"
+  },
+  {
+   "fieldname": "policy_page_title_en",
+   "label": "Policy Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "policy_page_title_ar",
+   "label": "Policy Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "policy_page_subtitle_en",
+   "label": "Policy Subtitle (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "policy_page_subtitle_ar",
+   "label": "Policy Subtitle (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "shipping_policy_title_en",
+   "label": "Shipping Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "shipping_policy_title_ar",
+   "label": "Shipping Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "shipping_policy_text_en",
+   "label": "Shipping Policy (English)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "shipping_policy_text_ar",
+   "label": "Shipping Policy (Arabic)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "returns_policy_title_en",
+   "label": "Returns Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "returns_policy_title_ar",
+   "label": "Returns Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "returns_policy_text_en",
+   "label": "Returns Policy (English)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "returns_policy_text_ar",
+   "label": "Returns Policy (Arabic)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "privacy_policy_title_en",
+   "label": "Privacy Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "privacy_policy_title_ar",
+   "label": "Privacy Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "privacy_policy_text_en",
+   "label": "Privacy Policy (English)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "privacy_policy_text_ar",
+   "label": "Privacy Policy (Arabic)",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "webshop_return_window_section",
+   "fieldtype": "Section Break",
+   "label": "Return Window"
+  },
+  {
+   "fieldname": "return_window_days",
+   "label": "Return Window (Days)",
+   "fieldtype": "Int",
+   "default": 14
+  },
+  {
+   "fieldname": "return_window_policy_text_en",
+   "label": "Return Window Policy (English)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "return_window_policy_text_ar",
+   "label": "Return Window Policy (Arabic)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "dynamic_pages_section",
+   "label": "Dynamic Pages",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "dynamic_pages_enabled",
+   "label": "Dynamic Pages Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_about_enabled",
+   "label": "About Us Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_about_show_in_nav",
+   "label": "Show About Us in Navigation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_about_label_en",
+   "label": "About Us Navigation Label (EN)",
+   "fieldtype": "Data",
+   "default": "About us"
+  },
+  {
+   "fieldname": "dynamic_about_label_ar",
+   "label": "About Us Navigation Label (AR)",
+   "fieldtype": "Data",
+   "default": "من نحن"
+  },
+  {
+   "fieldname": "dynamic_policy_enabled",
+   "label": "Our Policy Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_policy_show_in_nav",
+   "label": "Show Our Policy in Navigation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_policy_label_en",
+   "label": "Our Policy Navigation Label (EN)",
+   "fieldtype": "Data",
+   "default": "Our policy"
+  },
+  {
+   "fieldname": "dynamic_policy_label_ar",
+   "label": "Our Policy Navigation Label (AR)",
+   "fieldtype": "Data",
+   "default": "سياساتنا"
+  },
+  {
+   "fieldname": "dynamic_articles_enabled",
+   "label": "Articles Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_articles_show_in_nav",
+   "label": "Show Articles in Navigation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_articles_label_en",
+   "label": "Articles Navigation Label (EN)",
+   "fieldtype": "Data",
+   "default": "Articles"
+  },
+  {
+   "fieldname": "dynamic_articles_label_ar",
+   "label": "Articles Navigation Label (AR)",
+   "fieldtype": "Data",
+   "default": "المقالات"
+  },
+  {
+   "fieldname": "dynamic_qa_enabled",
+   "label": "Q&A Enabled",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_qa_show_in_nav",
+   "label": "Show Q&A in Navigation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "dynamic_qa_label_en",
+   "label": "Q&A Navigation Label (EN)",
+   "fieldtype": "Data",
+   "default": "Q&A"
+  },
+  {
+   "fieldname": "dynamic_qa_label_ar",
+   "label": "Q&A Navigation Label (AR)",
+   "fieldtype": "Data",
+   "default": "الأسئلة والأجوبة"
+  },
+  {
+   "fieldname": "dynamic_seo_description_en",
+   "label": "Dynamic Pages SEO Description (EN)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "dynamic_seo_description_ar",
+   "label": "Dynamic Pages SEO Description (AR)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "landing_builder_section",
+   "label": "Landing Builder",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "landing_builder_enabled",
+   "label": "Enable Dynamic Landing Builder",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "landing_hero_heading_en",
+   "label": "Hero Heading (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "landing_hero_heading_ar",
+   "label": "Hero Heading (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "landing_featured_grid_title_en",
+   "label": "Featured Grid Title (English)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "landing_featured_grid_title_ar",
+   "label": "Featured Grid Title (Arabic)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "help_content",
+   "label": "Help Content",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "unified_feature_section",
+   "label": "Feature Settings",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "webshop_enterprise_ai_settings_section",
+   "fieldtype": "Section Break",
+   "label": "AI & Merchandising"
+  },
+  {
+   "fieldname": "auto_translate_enabled",
+   "label": "Enable AI Auto-Translation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "intelligent_merchandising",
+   "label": "Enable Intelligent Merchandising",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "voice_actions_enabled",
+   "label": "Enable Voice-to-Action Assistant",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "webshop_b2b_wholesale_settings_section",
+   "fieldtype": "Section Break",
+   "label": "B2B & Wholesale"
+  },
+  {
+   "fieldname": "b2b_enabled",
+   "label": "Enable B2B Wholesale Portal",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "volume_pricing_enabled",
+   "label": "Enable Volume-Based Pricing",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "volume_pricing_rule",
+   "label": "Volume Pricing Rule",
+   "fieldtype": "Link",
+   "options": "Pricing Rule",
+   "description": "Optional standard ERPNext Pricing Rule used for the volume-pricing API. Leave blank to discover all active item-code rules."
+  },
+  {
+   "fieldname": "corporate_credit_enabled",
+   "label": "Enable Corporate Credit Lines",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "quick_order_enabled",
+   "label": "Enable Bulk Quick Order Sheet",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "webshop_live_shopping_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Live Shopping"
+  },
+  {
+   "fieldname": "live_stream_enabled",
+   "label": "Enable Live Shopping Stream",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "stream_url",
+   "label": "Stream Embed URL / HLS",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "stream_title_en",
+   "label": "Stream Title (English)",
+   "fieldtype": "Data",
+   "default": "Live Tasting & Masterclass"
+  },
+  {
+   "fieldname": "stream_title_ar",
+   "label": "Stream Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "جلسة تذوق حية ورشة عمل"
+  },
+  {
+   "fieldname": "webshop_recovery_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Recovery"
+  },
+  {
+   "fieldname": "abandoned_cart_enabled",
+   "label": "Enable Abandoned Cart Recovery",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "delay_hours",
+   "label": "Follow-up Delay (Hours)",
+   "fieldtype": "Int",
+   "default": 2
+  },
+  {
+   "fieldname": "coupon_discount",
+   "label": "Recovery Coupon Discount %",
+   "fieldtype": "Float",
+   "default": 10.0
+  },
+  {
+   "fieldname": "webshop_fraud_shield_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Fraud Shield"
+  },
+  {
+   "fieldname": "fraud_shield_enabled",
+   "label": "Enable Fraud & Risk Shield",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "max_order_amount",
+   "label": "Max Auto-Approve Order Amount (SAR)",
+   "fieldtype": "Currency",
+   "default": 5000.0
+  },
+  {
+   "fieldname": "webshop_infrastructure_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Infrastructure"
+  },
+  {
+   "fieldname": "edge_cache_enabled",
+   "label": "Enable Global Edge Caching",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "auto_healing_enabled",
+   "label": "Enable Auto-Healing Worker Queues",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ai_vision_section",
+   "fieldtype": "Section Break",
+   "label": "AI Vision"
+  },
+  {
+   "fieldname": "ai_vision_visual_search_enabled",
+   "label": "Enable Visual Search",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_auto_tagging_enabled",
+   "label": "Enable AI Auto-Tagging",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_ai_model_name",
+   "label": "AI Vision Model",
+   "fieldtype": "Select",
+   "options": "gpt-5-mini\ngemini-3-flash-preview\nclaude-haiku-4-5\ngpt-4o\ngpt-4-vision-preview\nclaude-3-5-sonnet",
+   "default": "gpt-5-mini",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_confidence_threshold",
+   "label": "Matching Confidence Threshold",
+   "fieldtype": "Float",
+   "options": null,
+   "default": 0.85,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_section_nlp",
+   "label": "Arabic NLP Shopping Assistant",
+   "fieldtype": "Section Break",
+   "options": null,
+   "default": null,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_nlp_enabled",
+   "label": "Enable Arabic NLP Assistant",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_welcome_message_en",
+   "label": "Welcome Message (English)",
+   "fieldtype": "Small Text",
+   "options": null,
+   "default": "Hello! I am your AI coffee & lifestyle assistant. How can I help you discover your perfect blend today?",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "ai_vision_welcome_message_ar",
+   "label": "Welcome Message (Arabic)",
+   "fieldtype": "Small Text",
+   "options": null,
+   "default": "مرحباً! أنا مساعدك الذكي للقهوة وأسلوب الحياة. كيف يمكنني مساعدتك في اكتشاف خلطتك المثالية اليوم؟",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "dashboard_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Dashboard"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_analytics",
+   "fieldtype": "Check",
+   "label": "Enable Order Analytics"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_loyalty",
+   "fieldtype": "Check",
+   "label": "Enable Loyalty Points"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_profile_edit",
+   "fieldtype": "Check",
+   "label": "Enable Profile Editing"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_rma",
+   "fieldtype": "Check",
+   "label": "Enable RMA / Returns"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_tracking_timeline",
+   "fieldtype": "Check",
+   "label": "Enable Visual Order Timeline"
+  },
+  {
+   "default": "1",
+   "fieldname": "dashboard_enable_addresses",
+   "fieldtype": "Check",
+   "label": "Enable Saved Addresses"
+  },
+  {
+   "default": "{\"placed\":\"Order placed\",\"confirmed\":\"Confirmed\",\"processing\":\"Preparing\",\"shipped\":\"Shipped\",\"delivered\":\"Delivered\"}",
+   "fieldname": "dashboard_tracking_labels_en",
+   "fieldtype": "Long Text",
+   "label": "Tracking Labels (English JSON)"
+  },
+  {
+   "default": "{\"placed\":\"تم تقديم الطلب\",\"confirmed\":\"تم التأكيد\",\"processing\":\"قيد التجهيز\",\"shipped\":\"تم الشحن\",\"delivered\":\"تم التسليم\"}",
+   "fieldname": "dashboard_tracking_labels_ar",
+   "fieldtype": "Long Text",
+   "label": "Tracking Labels (Arabic JSON)"
+  },
+  {
+   "fieldname": "ecosystem_section",
+   "fieldtype": "Section Break",
+   "label": "Ecosystem AI"
+  },
+  {
+   "fieldname": "ecosystem_rag_support_enabled",
+   "label": "Enable RAG AI Support Agent",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ecosystem_demand_forecaster_enabled",
+   "label": "Enable AI Demand Forecaster",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ecosystem_marketing_hub_enabled",
+   "label": "Enable AI Marketing Content Hub",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "fintech_section",
+   "fieldtype": "Section Break",
+   "label": "Fintech"
+  },
+  {
+   "fieldname": "fintech_gift_cards_enabled",
+   "label": "Enable Digital Gift Cards & Wallet",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "fintech_subscription_box_enabled",
+   "label": "Enable Subscription Box Customizer",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "omnichannel_section",
+   "fieldtype": "Section Break",
+   "label": "Omnichannel"
+  },
+  {
+   "fieldname": "omnichannel_bopis_enabled",
+   "label": "Enable Advanced BOPIS Locator",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "omnichannel_kiosk_mode_enabled",
+   "label": "Enable In-Store Kiosk Mode",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "webshop_pwa_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Progressive Web App"
+  },
+  {
+   "fieldname": "pwa_enabled",
+   "label": "Enable PWA Offline Service Worker",
+   "fieldtype": "Check",
+   "options": null,
+   "default": 1,
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "app_short_name",
+   "label": "App Short Name",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "Sync Webshop",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "theme_color",
+   "label": "Theme Color",
+   "fieldtype": "Color",
+   "options": null,
+   "default": "#173F3A",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "offline_message_en",
+   "label": "Offline Message (English)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "You are currently offline. Browsing cached catalog.",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "offline_message_ar",
+   "label": "Offline Message (Arabic)",
+   "fieldtype": "Data",
+   "options": null,
+   "default": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ.",
+   "hidden": 0,
+   "read_only": 0,
+   "reqd": 0
+  },
+  {
+   "fieldname": "sensory_section",
+   "fieldtype": "Section Break",
+   "label": "Sensory Experience"
+  },
+  {
+   "fieldname": "sensory_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Luxury Sensory Suite",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_magnetic_cursor_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Magnetic Adaptive Cursor",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_cinematic_transitions_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Cinematic Morphing Transitions",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_circadian_theme_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Circadian Theme Adaptation",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_predictive_prefetch_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Predictive Prefetching",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_webxr_ar_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Direct Browser AR (WebXR)",
+   "default": 1
+  },
+  {
+   "fieldname": "sensory_exploder_3d_enabled",
+   "fieldtype": "Check",
+   "label": "Enable 3D Interactive Exploder",
+   "default": 1
+  },
+  {
+   "fieldname": "ai_chat_section",
+   "label": "AI Chat",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ai_chat_enabled",
+   "label": "AI Chat Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "ai_chat_provider",
+   "label": "AI Chat Provider",
+   "fieldtype": "Select",
+   "options": "OpenAI\nManus\nCustom"
+  },
+  {
+   "fieldname": "ai_chat_api_key",
+   "label": "AI Chat API Key",
+   "fieldtype": "Password"
+  },
+  {
+   "fieldname": "ai_chat_api_base_url",
+   "label": "AI Chat API Base URL",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "ai_chat_model",
+   "label": "AI Chat Model",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "ai_chat_system_prompt",
+   "label": "AI Chat System Prompt",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "ai_chat_greeting_message",
+   "label": "AI Chat Greeting",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "ai_chat_primary_color",
+   "label": "AI Chat Primary Color",
+   "fieldtype": "Color"
+  },
+  {
+   "fieldname": "ai_chat_allow_guest",
+   "label": "Allow Guest AI Chat",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "ai_chat_rate_limit_per_minute",
+   "label": "AI Chat Rate Limit per Minute",
+   "fieldtype": "Int",
+   "default": 20
+  },
+  {
+   "fieldname": "ai_chat_max_message_length",
+   "label": "AI Chat Maximum Message Length",
+   "fieldtype": "Int",
+   "default": 2000
+  },
+  {
+   "fieldname": "ai_chat_max_tokens",
+   "label": "AI Chat Maximum Response Tokens",
+   "fieldtype": "Int",
+   "default": 300
+  },
+  {
+   "fieldname": "ai_chat_temperature",
+   "label": "AI Chat Temperature",
+   "fieldtype": "Float",
+   "default": 0
+  },
+  {
+   "fieldname": "ai_chat_prevent_sensitive_data",
+   "label": "Prevent Sensitive Data Exposure",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "marketplace_section",
+   "label": "Marketplace",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "marketplace_amazon_sa_enabled",
+   "label": "Amazon Saudi Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "marketplace_amazon_seller_id",
+   "label": "Amazon Seller ID",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "marketplace_amazon_mws_token",
+   "label": "Amazon MWS Token",
+   "fieldtype": "Password"
+  },
+  {
+   "fieldname": "marketplace_noon_enabled",
+   "label": "Noon Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "marketplace_noon_partner_id",
+   "label": "Noon Partner ID",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "marketplace_noon_api_key",
+   "label": "Noon API Key",
+   "fieldtype": "Password"
+  },
+  {
+   "fieldname": "marketplace_sync_interval_minutes",
+   "label": "Marketplace Sync Interval Minutes",
+   "fieldtype": "Int",
+   "default": 30
+  },
+  {
+   "fieldname": "marketplace_multi_vendor_enabled",
+   "label": "Multi-Vendor Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "marketplace_commission_percent",
+   "label": "Marketplace Commission %",
+   "fieldtype": "Float",
+   "default": 15
+  },
+  {
+   "fieldname": "marketplace_affiliate_enabled",
+   "label": "Affiliate Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_tier_section",
+   "label": "Master Tier Features",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "master_tier_enabled",
+   "label": "Master Tier Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_ghost_search_enabled",
+   "label": "Ghost Search Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_loyalty_enabled",
+   "label": "Loyalty Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_referrals_enabled",
+   "label": "Referrals Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_hotspots_enabled",
+   "label": "Hotspots Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_abandoned_cart_enabled",
+   "label": "Abandoned Cart Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_ai_seo_enabled",
+   "label": "AI SEO Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "master_points_per_currency",
+   "label": "Points per Currency",
+   "fieldtype": "Float",
+   "default": 1
+  },
+  {
+   "fieldname": "master_wallet_value_per_point",
+   "label": "Wallet Value per Point",
+   "fieldtype": "Float",
+   "default": 0.1
+  },
+  {
+   "fieldname": "master_min_redeem_points",
+   "label": "Minimum Redeem Points",
+   "fieldtype": "Float",
+   "default": 100
+  },
+  {
+   "fieldname": "master_referral_reward_points",
+   "label": "Referral Reward Points",
+   "fieldtype": "Float",
+   "default": 50
+  },
+  {
+   "fieldname": "master_referral_code_prefix",
+   "label": "Referral Code Prefix",
+   "fieldtype": "Data",
+   "default": "SYNC"
+  },
+  {
+   "fieldname": "master_recovery_delay_hours",
+   "label": "Recovery Delay Hours",
+   "fieldtype": "Int",
+   "default": 2
+  },
+  {
+   "fieldname": "master_recovery_coupon_percent",
+   "label": "Recovery Coupon %",
+   "fieldtype": "Float",
+   "default": 10
+  },
+  {
+   "fieldname": "master_style_profile_retention_days",
+   "label": "Style Profile Retention Days",
+   "fieldtype": "Int",
+   "default": 0
+  },
+  {
+   "fieldname": "unified_commerce_section",
+   "label": "Commerce Settings",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "subscription_section",
+   "label": "Subscribe & Save",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "subscription_enabled",
+   "label": "Enable Subscribe & Save",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "subscription_discount_percent",
+   "label": "Subscription Discount %",
+   "fieldtype": "Float",
+   "default": 10
+  },
+  {
+   "fieldname": "subscription_intervals",
+   "label": "Available Intervals",
+   "fieldtype": "Data",
+   "default": "Monthly,Every 2 Months,Quarterly"
+  },
+  {
+   "fieldname": "courier_section",
+   "label": "Courier",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "courier_provider",
+   "label": "Courier Provider",
+   "fieldtype": "Select",
+   "options": "Manual\nSMSA",
+   "default": "Manual"
+  },
+  {
+   "fieldname": "courier_api_key",
+   "label": "API Key / Token",
+   "fieldtype": "Password"
+  },
+  {
+   "fieldname": "courier_auto_waybill",
+   "label": "Auto-Generate Waybill on Order",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "currency_section",
+   "label": "Currency",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "currency_auto_detect",
+   "label": "Auto-Detect User Currency",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "supported_currencies",
+   "label": "Supported Currencies",
+   "fieldtype": "Data",
+   "default": "SAR,AED,USD,EUR"
+  },
+  {
+   "fieldname": "exchange_rates_json",
+   "label": "Exchange Rates JSON",
+   "fieldtype": "Code",
+   "default": "{\"SAR\": 1, \"AED\": 0.98, \"USD\": 0.2667, \"EUR\": 0.245}"
+  },
+  {
+   "fieldname": "tracking_section",
+   "label": "Order Tracking",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tracking_enabled",
+   "label": "Tracking Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "tracking_map_enabled",
+   "label": "Map Enabled",
+   "fieldtype": "Check",
+   "default": 0
+  },
+  {
+   "fieldname": "tracking_courier_name",
+   "label": "Courier Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tracking_url_template",
+   "label": "Tracking URL Template",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tracking_title_en",
+   "label": "Tracking Title (English)",
+   "fieldtype": "Data",
+   "default": "Your delivery, in view"
+  },
+  {
+   "fieldname": "tracking_title_ar",
+   "label": "Tracking Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "شاهد مسار توصيلك"
+  },
+  {
+   "fieldname": "tracking_status_labels_en",
+   "label": "Status Labels (English) JSON",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tracking_status_labels_ar",
+   "label": "Status Labels (Arabic) JSON",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "unified_seo_section",
+   "label": "SEO Settings",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "meta_section",
+   "fieldtype": "Section Break",
+   "label": "Meta Tags"
+  },
+  {
+   "fieldname": "meta_title_en",
+   "fieldtype": "Data",
+   "label": "Meta Title (English)"
+  },
+  {
+   "fieldname": "meta_title_ar",
+   "fieldtype": "Data",
+   "label": "Meta Title (Arabic)"
+  },
+  {
+   "fieldname": "meta_description_en",
+   "fieldtype": "Small Text",
+   "label": "Meta Description (English)"
+  },
+  {
+   "fieldname": "meta_description_ar",
+   "fieldtype": "Small Text",
+   "label": "Meta Description (Arabic)"
+  },
+  {
+   "fieldname": "og_section",
+   "fieldtype": "Section Break",
+   "label": "Open Graph"
+  },
+  {
+   "fieldname": "og_title_en",
+   "fieldtype": "Data",
+   "label": "OG Title (English)"
+  },
+  {
+   "fieldname": "og_title_ar",
+   "fieldtype": "Data",
+   "label": "OG Title (Arabic)"
+  },
+  {
+   "fieldname": "og_description_en",
+   "fieldtype": "Small Text",
+   "label": "OG Description (English)"
+  },
+  {
+   "fieldname": "og_description_ar",
+   "fieldtype": "Small Text",
+   "label": "OG Description (Arabic)"
+  },
+  {
+   "fieldname": "og_image",
+   "fieldtype": "Attach Image",
+   "label": "OG Image"
+  },
+  {
+   "fieldname": "advanced_section",
+   "fieldtype": "Section Break",
+   "label": "Advanced SEO"
+  },
+  {
+   "fieldname": "canonical_url",
+   "fieldtype": "Data",
+   "label": "Canonical URL"
+  },
+  {
+   "fieldname": "robots_txt",
+   "fieldtype": "Code",
+   "label": "Robots.txt",
+   "options": "Markdown"
+  },
+  {
+   "default": 1,
+   "fieldname": "sitemap_enabled",
+   "fieldtype": "Check",
+   "label": "Sitemap Enabled"
+  },
+  {
+   "fieldname": "structured_data",
+   "fieldtype": "Code",
+   "label": "Structured Data (JSON-LD)",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "redirects_section",
+   "fieldtype": "Section Break",
+   "label": "Redirects"
+  },
+  {
+   "fieldname": "redirects",
+   "fieldtype": "Table",
+   "label": "Redirects",
+   "options": "Webshop SEO Redirect"
+  },
+  {
+   "fieldname": "webshop_seo_automation_section",
+   "fieldtype": "Section Break",
+   "label": "SEO Automation"
+  },
+  {
+   "fieldname": "seo_automation_enabled",
+   "label": "Enable SEO Automation",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "auto_generate_product_meta",
+   "label": "Auto Generate Product Meta",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "include_json_ld",
+   "label": "Include JSON-LD",
+   "fieldtype": "Check",
+   "default": 1
+  },
+  {
+   "fieldname": "description_max_length",
+   "label": "Description Max Length",
+   "fieldtype": "Int",
+   "default": 155
+  },
+  {
+   "fieldname": "brand_voice_en",
+   "label": "Brand Voice (English)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "brand_voice_ar",
+   "label": "Brand Voice (Arabic)",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "style_quiz_enabled",
+   "label": "Style Quiz Enabled",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "style_quiz_title_en",
+   "label": "Style Quiz Title (English)",
+   "fieldtype": "Data",
+   "default": "Find your point of view"
+  },
+  {
+   "fieldname": "style_quiz_title_ar",
+   "label": "Style Quiz Title (Arabic)",
+   "fieldtype": "Data",
+   "default": "اكتشف ذوقك"
+  },
+  {
+   "fieldname": "style_quiz_intro_en",
+   "label": "Style Quiz Intro (English)",
+   "fieldtype": "Small Text",
+   "default": "Answer a few questions and we will tune the edit to you."
+  },
+  {
+   "fieldname": "style_quiz_intro_ar",
+   "label": "Style Quiz Intro (Arabic)",
+   "fieldtype": "Small Text",
+   "default": "أجب عن بعض الأسئلة لنضبط الاختيارات بما يناسبك."
+  },
+  {
+   "fieldname": "footer_eyebrow_en",
+   "fieldtype": "Data",
+   "label": "Footer Eyebrow (English)",
+   "default": "The considered edit"
+  },
+  {
+   "fieldname": "footer_eyebrow_ar",
+   "fieldtype": "Data",
+   "label": "Footer Eyebrow (Arabic)",
+   "default": "اختيارات مدروسة"
+  },
+  {
+   "fieldname": "footer_contact_heading_en",
+   "fieldtype": "Data",
+   "label": "Footer Contact Heading (English)",
+   "default": "Need help?"
+  },
+  {
+   "fieldname": "footer_contact_heading_ar",
+   "fieldtype": "Data",
+   "label": "Footer Contact Heading (Arabic)",
+   "default": "هل تحتاج إلى مساعدة؟"
+  },
+  {
+   "fieldname": "footer_phone_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Phone Label (English)",
+   "default": "Phone"
+  },
+  {
+   "fieldname": "footer_phone_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Phone Label (Arabic)",
+   "default": "الهاتف"
+  },
+  {
+   "fieldname": "footer_email_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Email Label (English)",
+   "default": "Email us"
+  },
+  {
+   "fieldname": "footer_email_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Email Label (Arabic)",
+   "default": "راسلنا"
+  },
+  {
+   "fieldname": "footer_address_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Address Label (English)",
+   "default": "Visit the studio"
+  },
+  {
+   "fieldname": "footer_address_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Address Label (Arabic)",
+   "default": "زيارة المتجر"
+  },
+  {
+   "fieldname": "footer_social_eyebrow_en",
+   "fieldtype": "Data",
+   "label": "Footer Social Eyebrow (English)",
+   "default": "Stay in the loop"
+  },
+  {
+   "fieldname": "footer_social_eyebrow_ar",
+   "fieldtype": "Data",
+   "label": "Footer Social Eyebrow (Arabic)",
+   "default": "ابقَ على اطلاع"
+  },
+  {
+   "fieldname": "footer_social_heading_en",
+   "fieldtype": "Data",
+   "label": "Footer Social Heading (English)",
+   "default": "Follow along"
+  },
+  {
+   "fieldname": "footer_social_heading_ar",
+   "fieldtype": "Data",
+   "label": "Footer Social Heading (Arabic)",
+   "default": "تابعنا"
+  },
+  {
+   "fieldname": "footer_social_aria_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Social Links Label (English)",
+   "default": "Social media links"
+  },
+  {
+   "fieldname": "footer_social_aria_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Social Links Label (Arabic)",
+   "default": "روابط التواصل الاجتماعي"
+  },
+  {
+   "fieldname": "footer_social_empty_en",
+   "fieldtype": "Data",
+   "label": "Footer Empty Social Message (English)",
+   "default": "Social links can be managed from Frappe Desk."
+  },
+  {
+   "fieldname": "footer_social_empty_ar",
+   "fieldtype": "Data",
+   "label": "Footer Empty Social Message (Arabic)",
+   "default": "يمكن إدارة روابط التواصل الاجتماعي من لوحة Frappe."
+  },
+  {
+   "fieldname": "footer_design_credit_en",
+   "fieldtype": "Data",
+   "label": "Footer Design Credit (English)",
+   "default": "Designed for a better shopping experience."
+  },
+  {
+   "fieldname": "footer_design_credit_ar",
+   "fieldtype": "Data",
+   "label": "Footer Design Credit (Arabic)",
+   "default": "مصمم لتجربة تسوق أفضل."
+  },
+  {
+   "fieldname": "footer_links_aria_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Links Label (English)",
+   "default": "Footer links and social media"
+  },
+  {
+   "fieldname": "footer_links_aria_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Links Label (Arabic)",
+   "default": "روابط التذييل والتواصل الاجتماعي"
+  },
+  {
+   "fieldname": "footer_navigation_aria_label_en",
+   "fieldtype": "Data",
+   "label": "Footer Navigation Label (English)",
+   "default": "Footer navigation"
+  },
+  {
+   "fieldname": "footer_navigation_aria_label_ar",
+   "fieldtype": "Data",
+   "label": "Footer Navigation Label (Arabic)",
+   "default": "التنقل في التذييل"
+  },
+  {
+   "fieldname": "language_switch_en",
+   "fieldtype": "Data",
+   "label": "Language Switch Label (English)",
+   "default": "العربية"
+  },
+  {
+   "fieldname": "language_switch_ar",
+   "fieldtype": "Data",
+   "label": "Language Switch Label (Arabic)",
+   "default": "English"
+  },
+  {
+   "fieldname": "explore_collection_en",
+   "fieldtype": "Data",
+   "label": "Explore Collection Label (English)",
+   "default": "Explore collection"
+  },
+  {
+   "fieldname": "explore_collection_ar",
+   "fieldtype": "Data",
+   "label": "Explore Collection Label (Arabic)",
+   "default": "استكشف المجموعة"
+  },
+  {
+   "fieldname": "best_match_en",
+   "fieldtype": "Data",
+   "label": "Best Match Label (English)",
+   "default": "Best match"
+  },
+  {
+   "fieldname": "best_match_ar",
+   "fieldtype": "Data",
+   "label": "Best Match Label (Arabic)",
+   "default": "أفضل تطابق"
+  },
+  {
+   "fieldname": "search_result_category_en",
+   "fieldtype": "Data",
+   "label": "Search Result Category Label (English)",
+   "default": "Category"
+  },
+  {
+   "fieldname": "search_result_category_ar",
+   "fieldtype": "Data",
+   "label": "Search Result Category Label (Arabic)",
+   "default": "الفئة"
+  },
+  {
+   "fieldname": "search_result_product_en",
+   "fieldtype": "Data",
+   "label": "Search Result Product Label (English)",
+   "default": "Product"
+  },
+  {
+   "fieldname": "search_result_product_ar",
+   "fieldtype": "Data",
+   "label": "Search Result Product Label (Arabic)",
+   "default": "المنتج"
+  },
+  {
+   "fieldname": "no_image_en",
+   "fieldtype": "Data",
+   "label": "No Image Label (English)",
+   "default": "No image"
+  },
+  {
+   "fieldname": "no_image_ar",
+   "fieldtype": "Data",
+   "label": "No Image Label (Arabic)",
+   "default": "لا توجد صورة"
+  },
+  {
+   "fieldname": "on_request_en",
+   "fieldtype": "Data",
+   "label": "On Request Label (English)",
+   "default": "On request"
+  },
+  {
+   "fieldname": "on_request_ar",
+   "fieldtype": "Data",
+   "label": "On Request Label (Arabic)",
+   "default": "السعر عند الطلب"
+  },
+  {
+   "fieldname": "unavailable_en",
+   "fieldtype": "Data",
+   "label": "Unavailable Label (English)",
+   "default": "Unavailable"
+  },
+  {
+   "fieldname": "unavailable_ar",
+   "fieldtype": "Data",
+   "label": "Unavailable Label (Arabic)",
+   "default": "غير متوفر"
+  },
+  {
+   "fieldname": "view_product_en",
+   "fieldtype": "Data",
+   "label": "View Product Label (English)",
+   "default": "View product"
+  },
+  {
+   "fieldname": "view_product_ar",
+   "fieldtype": "Data",
+   "label": "View Product Label (Arabic)",
+   "default": "عرض المنتج"
+  },
+  {
+   "fieldname": "view_details_en",
+   "fieldtype": "Data",
+   "label": "View Details Label (English)",
+   "default": "View full details"
+  },
+  {
+   "fieldname": "view_details_ar",
+   "fieldtype": "Data",
+   "label": "View Details Label (Arabic)",
+   "default": "عرض التفاصيل الكاملة"
+  },
+  {
+   "fieldname": "all_rights_reserved_en",
+   "fieldtype": "Data",
+   "label": "All Rights Reserved Label (English)",
+   "default": "All rights reserved."
+  },
+  {
+   "fieldname": "all_rights_reserved_ar",
+   "fieldtype": "Data",
+   "label": "All Rights Reserved Label (Arabic)",
+   "default": "جميع الحقوق محفوظة."
+  },
+  {
+   "fieldname": "support_en",
+   "fieldtype": "Data",
+   "label": "Support Label (English)",
+   "default": "Support"
+  },
+  {
+   "fieldname": "support_ar",
+   "fieldtype": "Data",
+   "label": "Support Label (Arabic)",
+   "default": "الدعم"
+  },
+  {
+   "fieldname": "complete_look_kicker_en",
+   "fieldtype": "Data",
+   "label": "Complete the Look Kicker (English)",
+   "default": "Styled together"
+  },
+  {
+   "fieldname": "complete_look_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Complete the Look Kicker (Arabic)",
+   "default": "منسقة معاً"
+  },
+  {
+   "fieldname": "complete_look_subtitle_en",
+   "fieldtype": "Data",
+   "label": "Complete the Look Subtitle (English)",
+   "default": "Curated pieces that work beautifully together."
+  },
+  {
+   "fieldname": "complete_look_subtitle_ar",
+   "fieldtype": "Data",
+   "label": "Complete the Look Subtitle (Arabic)",
+   "default": "اختيارات متناسقة لتشكيل مجموعة متكاملة."
+  },
+  {
+   "fieldname": "complete_look_total_label_en",
+   "fieldtype": "Data",
+   "label": "Complete the Look Total Label (English)",
+   "default": "Set total"
+  },
+  {
+   "fieldname": "complete_look_total_label_ar",
+   "fieldtype": "Data",
+   "label": "Complete the Look Total Label (Arabic)",
+   "default": "إجمالي المجموعة"
+  },
+  {
+   "fieldname": "add_set_to_bag_en",
+   "fieldtype": "Data",
+   "label": "Add Set to Bag Label (English)",
+   "default": "Add the set to bag"
+  },
+  {
+   "fieldname": "add_set_to_bag_ar",
+   "fieldtype": "Data",
+   "label": "Add Set to Bag Label (Arabic)",
+   "default": "أضف المجموعة إلى السلة"
+  },
+  {
+   "fieldname": "fit_guide_empty_state_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Empty State (English)",
+   "default": "Add two measurements to see your recommendation."
+  },
+  {
+   "fieldname": "fit_guide_empty_state_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Empty State (Arabic)",
+   "default": "أضف قياسين لرؤية الاقتراح."
+  },
+  {
+   "fieldname": "visual_search_kicker_en",
+   "fieldtype": "Data",
+   "label": "Visual Search Kicker (English)",
+   "default": "Search by image"
+  },
+  {
+   "fieldname": "visual_search_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Visual Search Kicker (Arabic)",
+   "default": "البحث بالصورة"
+  },
+  {
+   "fieldname": "visual_search_loading_en",
+   "fieldtype": "Data",
+   "label": "Visual Search Loading (English)",
+   "default": "Finding similar products…"
+  },
+  {
+   "fieldname": "visual_search_loading_ar",
+   "fieldtype": "Data",
+   "label": "Visual Search Loading (Arabic)",
+   "default": "جارٍ البحث عن منتجات مشابهة…"
+  },
+  {
+   "fieldname": "visual_search_no_results_en",
+   "fieldtype": "Data",
+   "label": "Visual Search No Results (English)",
+   "default": "Visual search is not available right now."
+  },
+  {
+   "fieldname": "visual_search_no_results_ar",
+   "fieldtype": "Data",
+   "label": "Visual Search No Results (Arabic)",
+   "default": "البحث بالصورة غير متاح حالياً."
+  },
+  {
+   "fieldname": "tracking_map_kicker_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map Kicker (English)",
+   "default": "Live delivery"
+  },
+  {
+   "fieldname": "tracking_map_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map Kicker (Arabic)",
+   "default": "تتبع حي"
+  },
+  {
+   "fieldname": "tracking_map_origin_label_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map Origin Label (English)",
+   "default": "Store"
+  },
+  {
+   "fieldname": "tracking_map_origin_label_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map Origin Label (Arabic)",
+   "default": "المتجر"
+  },
+  {
+   "fieldname": "tracking_map_destination_label_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map Destination Label (English)",
+   "default": "Destination"
+  },
+  {
+   "fieldname": "tracking_map_destination_label_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map Destination Label (Arabic)",
+   "default": "وجهتك"
+  },
+  {
+   "fieldname": "tracking_map_cta_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map CTA (English)",
+   "default": "Open courier tracking"
+  },
+  {
+   "fieldname": "tracking_map_cta_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map CTA (Arabic)",
+   "default": "فتح تتبع شركة الشحن"
+  },
+  {
+   "fieldname": "ai_chat_title_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Title (English)",
+   "default": "Shopping assistant"
+  },
+  {
+   "fieldname": "ai_chat_title_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Title (Arabic)",
+   "default": "مساعد التسوق"
+  },
+  {
+   "fieldname": "ai_chat_placeholder_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Placeholder (English)",
+   "default": "Ask about products, orders, or delivery…"
+  },
+  {
+   "fieldname": "ai_chat_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Placeholder (Arabic)",
+   "default": "اكتب سؤالك هنا..."
+  },
+  {
+   "fieldname": "ai_chat_send_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Send Label (English)",
+   "default": "Send"
+  },
+  {
+   "fieldname": "ai_chat_send_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Send Label (Arabic)",
+   "default": "إرسال"
+  },
+  {
+   "fieldname": "ai_chat_close_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Close Label (English)",
+   "default": "Close"
+  },
+  {
+   "fieldname": "ai_chat_close_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Close Label (Arabic)",
+   "default": "إغلاق"
+  },
+  {
+   "fieldname": "ai_chat_online_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Online Label (English)",
+   "default": "Online now"
+  },
+  {
+   "fieldname": "ai_chat_online_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Online Label (Arabic)",
+   "default": "متصل الآن"
+  },
+  {
+   "fieldname": "ai_chat_thinking_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Thinking Label (English)",
+   "default": "Thinking…"
+  },
+  {
+   "fieldname": "ai_chat_thinking_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Thinking Label (Arabic)",
+   "default": "جارٍ التفكير..."
+  },
+  {
+   "fieldname": "ai_chat_unavailable_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Unavailable Message (English)",
+   "default": "The assistant is temporarily unavailable."
+  },
+  {
+   "fieldname": "ai_chat_unavailable_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Unavailable Message (Arabic)",
+   "default": "المساعد غير متاح حالياً."
+  },
+  {
+   "fieldname": "ai_chat_error_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Error Message (English)",
+   "default": "Unable to get a response. Please try again."
+  },
+  {
+   "fieldname": "ai_chat_error_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Error Message (Arabic)",
+   "default": "تعذر الحصول على رد. حاول مرة أخرى."
+  },
+  {
+   "fieldname": "feature_copy_section",
+   "fieldtype": "Section Break",
+   "label": "Feature Copy & Commerce Copy",
+   "description": "Bilingual copy for enhanced storefront features. Keep behavior toggles in their existing feature sections."
+  },
+  {
+   "fieldname": "footer_explore_title_en",
+   "fieldtype": "Data",
+   "label": "Footer Explore Column Title (English)",
+   "default": "Explore"
+  },
+  {
+   "fieldname": "footer_explore_title_ar",
+   "fieldtype": "Data",
+   "label": "Footer Explore Column Title (Arabic)",
+   "default": "استكشف"
+  },
+  {
+   "fieldname": "footer_customer_care_title_en",
+   "fieldtype": "Data",
+   "label": "Footer Customer Care Column Title (English)",
+   "default": "Customer care"
+  },
+  {
+   "fieldname": "footer_customer_care_title_ar",
+   "fieldtype": "Data",
+   "label": "Footer Customer Care Column Title (Arabic)",
+   "default": "خدمة العملاء"
+  },
+  {
+   "fieldname": "footer_information_title_en",
+   "fieldtype": "Data",
+   "label": "Footer Information Column Title (English)",
+   "default": "Information"
+  },
+  {
+   "fieldname": "footer_information_title_ar",
+   "fieldtype": "Data",
+   "label": "Footer Information Column Title (Arabic)",
+   "default": "معلومات"
+  },
+  {
+   "fieldname": "footer_visit_social_text_en",
+   "fieldtype": "Data",
+   "label": "Footer Social Link Prefix (English)",
+   "default": "Visit us on"
+  },
+  {
+   "fieldname": "footer_visit_social_text_ar",
+   "fieldtype": "Data",
+   "label": "Footer Social Link Prefix (Arabic)",
+   "default": "زرنا على"
+  },
+  {
+   "fieldname": "close_en",
+   "fieldtype": "Data",
+   "label": "Close Label (English)",
+   "default": "Close"
+  },
+  {
+   "fieldname": "close_ar",
+   "fieldtype": "Data",
+   "label": "Close Label (Arabic)",
+   "default": "إغلاق"
+  },
+  {
+   "fieldname": "selected_product_en",
+   "fieldtype": "Data",
+   "label": "Selected Product Label (English)",
+   "default": "Selected product"
+  },
+  {
+   "fieldname": "selected_product_ar",
+   "fieldtype": "Data",
+   "label": "Selected Product Label (Arabic)",
+   "default": "المنتج المحدد"
+  },
+  {
+   "fieldname": "visual_search_no_matches_en",
+   "fieldtype": "Data",
+   "label": "Visual Search No Matches (English)",
+   "default": "No close matches found. Try a clearer product photo."
+  },
+  {
+   "fieldname": "visual_search_no_matches_ar",
+   "fieldtype": "Data",
+   "label": "Visual Search No Matches (Arabic)",
+   "default": "لم نعثر على نتائج قريبة. جرّب صورة أوضح للمنتج."
+  },
+  {
+   "fieldname": "tracking_map_on_way_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map On-Way Status (English)",
+   "default": "On the way"
+  },
+  {
+   "fieldname": "tracking_map_on_way_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map On-Way Status (Arabic)",
+   "default": "قيد التوصيل"
+  },
+  {
+   "fieldname": "tracking_map_stops_remaining_en",
+   "fieldtype": "Data",
+   "label": "Tracking Map Stops Remaining (English)",
+   "default": "{count} stops remaining"
+  },
+  {
+   "fieldname": "tracking_map_stops_remaining_ar",
+   "fieldtype": "Data",
+   "label": "Tracking Map Stops Remaining (Arabic)",
+   "default": "{count} محطات متبقية"
+  },
+  {
+   "fieldname": "ai_chat_open_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Open Label (English)",
+   "default": "Open assistant"
+  },
+  {
+   "fieldname": "ai_chat_open_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Open Label (Arabic)",
+   "default": "افتح المساعد"
+  },
+  {
+   "fieldname": "ai_chat_privacy_en",
+   "fieldtype": "Data",
+   "label": "AI Chat Privacy Notice (English)",
+   "default": "For your safety, do not share passwords, card details, OTPs, API keys, or private information."
+  },
+  {
+   "fieldname": "ai_chat_privacy_ar",
+   "fieldtype": "Data",
+   "label": "AI Chat Privacy Notice (Arabic)",
+   "default": "لأمانك، لا ترسل كلمات المرور أو بيانات البطاقات أو رموز التحقق أو أي بيانات خاصة."
+  },
+  {
+   "fieldname": "fit_guide_kicker_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Kicker (English)",
+   "default": "Fit studio"
+  },
+  {
+   "fieldname": "fit_guide_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Kicker (Arabic)",
+   "default": "استوديو المقاس"
+  },
+  {
+   "fieldname": "fit_guide_subtitle_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Subtitle (English)",
+   "default": "A private, on-device guide"
+  },
+  {
+   "fieldname": "fit_guide_subtitle_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Subtitle (Arabic)",
+   "default": "دليل خاص يعمل على جهازك"
+  },
+  {
+   "fieldname": "fit_guide_privacy_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Privacy Text (English)",
+   "default": "Enter approximate measurements. They stay in this browser and are never submitted."
+  },
+  {
+   "fieldname": "fit_guide_privacy_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Privacy Text (Arabic)",
+   "default": "أدخل قياسات تقريبية. تبقى على هذا المتصفح ولا يتم إرسالها."
+  },
+  {
+   "fieldname": "fit_guide_height_label_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Height Label (English)",
+   "default": "Height (cm)"
+  },
+  {
+   "fieldname": "fit_guide_height_label_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Height Label (Arabic)",
+   "default": "الطول (سم)"
+  },
+  {
+   "fieldname": "fit_guide_chest_label_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Chest Label (English)",
+   "default": "Chest (cm)"
+  },
+  {
+   "fieldname": "fit_guide_chest_label_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Chest Label (Arabic)",
+   "default": "الصدر (سم)"
+  },
+  {
+   "fieldname": "fit_guide_waist_label_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Waist Label (English)",
+   "default": "Waist (cm)"
+  },
+  {
+   "fieldname": "fit_guide_waist_label_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Waist Label (Arabic)",
+   "default": "الخصر (سم)"
+  },
+  {
+   "fieldname": "fit_guide_recommendation_label_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Recommendation Label (English)",
+   "default": "Your recommendation"
+  },
+  {
+   "fieldname": "fit_guide_recommendation_label_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Recommendation Label (Arabic)",
+   "default": "اقتراحك"
+  },
+  {
+   "fieldname": "fit_guide_relaxed_note_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Relaxed Note (English)",
+   "default": "Relaxed and generous through the body."
+  },
+  {
+   "fieldname": "fit_guide_relaxed_note_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Relaxed Note (Arabic)",
+   "default": "قصة مريحة وواسعة حول الجسم."
+  },
+  {
+   "fieldname": "fit_guide_balanced_note_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Balanced Note (English)",
+   "default": "A balanced fit with room to move."
+  },
+  {
+   "fieldname": "fit_guide_balanced_note_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Balanced Note (Arabic)",
+   "default": "قصة متوازنة تمنحك حرية الحركة."
+  },
+  {
+   "fieldname": "fit_guide_everyday_note_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Everyday Note (English)",
+   "default": "The considered everyday fit."
+  },
+  {
+   "fieldname": "fit_guide_everyday_note_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Everyday Note (Arabic)",
+   "default": "المقاس المتوازن للاستخدام اليومي."
+  },
+  {
+   "fieldname": "fit_guide_refined_note_en",
+   "fieldtype": "Data",
+   "label": "Fit Guide Refined Note (English)",
+   "default": "A closer, refined silhouette."
+  },
+  {
+   "fieldname": "fit_guide_refined_note_ar",
+   "fieldtype": "Data",
+   "label": "Fit Guide Refined Note (Arabic)",
+   "default": "قصة أقرب بصياغة راقية."
+  },
+  {
+   "fieldname": "cart_title_en",
+   "fieldtype": "Data",
+   "label": "Cart Title (English)",
+   "default": "Your cart"
+  },
+  {
+   "fieldname": "cart_title_ar",
+   "fieldtype": "Data",
+   "label": "Cart Title (Arabic)",
+   "default": "سلة التسوق"
+  },
+  {
+   "fieldname": "cart_empty_en",
+   "fieldtype": "Data",
+   "label": "Empty Cart Message (English)",
+   "default": "Your cart is empty."
+  },
+  {
+   "fieldname": "cart_empty_ar",
+   "fieldtype": "Data",
+   "label": "Empty Cart Message (Arabic)",
+   "default": "سلتك فارغة حالياً."
+  },
+  {
+   "fieldname": "browse_products_en",
+   "fieldtype": "Data",
+   "label": "Browse Products Label (English)",
+   "default": "Browse products"
+  },
+  {
+   "fieldname": "browse_products_ar",
+   "fieldtype": "Data",
+   "label": "Browse Products Label (Arabic)",
+   "default": "تصفح المنتجات"
+  },
+  {
+   "fieldname": "checkout_en",
+   "fieldtype": "Data",
+   "label": "Checkout Label (English)",
+   "default": "Checkout"
+  },
+  {
+   "fieldname": "checkout_ar",
+   "fieldtype": "Data",
+   "label": "Checkout Label (Arabic)",
+   "default": "إتمام الطلب"
+  },
+  {
+   "fieldname": "view_cart_en",
+   "fieldtype": "Data",
+   "label": "View Cart Label (English)",
+   "default": "View cart"
+  },
+  {
+   "fieldname": "view_cart_ar",
+   "fieldtype": "Data",
+   "label": "View Cart Label (Arabic)",
+   "default": "عرض السلة"
+  },
+  {
+   "fieldname": "free_shipping_unlocked_en",
+   "fieldtype": "Data",
+   "label": "Free Shipping Unlocked Message (English)",
+   "default": "You unlocked free shipping."
+  },
+  {
+   "fieldname": "free_shipping_unlocked_ar",
+   "fieldtype": "Data",
+   "label": "Free Shipping Unlocked Message (Arabic)",
+   "default": "تهانينا! حصلت على الشحن المجاني."
+  },
+  {
+   "fieldname": "free_shipping_away_en",
+   "fieldtype": "Data",
+   "label": "Free Shipping Remaining Label (English)",
+   "default": "away from free shipping"
+  },
+  {
+   "fieldname": "free_shipping_away_ar",
+   "fieldtype": "Data",
+   "label": "Free Shipping Remaining Label (Arabic)",
+   "default": "متبقي"
+  },
+  {
+   "fieldname": "cart_item_en",
+   "fieldtype": "Data",
+   "label": "Cart Item Label (English)",
+   "default": "items"
+  },
+  {
+   "fieldname": "cart_item_ar",
+   "fieldtype": "Data",
+   "label": "Cart Item Label (Arabic)",
+   "default": "منتج"
+  },
+  {
+   "fieldname": "close_cart_en",
+   "fieldtype": "Data",
+   "label": "Close Cart Label (English)",
+   "default": "Close cart"
+  },
+  {
+   "fieldname": "close_cart_ar",
+   "fieldtype": "Data",
+   "label": "Close Cart Label (Arabic)",
+   "default": "إغلاق السلة"
+  },
+  {
+   "fieldname": "free_shipping_progress_en",
+   "fieldtype": "Data",
+   "label": "Free Shipping Progress Label (English)",
+   "default": "Free shipping progress"
+  },
+  {
+   "fieldname": "free_shipping_progress_ar",
+   "fieldtype": "Data",
+   "label": "Free Shipping Progress Label (Arabic)",
+   "default": "تقدم الشحن المجاني"
+  },
+  {
+   "fieldname": "decrease_quantity_en",
+   "fieldtype": "Data",
+   "label": "Decrease Quantity Label (English)",
+   "default": "Decrease quantity"
+  },
+  {
+   "fieldname": "decrease_quantity_ar",
+   "fieldtype": "Data",
+   "label": "Decrease Quantity Label (Arabic)",
+   "default": "تقليل الكمية"
+  },
+  {
+   "fieldname": "increase_quantity_en",
+   "fieldtype": "Data",
+   "label": "Increase Quantity Label (English)",
+   "default": "Increase quantity"
+  },
+  {
+   "fieldname": "increase_quantity_ar",
+   "fieldtype": "Data",
+   "label": "Increase Quantity Label (Arabic)",
+   "default": "زيادة الكمية"
+  },
+  {
+   "fieldname": "remove_en",
+   "fieldtype": "Data",
+   "label": "Remove Label (English)",
+   "default": "Remove"
+  },
+  {
+   "fieldname": "remove_ar",
+   "fieldtype": "Data",
+   "label": "Remove Label (Arabic)",
+   "default": "حذف"
+  },
+  {
+   "fieldname": "subtotal_en",
+   "fieldtype": "Data",
+   "label": "Subtotal Label (English)",
+   "default": "Subtotal"
+  },
+  {
+   "fieldname": "subtotal_ar",
+   "fieldtype": "Data",
+   "label": "Subtotal Label (Arabic)",
+   "default": "الإجمالي"
+  },
+  {
+   "fieldname": "style_quiz_kicker_en",
+   "fieldtype": "Data",
+   "label": "Style Quiz Kicker (English)",
+   "default": "A considered edit"
+  },
+  {
+   "fieldname": "style_quiz_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Style Quiz Kicker (Arabic)",
+   "default": "تجربة مخصصة"
+  },
+  {
+   "fieldname": "style_quiz_cta_en",
+   "fieldtype": "Data",
+   "label": "Style Quiz CTA (English)",
+   "default": "Take the quiz"
+  },
+  {
+   "fieldname": "style_quiz_cta_ar",
+   "fieldtype": "Data",
+   "label": "Style Quiz CTA (Arabic)",
+   "default": "ابدأ الاختبار"
+  },
+  {
+   "fieldname": "style_quiz_close_en",
+   "fieldtype": "Data",
+   "label": "Style Quiz Close Label (English)",
+   "default": "Close"
+  },
+  {
+   "fieldname": "style_quiz_close_ar",
+   "fieldtype": "Data",
+   "label": "Style Quiz Close Label (Arabic)",
+   "default": "إغلاق"
+  },
+  {
+   "fieldname": "style_quiz_next_en",
+   "fieldtype": "Data",
+   "label": "Style Quiz Next Label (English)",
+   "default": "Next"
+  },
+  {
+   "fieldname": "style_quiz_next_ar",
+   "fieldtype": "Data",
+   "label": "Style Quiz Next Label (Arabic)",
+   "default": "التالي"
+  },
+  {
+   "fieldname": "style_quiz_finish_en",
+   "fieldtype": "Data",
+   "label": "Style Quiz Finish Label (English)",
+   "default": "Tune my edit"
+  },
+  {
+   "fieldname": "style_quiz_finish_ar",
+   "fieldtype": "Data",
+   "label": "Style Quiz Finish Label (Arabic)",
+   "default": "عرض اختياراتي"
+  },
+  {
+   "fieldname": "compare_products_en",
+   "fieldtype": "Data",
+   "label": "Compare Products Label (English)",
+   "default": "Compare products"
+  },
+  {
+   "fieldname": "compare_products_ar",
+   "fieldtype": "Data",
+   "label": "Compare Products Label (Arabic)",
+   "default": "مقارنة المنتجات"
+  },
+  {
+   "fieldname": "compare_items_en",
+   "fieldtype": "Data",
+   "label": "Compare Items Label (English)",
+   "default": "items"
+  },
+  {
+   "fieldname": "compare_items_ar",
+   "fieldtype": "Data",
+   "label": "Compare Items Label (Arabic)",
+   "default": "منتجات"
+  },
+  {
+   "fieldname": "compare_now_en",
+   "fieldtype": "Data",
+   "label": "Compare Now Label (English)",
+   "default": "Compare now"
+  },
+  {
+   "fieldname": "compare_now_ar",
+   "fieldtype": "Data",
+   "label": "Compare Now Label (Arabic)",
+   "default": "قارن الآن"
+  },
+  {
+   "fieldname": "clear_en",
+   "fieldtype": "Data",
+   "label": "Clear Label (English)",
+   "default": "Clear"
+  },
+  {
+   "fieldname": "clear_ar",
+   "fieldtype": "Data",
+   "label": "Clear Label (Arabic)",
+   "default": "مسح"
+  },
+  {
+   "fieldname": "comparison_kicker_en",
+   "fieldtype": "Data",
+   "label": "Comparison Kicker (English)",
+   "default": "A smarter choice"
+  },
+  {
+   "fieldname": "comparison_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Comparison Kicker (Arabic)",
+   "default": "قرار أذكى"
+  },
+  {
+   "fieldname": "comparison_title_en",
+   "fieldtype": "Data",
+   "label": "Comparison Title (English)",
+   "default": "Compare your picks"
+  },
+  {
+   "fieldname": "comparison_title_ar",
+   "fieldtype": "Data",
+   "label": "Comparison Title (Arabic)",
+   "default": "قارن اختياراتك"
+  },
+  {
+   "fieldname": "rating_en",
+   "fieldtype": "Data",
+   "label": "Rating Label (English)",
+   "default": "Rating"
+  },
+  {
+   "fieldname": "rating_ar",
+   "fieldtype": "Data",
+   "label": "Rating Label (Arabic)",
+   "default": "التقييم"
+  },
+  {
+   "fieldname": "availability_en",
+   "fieldtype": "Data",
+   "label": "Availability Label (English)",
+   "default": "Availability"
+  },
+  {
+   "fieldname": "availability_ar",
+   "fieldtype": "Data",
+   "label": "Availability Label (Arabic)",
+   "default": "التوفر"
+  },
+  {
+   "fieldname": "available_en",
+   "fieldtype": "Data",
+   "label": "Available Label (English)",
+   "default": "Available"
+  },
+  {
+   "fieldname": "available_ar",
+   "fieldtype": "Data",
+   "label": "Available Label (Arabic)",
+   "default": "متوفر"
+  },
+  {
+   "fieldname": "close_quick_actions_en",
+   "fieldtype": "Data",
+   "label": "Close Quick Actions Label (English)",
+   "default": "Close quick actions"
+  },
+  {
+   "fieldname": "close_quick_actions_ar",
+   "fieldtype": "Data",
+   "label": "Close Quick Actions Label (Arabic)",
+   "default": "إغلاق الإجراءات السريعة"
+  },
+  {
+   "fieldname": "quick_actions_en",
+   "fieldtype": "Data",
+   "label": "Quick Actions Label (English)",
+   "default": "Quick actions"
+  },
+  {
+   "fieldname": "quick_actions_ar",
+   "fieldtype": "Data",
+   "label": "Quick Actions Label (Arabic)",
+   "default": "إجراءات سريعة"
+  },
+  {
+   "fieldname": "search_en",
+   "fieldtype": "Data",
+   "label": "Search Label (English)",
+   "default": "Search"
+  },
+  {
+   "fieldname": "search_ar",
+   "fieldtype": "Data",
+   "label": "Search Label (Arabic)",
+   "default": "بحث"
+  },
+  {
+   "fieldname": "saved_en",
+   "fieldtype": "Data",
+   "label": "Saved Label (English)",
+   "default": "Saved"
+  },
+  {
+   "fieldname": "saved_ar",
+   "fieldtype": "Data",
+   "label": "Saved Label (Arabic)",
+   "default": "المفضلة"
+  },
+  {
+   "fieldname": "bag_en",
+   "fieldtype": "Data",
+   "label": "Bag Label (English)",
+   "default": "Bag"
+  },
+  {
+   "fieldname": "bag_ar",
+   "fieldtype": "Data",
+   "label": "Bag Label (Arabic)",
+   "default": "السلة"
+  },
+  {
+   "fieldname": "ai_help_en",
+   "fieldtype": "Data",
+   "label": "AI Help Label (English)",
+   "default": "AI help"
+  },
+  {
+   "fieldname": "ai_help_ar",
+   "fieldtype": "Data",
+   "label": "AI Help Label (Arabic)",
+   "default": "مساعدة ذكية"
+  },
+  {
+   "fieldname": "whatsapp_en",
+   "fieldtype": "Data",
+   "label": "WhatsApp Label (English)",
+   "default": "WhatsApp"
+  },
+  {
+   "fieldname": "whatsapp_ar",
+   "fieldtype": "Data",
+   "label": "WhatsApp Label (Arabic)",
+   "default": "واتساب"
+  },
+  {
+   "fieldname": "light_en",
+   "fieldtype": "Data",
+   "label": "Light Theme Label (English)",
+   "default": "Light"
+  },
+  {
+   "fieldname": "light_ar",
+   "fieldtype": "Data",
+   "label": "Light Theme Label (Arabic)",
+   "default": "مضيء"
+  },
+  {
+   "fieldname": "dark_en",
+   "fieldtype": "Data",
+   "label": "Dark Theme Label (English)",
+   "default": "Dark"
+  },
+  {
+   "fieldname": "dark_ar",
+   "fieldtype": "Data",
+   "label": "Dark Theme Label (Arabic)",
+   "default": "داكن"
+  },
+  {
+   "fieldname": "top_en",
+   "fieldtype": "Data",
+   "label": "Back to Top Label (English)",
+   "default": "Top"
+  },
+  {
+   "fieldname": "top_ar",
+   "fieldtype": "Data",
+   "label": "Back to Top Label (Arabic)",
+   "default": "أعلى"
+  },
+  {
+   "fieldname": "open_quick_actions_en",
+   "fieldtype": "Data",
+   "label": "Open Quick Actions Label (English)",
+   "default": "Open quick actions"
+  },
+  {
+   "fieldname": "open_quick_actions_ar",
+   "fieldtype": "Data",
+   "label": "Open Quick Actions Label (Arabic)",
+   "default": "فتح الإجراءات السريعة"
+  },
+  {
+   "fieldname": "menu_en",
+   "fieldtype": "Data",
+   "label": "Menu Label (English)",
+   "default": "Menu"
+  },
+  {
+   "fieldname": "menu_ar",
+   "fieldtype": "Data",
+   "label": "Menu Label (Arabic)",
+   "default": "القائمة"
+  },
+  {
+   "fieldname": "shipping_information_en",
+   "fieldtype": "Data",
+   "label": "Shipping Information Heading (English)",
+   "default": "Shipping Information"
+  },
+  {
+   "fieldname": "shipping_information_ar",
+   "fieldtype": "Data",
+   "label": "Shipping Information Heading (Arabic)",
+   "default": "معلومات الشحن"
+  },
+  {
+   "fieldname": "full_name_en",
+   "fieldtype": "Data",
+   "label": "Full Name Label (English)",
+   "default": "Full Name"
+  },
+  {
+   "fieldname": "full_name_ar",
+   "fieldtype": "Data",
+   "label": "Full Name Label (Arabic)",
+   "default": "الاسم الكامل"
+  },
+  {
+   "fieldname": "email_en",
+   "fieldtype": "Data",
+   "label": "Email Label (English)",
+   "default": "Email"
+  },
+  {
+   "fieldname": "email_ar",
+   "fieldtype": "Data",
+   "label": "Email Label (Arabic)",
+   "default": "البريد الإلكتروني"
+  },
+  {
+   "fieldname": "primary_phone_en",
+   "fieldtype": "Data",
+   "label": "Primary Phone Label (English)",
+   "default": "Primary Phone"
+  },
+  {
+   "fieldname": "primary_phone_ar",
+   "fieldtype": "Data",
+   "label": "Primary Phone Label (Arabic)",
+   "default": "رقم الهاتف الأساسي"
+  },
+  {
+   "fieldname": "second_phone_en",
+   "fieldtype": "Data",
+   "label": "Second Phone Label (English)",
+   "default": "Second Phone Number"
+  },
+  {
+   "fieldname": "second_phone_ar",
+   "fieldtype": "Data",
+   "label": "Second Phone Label (Arabic)",
+   "default": "رقم هاتف ثانٍ"
+  },
+  {
+   "fieldname": "governorate_en",
+   "fieldtype": "Data",
+   "label": "Governorate Label (English)",
+   "default": "Governorate"
+  },
+  {
+   "fieldname": "governorate_ar",
+   "fieldtype": "Data",
+   "label": "Governorate Label (Arabic)",
+   "default": "المحافظة"
+  },
+  {
+   "fieldname": "select_governorate_en",
+   "fieldtype": "Data",
+   "label": "Select Governorate Label (English)",
+   "default": "Select governorate"
+  },
+  {
+   "fieldname": "select_governorate_ar",
+   "fieldtype": "Data",
+   "label": "Select Governorate Label (Arabic)",
+   "default": "اختر المحافظة"
+  },
+  {
+   "fieldname": "city_en",
+   "fieldtype": "Data",
+   "label": "City Label (English)",
+   "default": "City"
+  },
+  {
+   "fieldname": "city_ar",
+   "fieldtype": "Data",
+   "label": "City Label (Arabic)",
+   "default": "المدينة"
+  },
+  {
+   "fieldname": "select_city_en",
+   "fieldtype": "Data",
+   "label": "Select City Label (English)",
+   "default": "Select city"
+  },
+  {
+   "fieldname": "select_city_ar",
+   "fieldtype": "Data",
+   "label": "Select City Label (Arabic)",
+   "default": "اختر المدينة"
+  },
+  {
+   "fieldname": "detailed_address_en",
+   "fieldtype": "Data",
+   "label": "Detailed Address Label (English)",
+   "default": "Detailed Address"
+  },
+  {
+   "fieldname": "detailed_address_ar",
+   "fieldtype": "Data",
+   "label": "Detailed Address Label (Arabic)",
+   "default": "العنوان بالتفصيل"
+  },
+  {
+   "fieldname": "optional_location_en",
+   "fieldtype": "Data",
+   "label": "Optional Location Label (English)",
+   "default": "Optional Location"
+  },
+  {
+   "fieldname": "optional_location_ar",
+   "fieldtype": "Data",
+   "label": "Optional Location Label (Arabic)",
+   "default": "موقع اختياري"
+  },
+  {
+   "fieldname": "location_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Location Placeholder (English)",
+   "default": "Map link or nearby landmark"
+  },
+  {
+   "fieldname": "location_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Location Placeholder (Arabic)",
+   "default": "رابط الخريطة أو علامة مميزة"
+  },
+  {
+   "fieldname": "coupon_code_en",
+   "fieldtype": "Data",
+   "label": "Coupon Code Heading (English)",
+   "default": "Coupon Code"
+  },
+  {
+   "fieldname": "coupon_code_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Code Heading (Arabic)",
+   "default": "كود الخصم"
+  },
+  {
+   "fieldname": "apply_en",
+   "fieldtype": "Data",
+   "label": "Apply Label (English)",
+   "default": "Apply"
+  },
+  {
+   "fieldname": "apply_ar",
+   "fieldtype": "Data",
+   "label": "Apply Label (Arabic)",
+   "default": "تطبيق"
+  },
+  {
+   "fieldname": "invalid_coupon_en",
+   "fieldtype": "Data",
+   "label": "Invalid Coupon Message (English)",
+   "default": "Invalid coupon code"
+  },
+  {
+   "fieldname": "invalid_coupon_ar",
+   "fieldtype": "Data",
+   "label": "Invalid Coupon Message (Arabic)",
+   "default": "كود غير صالح"
+  },
+  {
+   "fieldname": "coupon_applied_en",
+   "fieldtype": "Data",
+   "label": "Coupon Applied Message (English)",
+   "default": "Coupon applied successfully"
+  },
+  {
+   "fieldname": "coupon_applied_ar",
+   "fieldtype": "Data",
+   "label": "Coupon Applied Message (Arabic)",
+   "default": "تم تطبيق الكود بنجاح"
+  },
+  {
+   "fieldname": "make_it_gift_en",
+   "fieldtype": "Data",
+   "label": "Gift Heading (English)",
+   "default": "Make it a gift"
+  },
+  {
+   "fieldname": "make_it_gift_ar",
+   "fieldtype": "Data",
+   "label": "Gift Heading (Arabic)",
+   "default": "اجعلها هدية"
+  },
+  {
+   "fieldname": "add_gift_wrapping_en",
+   "fieldtype": "Data",
+   "label": "Gift Wrapping Label (English)",
+   "default": "Add gift wrapping"
+  },
+  {
+   "fieldname": "add_gift_wrapping_ar",
+   "fieldtype": "Data",
+   "label": "Gift Wrapping Label (Arabic)",
+   "default": "إضافة تغليف هدايا"
+  },
+  {
+   "fieldname": "personal_note_en",
+   "fieldtype": "Data",
+   "label": "Personal Note Placeholder (English)",
+   "default": "Add a personal note"
+  },
+  {
+   "fieldname": "personal_note_ar",
+   "fieldtype": "Data",
+   "label": "Personal Note Placeholder (Arabic)",
+   "default": "أضف ملاحظة شخصية"
+  },
+  {
+   "fieldname": "fulfillment_en",
+   "fieldtype": "Data",
+   "label": "Fulfillment Heading (English)",
+   "default": "Fulfillment"
+  },
+  {
+   "fieldname": "fulfillment_ar",
+   "fieldtype": "Data",
+   "label": "Fulfillment Heading (Arabic)",
+   "default": "التنفيذ"
+  },
+  {
+   "fieldname": "delivery_en",
+   "fieldtype": "Data",
+   "label": "Delivery Label (English)",
+   "default": "Delivery"
+  },
+  {
+   "fieldname": "delivery_ar",
+   "fieldtype": "Data",
+   "label": "Delivery Label (Arabic)",
+   "default": "توصيل"
+  },
+  {
+   "fieldname": "store_pickup_en",
+   "fieldtype": "Data",
+   "label": "Store Pickup Label (English)",
+   "default": "Store pickup"
+  },
+  {
+   "fieldname": "store_pickup_ar",
+   "fieldtype": "Data",
+   "label": "Store Pickup Label (Arabic)",
+   "default": "الاستلام من المتجر"
+  },
+  {
+   "fieldname": "select_warehouse_en",
+   "fieldtype": "Data",
+   "label": "Select Warehouse Label (English)",
+   "default": "Select warehouse"
+  },
+  {
+   "fieldname": "select_warehouse_ar",
+   "fieldtype": "Data",
+   "label": "Select Warehouse Label (Arabic)",
+   "default": "اختر المستودع"
+  },
+  {
+   "fieldname": "delivery_date_en",
+   "fieldtype": "Data",
+   "label": "Delivery Date Heading (English)",
+   "default": "Delivery Date"
+  },
+  {
+   "fieldname": "delivery_date_ar",
+   "fieldtype": "Data",
+   "label": "Delivery Date Heading (Arabic)",
+   "default": "تاريخ التوصيل"
+  },
+  {
+   "fieldname": "preferred_delivery_date_en",
+   "fieldtype": "Data",
+   "label": "Preferred Delivery Date Hint (English)",
+   "default": "Select your preferred delivery date"
+  },
+  {
+   "fieldname": "preferred_delivery_date_ar",
+   "fieldtype": "Data",
+   "label": "Preferred Delivery Date Hint (Arabic)",
+   "default": "اختر موعد التوصيل المفضل لديك"
+  },
+  {
+   "fieldname": "payment_method_en",
+   "fieldtype": "Data",
+   "label": "Payment Method Heading (English)",
+   "default": "Payment Method"
+  },
+  {
+   "fieldname": "payment_method_ar",
+   "fieldtype": "Data",
+   "label": "Payment Method Heading (Arabic)",
+   "default": "طريقة الدفع"
+  },
+  {
+   "fieldname": "paymob_secure_hint_en",
+   "fieldtype": "Data",
+   "label": "Paymob Secure Hint (English)",
+   "default": "Pay securely through Paymob"
+  },
+  {
+   "fieldname": "paymob_secure_hint_ar",
+   "fieldtype": "Data",
+   "label": "Paymob Secure Hint (Arabic)",
+   "default": "ادفع بأمان عبر Paymob"
+  },
+  {
+   "fieldname": "processing_en",
+   "fieldtype": "Data",
+   "label": "Processing Label (English)",
+   "default": "Processing..."
+  },
+  {
+   "fieldname": "processing_ar",
+   "fieldtype": "Data",
+   "label": "Processing Label (Arabic)",
+   "default": "جاري المعالجة..."
+  },
+  {
+   "fieldname": "continue_payment_en",
+   "fieldtype": "Data",
+   "label": "Continue to Payment Label (English)",
+   "default": "Continue to Payment"
+  },
+  {
+   "fieldname": "continue_payment_ar",
+   "fieldtype": "Data",
+   "label": "Continue to Payment Label (Arabic)",
+   "default": "المتابعة إلى الدفع"
+  },
+  {
+   "fieldname": "confirm_order_en",
+   "fieldtype": "Data",
+   "label": "Confirm Order Label (English)",
+   "default": "Confirm Order"
+  },
+  {
+   "fieldname": "confirm_order_ar",
+   "fieldtype": "Data",
+   "label": "Confirm Order Label (Arabic)",
+   "default": "تأكيد الطلب"
+  },
+  {
+   "fieldname": "order_summary_en",
+   "fieldtype": "Data",
+   "label": "Order Summary Heading (English)",
+   "default": "Order Summary"
+  },
+  {
+   "fieldname": "order_summary_ar",
+   "fieldtype": "Data",
+   "label": "Order Summary Heading (Arabic)",
+   "default": "ملخص الطلب"
+  },
+  {
+   "fieldname": "discount_en",
+   "fieldtype": "Data",
+   "label": "Discount Label (English)",
+   "default": "Discount"
+  },
+  {
+   "fieldname": "discount_ar",
+   "fieldtype": "Data",
+   "label": "Discount Label (Arabic)",
+   "default": "الخصم"
+  },
+  {
+   "fieldname": "shipping_en",
+   "fieldtype": "Data",
+   "label": "Shipping Label (English)",
+   "default": "Shipping"
+  },
+  {
+   "fieldname": "shipping_ar",
+   "fieldtype": "Data",
+   "label": "Shipping Label (Arabic)",
+   "default": "الشحن"
+  },
+  {
+   "fieldname": "free_en",
+   "fieldtype": "Data",
+   "label": "Free Label (English)",
+   "default": "Free"
+  },
+  {
+   "fieldname": "free_ar",
+   "fieldtype": "Data",
+   "label": "Free Label (Arabic)",
+   "default": "مجاني"
+  },
+  {
+   "fieldname": "total_en",
+   "fieldtype": "Data",
+   "label": "Total Label (English)",
+   "default": "Total"
+  },
+  {
+   "fieldname": "total_ar",
+   "fieldtype": "Data",
+   "label": "Total Label (Arabic)",
+   "default": "الإجمالي"
+  },
+  {
+   "fieldname": "retry_en",
+   "fieldtype": "Data",
+   "label": "Retry Label (English)",
+   "default": "Retry"
+  },
+  {
+   "fieldname": "retry_ar",
+   "fieldtype": "Data",
+   "label": "Retry Label (Arabic)",
+   "default": "إعادة المحاولة"
+  },
+  {
+   "fieldname": "loading_en",
+   "fieldtype": "Data",
+   "label": "Loading Label (English)",
+   "default": "Loading..."
+  },
+  {
+   "fieldname": "loading_ar",
+   "fieldtype": "Data",
+   "label": "Loading Label (Arabic)",
+   "default": "جارٍ التحميل..."
+  },
+  {
+   "fieldname": "account_title_en",
+   "fieldtype": "Data",
+   "label": "Account Title (English)",
+   "default": "My account"
+  },
+  {
+   "fieldname": "account_title_ar",
+   "fieldtype": "Data",
+   "label": "Account Title (Arabic)",
+   "default": "حسابي"
+  },
+  {
+   "fieldname": "account_subtitle_en",
+   "fieldtype": "Data",
+   "label": "Account Subtitle (English)",
+   "default": "Track orders, invoices, loyalty points, profile details, and returns in one place."
+  },
+  {
+   "fieldname": "account_subtitle_ar",
+   "fieldtype": "Data",
+   "label": "Account Subtitle (Arabic)",
+   "default": "تابع طلباتك وفواتيرك ونقاطك وطلبات الإرجاع من مكان واحد."
+  },
+  {
+   "fieldname": "account_email_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Account Email Placeholder (English)",
+   "default": "Enter the email used at checkout"
+  },
+  {
+   "fieldname": "account_email_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Account Email Placeholder (Arabic)",
+   "default": "أدخل البريد الإلكتروني المستخدم عند الدفع"
+  },
+  {
+   "fieldname": "open_dashboard_en",
+   "fieldtype": "Data",
+   "label": "Open Dashboard Label (English)",
+   "default": "Open my dashboard"
+  },
+  {
+   "fieldname": "open_dashboard_ar",
+   "fieldtype": "Data",
+   "label": "Open Dashboard Label (Arabic)",
+   "default": "عرض لوحة حسابي"
+  },
+  {
+   "fieldname": "no_orders_en",
+   "fieldtype": "Data",
+   "label": "No Orders Message (English)",
+   "default": "No orders found for that email."
+  },
+  {
+   "fieldname": "no_orders_ar",
+   "fieldtype": "Data",
+   "label": "No Orders Message (Arabic)",
+   "default": "لا توجد طلبات لهذا البريد الإلكتروني."
+  },
+  {
+   "fieldname": "orders_en",
+   "fieldtype": "Data",
+   "label": "Orders Label (English)",
+   "default": "Orders"
+  },
+  {
+   "fieldname": "orders_ar",
+   "fieldtype": "Data",
+   "label": "Orders Label (Arabic)",
+   "default": "الطلبات"
+  },
+  {
+   "fieldname": "invoices_en",
+   "fieldtype": "Data",
+   "label": "Invoices Label (English)",
+   "default": "Invoices"
+  },
+  {
+   "fieldname": "invoices_ar",
+   "fieldtype": "Data",
+   "label": "Invoices Label (Arabic)",
+   "default": "الفواتير"
+  },
+  {
+   "fieldname": "return_requests_en",
+   "fieldtype": "Data",
+   "label": "Return Requests Label (English)",
+   "default": "Return requests"
+  },
+  {
+   "fieldname": "return_requests_ar",
+   "fieldtype": "Data",
+   "label": "Return Requests Label (Arabic)",
+   "default": "طلبات الإرجاع"
+  },
+  {
+   "fieldname": "account_summary_en",
+   "fieldtype": "Data",
+   "label": "Account Summary Label (English)",
+   "default": "Account summary"
+  },
+  {
+   "fieldname": "account_summary_ar",
+   "fieldtype": "Data",
+   "label": "Account Summary Label (Arabic)",
+   "default": "ملخص الحساب"
+  },
+  {
+   "fieldname": "loyalty_points_en",
+   "fieldtype": "Data",
+   "label": "Loyalty Points Label (English)",
+   "default": "Loyalty points"
+  },
+  {
+   "fieldname": "loyalty_points_ar",
+   "fieldtype": "Data",
+   "label": "Loyalty Points Label (Arabic)",
+   "default": "نقاط الولاء"
+  },
+  {
+   "fieldname": "my_profile_en",
+   "fieldtype": "Data",
+   "label": "My Profile Label (English)",
+   "default": "My profile"
+  },
+  {
+   "fieldname": "my_profile_ar",
+   "fieldtype": "Data",
+   "label": "My Profile Label (Arabic)",
+   "default": "بياناتي"
+  },
+  {
+   "fieldname": "save_changes_en",
+   "fieldtype": "Data",
+   "label": "Save Changes Label (English)",
+   "default": "Save changes"
+  },
+  {
+   "fieldname": "save_changes_ar",
+   "fieldtype": "Data",
+   "label": "Save Changes Label (Arabic)",
+   "default": "حفظ التغييرات"
+  },
+  {
+   "fieldname": "edit_profile_en",
+   "fieldtype": "Data",
+   "label": "Edit Profile Label (English)",
+   "default": "Edit profile"
+  },
+  {
+   "fieldname": "edit_profile_ar",
+   "fieldtype": "Data",
+   "label": "Edit Profile Label (Arabic)",
+   "default": "تعديل البيانات"
+  },
+  {
+   "fieldname": "download_pdf_en",
+   "fieldtype": "Data",
+   "label": "Download PDF Label (English)",
+   "default": "Download PDF"
+  },
+  {
+   "fieldname": "download_pdf_ar",
+   "fieldtype": "Data",
+   "label": "Download PDF Label (Arabic)",
+   "default": "تحميل PDF"
+  },
+  {
+   "fieldname": "request_return_en",
+   "fieldtype": "Data",
+   "label": "Request Return Label (English)",
+   "default": "Request return"
+  },
+  {
+   "fieldname": "request_return_ar",
+   "fieldtype": "Data",
+   "label": "Request Return Label (Arabic)",
+   "default": "طلب إرجاع"
+  },
+  {
+   "fieldname": "cancel_en",
+   "fieldtype": "Data",
+   "label": "Cancel Label (English)",
+   "default": "Cancel"
+  },
+  {
+   "fieldname": "cancel_ar",
+   "fieldtype": "Data",
+   "label": "Cancel Label (Arabic)",
+   "default": "إلغاء"
+  },
+  {
+   "fieldname": "submit_request_en",
+   "fieldtype": "Data",
+   "label": "Submit Request Label (English)",
+   "default": "Submit request"
+  },
+  {
+   "fieldname": "submit_request_ar",
+   "fieldtype": "Data",
+   "label": "Submit Request Label (Arabic)",
+   "default": "إرسال الطلب"
+  },
+  {
+   "fieldname": "return_reason_en",
+   "fieldtype": "Data",
+   "label": "Return Reason Label (English)",
+   "default": "Reason for return"
+  },
+  {
+   "fieldname": "return_reason_ar",
+   "fieldtype": "Data",
+   "label": "Return Reason Label (Arabic)",
+   "default": "سبب الإرجاع"
+  },
+  {
+   "fieldname": "quantity_en",
+   "fieldtype": "Data",
+   "label": "Quantity Label (English)",
+   "default": "Quantity"
+  },
+  {
+   "fieldname": "quantity_ar",
+   "fieldtype": "Data",
+   "label": "Quantity Label (Arabic)",
+   "default": "الكمية"
+  },
+  {
+   "fieldname": "return_success_en",
+   "fieldtype": "Data",
+   "label": "Return Success Message (English)",
+   "default": "Return request submitted successfully."
+  },
+  {
+   "fieldname": "return_success_ar",
+   "fieldtype": "Data",
+   "label": "Return Success Message (Arabic)",
+   "default": "تم إرسال طلب الإرجاع."
+  },
+  {
+   "fieldname": "profile_saved_en",
+   "fieldtype": "Data",
+   "label": "Profile Saved Message (English)",
+   "default": "Profile updated successfully."
+  },
+  {
+   "fieldname": "profile_saved_ar",
+   "fieldtype": "Data",
+   "label": "Profile Saved Message (Arabic)",
+   "default": "تم تحديث البيانات."
+  },
+  {
+   "fieldname": "address_saved_en",
+   "fieldtype": "Data",
+   "label": "Address Saved Message (English)",
+   "default": "Address saved successfully."
+  },
+  {
+   "fieldname": "address_saved_ar",
+   "fieldtype": "Data",
+   "label": "Address Saved Message (Arabic)",
+   "default": "تم حفظ العنوان."
+  },
+  {
+   "fieldname": "address_deleted_en",
+   "fieldtype": "Data",
+   "label": "Address Deleted Message (English)",
+   "default": "Address deleted successfully."
+  },
+  {
+   "fieldname": "address_deleted_ar",
+   "fieldtype": "Data",
+   "label": "Address Deleted Message (Arabic)",
+   "default": "تم حذف العنوان."
+  },
+  {
+   "fieldname": "total_spend_en",
+   "fieldtype": "Data",
+   "label": "Total Spend Label (English)",
+   "default": "Total spend"
+  },
+  {
+   "fieldname": "total_spend_ar",
+   "fieldtype": "Data",
+   "label": "Total Spend Label (Arabic)",
+   "default": "إجمالي الإنفاق"
+  },
+  {
+   "fieldname": "average_order_en",
+   "fieldtype": "Data",
+   "label": "Average Order Label (English)",
+   "default": "Average order"
+  },
+  {
+   "fieldname": "average_order_ar",
+   "fieldtype": "Data",
+   "label": "Average Order Label (Arabic)",
+   "default": "متوسط الطلب"
+  },
+  {
+   "fieldname": "completed_orders_en",
+   "fieldtype": "Data",
+   "label": "Completed Orders Label (English)",
+   "default": "Completed orders"
+  },
+  {
+   "fieldname": "completed_orders_ar",
+   "fieldtype": "Data",
+   "label": "Completed Orders Label (Arabic)",
+   "default": "طلبات مكتملة"
+  },
+  {
+   "fieldname": "saved_addresses_en",
+   "fieldtype": "Data",
+   "label": "Saved Addresses Label (English)",
+   "default": "Saved addresses"
+  },
+  {
+   "fieldname": "saved_addresses_ar",
+   "fieldtype": "Data",
+   "label": "Saved Addresses Label (Arabic)",
+   "default": "عناويني"
+  },
+  {
+   "fieldname": "add_address_en",
+   "fieldtype": "Data",
+   "label": "Add Address Label (English)",
+   "default": "Add address"
+  },
+  {
+   "fieldname": "add_address_ar",
+   "fieldtype": "Data",
+   "label": "Add Address Label (Arabic)",
+   "default": "إضافة عنوان"
+  },
+  {
+   "fieldname": "edit_address_en",
+   "fieldtype": "Data",
+   "label": "Edit Address Label (English)",
+   "default": "Edit address"
+  },
+  {
+   "fieldname": "edit_address_ar",
+   "fieldtype": "Data",
+   "label": "Edit Address Label (Arabic)",
+   "default": "تعديل العنوان"
+  },
+  {
+   "fieldname": "delete_address_en",
+   "fieldtype": "Data",
+   "label": "Delete Address Label (English)",
+   "default": "Delete"
+  },
+  {
+   "fieldname": "delete_address_ar",
+   "fieldtype": "Data",
+   "label": "Delete Address Label (Arabic)",
+   "default": "حذف"
+  },
+  {
+   "fieldname": "delete_address_confirm_en",
+   "fieldtype": "Data",
+   "label": "Delete Address Confirmation (English)",
+   "default": "Delete this address?"
+  },
+  {
+   "fieldname": "delete_address_confirm_ar",
+   "fieldtype": "Data",
+   "label": "Delete Address Confirmation (Arabic)",
+   "default": "هل تريد حذف هذا العنوان؟"
+  },
+  {
+   "fieldname": "address_line_en",
+   "fieldtype": "Data",
+   "label": "Address Line Label (English)",
+   "default": "Address line"
+  },
+  {
+   "fieldname": "address_line_ar",
+   "fieldtype": "Data",
+   "label": "Address Line Label (Arabic)",
+   "default": "العنوان"
+  },
+  {
+   "fieldname": "country_en",
+   "fieldtype": "Data",
+   "label": "Country Label (English)",
+   "default": "Country"
+  },
+  {
+   "fieldname": "country_ar",
+   "fieldtype": "Data",
+   "label": "Country Label (Arabic)",
+   "default": "الدولة"
+  },
+  {
+   "fieldname": "postcode_en",
+   "fieldtype": "Data",
+   "label": "Postcode Label (English)",
+   "default": "Postcode"
+  },
+  {
+   "fieldname": "postcode_ar",
+   "fieldtype": "Data",
+   "label": "Postcode Label (Arabic)",
+   "default": "الرمز البريدي"
+  },
+  {
+   "fieldname": "no_saved_addresses_en",
+   "fieldtype": "Data",
+   "label": "No Saved Addresses Message (English)",
+   "default": "No saved addresses yet."
+  },
+  {
+   "fieldname": "no_saved_addresses_ar",
+   "fieldtype": "Data",
+   "label": "No Saved Addresses Message (Arabic)",
+   "default": "لا توجد عناوين محفوظة."
+  },
+  {
+   "fieldname": "no_invoices_en",
+   "fieldtype": "Data",
+   "label": "No Invoices Message (English)",
+   "default": "No invoices available."
+  },
+  {
+   "fieldname": "no_invoices_ar",
+   "fieldtype": "Data",
+   "label": "No Invoices Message (Arabic)",
+   "default": "لا توجد فواتير."
+  },
+  {
+   "fieldname": "no_returns_en",
+   "fieldtype": "Data",
+   "label": "No Returns Message (English)",
+   "default": "No return requests yet."
+  },
+  {
+   "fieldname": "no_returns_ar",
+   "fieldtype": "Data",
+   "label": "No Returns Message (Arabic)",
+   "default": "لا توجد طلبات إرجاع."
+  },
+  {
+   "fieldname": "item_added_to_bag_en",
+   "fieldtype": "Data",
+   "label": "Item Added Message (English)",
+   "default": "Item added to your bag."
+  },
+  {
+   "fieldname": "item_added_to_bag_ar",
+   "fieldtype": "Data",
+   "label": "Item Added Message (Arabic)",
+   "default": "تمت إضافة المنتج إلى السلة."
+  },
+  {
+   "fieldname": "new_member_en",
+   "fieldtype": "Data",
+   "label": "New Member Label (English)",
+   "default": "New member"
+  },
+  {
+   "fieldname": "new_member_ar",
+   "fieldtype": "Data",
+   "label": "New Member Label (Arabic)",
+   "default": "عضو جديد"
+  },
+  {
+   "fieldname": "member_discount_en",
+   "fieldtype": "Data",
+   "label": "Member Discount Label (English)",
+   "default": "member discount"
+  },
+  {
+   "fieldname": "member_discount_ar",
+   "fieldtype": "Data",
+   "label": "Member Discount Label (Arabic)",
+   "default": "خصم للأعضاء"
+  },
+  {
+   "fieldname": "quote_status_prefix_en",
+   "fieldtype": "Data",
+   "label": "Quote Status Prefix (English)",
+   "default": "Quote request"
+  },
+  {
+   "fieldname": "quote_status_prefix_ar",
+   "fieldtype": "Data",
+   "label": "Quote Status Prefix (Arabic)",
+   "default": "طلب عرض السعر"
+  },
+  {
+   "fieldname": "quote_kicker_en",
+   "fieldtype": "Data",
+   "label": "Quote Kicker (English)",
+   "default": "Concierge service"
+  },
+  {
+   "fieldname": "quote_kicker_ar",
+   "fieldtype": "Data",
+   "label": "Quote Kicker (Arabic)",
+   "default": "خدمة مخصصة"
+  },
+  {
+   "fieldname": "quote_body_en",
+   "fieldtype": "Data",
+   "label": "Quote Body (English)",
+   "default": "Tell us what you need and our team will prepare a considered proposal."
+  },
+  {
+   "fieldname": "quote_body_ar",
+   "fieldtype": "Data",
+   "label": "Quote Body (Arabic)",
+   "default": "أخبرنا بما تحتاجه وسنعد لك عرضاً مناسباً."
+  },
+  {
+   "fieldname": "quote_name_en",
+   "fieldtype": "Data",
+   "label": "Quote Name Label (English)",
+   "default": "Name"
+  },
+  {
+   "fieldname": "quote_name_ar",
+   "fieldtype": "Data",
+   "label": "Quote Name Label (Arabic)",
+   "default": "الاسم"
+  },
+  {
+   "fieldname": "quote_email_en",
+   "fieldtype": "Data",
+   "label": "Quote Email Label (English)",
+   "default": "Email"
+  },
+  {
+   "fieldname": "quote_email_ar",
+   "fieldtype": "Data",
+   "label": "Quote Email Label (Arabic)",
+   "default": "البريد الإلكتروني"
+  },
+  {
+   "fieldname": "quote_phone_en",
+   "fieldtype": "Data",
+   "label": "Quote Phone Label (English)",
+   "default": "Phone"
+  },
+  {
+   "fieldname": "quote_phone_ar",
+   "fieldtype": "Data",
+   "label": "Quote Phone Label (Arabic)",
+   "default": "الهاتف"
+  },
+  {
+   "fieldname": "quote_company_en",
+   "fieldtype": "Data",
+   "label": "Quote Company Label (English)",
+   "default": "Company or project"
+  },
+  {
+   "fieldname": "quote_company_ar",
+   "fieldtype": "Data",
+   "label": "Quote Company Label (Arabic)",
+   "default": "الشركة أو المشروع"
+  },
+  {
+   "fieldname": "quote_notes_en",
+   "fieldtype": "Data",
+   "label": "Quote Notes Label (English)",
+   "default": "Notes"
+  },
+  {
+   "fieldname": "quote_notes_ar",
+   "fieldtype": "Data",
+   "label": "Quote Notes Label (Arabic)",
+   "default": "ملاحظات"
+  },
+  {
+   "fieldname": "quote_sending_en",
+   "fieldtype": "Data",
+   "label": "Quote Sending Label (English)",
+   "default": "Sending..."
+  },
+  {
+   "fieldname": "quote_sending_ar",
+   "fieldtype": "Data",
+   "label": "Quote Sending Label (Arabic)",
+   "default": "جارٍ الإرسال..."
+  },
+  {
+   "fieldname": "quote_send_en",
+   "fieldtype": "Data",
+   "label": "Quote Send Label (English)",
+   "default": "Send request"
+  },
+  {
+   "fieldname": "quote_send_ar",
+   "fieldtype": "Data",
+   "label": "Quote Send Label (Arabic)",
+   "default": "إرسال الطلب"
+  },
+  {
+   "fieldname": "login_validation_en",
+   "fieldtype": "Data",
+   "label": "Login Validation Message (English)",
+   "default": "Please enter email and phone number"
+  },
+  {
+   "fieldname": "login_validation_ar",
+   "fieldtype": "Data",
+   "label": "Login Validation Message (Arabic)",
+   "default": "الرجاء إدخال البريد الإلكتروني ورقم الهاتف"
+  },
+  {
+   "fieldname": "login_failed_en",
+   "fieldtype": "Data",
+   "label": "Login Failed Message (English)",
+   "default": "Login failed"
+  },
+  {
+   "fieldname": "login_failed_ar",
+   "fieldtype": "Data",
+   "label": "Login Failed Message (Arabic)",
+   "default": "فشل تسجيل الدخول"
+  },
+  {
+   "fieldname": "connection_error_en",
+   "fieldtype": "Data",
+   "label": "Connection Error Message (English)",
+   "default": "Connection error"
+  },
+  {
+   "fieldname": "connection_error_ar",
+   "fieldtype": "Data",
+   "label": "Connection Error Message (Arabic)",
+   "default": "خطأ في الاتصال"
+  },
+  {
+   "fieldname": "customer_sign_in_en",
+   "fieldtype": "Data",
+   "label": "Customer Sign In Heading (English)",
+   "default": "Customer Sign In"
+  },
+  {
+   "fieldname": "customer_sign_in_ar",
+   "fieldtype": "Data",
+   "label": "Customer Sign In Heading (Arabic)",
+   "default": "تسجيل دخول العميل"
+  },
+  {
+   "fieldname": "mobile_phone_en",
+   "fieldtype": "Data",
+   "label": "Mobile Phone Label (English)",
+   "default": "Mobile Phone"
+  },
+  {
+   "fieldname": "mobile_phone_ar",
+   "fieldtype": "Data",
+   "label": "Mobile Phone Label (Arabic)",
+   "default": "رقم الهاتف المحمول"
+  },
+  {
+   "fieldname": "verifying_en",
+   "fieldtype": "Data",
+   "label": "Verifying Label (English)",
+   "default": "Verifying..."
+  },
+  {
+   "fieldname": "verifying_ar",
+   "fieldtype": "Data",
+   "label": "Verifying Label (Arabic)",
+   "default": "جاري التحقق..."
+  },
+  {
+   "fieldname": "continue_en",
+   "fieldtype": "Data",
+   "label": "Continue Label (English)",
+   "default": "Continue"
+  },
+  {
+   "fieldname": "continue_ar",
+   "fieldtype": "Data",
+   "label": "Continue Label (Arabic)",
+   "default": "متابعة الدخول"
+  },
+  {
+   "fieldname": "stripe_secure_hint_en",
+   "fieldtype": "Data",
+   "label": "Stripe Secure Hint (English)",
+   "default": "Payment will be processed securely via Stripe"
+  },
+  {
+   "fieldname": "stripe_secure_hint_ar",
+   "fieldtype": "Data",
+   "label": "Stripe Secure Hint (Arabic)",
+   "default": "سيتم معالجة الدفع بأمان عبر Stripe"
+  },
+  {
+   "fieldname": "pay_now_en",
+   "fieldtype": "Data",
+   "label": "Pay Now Label (English)",
+   "default": "Pay Now"
+  },
+  {
+   "fieldname": "pay_now_ar",
+   "fieldtype": "Data",
+   "label": "Pay Now Label (Arabic)",
+   "default": "ادفع الآن"
+  },
+  {
+   "fieldname": "full_name_placeholder_en",
+   "fieldtype": "Data",
+   "label": "Full Name Placeholder (English)",
+   "default": "Enter your full name"
+  },
+  {
+   "fieldname": "full_name_placeholder_ar",
+   "fieldtype": "Data",
+   "label": "Full Name Placeholder (Arabic)",
+   "default": "أدخل اسمك الكامل"
+  },
+  {
+   "fieldname": "required_fields_en",
+   "fieldtype": "Data",
+   "label": "Required Fields Validation (English)",
+   "default": "Please complete all required fields"
+  },
+  {
+   "fieldname": "required_fields_ar",
+   "fieldtype": "Data",
+   "label": "Required Fields Validation (Arabic)",
+   "default": "يرجى إكمال جميع الحقول المطلوبة"
+  },
+  {
+   "fieldname": "valid_fields_en",
+   "fieldtype": "Data",
+   "label": "Valid Fields Validation (English)",
+   "default": "Please ensure all entered data is valid"
+  },
+  {
+   "fieldname": "valid_fields_ar",
+   "fieldtype": "Data",
+   "label": "Valid Fields Validation (Arabic)",
+   "default": "يرجى التأكد من صحة البيانات المدخلة"
+  },
+  {
+   "fieldname": "payment_start_error_en",
+   "fieldtype": "Data",
+   "label": "Payment Start Error (English)",
+   "default": "Unable to start the online payment."
+  },
+  {
+   "fieldname": "payment_start_error_ar",
+   "fieldtype": "Data",
+   "label": "Payment Start Error (Arabic)",
+   "default": "تعذر بدء عملية الدفع الإلكتروني."
+  },
+  {
+   "fieldname": "reorder_en",
+   "fieldtype": "Data",
+   "label": "Reorder Label (English)",
+   "default": "Reorder"
+  },
+  {
+   "fieldname": "reorder_ar",
+   "fieldtype": "Data",
+   "label": "Reorder Label (Arabic)",
+   "default": "إعادة الطلب"
+  },
+  {
+   "fieldname": "quote_title_en",
+   "fieldtype": "Data",
+   "label": "Quote Request Title (English)",
+   "default": "Request a tailored quote"
+  },
+  {
+   "fieldname": "quote_title_ar",
+   "fieldtype": "Data",
+   "label": "Quote Request Title (Arabic)",
+   "default": "اطلب عرض سعر مخصص"
   }
  ],
  "issingle": 1,

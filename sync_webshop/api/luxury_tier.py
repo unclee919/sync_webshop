@@ -5,17 +5,17 @@ from sync_webshop.api.utils import full_url, set_cors_headers
 def get_luxury_settings():
     set_cors_headers()
     settings = {}
-    if frappe.db.exists("DocType", "Webshop Sensory Settings"):
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
         try:
-            doc = frappe.get_single("Webshop Sensory Settings")
+            doc = frappe.get_single("Webshop Content Settings")
             settings = {
-                "enabled": int(doc.get("enabled", 1)),
-                "magnetic_cursor_enabled": int(doc.get("magnetic_cursor_enabled", 1)),
-                "cinematic_transitions_enabled": int(doc.get("cinematic_transitions_enabled", 1)),
-                "circadian_theme_enabled": int(doc.get("circadian_theme_enabled", 1)),
-                "predictive_prefetch_enabled": int(doc.get("predictive_prefetch_enabled", 1)),
-                "webxr_ar_enabled": int(doc.get("webxr_ar_enabled", 1)),
-                "exploder_3d_enabled": int(doc.get("exploder_3d_enabled", 1)),
+                "enabled": int(doc.get("sensory_enabled", 1)),
+                "magnetic_cursor_enabled": int(doc.get("sensory_magnetic_cursor_enabled", 1)),
+                "cinematic_transitions_enabled": int(doc.get("sensory_cinematic_transitions_enabled", 1)),
+                "circadian_theme_enabled": int(doc.get("sensory_circadian_theme_enabled", 1)),
+                "predictive_prefetch_enabled": int(doc.get("sensory_predictive_prefetch_enabled", 1)),
+                "webxr_ar_enabled": int(doc.get("sensory_webxr_ar_enabled", 1)),
+                "exploder_3d_enabled": int(doc.get("sensory_exploder_3d_enabled", 1)),
             }
         except Exception:
             pass

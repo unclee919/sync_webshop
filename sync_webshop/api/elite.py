@@ -6,37 +6,37 @@ def get_elite_settings():
     """Returns all Desk-configured elite settings for AI Vision, Marketplaces, Regional Payments, and PWA."""
     set_cors_headers()
     try:
-        ai_settings = frappe.get_single("Webshop AI Vision Settings")
+        ai_settings = frappe.get_single("Webshop Content Settings")
     except Exception:
         ai_settings = frappe._dict({"visual_search_enabled": 1, "auto_tagging_enabled": 1, "nlp_enabled": 1})
 
     try:
-        market_settings = frappe.get_single("Webshop Marketplace Settings")
+        market_settings = frappe.get_single("Webshop Content Settings")
     except Exception:
-        market_settings = frappe._dict({"amazon_sa_enabled": 0, "noon_enabled": 0})
+        market_settings = frappe._dict({"marketplace_amazon_sa_enabled": 0, "marketplace_noon_enabled": 0})
 
     try:
-        payment_settings = frappe.get_single("Webshop Regional Payment Settings")
+        payment_settings = frappe.get_single("Webshop Payment Settings")
     except Exception:
         payment_settings = frappe._dict({"tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1})
 
     try:
-        pwa_settings = frappe.get_single("Webshop PWA Settings")
+        pwa_settings = frappe.get_single("Webshop Content Settings")
     except Exception:
         pwa_settings = frappe._dict({"pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A"})
 
     return {
         "ai_vision": {
-            "visual_search_enabled": ai_settings.get("visual_search_enabled", 1),
-            "auto_tagging_enabled": ai_settings.get("auto_tagging_enabled", 1),
-            "nlp_enabled": ai_settings.get("nlp_enabled", 1),
-            "welcome_message_en": ai_settings.get("welcome_message_en"),
-            "welcome_message_ar": ai_settings.get("welcome_message_ar"),
+            "visual_search_enabled": ai_settings.get("ai_vision_visual_search_enabled", 1),
+            "auto_tagging_enabled": ai_settings.get("ai_vision_auto_tagging_enabled", 1),
+            "nlp_enabled": ai_settings.get("ai_vision_nlp_enabled", 1),
+            "welcome_message_en": ai_settings.get("ai_vision_welcome_message_en"),
+            "welcome_message_ar": ai_settings.get("ai_vision_welcome_message_ar"),
         },
         "marketplaces": {
-            "amazon_sa_enabled": market_settings.get("amazon_sa_enabled", 0),
-            "noon_enabled": market_settings.get("noon_enabled", 0),
-            "sync_interval_minutes": market_settings.get("sync_interval_minutes", 30),
+            "amazon_sa_enabled": market_settings.get("marketplace_amazon_sa_enabled", 0),
+            "noon_enabled": market_settings.get("marketplace_noon_enabled", 0),
+            "sync_interval_minutes": market_settings.get("marketplace_sync_interval_minutes", 30),
         },
         "regional_payments": {
             "tabby_enabled": payment_settings.get("tabby_enabled", 1),
@@ -133,8 +133,8 @@ def auto_tag_item(item_code):
     """Populate business-neutral catalog tags from item metadata; all fields remain editable in Desk."""
     if frappe.session.user == "Guest":
         frappe.throw("Authentication is required for product auto-tagging.")
-    settings = frappe.get_single("Webshop AI Vision Settings")
-    if not settings.get("auto_tagging_enabled", 1):
+    settings = frappe.get_single("Webshop Content Settings")
+    if not settings.get("ai_vision_auto_tagging_enabled", 1):
         frappe.throw("AI auto-tagging is disabled in Desk settings.")
     item = frappe.get_doc("Item", item_code)
     source = " ".join(str(item.get(field) or "") for field in ["item_name", "description", "item_group"]).lower()
@@ -155,13 +155,13 @@ def sync_marketplaces():
     set_cors_headers()
     if frappe.session.user == "Guest":
         frappe.throw("Unauthorized marketplace sync.")
-    settings = frappe.get_single("Webshop Marketplace Settings")
+    settings = frappe.get_single("Webshop Content Settings")
     channels = []
-    if settings.get("amazon_sa_enabled"):
+    if settings.get("marketplace_amazon_sa_enabled"):
         channels.append("Amazon Saudi")
-    if settings.get("noon_enabled"):
+    if settings.get("marketplace_noon_enabled"):
         channels.append("Noon")
-    credentials_ready = bool((settings.get_password("amazon_mws_token") if settings.get("amazon_mws_token") else "") or (settings.get_password("noon_api_key") if settings.get("noon_api_key") else ""))
+    credentials_ready = bool((settings.get_password("marketplace_amazon_mws_token") if settings.get("marketplace_amazon_mws_token") else "") or (settings.get_password("marketplace_noon_api_key") if settings.get("marketplace_noon_api_key") else ""))
     return {"ok": True, "status": "ready" if channels and credentials_ready else "safe_mode", "channels": channels, "credentials_ready": credentials_ready, "message": "Sync plan prepared. No marketplace order or inventory write is performed until credentials and explicit live mode are configured in Desk."}
 
 
@@ -169,7 +169,7 @@ def sync_marketplaces():
 def get_regional_payment_options():
     """Return enabled regional payment options without exposing credentials or performing capture."""
     set_cors_headers()
-    settings = frappe.get_single("Webshop Regional Payment Settings")
+    settings = frappe.get_single("Webshop Payment Settings")
     options = []
     for key, fieldname, label_en, label_ar in [
         ("tabby", "tabby_enabled", "Tabby", "تابي"),
@@ -187,7 +187,7 @@ def create_regional_payment_session(gateway, amount, currency="SAR", order_refer
     """Create a non-capturing regional payment handoff; capture remains delegated to the configured provider."""
     if frappe.session.user == "Guest":
         frappe.throw("Authentication is required to initialize a payment session.")
-    settings = frappe.get_single("Webshop Regional Payment Settings")
+    settings = frappe.get_single("Webshop Payment Settings")
     enabled = {"tabby": "tabby_enabled", "tamara": "tamara_enabled", "mada": "mada_enabled", "apple_pay": "apple_pay_enabled"}
     if gateway not in enabled or not settings.get(enabled[gateway]):
         frappe.throw("This regional payment method is disabled in Desk.")
@@ -197,17 +197,17 @@ def create_regional_payment_session(gateway, amount, currency="SAR", order_refer
 
 def run_scheduled_marketplace_sync():
     """Scheduled hook entrypoint; safe by default and ready for provider adapters once credentials are configured."""
-    if not frappe.db.exists("DocType", "Webshop Marketplace Settings"):
+    if not frappe.db.exists("DocType", "Webshop Content Settings"):
         return {"status": "disabled", "reason": "settings_doctype_missing"}
-    settings = frappe.get_single("Webshop Marketplace Settings")
+    settings = frappe.get_single("Webshop Content Settings")
     channels = []
-    if settings.get("amazon_sa_enabled"):
+    if settings.get("marketplace_amazon_sa_enabled"):
         channels.append("Amazon Saudi")
-    if settings.get("noon_enabled"):
+    if settings.get("marketplace_noon_enabled"):
         channels.append("Noon")
     if not channels:
         return {"status": "disabled", "reason": "no_channels_enabled"}
-    interval = max(5, int(settings.get("sync_interval_minutes") or 30))
+    interval = max(5, int(settings.get("marketplace_sync_interval_minutes") or 30))
     cache = frappe.cache()
     last_run = cache.get_value("sync_webshop_marketplace_last_run")
     import time

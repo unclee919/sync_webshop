@@ -1,4 +1,5 @@
 import frappe
+from frappe.utils import flt
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from sync_webshop.api.utils import clear_webshop_cache
 from sync_webshop.api.master_tier import seed_master_tier
@@ -174,12 +175,8 @@ def run_setup():
         })
         doc.insert(ignore_permissions=True)
         
-    # Create Help Guide content
-    if not frappe.db.exists("Webshop Help Guide", "Webshop Help Guide"):
-        doc = frappe.get_doc({"doctype": "Webshop Help Guide"})
-        doc.insert(ignore_permissions=True)
-    
-    help_doc = frappe.get_single("Webshop Help Guide")
+    # Seed Help Guide content inside canonical Content Settings
+    help_doc = frappe.get_single("Webshop Content Settings")
     help_doc.help_content = """
         <div dir="rtl" style="padding: 20px; font-family: Cairo, sans-serif;">
             <h2 style="color: #21504C; border-bottom: 2px solid #84B082; padding-bottom: 10px;">دليل أنواع الحقول في المتجر</h2>
@@ -221,10 +218,8 @@ def run_setup():
 
     # Seed safe defaults for every new Elite settings Single. Secrets remain empty and are entered only in Desk.
     elite_defaults = {
-        "Webshop AI Vision Settings": {"visual_search_enabled": 1, "auto_tagging_enabled": 1, "ai_model_name": "gpt-5-mini", "confidence_threshold": 0.85, "nlp_enabled": 1, "welcome_message_en": "Hello! I am your AI shopping assistant. How can I help you discover the right product?", "welcome_message_ar": "مرحباً! أنا مساعد التسوق الذكي. كيف يمكنني مساعدتك في اكتشاف المنتج المناسب؟"},
-        "Webshop Marketplace Settings": {"amazon_sa_enabled": 0, "noon_enabled": 0, "sync_interval_minutes": 30},
-        "Webshop Regional Payment Settings": {"regional_live_mode": 0, "tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1},
-        "Webshop PWA Settings": {"pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A", "offline_message_en": "You are currently offline. Browsing cached catalog.", "offline_message_ar": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ."},
+        "Webshop Content Settings": {"ai_vision_visual_search_enabled": 1, "ai_vision_auto_tagging_enabled": 1, "ai_vision_ai_model_name": "gpt-5-mini", "ai_vision_confidence_threshold": 0.85, "ai_vision_nlp_enabled": 1, "ai_vision_welcome_message_en": "Hello! I am your AI shopping assistant. How can I help you discover the right product?", "ai_vision_welcome_message_ar": "مرحباً! أنا مساعد التسوق الذكي. كيف يمكنني مساعدتك في اكتشاف المنتج المناسب؟", "pwa_enabled": 1, "app_short_name": "Sync Webshop", "theme_color": "#173F3A", "offline_message_en": "You are currently offline. Browsing cached catalog.", "offline_message_ar": "أنت غير متصل بالإنترنت حالياً. يتم تصفح الكتالوج المحفوظ.", "marketplace_amazon_sa_enabled": 0, "marketplace_noon_enabled": 0, "marketplace_sync_interval_minutes": 30},
+        "Webshop Payment Settings": {"regional_live_mode": 0, "tabby_enabled": 1, "tamara_enabled": 1, "mada_enabled": 1, "apple_pay_enabled": 1},
     }
     for doctype, values in elite_defaults.items():
         if frappe.db.exists("DocType", doctype):
@@ -238,18 +233,16 @@ def run_setup():
                 doc.save(ignore_permissions=True)
 
     master_defaults = {
-        "Webshop Landing Page Builder": {"enabled": 1, "hero_heading_en": "Small details. Better everyday living.", "hero_heading_ar": "تفاصيل صغيرة. حياة يومية أفضل.", "featured_grid_title_en": "The edit, in moments", "featured_grid_title_ar": "مختارات في لحظات"},
-        "Webshop Subscription Settings": {"enabled": 1, "discount_percent": 10, "intervals": "Monthly,Every 2 Months,Quarterly"},
-        "Webshop Courier Settings": {"provider": "Manual", "auto_waybill": 0},
-        "Webshop Return Policy": {"allowed_days": 14, "policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع."},
-        "Webshop Currency Settings": {"auto_detect": 1, "supported_currencies": "SAR,AED,USD,EUR", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667, "EUR": 0.245}'},
+
+
+        "Webshop Content Settings": {"return_window_days": 14, "return_window_policy_text_en": "Items may be returned within 14 days when unused and in resalable condition.", "return_window_policy_text_ar": "يمكن إرجاع المنتجات خلال 14 يوماً إذا كانت غير مستخدمة وبحالة قابلة لإعادة البيع.", "landing_builder_enabled": 1, "landing_hero_heading_en": "Small details. Better everyday living.", "landing_hero_heading_ar": "تفاصيل صغيرة. حياة يومية أفضل.", "landing_featured_grid_title_en": "The edit, in moments", "landing_featured_grid_title_ar": "مختارات في لحظات", "subscription_enabled": 1, "subscription_discount_percent": 10, "subscription_intervals": "Monthly,Every 2 Months,Quarterly", "courier_provider": "Manual", "courier_auto_waybill": 0, "currency_auto_detect": 1, "supported_currencies": "SAR,AED,USD,EUR", "exchange_rates_json": '{"SAR": 1, "AED": 0.98, "USD": 0.2667, "EUR": 0.245}'},
     }
     for doctype, values in master_defaults.items():
         if frappe.db.exists("DocType", doctype):
             doc = frappe.get_single(doctype)
             changed = False
             for fieldname, value in values.items():
-                placeholder_rate = doctype == "Webshop Currency Settings" and fieldname == "exchange_rates_json" and str(doc.get(fieldname) or "").replace(" ", "") in ("{\"SAR\":1}", "")
+                placeholder_rate = doctype == "Webshop Content Settings" and fieldname == "exchange_rates_json" and str(doc.get(fieldname) or "").replace(" ", "") in ("{\"SAR\":1}", "")
                 if not doc.get(fieldname) or placeholder_rate:
                     doc.set(fieldname, value)
                     changed = True
@@ -261,44 +254,101 @@ def run_setup():
     if frappe.db.exists("DocType", "Webshop Storefront Profile") and not frappe.db.exists("Webshop Storefront Profile", {"store_key": "sync-coffee-house"}):
         frappe.get_doc({"doctype": "Webshop Storefront Profile", "name": "Sync Coffee House", "profile_name": "Sync Coffee House", "store_key": "sync-coffee-house", "enabled": 1, "is_default": 1, "label_en": "Sync Coffee House", "label_ar": "مقهى سينك", "accent_color": "#C5A059"}).insert(ignore_permissions=True)
 
-    enterprise_defaults = {
-        "Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
-        "Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
-        "Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
-        "Webshop Flash Sale Settings": {"flash_sale_enabled": 1, "scarcity_threshold": 5, "discount_percent": 20},
-        "Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
-        "Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
-        "Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
+    feature_defaults = {
+        "auto_translate_enabled": 1,
+        "intelligent_merchandising": 1,
+        "voice_actions_enabled": 1,
+        "b2b_enabled": 1,
+        "volume_pricing_enabled": 1,
+        "corporate_credit_enabled": 1,
+        "quick_order_enabled": 1,
+        "live_stream_enabled": 0,
+        "stream_title_en": "Live Tasting & Masterclass",
+        "stream_title_ar": "جلسة تذوق حية وورشة عمل",
+        "abandoned_cart_enabled": 1,
+        "delay_hours": 2,
+        "coupon_discount": 10,
+        "fraud_shield_enabled": 1,
+        "max_order_amount": 5000,
+        "edge_cache_enabled": 1,
+        "auto_healing_enabled": 1,
     }
-    for doctype, values in enterprise_defaults.items():
-        if frappe.db.exists("DocType", doctype):
-            doc = frappe.get_single(doctype)
-            changed = False
-            for fieldname, value in values.items():
-                if not doc.get(fieldname):
-                    doc.set(fieldname, value)
-                    changed = True
-            if changed:
-                doc.save(ignore_permissions=True)
-    if frappe.db.exists("DocType", "Webshop Volume Pricing Rule") and not frappe.db.exists("Webshop Volume Pricing Rule", {"item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10}):
-        frappe.get_doc({"doctype": "Webshop Volume Pricing Rule", "item_code": "COFFEE-ETHIOPIA-001", "minimum_qty": 10, "discount_percent": 5, "enabled": 1}).insert(ignore_permissions=True)
-    if frappe.db.exists("DocType", "Webshop Flash Sale Item") and not frappe.db.exists("Webshop Flash Sale Item", {"item_code": "COFFEE-HOUSE-001"}):
-        frappe.get_doc({"doctype": "Webshop Flash Sale Item", "item_code": "COFFEE-HOUSE-001", "discount_percent": 20, "enabled": 1}).insert(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
+        feature_doc = frappe.get_single("Webshop Content Settings")
+        changed = False
+        for fieldname, value in feature_defaults.items():
+            if not feature_doc.get(fieldname):
+                feature_doc.set(fieldname, value)
+                changed = True
+        if changed:
+            feature_doc.save(ignore_permissions=True)
+    else:
+        legacy_feature_defaults = {
+            "Webshop Enterprise AI Settings": {"auto_translate_enabled": 1, "intelligent_merchandising": 1, "voice_actions_enabled": 1},
+            "Webshop B2B Wholesale Settings": {"b2b_enabled": 1, "volume_pricing_enabled": 1, "corporate_credit_enabled": 1, "quick_order_enabled": 1},
+            "Webshop Live Shopping Settings": {"live_stream_enabled": 0, "stream_title_en": "Live Tasting & Masterclass", "stream_title_ar": "جلسة تذوق حية وورشة عمل"},
+            "Webshop Recovery Settings": {"abandoned_cart_enabled": 1, "delay_hours": 2, "coupon_discount": 10},
+            "Webshop Fraud Shield Settings": {"fraud_shield_enabled": 1, "max_order_amount": 5000},
+            "Webshop Infrastructure Settings": {"edge_cache_enabled": 1, "auto_healing_enabled": 1},
+        }
+        for doctype, values in legacy_feature_defaults.items():
+            if frappe.db.exists("DocType", doctype):
+                doc = frappe.get_single(doctype)
+                changed = False
+                for fieldname, value in values.items():
+                    if not doc.get(fieldname):
+                        doc.set(fieldname, value)
+                        changed = True
+                if changed:
+                    doc.save(ignore_permissions=True)
+    if frappe.db.exists("DocType", "Pricing Rule"):
+        volume_rule_name = None
+        candidate_names = frappe.get_all(
+            "Pricing Rule Item Code",
+            filters={"item_code": "COFFEE-ETHIOPIA-001"},
+            pluck="parent",
+            limit_page_length=100,
+        )
+        for candidate in candidate_names:
+            values = frappe.db.get_value("Pricing Rule", candidate, ["min_qty", "selling", "disable"], as_dict=True)
+            if values and flt(values.min_qty) == 10 and values.selling and not values.disable:
+                volume_rule_name = candidate
+                break
+        if not volume_rule_name:
+            volume_rule = frappe.get_doc({
+                "doctype": "Pricing Rule",
+                "name": "Sync Volume Pricing - Coffee Ethiopia",
+                "apply_on": "Item Code",
+                "price_or_product_discount": "Price",
+                "selling": 1,
+                "currency": frappe.db.get_value("Price List", "Standard Selling", "currency") or "SAR",
+                "min_qty": 10,
+                "rate_or_discount": "Discount Percentage",
+                "discount_percentage": 5,
+                "for_price_list": "Standard Selling" if frappe.db.exists("Price List", "Standard Selling") else None,
+            })
+            volume_rule.append("items", {"item_code": "COFFEE-ETHIOPIA-001"})
+            volume_rule.insert(ignore_permissions=True)
+            volume_rule_name = volume_rule.name
+        if frappe.db.exists("DocType", "Webshop Content Settings") and not frappe.db.get_single_value("Webshop Content Settings", "volume_pricing_rule"):
+            frappe.db.set_single_value("Webshop Content Settings", "volume_pricing_rule", volume_rule_name)
     if frappe.db.exists("DocType", "Webshop Fraud Rule") and not frappe.db.exists("Webshop Fraud Rule", {"rule_key": "High Value"}):
         frappe.get_doc({"doctype": "Webshop Fraud Rule", "rule_key": "High Value", "threshold": 5000, "action": "Review", "enabled": 1}).insert(ignore_permissions=True)
 
     ecosystem_defaults = {
-        "Webshop Ecosystem AI Settings": {"rag_support_enabled": 1, "demand_forecaster_enabled": 1, "marketing_hub_enabled": 1},
-        "Webshop Marketplace Vendor Settings": {"multi_vendor_enabled": 1, "commission_percent": 15.0, "affiliate_enabled": 1},
-        "Webshop Fintech Settings": {"gift_cards_enabled": 1, "subscription_box_enabled": 1},
-        "Webshop Omnichannel Settings": {"bopis_enabled": 1, "kiosk_mode_enabled": 1},
+        "Webshop Content Settings": {
+            "ecosystem_rag_support_enabled": 1,
+            "ecosystem_demand_forecaster_enabled": 1,
+            "ecosystem_marketing_hub_enabled": 1,
+            "fintech_gift_cards_enabled": 1,
+            "fintech_subscription_box_enabled": 1,
+            "omnichannel_bopis_enabled": 1,
+            "omnichannel_kiosk_mode_enabled": 1,
+            "marketplace_multi_vendor_enabled": 1,
+            "marketplace_commission_percent": 15.0,
+            "marketplace_affiliate_enabled": 1,
+        },
     }
-    for doctype, values in ecosystem_defaults.items():
-        if frappe.db.exists("DocType", doctype):
-            doc = frappe.get_single(doctype)
-            for fieldname, value in values.items():
-                doc.set(fieldname, value)
-            doc.save(ignore_permissions=True)
     for doctype, values in ecosystem_defaults.items():
         if frappe.db.exists("DocType", doctype):
             doc = frappe.get_single(doctype)
@@ -311,82 +361,80 @@ def run_setup():
                 doc.save(ignore_permissions=True)
 
     dynamic_pages_defaults = {
-    "enabled": 1,
-    "about_enabled": 1,
-    "about_show_in_nav": 1,
-    "about_label_en": "About us",
-    "about_label_ar": "من نحن",
-    "policy_enabled": 1,
-    "policy_show_in_nav": 1,
-    "policy_label_en": "Our policy",
-    "policy_label_ar": "سياساتنا",
-    "articles_enabled": 1,
-    "articles_show_in_nav": 1,
-    "articles_label_en": "Articles",
-    "articles_label_ar": "المقالات",
-    "qa_enabled": 1,
-    "qa_show_in_nav": 1,
-    "qa_label_en": "Q&A",
-    "qa_label_ar": "الأسئلة والأجوبة",
-    "seo_description_en": "Discover our story, policies, and helpful answers from the Sync Webshop team.",
-    "seo_description_ar": "اكتشف قصتنا وسياساتنا وإجاباتنا المفيدة من فريق متجر سينك.",
-}
-    if frappe.db.exists("DocType", "Webshop Dynamic Pages Settings"):
-        doc = frappe.get_single("Webshop Dynamic Pages Settings")
+        "dynamic_pages_enabled": 1,
+        "dynamic_about_enabled": 1,
+        "dynamic_about_show_in_nav": 1,
+        "dynamic_about_label_en": "About us",
+        "dynamic_about_label_ar": "من نحن",
+        "dynamic_policy_enabled": 1,
+        "dynamic_policy_show_in_nav": 1,
+        "dynamic_policy_label_en": "Our policy",
+        "dynamic_policy_label_ar": "سياساتنا",
+        "dynamic_articles_enabled": 1,
+        "dynamic_articles_show_in_nav": 1,
+        "dynamic_articles_label_en": "Articles",
+        "dynamic_articles_label_ar": "المقالات",
+        "dynamic_qa_enabled": 1,
+        "dynamic_qa_show_in_nav": 1,
+        "dynamic_qa_label_en": "Q&A",
+        "dynamic_qa_label_ar": "الأسئلة والأجوبة",
+        "dynamic_seo_description_en": "Discover our story, policies, and helpful answers from the Sync Webshop team.",
+        "dynamic_seo_description_ar": "اكتشف قصتنا وسياساتنا وإجاباتنا المفيدة من فريق متجر سينك.",
+    }
+    content_settings = frappe.get_single("Webshop Content Settings") if frappe.db.exists("DocType", "Webshop Content Settings") else None
+    if content_settings:
         changed = False
         for fieldname, value in dynamic_pages_defaults.items():
-            if doc.get(fieldname) is None or doc.get(fieldname) == "":
-                doc.set(fieldname, value)
+            if content_settings.get(fieldname) is None or content_settings.get(fieldname) == "":
+                content_settings.set(fieldname, value)
                 changed = True
-
         if changed:
-            doc.save(ignore_permissions=True)
+            content_settings.save(ignore_permissions=True)
 
     about_defaults = {
-        "title_en": "About Our Brand",
-        "title_ar": "عن علامتنا التجارية",
-        "subtitle_en": "A considered way to discover what belongs in your everyday.",
-        "subtitle_ar": "طريقة مدروسة لاكتشاف ما يناسب تفاصيل يومك.",
-        "content_en": "<p>We curate thoughtfully selected essentials for modern living, with a focus on quality, clarity, and a warmer way to shop.</p>",
-        "content_ar": "<p>نختار بعناية فائقة أساسيات الحياة العصرية، مع التركيز على الجودة والوضوح وتجربة تسوق أكثر دفئاً.</p>",
+        "about_title_en": "About Our Brand",
+        "about_title_ar": "عن علامتنا التجارية",
+        "about_subtitle_en": "A considered way to discover what belongs in your everyday.",
+        "about_subtitle_ar": "طريقة مدروسة لاكتشاف ما يناسب تفاصيل يومك.",
+        "about_content_en": "<p>We curate thoughtfully selected essentials for modern living, with a focus on quality, clarity, and a warmer way to shop.</p>",
+        "about_content_ar": "<p>نختار بعناية فائقة أساسيات الحياة العصرية، مع التركيز على الجودة والوضوح وتجربة تسوق أكثر دفئاً.</p>",
     }
-    if frappe.db.exists("DocType", "Webshop About Settings"):
-        doc = frappe.get_single("Webshop About Settings")
+    content_settings = frappe.get_single("Webshop Content Settings") if frappe.db.exists("DocType", "Webshop Content Settings") else None
+    if content_settings:
         changed = False
         for fieldname, value in about_defaults.items():
-            if not doc.get(fieldname):
-                doc.set(fieldname, value)
+            if not content_settings.get(fieldname):
+                content_settings.set(fieldname, value)
                 changed = True
         if changed:
-            doc.save(ignore_permissions=True)
+            content_settings.save(ignore_permissions=True)
 
     policy_defaults = {
-        "title_en": "Our Policy",
-        "title_ar": "سياساتنا",
-        "subtitle_en": "Clear commitments for every order and every customer.",
-        "subtitle_ar": "التزامات واضحة لكل طلب ولكل عميل.",
-        "shipping_title_en": "Shipping",
-        "shipping_title_ar": "الشحن",
-        "shipping_policy_en": "<p>Reliable regional shipping with clear tracking. Delivery estimates and fees are shown before you place an order.</p>",
-        "shipping_policy_ar": "<p>شحن موثوق في جميع أنحاء المنطقة مع تتبع دقيق. تظهر تقديرات وعمولة التوصيل قبل إتمام الطلب.</p>",
-        "return_title_en": "Returns & Exchanges",
-        "return_title_ar": "الإرجاع والاستبدال",
-        "return_policy_en": "<p>Contact our team within 14 days for unused items in their original condition. We will guide you through the next step.</p>",
-        "return_policy_ar": "<p>تواصل مع فريقنا خلال 14 يوماً للأصناف غير المستخدمة وبحالتها الأصلية، وسنرشدك إلى الخطوة التالية.</p>",
-        "privacy_title_en": "Privacy",
-        "privacy_title_ar": "الخصوصية",
-        "privacy_policy_en": "<p>We use customer data only to provide, secure, and improve the shopping experience. We do not expose sensitive information to the browser assistant.</p>",
-        "privacy_policy_ar": "<p>نستخدم بيانات العملاء فقط لتقديم تجربة التسوق وتأمينها وتحسينها، ولا نعرض المعلومات الحساسة على مساعد المتصفح.</p>",
+        "policy_page_title_en": "Our Policy",
+        "policy_page_title_ar": "سياساتنا",
+        "policy_page_subtitle_en": "Clear commitments for every order and every customer.",
+        "policy_page_subtitle_ar": "التزامات واضحة لكل طلب ولكل عميل.",
+        "shipping_policy_title_en": "Shipping",
+        "shipping_policy_title_ar": "الشحن",
+        "shipping_policy_text_en": "<p>Reliable regional shipping with clear tracking. Delivery estimates and fees are shown before you place an order.</p>",
+        "shipping_policy_text_ar": "<p>شحن موثوق في جميع أنحاء المنطقة مع تتبع دقيق. تظهر تقديرات وعمولة التوصيل قبل إتمام الطلب.</p>",
+        "returns_policy_title_en": "Returns & Exchanges",
+        "returns_policy_title_ar": "الإرجاع والاستبدال",
+        "returns_policy_text_en": "<p>Contact our team within 14 days for unused items in their original condition. We will guide you through the next step.</p>",
+        "returns_policy_text_ar": "<p>تواصل مع فريقنا خلال 14 يوماً للأصناف غير المستخدمة وبحالتها الأصلية، وسنرشدك إلى الخطوة التالية.</p>",
+        "privacy_policy_title_en": "Privacy",
+        "privacy_policy_title_ar": "الخصوصية",
+        "privacy_policy_text_en": "<p>We use customer data only to provide, secure, and improve the shopping experience. We do not expose sensitive information to the browser assistant.</p>",
+        "privacy_policy_text_ar": "<p>نستخدم بيانات العملاء فقط لتقديم تجربة التسوق وتأمينها وتحسينها، ولا نعرض المعلومات الحساسة على مساعد المتصفح.</p>",
     }
-    if frappe.db.exists("DocType", "Webshop Policy Settings"):
-        doc = frappe.get_single("Webshop Policy Settings")
+    if content_settings:
         changed = False
         for fieldname, value in policy_defaults.items():
-            if not doc.get(fieldname):
-                doc.set(fieldname, value)
+            if not content_settings.get(fieldname):
+                content_settings.set(fieldname, value)
                 changed = True
         if changed:
-            doc.save(ignore_permissions=True)
+            content_settings.save(ignore_permissions=True)
 
     if frappe.db.exists("DocType", "Webshop Gift Card") and not frappe.db.exists("Webshop Gift Card", {"code": "SYNC-ELITE-2026"}):
 
@@ -445,7 +493,6 @@ def seed_phase3_demo():
             "membership_title_en": "Your membership",
             "membership_title_ar": "عضويتك",
             "presence_material_studio_enabled": 1,
-            "style_quiz_enabled": 1,
             "quote_requests_enabled": 1,
             "quote_request_title_en": "Request a tailored quote",
             "quote_request_title_ar": "اطلب عرض سعر مخصص",
@@ -458,14 +505,14 @@ def seed_phase3_demo():
                 settings.set(fieldname, value)
         settings.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Paymob Settings"):
-        paymob = frappe.get_single("Webshop Paymob Settings")
+    if frappe.db.exists("DocType", "Webshop Payment Settings"):
+        paymob = frappe.get_single("Webshop Payment Settings")
         for fieldname, value in {
-            "online_payment_enabled": 1,
-            "online_label_en": "Online payment",
-            "online_label_ar": "الدفع الإلكتروني",
-            "online_note_en": "Pay securely with the methods enabled in Paymob.",
-            "online_note_ar": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
+            "paymob_online_payment_enabled": 1,
+            "paymob_online_label_en": "Online payment",
+            "paymob_online_label_ar": "الدفع الإلكتروني",
+            "paymob_online_note_en": "Pay securely with the methods enabled in Paymob.",
+            "paymob_online_note_ar": "ادفع بأمان باستخدام طرق الدفع المفعلة في Paymob.",
         }.items():
             if paymob.meta.has_field(fieldname):
                 paymob.set(fieldname, value)
@@ -484,20 +531,11 @@ def seed_phase3_demo():
             doc.enabled = 1
             doc.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Tracking Settings"):
-        tracking = frappe.get_single("Webshop Tracking Settings")
-        tracking.update({"enabled": 1, "map_enabled": 1, "courier_name": "Configured courier", "tracking_url_template": "", "title_en": "Your delivery, in view", "title_ar": "شاهد مسار توصيلك"})
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
+        tracking = frappe.get_single("Webshop Content Settings")
+        tracking.update({"tracking_enabled": 1, "tracking_map_enabled": 1, "tracking_courier_name": "Configured courier", "tracking_url_template": "", "tracking_title_en": "Your delivery, in view", "tracking_title_ar": "شاهد مسار توصيلك"})
         tracking.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
-        questions = [
-            {"question_key": "mood", "question_en": "Which mood feels most like your space?", "question_ar": "أي أجواء تشبه مساحتك أكثر؟", "options_json": '[{"label_en":"Quiet and natural","label_ar":"هادئة وطبيعية","tag":"natural"},{"label_en":"Warm and expressive","label_ar":"دافئة ومعبرة","tag":"warm"},{"label_en":"Clean and modern","label_ar":"نظيفة وعصرية","tag":"modern"}]', "sort_order": 10},
-            {"question_key": "pace", "question_en": "What do you value most?", "question_ar": "ما الذي تقدره أكثر؟", "options_json": '[{"label_en":"Daily ease","label_ar":"سهولة يومية","tag":"everyday"},{"label_en":"Craft and detail","label_ar":"الحرفة والتفاصيل","tag":"crafted"},{"label_en":"A bold point of view","label_ar":"رؤية جريئة","tag":"statement"}]', "sort_order": 20},
-        ]
-        for row in questions:
-            existing = frappe.db.get_value("Webshop Style Quiz Question", {"question_key": row["question_key"]}, "name")
-            doc = frappe.get_doc("Webshop Style Quiz Question", existing) if existing else frappe.new_doc("Webshop Style Quiz Question")
-            doc.update(row); doc.enabled = 1; doc.save(ignore_permissions=True)
 
     if frappe.db.exists("DocType", "Webshop Social Proof Event"):
         events = [
@@ -539,10 +577,10 @@ def seed_phase3_demo():
                 item.webshop_curated_tags = "everyday, staff picks"
             item.save(ignore_permissions=True)
 
-    if frappe.db.exists("DocType", "Webshop Sensory Settings"):
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
         try:
-            doc = frappe.get_single("Webshop Sensory Settings")
-            for fieldname in ["enabled", "magnetic_cursor_enabled", "cinematic_transitions_enabled", "circadian_theme_enabled", "predictive_prefetch_enabled", "webxr_ar_enabled", "exploder_3d_enabled"]:
+            doc = frappe.get_single("Webshop Content Settings")
+            for fieldname in ["sensory_enabled", "sensory_magnetic_cursor_enabled", "sensory_cinematic_transitions_enabled", "sensory_circadian_theme_enabled", "sensory_predictive_prefetch_enabled", "sensory_webxr_ar_enabled", "sensory_exploder_3d_enabled"]:
                 if doc.meta.has_field(fieldname):
                     doc.set(fieldname, 1)
             doc.save(ignore_permissions=True)
@@ -692,17 +730,6 @@ def seed_coffee_shop_demo():
             receipt.submit()
             stock_entry_name = receipt.name
 
-    if frappe.db.exists("DocType", "Webshop Style Quiz Question"):
-        questions = [
-            {"question_key": "roast", "question_en": "Which cup sounds like you today?", "question_ar": "أي فنجان يناسبك اليوم؟", "options_json": '[{"label_en":"Bright and floral","label_ar":"مشرق وزهري","tag":"bright"},{"label_en":"Balanced and chocolatey","label_ar":"متوازن وشوكولاتي","tag":"warm"},{"label_en":"Bold and concentrated","label_ar":"قوي ومركز","tag":"statement"}]', "sort_order": 10},
-            {"question_key": "ritual", "question_en": "How do you like to brew?", "question_ar": "كيف تحب تحضير قهوتك؟", "options_json": '[{"label_en":"Slow pour-over","label_ar":"ترشيح بطيء","tag":"crafted"},{"label_en":"Quick espresso","label_ar":"إسبريسو سريع","tag":"everyday"},{"label_en":"A shared café moment","label_ar":"لحظة مقهى مشتركة","tag":"warm"}]', "sort_order": 20},
-        ]
-        for row in questions:
-            existing = frappe.db.get_value("Webshop Style Quiz Question", {"question_key": row["question_key"]}, "name")
-            doc = frappe.get_doc("Webshop Style Quiz Question", existing) if existing else frappe.new_doc("Webshop Style Quiz Question")
-            doc.update(row)
-            doc.enabled = 1
-            doc.save(ignore_permissions=True)
 
     frappe.db.commit()
     clear_webshop_cache()

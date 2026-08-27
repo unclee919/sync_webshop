@@ -51,11 +51,9 @@ def setup_workspace():
         {"label": "Theme Settings", "link_type": "DocType", "link_to": "Webshop Theme Settings"},
         {"label": "Content Settings", "link_type": "DocType", "link_to": "Webshop Content Settings"},
         {"label": "Landing Sections", "link_type": "DocType", "link_to": "Webshop Landing Section"},
-        {"label": "SEO Settings", "link_type": "DocType", "link_to": "Webshop SEO Settings"},
         
         # Marketing & Support Card
         {"label": "Marketing & Support", "type": "Card Break"},
-        {"label": "AI Chat Settings", "link_type": "DocType", "link_to": "Webshop AI Chat Settings"},
         {"label": "Product Reviews", "link_type": "DocType", "link_to": "Webshop Review"},
         {"label": "Coupon Codes", "link_type": "DocType", "link_to": "Coupon Code"},
         {"label": "Abandoned Carts", "link_type": "DocType", "link_to": "Webshop Abandoned Cart"},
@@ -88,15 +86,15 @@ def setup_workspace():
     
     # 5. Force module update for DocTypes to ensure they show up
     custom_doctypes = [
-        "Webshop Content Settings", "Webshop Theme Settings", "Webshop SEO Settings",
-        "Webshop Dashboard Settings", "Webshop AI Chat Settings", "Webshop Review",
-        "Webshop Product Settings", "Webshop Paymob Settings", "Webshop Paymob Transaction",
-        "Webshop Abandoned Cart", "Webshop Announcement Bar", "Webshop FAQ",
+        "Webshop Content Settings", "Webshop Theme Settings",
+        "Webshop Review",
+        "Webshop Product Settings", "Webshop Payment Settings", "Webshop Paymob Transaction",
+        "Webshop Abandoned Cart", "Webshop FAQ",
         "Webshop Popup", "Webshop Landing Section", "Webshop Landing Section Item",
         "Webshop Navigation Link", "Webshop Banner", "Webshop Featured Category",
-        "Webshop Footer Column", "Webshop Footer Link", "Webshop Footer Settings",
+        "Webshop Footer Column", "Webshop Footer Link",
         "Webshop Social Link", "Webshop Testimonial", "Webshop Trust Badge",
-        "Webshop Wishlist", "Webshop Help Guide", "Webshop SEO Redirect", "Webshop Shipping Rule"
+        "Webshop Wishlist", "Webshop SEO Redirect", "Webshop Shipping Rule"
     ]
     for dt in custom_doctypes:
         if frappe.db.exists("DocType", dt):

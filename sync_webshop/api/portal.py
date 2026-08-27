@@ -1,7 +1,7 @@
+import frappe
 import json
 
-import frappe
-
+from sync_webshop.api.auth import get_authenticated_customer
 from sync_webshop.api.utils import set_cors_headers
 
 
@@ -16,14 +16,13 @@ def _dashboard_settings():
         "tracking_labels_en": '{"placed":"Order placed","confirmed":"Confirmed","processing":"Preparing","shipped":"Shipped","delivered":"Delivered"}',
         "tracking_labels_ar": '{"placed":"تم تقديم الطلب","confirmed":"تم التأكيد","processing":"قيد التجهيز","shipped":"تم الشحن","delivered":"تم التسليم"}',
     }
-    if not frappe.db.exists("DocType", "Webshop Dashboard Settings"):
-        settings = dict(defaults)
-        settings["tracking_labels"] = {"en": json.loads(defaults["tracking_labels_en"]), "ar": json.loads(defaults["tracking_labels_ar"])}
-        return settings
-    doc = frappe.get_single("Webshop Dashboard Settings")
+    try:
+        doc = frappe.get_single("Webshop Content Settings")
+    except Exception:
+        doc = frappe._dict()
     settings = {}
     for key, default in defaults.items():
-        value = getattr(doc, key, default)
+        value = doc.get("dashboard_" + key, default)
         settings[key] = bool(value) if key.startswith("enable_") else (value or default)
     try:
         settings["tracking_labels"] = {
@@ -41,10 +40,35 @@ def _dashboard_settings():
         settings["membership_enabled"] = True
         settings["membership_title_en"] = "Your membership"
         settings["membership_title_ar"] = "عضويتك"
+    try:
+        top_bar = frappe.get_single("Webshop Content Settings")
+        settings["show_top_bar"] = bool(top_bar.get("show_top_bar", 1))
+        settings["top_bar_message_en"] = top_bar.get("top_bar_message_en") or "Free delivery over SAR 250|Thoughtfully selected essentials, delivered with care|New favorites are waiting for you"
+        settings["top_bar_message_ar"] = top_bar.get("top_bar_message_ar") or "توصيل مجاني للطلبات التي تزيد عن ٢٥٠ ر.س|اختيارات بعناية، تصل إليك بكل اهتمام|اكتشف مفضلات جديدة بانتظارك"
+    except Exception:
+        settings["show_top_bar"] = True
+        settings["top_bar_message_en"] = "Free delivery over SAR 250|Thoughtfully selected essentials, delivered with care|New favorites are waiting for you"
+        settings["top_bar_message_ar"] = "توصيل مجاني للطلبات التي تزيد عن ٢٥٠ ر.س|اختيارات بعناية، تصل إليك بكل اهتمام|اكتشف مفضلات جديدة بانتظارك"
+    try:
+        announcement = frappe.get_single("Webshop Content Settings")
+        settings["announcement_enabled"] = bool(announcement.get("announcement_enabled", 1))
+        settings["announcement_message_en"] = announcement.get("announcement_message_en") or "Seasonal savings are here"
+        settings["announcement_message_ar"] = announcement.get("announcement_message_ar") or "عروض الموسم وصلت"
+        settings["announcement_background_color"] = announcement.get("announcement_background_color") or "#e6b85c"
+        settings["announcement_text_color"] = announcement.get("announcement_text_color") or "#173f3a"
+    except Exception:
+        settings["announcement_enabled"] = True
+        settings["announcement_message_en"] = "Seasonal savings are here"
+        settings["announcement_message_ar"] = "عروض الموسم وصلت"
+        settings["announcement_background_color"] = "#e6b85c"
+        settings["announcement_text_color"] = "#173f3a"
     return settings
 
 
-def _find_customer(email=None, phone=None):
+def _find_customer(email=None, phone=None, require_session=False):
+    if require_session:
+        authenticated = get_authenticated_customer()
+        return authenticated["customer"] if authenticated else None
     if frappe.session.user != "Guest":
         email = email or frappe.session.user
     email = (email or "").strip()
@@ -190,6 +214,21 @@ def _guard_order(order_name, customer):
     return order
 
 
+def _invoice_url_for_order(order_name, customer):
+    if not frappe.db.exists("DocType", "Sales Invoice Item"):
+        return None
+    meta = frappe.get_meta("Sales Invoice Item")
+    if not meta.has_field("sales_order"):
+        return None
+    candidates = frappe.get_all("Sales Invoice Item", filters={"sales_order": order_name}, fields=["parent"], limit_page_length=10)
+    for row in candidates:
+        invoice_name = row.get("parent")
+        invoice = frappe.db.get_value("Sales Invoice", invoice_name, ["customer", "docstatus"], as_dict=True)
+        if invoice and invoice.get("customer") == customer and int(invoice.get("docstatus") or 0) == 1:
+            return f"/api/method/sync_webshop.api.portal.get_invoice_pdf?invoice_name={invoice_name}"
+    return None
+
+
 @frappe.whitelist(allow_guest=True)
 def get_dashboard_settings():
     set_cors_headers()
@@ -201,7 +240,7 @@ def get_customer_portal(email=None, phone=None):
     """Return the complete customer dashboard payload for a verified customer context."""
     set_cors_headers()
     settings = _dashboard_settings()
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         return {"customer": None, "profile": None, "orders": [], "invoices": [], "returns": [], "analytics": None, "loyalty": None, "addresses": [], "settings": settings}
 
@@ -225,6 +264,7 @@ def get_customer_portal(email=None, phone=None):
         )
         if settings["enable_tracking_timeline"]:
             order["tracking_timeline"] = _tracking_steps(order, settings)
+        order["invoice_url"] = _invoice_url_for_order(order.name, customer)
 
     invoices = frappe.get_all(
         "Sales Invoice",
@@ -236,10 +276,12 @@ def get_customer_portal(email=None, phone=None):
     for invoice in invoices:
         invoice["pdf_url"] = f"/api/method/sync_webshop.api.portal.get_invoice_pdf?invoice_name={invoice.name}"
 
+    issue_meta = frappe.get_meta("Issue")
+    return_fields = [field for field in ["name", "subject", "status", "opening_date", "resolution_date"] if issue_meta.has_field(field)]
     returns = frappe.get_all(
         "Issue",
         filters={"customer": customer, "subject": ["like", "RMA:%"]},
-        fields=["name", "subject", "status", "opening_date", "resolution_date"],
+        fields=return_fields,
         order_by="creation desc",
         limit_page_length=50,
     )
@@ -258,6 +300,36 @@ def get_customer_portal(email=None, phone=None):
 
 
 @frappe.whitelist(allow_guest=True)
+def create_support_ticket(subject=None, message=None):
+    set_cors_headers()
+    customer = _find_customer(require_session=True)
+    if not customer:
+        frappe.throw("Customer verification is required before contacting support.")
+    subject = " ".join(str(subject or "Support request").split())[:140] or "Support request"
+    message = str(message or "").strip()
+    if len(message) < 8:
+        frappe.throw("Please write at least a few words so our team can help.")
+    if len(message) > 4000:
+        frappe.throw("Your message is too long. Please keep it under 4,000 characters.")
+    if not frappe.db.exists("DocType", "Issue"):
+        frappe.throw("Support tickets are not available on this site yet.")
+    meta = frappe.get_meta("Issue")
+    values = {"doctype": "Issue"}
+    if meta.has_field("customer"):
+        values["customer"] = customer
+    if meta.has_field("subject"):
+        values["subject"] = f"Support: {subject}"
+    if meta.has_field("description"):
+        values["description"] = message
+    if meta.has_field("status"):
+        values["status"] = "Open"
+    ticket = frappe.get_doc(values)
+    ticket.flags.ignore_permissions = True
+    ticket.insert(ignore_permissions=True)
+    return {"ticket": ticket.name, "status": ticket.get("status") or "Open"}
+
+
+@frappe.whitelist(allow_guest=True)
 def update_customer_profile(profile, email=None, phone=None):
     set_cors_headers()
     settings = _dashboard_settings()
@@ -267,7 +339,7 @@ def update_customer_profile(profile, email=None, phone=None):
         profile = json.loads(profile)
     if not isinstance(profile, dict):
         frappe.throw("Profile data must be an object.")
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         frappe.throw("Customer verification is required before editing the profile.")
     customer_doc = frappe.get_doc("Customer", customer)
@@ -293,7 +365,7 @@ def request_return(order_name, item_code, qty=1, reason=None, email=None, phone=
     set_cors_headers()
     if not _dashboard_settings()["enable_rma"]:
         frappe.throw("Returns are disabled.")
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         frappe.throw("Customer verification is required before requesting a return.")
     _guard_order(order_name, customer)
@@ -322,7 +394,7 @@ def request_return(order_name, item_code, qty=1, reason=None, email=None, phone=
 @frappe.whitelist(allow_guest=True)
 def get_invoice(invoice_name, email=None, phone=None):
     set_cors_headers()
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         frappe.throw("Customer verification is required.")
     invoice = frappe.db.get_value("Sales Invoice", {"name": invoice_name, "customer": customer}, ["name", "posting_date", "due_date", "status", "grand_total", "outstanding_amount", "currency"], as_dict=True)
@@ -336,7 +408,7 @@ def get_invoice(invoice_name, email=None, phone=None):
 @frappe.whitelist(allow_guest=True)
 def get_invoice_pdf(invoice_name, email=None, phone=None):
     set_cors_headers()
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer or not frappe.db.exists("Sales Invoice", {"name": invoice_name, "customer": customer}):
         frappe.throw("Invoice not found for this customer.")
     pdf = frappe.get_print("Sales Invoice", invoice_name, print_format=None, as_pdf=True)
@@ -366,7 +438,7 @@ def save_customer_address(address=None, address_name=None, email=None, phone=Non
         address = json.loads(address)
     if not isinstance(address, dict):
         frappe.throw("Address data must be an object.")
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         frappe.throw("Customer verification is required before saving an address.")
     doc = _guard_address(address_name, customer) if address_name else frappe.new_doc("Address")
@@ -391,7 +463,7 @@ def delete_customer_address(address_name, email=None, phone=None):
     settings = _dashboard_settings()
     if not settings["enable_addresses"]:
         frappe.throw("Saved addresses are disabled.")
-    customer = _find_customer(email=email, phone=phone)
+    customer = _find_customer(email=email, phone=phone, require_session=True)
     if not customer:
         frappe.throw("Customer verification is required before deleting an address.")
     doc = _guard_address(address_name, customer)

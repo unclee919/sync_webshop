@@ -113,12 +113,12 @@ def get_order_status(order_name, email=None, phone=None):
     )
     order["delivery_notes"] = delivery_notes
     try:
-        tracking_settings = frappe.get_single("Webshop Tracking Settings")
+        tracking_settings = frappe.get_single("Webshop Content Settings")
         tracking_template = getattr(tracking_settings, "tracking_url_template", "") or ""
         order["tracking"] = {
-            "enabled": bool(getattr(tracking_settings, "enabled", 0)),
-            "map_enabled": bool(getattr(tracking_settings, "map_enabled", 0)),
-            "courier_name": getattr(tracking_settings, "courier_name", None),
+            "enabled": bool(getattr(tracking_settings, "tracking_enabled", 0)),
+            "map_enabled": bool(getattr(tracking_settings, "tracking_map_enabled", 0)),
+            "courier_name": getattr(tracking_settings, "tracking_courier_name", None),
             "tracking_url": order.get("webshop_courier_tracking_url") or tracking_template.replace("{tracking_number}", order.get("tracking_number") or ""),
             "latitude": order.get("webshop_tracking_latitude"),
             "longitude": order.get("webshop_tracking_longitude"),

@@ -6,7 +6,7 @@ def get_robots_txt():
     """Returns the robots.txt content from SEO settings."""
     set_cors_headers()
     try:
-        seo_settings = frappe.get_single("Webshop SEO Settings")
+        seo_settings = frappe.get_single("Webshop Content Settings")
         content = seo_settings.robots_txt or "User-agent: *\nAllow: /"
         
         # Add sitemap link if enabled
@@ -26,7 +26,7 @@ def get_sitemap():
     """Generates a dynamic XML sitemap of products and categories."""
     set_cors_headers()
     try:
-        seo_settings = frappe.get_single("Webshop SEO Settings")
+        seo_settings = frappe.get_single("Webshop Content Settings")
         if not seo_settings.sitemap_enabled:
             frappe.throw("Sitemap is disabled.")
             

@@ -2,16 +2,30 @@ import json
 import re
 
 import frappe
-from frappe.utils import flt, get_datetime, now_datetime
+from frappe.utils import flt, now_datetime
 
 from sync_webshop.api.utils import full_url, require_catalog_access, set_cors_headers
 
 
+FEATURE_SETTINGS_FIELDS = {
+    "Webshop Enterprise AI Settings": ("auto_translate_enabled", "intelligent_merchandising", "voice_actions_enabled"),
+    "Webshop B2B Wholesale Settings": ("b2b_enabled", "volume_pricing_enabled", "volume_pricing_rule", "corporate_credit_enabled", "quick_order_enabled"),
+    "Webshop Live Shopping Settings": ("live_stream_enabled", "stream_url", "stream_title_en", "stream_title_ar"),
+    "Webshop Recovery Settings": ("abandoned_cart_enabled", "delay_hours", "coupon_discount"),
+    "Webshop Fraud Shield Settings": ("fraud_shield_enabled", "max_order_amount"),
+    "Webshop Infrastructure Settings": ("edge_cache_enabled", "auto_healing_enabled"),
+}
+
+
 def _single(doctype, defaults=None):
-    try:
+    if frappe.db.exists("DocType", doctype):
         return frappe.get_single(doctype)
-    except Exception:
-        return frappe._dict(defaults or {})
+    fields = FEATURE_SETTINGS_FIELDS.get(doctype)
+    if fields and frappe.db.exists("DocType", "Webshop Content Settings"):
+        feature = frappe.get_single("Webshop Content Settings")
+        values = {fieldname: feature.get(fieldname) for fieldname in fields if feature.get(fieldname) is not None}
+        return frappe._dict({**(defaults or {}), **values})
+    return frappe._dict(defaults or {})
 
 
 def _enabled(setting, field, default=0):
@@ -36,7 +50,6 @@ def get_enterprise_settings():
     ai = _single('Webshop Enterprise AI Settings', {'auto_translate_enabled': 0, 'intelligent_merchandising': 0, 'voice_actions_enabled': 0})
     b2b = _single('Webshop B2B Wholesale Settings', {'b2b_enabled': 0, 'volume_pricing_enabled': 0, 'corporate_credit_enabled': 0, 'quick_order_enabled': 0})
     live = _single('Webshop Live Shopping Settings', {'live_stream_enabled': 0})
-    flash = _single('Webshop Flash Sale Settings', {'flash_sale_enabled': 0, 'scarcity_threshold': 5, 'discount_percent': 0})
     recovery = _single('Webshop Recovery Settings', {'abandoned_cart_enabled': 0, 'delay_hours': 2, 'coupon_discount': 0})
     fraud = _single('Webshop Fraud Shield Settings', {'fraud_shield_enabled': 0, 'max_order_amount': 5000})
     infrastructure = _single('Webshop Infrastructure Settings', {'edge_cache_enabled': 0, 'auto_healing_enabled': 0})
@@ -44,7 +57,6 @@ def get_enterprise_settings():
         'ai': {'auto_translate_enabled': _enabled(ai, 'auto_translate_enabled'), 'intelligent_merchandising': _enabled(ai, 'intelligent_merchandising'), 'voice_actions_enabled': _enabled(ai, 'voice_actions_enabled')},
         'b2b': {'enabled': _enabled(b2b, 'b2b_enabled'), 'volume_pricing_enabled': _enabled(b2b, 'volume_pricing_enabled'), 'corporate_credit_enabled': _enabled(b2b, 'corporate_credit_enabled'), 'quick_order_enabled': _enabled(b2b, 'quick_order_enabled')},
         'live_shopping': {'enabled': _enabled(live, 'live_stream_enabled'), 'stream_url': live.get('stream_url'), 'title_en': live.get('stream_title_en'), 'title_ar': live.get('stream_title_ar')},
-        'flash_sales': {'enabled': _enabled(flash, 'flash_sale_enabled'), 'scarcity_threshold': flt(flash.get('scarcity_threshold') or 5), 'discount_percent': flt(flash.get('discount_percent') or 0)},
         'recovery': {'enabled': _enabled(recovery, 'abandoned_cart_enabled'), 'delay_hours': flt(recovery.get('delay_hours') or 2), 'coupon_discount': flt(recovery.get('coupon_discount') or 0)},
         'fraud_shield': {'enabled': _enabled(fraud, 'fraud_shield_enabled'), 'max_order_amount': flt(fraud.get('max_order_amount') or 5000)},
         'infrastructure': {'edge_cache_enabled': _enabled(infrastructure, 'edge_cache_enabled'), 'auto_healing_enabled': _enabled(infrastructure, 'auto_healing_enabled')},
@@ -112,18 +124,83 @@ def voice_action(command):
     return {'ok': True, 'action': 'search', 'query': command}
 
 
+def _standard_volume_rules(item_code, settings):
+    """Return active item-code Pricing Rules configured for the volume-pricing API."""
+    selected_name = str(settings.get("volume_pricing_rule") or "").strip()
+    filters = {
+        "disable": 0,
+        "selling": 1,
+        "apply_on": "Item Code",
+    }
+    if selected_name:
+        filters["name"] = selected_name
+    return frappe.get_all(
+        "Pricing Rule",
+        filters=filters,
+        fields=[
+            "name", "min_qty", "max_qty", "valid_from", "valid_upto",
+            "rate_or_discount", "rate", "discount_amount", "discount_percentage",
+            "for_price_list",
+        ],
+        order_by="min_qty desc, modified desc",
+        limit_page_length=100,
+    )
+
+
 @frappe.whitelist(allow_guest=True)
 def get_volume_price(item_code, qty=1):
     set_cors_headers()
-    settings = _single('Webshop B2B Wholesale Settings', {'volume_pricing_enabled': 0})
+    settings = _single("Webshop B2B Wholesale Settings", {"volume_pricing_enabled": 0})
+    if not settings.get("volume_pricing_rule") and frappe.db.exists("DocType", "Webshop Content Settings"):
+        settings["volume_pricing_rule"] = frappe.db.get_single_value("Webshop Content Settings", "volume_pricing_rule")
+    quantity = flt(qty)
     base = _price(item_code)
-    if not _enabled(settings, 'volume_pricing_enabled') or not frappe.db.exists('DocType', 'Webshop Volume Pricing Rule'):
-        return {'item_code': item_code, 'qty': flt(qty), 'base_price': base, 'discount_percent': 0, 'unit_price': base, 'currency': 'SAR'}
-    rules = frappe.get_all('Webshop Volume Pricing Rule', filters={'enabled': 1, 'item_code': item_code}, fields=['minimum_qty', 'discount_percent', 'price_list'], order_by='minimum_qty desc')
-    selected = next((rule for rule in rules if flt(qty) >= flt(rule.minimum_qty)), None)
-    discount = flt(selected.discount_percent) if selected else 0
-    unit = base * (1 - discount / 100)
-    return {'item_code': item_code, 'qty': flt(qty), 'base_price': base, 'discount_percent': discount, 'unit_price': unit, 'currency': 'SAR'}
+    response = {
+        "item_code": item_code,
+        "qty": quantity,
+        "base_price": base,
+        "discount_percent": 0,
+        "unit_price": base,
+        "currency": "SAR",
+    }
+    if not _enabled(settings, "volume_pricing_enabled") or not frappe.db.exists("DocType", "Pricing Rule"):
+        return response
+
+    today = frappe.utils.getdate()
+    selected = None
+    for rule in _standard_volume_rules(item_code, settings):
+        if rule.valid_from and frappe.utils.getdate(rule.valid_from) > today:
+            continue
+        if rule.valid_upto and frappe.utils.getdate(rule.valid_upto) < today:
+            continue
+        if quantity < flt(rule.min_qty):
+            continue
+        if flt(rule.max_qty) and quantity > flt(rule.max_qty):
+            continue
+        if not frappe.db.exists("Pricing Rule Item Code", {"parent": rule.name, "item_code": item_code}):
+            continue
+        selected = rule
+        break
+
+    if not selected:
+        return response
+    rule_base = _price(item_code, selected.for_price_list) if selected.for_price_list else base
+    if not rule_base:
+        rule_base = base
+    response["base_price"] = rule_base
+    if selected.rate_or_discount == "Discount Percentage":
+        discount_percent = flt(selected.discount_percentage)
+        response["discount_percent"] = discount_percent
+        response["unit_price"] = rule_base * (1 - discount_percent / 100)
+    elif selected.rate_or_discount == "Discount Amount":
+        discount_amount = flt(selected.discount_amount)
+        response["discount_percent"] = (discount_amount / rule_base * 100) if rule_base else 0
+        response["unit_price"] = max(rule_base - discount_amount, 0)
+    elif selected.rate_or_discount == "Rate":
+        unit_price = flt(selected.rate)
+        response["discount_percent"] = ((rule_base - unit_price) / rule_base * 100) if rule_base else 0
+        response["unit_price"] = unit_price
+    return response
 
 
 @frappe.whitelist(allow_guest=True)
@@ -153,29 +230,6 @@ def get_live_shopping():
     settings = _single('Webshop Live Shopping Settings', {'live_stream_enabled': 0})
     return {'enabled': _enabled(settings, 'live_stream_enabled'), 'stream_url': settings.get('stream_url'), 'title_en': settings.get('stream_title_en'), 'title_ar': settings.get('stream_title_ar')}
 
-
-@frappe.whitelist(allow_guest=True)
-def get_flash_sale_items(limit=12):
-    set_cors_headers()
-    settings = _single('Webshop Flash Sale Settings', {'flash_sale_enabled': 0, 'scarcity_threshold': 5, 'discount_percent': 0})
-    if not _enabled(settings, 'flash_sale_enabled'):
-        return []
-    now = now_datetime()
-    rows = []
-    if frappe.db.exists('DocType', 'Webshop Flash Sale Item'):
-        rows = frappe.get_all('Webshop Flash Sale Item', filters={'enabled': 1}, fields=['item_code', 'discount_percent', 'start_at', 'end_at'], limit_page_length=30)
-    result = []
-    for row in rows:
-        if row.start_at and get_datetime(row.start_at) > now: continue
-        if row.end_at and get_datetime(row.end_at) < now: continue
-        if not frappe.db.exists('Item', row.item_code): continue
-        stock = _stock(row.item_code)
-        if stock <= 0: continue
-        item = frappe.db.get_value('Item', row.item_code, ['item_code', 'item_name', 'image'], as_dict=True)
-        base = _price(row.item_code)
-        discount = flt(row.discount_percent or settings.get('discount_percent') or 0)
-        result.append({**item, 'image': full_url(item.image) if item.image else None, 'price': base * (1 - discount / 100), 'old_price': base, 'discount_percent': discount, 'stock': stock, 'scarcity': stock <= flt(settings.get('scarcity_threshold') or 5), 'currency': 'SAR'})
-    return result[:max(1, min(int(limit or 12), 24))]
 
 
 @frappe.whitelist(allow_guest=True)

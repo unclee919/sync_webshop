@@ -62,9 +62,9 @@ def sync_cart(cart_data):
         
     settings = frappe.get_single("Webshop Content Settings")
     master_recovery_enabled = None
-    if frappe.db.exists("DocType", "Webshop Master Tier Settings"):
+    if frappe.db.exists("DocType", "Webshop Content Settings"):
         try:
-            master_recovery_enabled = bool(getattr(frappe.get_single("Webshop Master Tier Settings"), "abandoned_cart_enabled", 0))
+            master_recovery_enabled = bool(getattr(frappe.get_single("Webshop Content Settings"), "master_abandoned_cart_enabled", 0))
         except Exception:
             master_recovery_enabled = None
     if master_recovery_enabled is False or (master_recovery_enabled is None and not settings.enable_abandoned_cart_recovery):

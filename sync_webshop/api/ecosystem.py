@@ -7,22 +7,22 @@ import frappe
 def get_ecosystem_settings():
     return {
         "ai": {
-            "rag_support_enabled": bool(frappe.db.get_single_value("Webshop Ecosystem AI Settings", "rag_support_enabled")),
-            "demand_forecaster_enabled": bool(frappe.db.get_single_value("Webshop Ecosystem AI Settings", "demand_forecaster_enabled")),
-            "marketing_hub_enabled": bool(frappe.db.get_single_value("Webshop Ecosystem AI Settings", "marketing_hub_enabled")),
+            "rag_support_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "ecosystem_rag_support_enabled")),
+            "demand_forecaster_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "ecosystem_demand_forecaster_enabled")),
+            "marketing_hub_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "ecosystem_marketing_hub_enabled")),
         },
         "marketplace": {
-            "multi_vendor_enabled": bool(frappe.db.get_single_value("Webshop Marketplace Vendor Settings", "multi_vendor_enabled")),
-            "commission_percent": float(frappe.db.get_single_value("Webshop Marketplace Vendor Settings", "commission_percent") or 15.0),
-            "affiliate_enabled": bool(frappe.db.get_single_value("Webshop Marketplace Vendor Settings", "affiliate_enabled")),
+            "multi_vendor_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "marketplace_multi_vendor_enabled")),
+            "commission_percent": float(frappe.db.get_single_value("Webshop Content Settings", "marketplace_commission_percent") or 15.0),
+            "affiliate_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "marketplace_affiliate_enabled")),
         },
         "fintech": {
-            "gift_cards_enabled": bool(frappe.db.get_single_value("Webshop Fintech Settings", "gift_cards_enabled")),
-            "subscription_box_enabled": bool(frappe.db.get_single_value("Webshop Fintech Settings", "subscription_box_enabled")),
+            "gift_cards_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "fintech_gift_cards_enabled")),
+            "subscription_box_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "fintech_subscription_box_enabled")),
         },
         "omnichannel": {
-            "bopis_enabled": bool(frappe.db.get_single_value("Webshop Omnichannel Settings", "bopis_enabled")),
-            "kiosk_mode_enabled": bool(frappe.db.get_single_value("Webshop Omnichannel Settings", "kiosk_mode_enabled")),
+            "bopis_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "omnichannel_bopis_enabled")),
+            "kiosk_mode_enabled": bool(frappe.db.get_single_value("Webshop Content Settings", "omnichannel_kiosk_mode_enabled")),
         }
     }
 
