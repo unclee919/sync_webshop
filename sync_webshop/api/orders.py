@@ -1,4 +1,6 @@
 import frappe
+
+from sync_webshop.api.auth import get_authenticated_customer
 from sync_webshop.api.utils import set_cors_headers
 
 
@@ -63,15 +65,22 @@ def list_my_orders(email=None, phone=None):
 @frappe.whitelist(allow_guest=True)
 def get_order_status(order_name, email=None, phone=None):
     set_cors_headers()
-    
-    filters = {"name": order_name}
-    if email or phone:
+
+    # Always bind the lookup to an authenticated storefront customer or to
+    # the customer resolved from the supplied contact information. Never
+    # allow an order identifier alone to return order data.
+    authenticated = get_authenticated_customer()
+    if authenticated:
+        customer = authenticated["customer"]
+    else:
+        if not email and not phone:
+            frappe.throw("Customer verification is required to view this order.")
         customer = _find_customer(email=email, phone=phone)
-        if customer:
-            filters["customer"] = customer
-        else:
+        if not customer:
             frappe.throw("Customer not found with provided contact info.")
-    
+
+    filters = {"name": order_name, "customer": customer}
+
     order = frappe.get_all(
         "Sales Order",
         filters=filters,
